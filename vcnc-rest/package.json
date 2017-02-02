@@ -1,11 +1,13 @@
 {
-  "name": "cnc_server",
+  "name": "vcnc-rest",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm run json-ize; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
+    "build": "npm run json-ize; npm run generate",
+    "start": "npm run build; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
     "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
     "json-ize": "yaml2json ./api/swagger.yaml > ./api/swagger.json",
+    "generate": "generate-md --input doc --output static/doc-html --layout mixu-page",
     "test": "echo ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
@@ -14,18 +16,13 @@
     "express": "^4.0.0",
     "ioredis": "^1.15.1",
     "json-stringify": "^1.0.0",
+    "markdown-styles": "^3.1.5",
     "swagger-express-middleware": "1.0.0-alpha.12",
     "tv4": "^1.2.7",
     "yamljs": "^0.2.7"
   },
   "devDependencies": {
     "chakram": "^1.3.0",
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.10.0",
-    "gulp-livereload": "^3.8.0",
-    "gulp-nodemon": "^2.0.2",
-    "gulp-watch": "0.7.1",
-    "markdown-styles": "^3.1.5",
     "mocha": "^2.4.5"
   }
 }

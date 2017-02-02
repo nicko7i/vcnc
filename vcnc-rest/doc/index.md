@@ -1,19 +1,10 @@
 # vCNC Server Documentation
 
+The vCNC provides a REST-style API for the use of administrative clients,
+other PeerCache components, and customer-developed software.
 
-## API Documentation
+The [Interactive API Explorer](./api/?url=spec) is both the formal API specification
+and an interactive REST client.
 
-The vCNC provides a REST-style API that can be used by administrative clients,
-other components of the VelStor system, and also by customer-developed software. The API documents are:
+Complete documentation is available on [GitHub](https://nicko7i.github.io/vcnc)
 
-* [VelStor API Overview](./api-overview.html)
-* [VelStor REST API](./api/?url=spec)
-* [Data Streaming Services]()
-
-## Code Documentation
-
-The JavaScript sources are [documented](./jsdoc/) with [JSDoc](http://usejsdoc.org/index.html).
-
-The C++ sources are documented with Doxygen.
-
-Python sources are documented with TBD. (Sphinx?)

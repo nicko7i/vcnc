@@ -7,34 +7,20 @@ swagger: '2.0'
 
 # Document metadata
 info:
-  version: "1.0.0"
+  version: "1.1.0"
   title: Velstor vCNC API
   description: |
     ### Admin API
-    <p/>
+
     The Admin API manages the vCNC server itself.
 
     ### vTRQ API
-    <p/>
+
     The vTRQ API performs operations on a vTRQ.
 
     Errors are reported at two levels: HTTP and operational.  With one exception, HTTP error codes represent the success or failure of the HTTP protocol, considered solely as a transport. Operational error codes, reported in the response body, reflect the success or failure of the operation itself.
 
     The exception is the operational error code __ENOENT__ (Does not exist).  REST operations which refer to exactly one resource in the URL convert __ENOENT__ to HTTP 404.  Doing so improves our compliance with [*HTTP/1.1*](http://tools.ietf.org/html/rfc7231).  Refer to the [vCNC API Overview](../api-overview.html) for a more detailed discussion.
-
-    vTRQ operational codes are returned to the REST interface as strings.
-
-    Error | Description |
-    --- | --- |
-    __OK__ | Operation was successful.
-    __EACCES__ | vCNC user does not have permission to perform operation on vTRQ.
-    __EEXIST__ | Destination path exists and is a directory, or it is a file and the value of _overwrite_ is _false_.
-    __ENOENT__ | Path does not exist. In most cases, reported as HTTP error 404.
-    __ENOTDIR__ | Path is not a directory.
-    __ENOTRECOVERABLE__ | vTRQ unable to make data safe; vTRQ is now in an unknown state.  Check the vTRQ logs for details.
-    __EREMOTEIO__ | An unspecified communication error occurred.
-
-    These error codes follow [IEEE Std 1003.1, 2013 Edition](http://pubs.opengroup.org/onlinepubs/9699919799/).
 
 # Generic host; our customers deploy this service.
 # In production, comment out this line.  The correct host will be displayed
@@ -109,9 +95,83 @@ paths:
             $ref: '#/definitions/Error'
 
   ##
+  ##  Grid computing support
+  ##
+  /grid/jobs/{job_id}:
+    post:
+      summary: Creates a new resource describing a job with the specified id.
+      operationId: gridJobPost
+      tags:
+        - "Grid API"
+      parameters:
+        - in: path
+          name: job_id
+          description: ID of grid job
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Information about a grid job
+          required: true
+          schema:
+            type: object
+            properties:
+              workspace:
+                type: string
+            required:
+              - workspace
+            additionalProperties: false
+      responses:
+        '200':
+          description: Request processed.  See response body.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /grid/jobs/{job_id}:
+    get:
+      summary: Retrieves data associated with a grid job.
+      operationId: gridJobGet
+      tags:
+        - "Grid API"
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: job_id
+          description: ID of grid job
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      summary: Deletes data associated with a grid job.
+      operationId: gridJobDelete
+      tags:
+        - "Grid API"
+      parameters:
+        - in: path
+          name: job_id
+          description: ID of grid job
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  ##
   ##  vCNC - vtrq
   ##
-  /vcnc/vtrqs:
     post:
       summary: Creates a new vTRQ resource and assigns the vTRQ ID.
       operationId: vcncVtrqCreate
@@ -137,7 +197,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vcnc/vtrqs/{vtrq_id}:
     put:
       summary: Updates a vTRQ entry.
       operationId: vcncVtrqUpdate
@@ -301,7 +360,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-
     delete:
       summary: Deletes a vCNC user
       operationId: vcncUserDelete
@@ -451,18 +509,7 @@ paths:
         '200':
           description: Request processed.  See response body.
           schema:
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-            required:
-              - error_sym
-            additionalProperties: false
+            $ref: '#/definitions/ErrorVtrq'
         default:
           description: HTTP error
           schema:
@@ -543,8 +590,8 @@ paths:
           type: integer
           default: 1000
         - in: query
-          name: offset
-          description: Offset the list of returned results by this amount. Default is zero.
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
           required: false
           type: integer
           default: 0
@@ -741,7 +788,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-
   /vtrq/service/{vtrq_id}:
     delete:
       summary: Gracefully brings down a vTRQ
@@ -758,20 +804,6 @@ paths:
           minimum: 0
           maximum: 1073741823
       responses:
-      #  '200':
-      #    description: Request processed.  See response body.
-      #    schema:
-      #      properties:
-      #        error_sym:
-      #          type: string
-      #          description: Symbolic error code value
-      #          default: OK
-      #          enum:
-      #            - EACCES
-      #            - EREMOTEIO
-      #      required:
-      #        - error_sym
-      #      additionalProperties: false
         '202':
           description: Request accepted. Client may receive the HTTP response before the vTRQ has fully shut down.
           schema:
@@ -927,8 +959,8 @@ paths:
           type: integer
           default: 1000
         - in: query
-          name: offset
-          description: Offset the list of returned results by this amount. Default is zero.
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
           required: false
           type: integer
           default: 0
@@ -1130,8 +1162,8 @@ paths:
           type: integer
           default: 1000
         - in: query
-          name: offset
-          description: Offset the list of returned results by this amount. Default is zero.
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
           required: false
           type: integer
           default: 0
@@ -1225,11 +1257,115 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /_paginate/{id}:
+    post:
+      summary: Sets new sorting and filtering directives.
+      operationId: _paginatePost
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique grid job identifier
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+          schema:
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCESS
+                  - EREMOTEIO
+            required:
+              - error_sym
+            additionalProperties: false
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+    get:
+      summary: Iterates over the result set.
+      operationId: _paginateGet
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique grid job identifier
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+
+    delete:
+      summary: Releases the result set.
+      operationId: _paginateDelete
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique grid job identifier
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed, see response body.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /_test/latency:
+    post:
+      summary: Tests 202 latency mechanism
+      operationId: _testLatency
+      tags:
+        - "Internal API"
+        - "Tests"
+      parameters:
+        - in: query
+          name: latency
+          description: Number of seconds needed to fulfill
+          required: true
+          type: integer
+        - in: query
+          name: input
+          description: Integer input value
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Completed
+
   /_test/moxiate:
+    # /_test/moxiate is deprecated. Use /_test/latency instead
     post:
       summary: Tests 202 fulfillment mechanism
       operationId: _testFulfill
       tags:
+        - "Internal API"
         - "Tests"
       parameters:
         - in: query
@@ -1247,7 +1383,7 @@ paths:
           description: Completed
 
 #summary
-#  Re-usuable object definitions.
+#  Re-usable object definitions.
 #
 definitions:
 
@@ -1306,31 +1442,68 @@ definitions:
       message:
         type: string
 
-  PSpaceNode:
-    type: object
-    properties:
-      N:
-        type: string
-      C:
-        type: array
-        minItems: 0
-        items:
-          $ref: '#/definitions/PSpaceNode'
-    required:
-      - N
-    additionalProperties: false
+  ErrorVtrq:
+    description: |
+      vTRQ operational codes are returned to the REST interface as strings. The HHTP status code is '200', other than '404' for __ENOENT__ (Does not exist).
 
-  PSpace:
-    type: object
-    properties:
-      P:
-        type: string
-      S:
-        $ref: '#/definitions/PSpaceNode'
+      Error | Description |
+      --- | --- |
+      __OK__ | Operation was successful.
+      __EACCES__ | vCNC user does not have permission to perform operation on vTRQ.
+      __EEXIST__ | Destination path exists and is a directory, or it is a file and the value of _overwrite_ is _false_.
+      __ENOENT__ | Path does not exist. In most cases, reported as HTTP error 404.
+      __ENOTDIR__ | Path is not a directory.
+      __ENOTRECOVERABLE__ | vTRQ unable to make data safe; vTRQ is now in an unknown state.  Check the vTRQ logs for details.
+      __EREMOTEIO__ | An unspecified communication error occurred.
+
+      These error codes follow [IEEE Std 1003.1, 2013 Edition](http://pubs.opengroup.org/onlinepubs/9699919799/).
+
     required:
-      - P
-      - S
-    additionalProperties: false
+      - error_sym
+      - message
+    properties:
+      error_sym:
+        type: string
+        description: Symbolic error code value
+        default: OK
+        enum:
+          - OK
+          - EACCES
+          - EEXIST
+          - ENAMETOOLONG
+          - ENOENT
+          - ENOSPC
+          - ENOTDIR
+          - ENOTRECOVERABLE
+          - EREMOTEIO
+      message:
+        type: string
+
+#  PSpaceNode:
+#    type: object
+#    properties:
+#      N:
+#        type: string
+#      C:
+#        type: array
+#        minItems: 0
+#        items:
+#          $ref: '#/definitions/PSpaceNode'
+#    required:
+#      - N
+#    additionalProperties: false
+#
+#  PSpace:
+#    type: object
+#    properties:
+#      P:
+#        type: string
+#      S:
+#        $ref: '#/definitions/PSpaceNode'
+#    required:
+#      - P
+#      - S
+#    additionalProperties: false
 
   Host:
     type: object

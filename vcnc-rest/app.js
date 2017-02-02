@@ -54,7 +54,7 @@ module.exports = (() => {
   //  in effect, /earlier/ in the processing chain, because this
   //  block is a callback whose execution is deferred.
   //
-  middleware.init(path.join(__dirname, 'api/swagger.yaml'), () => {
+  middleware.init(path.join(__dirname, 'api/swagger.json'), () => {
     //
     //  Enable CORS
     //
