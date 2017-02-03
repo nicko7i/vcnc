@@ -11,8 +11,8 @@
 'use strict'; // eslint-disable-line strict
 const fulfill202 = require('../lib/fulfill202.js').fulfill202;
 const CnctrqClient = require('../addon/build/Release/cnctrq_client.node').CnctrqClient;
-
 const cnctrqClient = new CnctrqClient;
+const grid = require('../lib/grid.js');
 const json = require('JSON');
 const config = require('../lib/configuration.js');
 
@@ -58,6 +58,60 @@ function adapter(fromRpc, onSuccess, onFailure) {
  */
 module.exports = (app) => {
   //
+  //  Creates a grid job record
+  //
+  app.post('/grid/jobs/:job_id', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(()=> {
+          grid.createJob(
+            job_id,
+            (result) => {
+              cb(adapter(result, { result: result.result }))
+            });
+        });
+      });
+  });
+  //
+  //  Returns a grid job record
+  //
+  app.get('/grid/jobs/:job_id', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(()=> {
+          grid.getJob(
+            job_id,
+            (result) => {
+              cb(adapter(result, { result: result.result }))
+            });
+        });
+      });
+  });
+  //
+  //  Deletes a grid job record
+  //
+  app.delete('/grid/jobs/:job_id', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(()=> {
+          grid.deleteJob(
+            job_id,
+            (result) => {
+              cb(adapter(result, { result: result.result }))
+            });
+        });
+      });
+  });
+  //
   //  Vector delete node
   //
   app.post('/vtrq/delete_nodes/:vtrq_id', (req, res) => {
@@ -65,7 +119,8 @@ module.exports = (app) => {
       req,
       res,
       (cb) => {
-        latency(() => {
+        latency()
+        .then(() => {
           cnctrqClient.remove(
             req.pathParams.vtrq_id,
             req.body.delete_paths,

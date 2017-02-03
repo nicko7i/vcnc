@@ -17,6 +17,7 @@
     "ioredis": "^1.15.1",
     "json-stringify": "^1.0.0",
     "markdown-styles": "^3.1.5",
+    "rethinkdb": "^2.3.3",
     "swagger-express-middleware": "1.0.0-alpha.12",
     "tv4": "^1.2.7",
     "yamljs": "^0.2.7"

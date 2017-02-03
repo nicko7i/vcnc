@@ -56,10 +56,33 @@ redis:
     #  be using the same Redis instance.
     keyPrefix: vcnc
     #
-    #  An alternative way to isolate vcnc instances is by specifing a database 
+    #  An alternative way to isolate vcnc instances is by specifying a database
     #  number.  Valid values are between 0 and 15, inclusive.  Default is 0
     db: 0
     #
+rethinkdb:
+  #
+  #  Connection information for the RethinkDB client.  See
+  #  https://www.rethinkdb.com/api/javascript/
+  #
+  #  The RethinkDB server itself is configured separately.  The two configurations
+  #  must match where they intersect.
+  connection:
+    # The host to connect to.
+    host: 172.17.0.2
+    # The port to connect on.
+    port: 28015
+    # The default database
+    db: vcnc-rest
+    # The user account to connect as
+    user: admin
+    # The password for the user account to connect as
+    password: ''
+    # Timeout period in seconds for the connection to be opened.
+    timeout: 20
+    # A hash of options to support SSL connections.
+    ssl: {}
+
 test:
   #
   #  Introduces seconds of latency into the (apparent) response time of the vtrq.

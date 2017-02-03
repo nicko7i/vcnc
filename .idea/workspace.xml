@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d42b8096-b0cc-4a47-a6f0-fc55583474a0" name="Default" comment="" />
+    <list default="true" id="d42b8096-b0cc-4a47-a6f0-fc55583474a0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vcnc-rest/config/vcnc-config.yaml" afterPath="$PROJECT_DIR$/vcnc-rest/config/vcnc-config.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vcnc-rest/package.json" afterPath="$PROJECT_DIR$/vcnc-rest/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vcnc-rest/routes/v1.js" afterPath="$PROJECT_DIR$/vcnc-rest/routes/v1.js" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,183 +31,7 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="4194">
                   <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-                  <folding>
-                    <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-                    <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-                    <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-                    <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-                    <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-                    <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-                    <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-                    <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-                    <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-                    <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-                    <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-                    <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-                    <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-                    <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-                    <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-                    <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-                    <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-                    <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-                    <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-                    <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-                    <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-                    <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-                    <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-                    <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-                    <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-                    <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-                    <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-                    <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-                    <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-                    <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-                    <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-                    <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-                    <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-                    <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-                    <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-                    <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-                    <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -226,11 +56,68 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+          <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vcnc-rest/package.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="378">
-                  <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+                <state relative-caret-position="522">
+                  <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                  <folding>
+                    <marker date="1486140334680" expanded="true" signature="0:892" ph="{&quot;name&quot;: &quot;vcnc-rest&quot;...}" />
+                    <marker date="1486140334680" expanded="true" signature="527:815" ph="{&quot;JSON&quot;: &quot;^1.0.0&quot;...}" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="v1.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/vcnc-rest/routes/v1.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="49" column="2" lean-forward="false" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="grid.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/vcnc-rest/lib/grid.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="180">
+                  <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="configuration.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/vcnc-rest/lib/configuration.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="468">
+                  <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="vcnc-config.yaml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/vcnc-rest/config/vcnc-config.yaml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="252">
+                  <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="vcnc-redis.conf" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/vcnc-rest/config/vcnc-redis.conf">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="126">
+                  <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -240,193 +127,17 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="swagger.yaml" pinned="false" current-in-tab="false">
+          <file leaf-file-name="swagger.yaml" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/vcnc-rest/api/swagger.yaml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="25632">
-                  <caret line="1424" column="25" lean-forward="false" selection-start-line="1424" selection-start-column="25" selection-end-line="1424" selection-end-column="25" />
-                  <folding>
-                    <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-                    <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-                    <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-                    <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-                    <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-                    <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-                    <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-                    <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-                    <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-                    <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-                    <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-                    <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-                    <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-                    <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-                    <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-                    <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-                    <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-                    <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-                    <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-                    <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-                    <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-                    <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-                    <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-                    <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-                    <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-                    <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-                    <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-                    <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-                    <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-                    <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-                    <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-                    <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-                    <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-                    <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-                    <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-                    <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-                    <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-                    <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-                    <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-                    <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-                    <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-                    <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-                    <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-                    <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-                    <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-                    <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-                    <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-                    <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-                    <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-                  </folding>
+                <state relative-caret-position="430">
+                  <caret line="144" column="21" lean-forward="false" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
+                  <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Makefile.am" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Makefile.am" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/vcnc-rest/src/Makefile.am">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="432">
@@ -460,8 +171,11 @@
         <option value="$PROJECT_DIR$/vcnc-rest/api/swagger.yaml" />
         <option value="$PROJECT_DIR$/vcnc-rest/app.js" />
         <option value="$PROJECT_DIR$/vcnc-rest/doc/index.md" />
-        <option value="$PROJECT_DIR$/vcnc-rest/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/vcnc-rest/package.json" />
+        <option value="$PROJECT_DIR$/vcnc-rest/routes/v1.js" />
+        <option value="$PROJECT_DIR$/vcnc-rest/config/vcnc-config.yaml" />
+        <option value="$PROJECT_DIR$/vcnc-rest/lib/grid.js" />
       </list>
     </option>
   </component>
@@ -479,8 +193,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="27" />
-    <option name="width" value="2560" />
-    <option name="height" value="1573" />
+    <option name="width" value="2289" />
+    <option name="height" value="1406" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -498,8 +212,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -512,8 +224,42 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cnc_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cnc_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vcnc-rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cnc_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cnc_server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vcnc-rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -524,6 +270,7 @@
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v6.2.2/bin/node" />
     <property name="js.eslint.eslintPackage" value="$USER_HOME$/.nvm/versions/node/v6.2.2/lib/node_modules/eslint" />
     <property name="js-jscs-nodeInterpreter" value="$USER_HOME$/.nvm/versions/node/v6.2.2/bin/node" />
+    <property name="nodejs.mocha.mocha_node_package_dir" value="$PROJECT_DIR$/vcnc-rest/node_modules/mocha" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -603,32 +350,33 @@
       <workItem from="1486041725807" duration="18633000" />
       <workItem from="1486066506793" duration="4836000" />
       <workItem from="1486139643575" duration="75000" />
+      <workItem from="1486140258533" duration="7849000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24310000" />
+    <option name="totallyTimeSpent" value="32159000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="2560" height="1573" extended-state="0" />
+    <frame x="0" y="27" width="2289" height="1406" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16094674" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18021202" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961673" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2519716" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3312325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25176677" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37589216" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,9 +408,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vcnc-rest/package.json">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+          <folding>
+            <marker date="1486140334680" expanded="true" signature="0:892" ph="{&quot;name&quot;: &quot;vcnc-rest&quot;...}" />
+            <marker date="1486140334680" expanded="true" signature="527:815" ph="{&quot;JSON&quot;: &quot;^1.0.0&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/api/swagger.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25632">
+          <caret line="1424" column="25" lean-forward="false" selection-start-line="1424" selection-start-column="25" selection-end-line="1424" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/src/Makefile.am">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/configure.ac">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="42" column="2" lean-forward="false" selection-start-line="42" selection-start-column="2" selection-end-line="42" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/doc/index.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/package.json">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1486140334680" expanded="true" signature="0:892" ph="{&quot;name&quot;: &quot;vcnc-rest&quot;...}" />
+            <marker date="1486140334680" expanded="true" signature="527:815" ph="{&quot;JSON&quot;: &quot;^1.0.0&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -670,183 +472,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23184">
           <caret line="1288" column="25" lean-forward="true" selection-start-line="1288" selection-start-column="25" selection-end-line="1288" selection-end-column="25" />
-          <folding>
-            <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-            <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-            <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-            <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-            <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-            <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-            <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-            <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-            <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-            <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-            <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-            <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-            <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-            <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-            <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-            <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-            <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-            <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-            <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-            <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-            <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-            <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-            <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-            <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-            <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-            <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-            <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-            <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-            <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-            <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-            <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-            <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-            <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -879,183 +505,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3132">
           <caret line="174" column="0" lean-forward="false" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
-          <folding>
-            <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-            <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-            <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-            <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-            <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-            <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-            <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-            <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-            <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-            <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-            <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-            <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-            <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-            <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-            <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-            <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-            <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-            <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-            <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-            <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-            <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-            <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-            <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-            <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-            <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-            <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-            <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-            <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-            <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-            <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-            <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-            <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-            <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,183 +529,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-            <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-            <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-            <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-            <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-            <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-            <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-            <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-            <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-            <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-            <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-            <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-            <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-            <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-            <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-            <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-            <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-            <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-            <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-            <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-            <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-            <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-            <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-            <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-            <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-            <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-            <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-            <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-            <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-            <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-            <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-            <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-            <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1297,190 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vcnc-rest/api/swagger.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4194">
-          <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-          <folding>
-            <marker date="1486136250408" expanded="true" signature="130:150" ph="info: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="147:150" ph="1.0.0" />
-            <marker date="1486136250408" expanded="true" signature="42169:42200" ph="PSpace: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42169:46066" ph="definition...: &lt;18 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42195:42200" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42204:42559" ph="Host: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42220:42226" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="42231:42452" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42249:42276" ph="hname: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42270:42276" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42283:42313" ph="vtrq_id: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42306:42313" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="42320:42346" ph="port: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42340:42346" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42353:42452" ph="transport: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42378:42384" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42402:42405" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42414:42452" ph="enum: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42432:42435" ph="tcp" />
-            <marker date="1486136250408" expanded="true" signature="42448:42452" ph="sctp" />
-            <marker date="1486136250408" expanded="true" signature="42457:42527" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42475:42480" ph="hname" />
-            <marker date="1486136250408" expanded="true" signature="42489:42496" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="42505:42509" ph="port" />
-            <marker date="1486136250408" expanded="true" signature="42518:42527" ph="transport" />
-            <marker date="1486136250408" expanded="true" signature="42554:42559" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42563:42812" ph="SourceDest...: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42590:42741" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42608:42668" ph="src: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42627:42633" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42651:42668" ph="/path/to/s..." />
-            <marker date="1486136250408" expanded="true" signature="42675:42741" ph="dest: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42695:42701" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="42719:42741" ph="/path/to/d..." />
-            <marker date="1486136250408" expanded="true" signature="42746:42780" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42764:42767" ph="src" />
-            <marker date="1486136250408" expanded="true" signature="42776:42780" ph="dest" />
-            <marker date="1486136250408" expanded="true" signature="42807:42812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="42816:42917" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42851:42856" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42861:42917" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42880:42917" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="42921:43212" ph="SourceDest...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42961:42966" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="42971:43212" ph="items: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="42984:43127" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43004:43059" ph="error_sym: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43031:43037" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43057:43059" ph="OK" />
-            <marker date="1486136250408" expanded="true" signature="43068:43127" ph="copy: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43090:43127" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43134:43178" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43154:43163" ph="error_sym" />
-            <marker date="1486136250408" expanded="true" signature="43174:43178" ph="copy" />
-            <marker date="1486136250408" expanded="true" signature="43207:43212" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43216:43402" ph="MetaCopyRe...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43243:43249" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43254:43337" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43272:43337" ph="copy_paths: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43298:43337" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43342:43370" ph="required: &lt;1 item&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43360:43370" ph="copy_paths" />
-            <marker date="1486136250408" expanded="true" signature="43397:43402" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="43406:43529" ph="MetaCopyRe...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43434:43440" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="43445:43529" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43463:43529" ph="result: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43485:43529" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="43533:43596" ph="SessionTok...: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43551:43596" ph="properties: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43569:43596" ph="token: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43590:43596" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43600:45128" ph="StructStat: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43616:44869" ph="properties: &lt;13 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43634:43723" ph="st_dev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43656:43662" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43679:43685" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43703:43723" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43730:43819" ph="st_ino: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43752:43758" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43775:43781" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43799:43819" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="43826:43899" ph="st_mode: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43849:43856" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="43873:43878" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="43896:43899" ph="544" />
-            <marker date="1486136250408" expanded="true" signature="43906:43997" ph="st_nlink: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="43930:43936" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="43953:43959" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="43977:43997" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44004:44076" ph="st_uid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44026:44033" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44050:44055" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44073:44076" ph="101" />
-            <marker date="1486136250408" expanded="true" signature="44083:44155" ph="st_gid: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44105:44112" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="44129:44134" ph="int32" />
-            <marker date="1486136250408" expanded="true" signature="44152:44155" ph="102" />
-            <marker date="1486136250408" expanded="true" signature="44162:44252" ph="st_rdev: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44185:44191" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44208:44214" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44232:44252" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44259:44349" ph="st_size: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44282:44288" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44305:44311" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44329:44349" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44356:44449" ph="st_blksize: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44382:44388" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44405:44411" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44429:44449" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44456:44548" ph="st_blocks: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44481:44487" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44504:44510" ph="uint64" />
-            <marker date="1486136250408" expanded="true" signature="44528:44548" ph="0x00000000..." />
-            <marker date="1486136250408" expanded="true" signature="44555:44655" ph="st_atime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44579:44585" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44602:44611" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44629:44655" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44662:44762" ph="st_mtime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44686:44692" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44709:44718" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44736:44762" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44769:44869" ph="st_ctime: &lt;3 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44793:44799" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="44816:44825" ph="date-time" />
-            <marker date="1486136250408" expanded="true" signature="44843:44869" ph="2015-09-10..." />
-            <marker date="1486136250408" expanded="true" signature="44874:45096" ph="required: &lt;13 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="44907:44913" ph="st_ino" />
-            <marker date="1486136250408" expanded="true" signature="44922:44929" ph="st_mode" />
-            <marker date="1486136250408" expanded="true" signature="44938:44946" ph="st_nlink" />
-            <marker date="1486136250408" expanded="true" signature="44970:44976" ph="st_gid" />
-            <marker date="1486136250408" expanded="true" signature="45001:45008" ph="st_size" />
-            <marker date="1486136250408" expanded="true" signature="45017:45027" ph="st_blksize" />
-            <marker date="1486136250408" expanded="true" signature="45036:45045" ph="st_blocks" />
-            <marker date="1486136250408" expanded="true" signature="45088:45096" ph="st_ctime" />
-            <marker date="1486136250408" expanded="true" signature="45123:45128" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45132:45336" ph="UsernamePa...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45160:45166" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45171:45256" ph="properties: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45189:45219" ph="username: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45213:45219" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45226:45256" ph="password: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45250:45256" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45261:45304" ph="required: &lt;2 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45296:45304" ph="password" />
-            <marker date="1486136250408" expanded="true" signature="45331:45336" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45340:45812" ph="WorkspaceE...: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45366:45372" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45377:45702" ph="properties: &lt;4 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45395:45443" ph="vp_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45418:45424" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45450:45569" ph="vtrq_id: &lt;5 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45473:45480" ph="integer" />
-            <marker date="1486136250408" expanded="true" signature="45497:45502" ph="int64" />
-            <marker date="1486136250408" expanded="true" signature="45539:45549" ph="1073741823" />
-            <marker date="1486136250408" expanded="true" signature="45567:45569" ph="10" />
-            <marker date="1486136250408" expanded="true" signature="45576:45644" ph="vtrq_path: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45601:45607" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45625:45644" ph="/path/with..." />
-            <marker date="1486136250408" expanded="true" signature="45651:45702" ph="local: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45672:45679" ph="boolean" />
-            <marker date="1486136250408" expanded="true" signature="45697:45702" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45707:45780" ph="required: &lt;4 items&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45741:45748" ph="vtrq_id" />
-            <marker date="1486136250408" expanded="true" signature="45757:45766" ph="vtrq_path" />
-            <marker date="1486136250408" expanded="true" signature="45775:45780" ph="local" />
-            <marker date="1486136250408" expanded="true" signature="45807:45812" ph="false" />
-            <marker date="1486136250408" expanded="true" signature="45816:45900" ph="WorkspaceS...: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45841:45846" ph="array" />
-            <marker date="1486136250408" expanded="true" signature="45851:45900" ph="items: &lt;1 key&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45870:45900" ph="##/definiti..." />
-            <marker date="1486136250408" expanded="true" signature="45925:45931" ph="object" />
-            <marker date="1486136250408" expanded="true" signature="45954:46010" ph="name: &lt;2 keys&gt;" />
-            <marker date="1486136250408" expanded="true" signature="45974:45980" ph="string" />
-            <marker date="1486136250408" expanded="true" signature="45998:46010" ph="my-workspa..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vcnc-rest/src/Makefile.am">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -1491,8 +581,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vcnc-rest/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="21" lean-forward="false" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+        <state relative-caret-position="522">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <marker date="1486140334680" expanded="true" signature="0:892" ph="{&quot;name&quot;: &quot;vcnc-rest&quot;...}" />
+            <marker date="1486140334680" expanded="true" signature="527:815" ph="{&quot;JSON&quot;: &quot;^1.0.0&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/routes/v1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="49" column="2" lean-forward="false" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/config/vcnc-redis.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/config/vcnc-config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/lib/configuration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/lib/grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vcnc-rest/api/swagger.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="144" column="21" lean-forward="false" selection-start-line="144" selection-start-column="21" selection-end-line="144" selection-end-column="21" />
           <folding />
         </state>
       </provider>
