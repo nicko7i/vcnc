@@ -16,7 +16,7 @@ Build/
 _build/
 
 # Webstorm 
-.idea/*.iml
+.idea/
 
 # Python virtual environments
 venv*/
