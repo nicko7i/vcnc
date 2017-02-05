@@ -69,11 +69,11 @@ rethinkdb:
   #  must match where they intersect.
   connection:
     # The host to connect to.
-    host: 172.17.0.2
+    host: 172.17.0.3
     # The port to connect on.
     port: 28015
     # The default database
-    db: vcnc-rest
+    db: vcnc_rest
     # The user account to connect as
     user: admin
     # The password for the user account to connect as
@@ -81,7 +81,11 @@ rethinkdb:
     # Timeout period in seconds for the connection to be opened.
     timeout: 20
     # A hash of options to support SSL connections.
-    ssl: {}
+
+  #
+  #  The RethinkDB database name. Will be created if it doesn't exist.
+  #  Valid characters are [A-Za-z0-9_]
+  #  dbName: vcnc_rest
 
 test:
   #

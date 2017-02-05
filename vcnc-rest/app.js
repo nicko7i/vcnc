@@ -8,8 +8,13 @@
 // process.env.DEBUG = 'swagger:middleware';
 
 const config = require('./lib/configuration');
+//
+//  Express
 const express = require('express');
+//
+//  Swagger
 const Middleware = require('swagger-express-middleware');
+//
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
@@ -21,16 +26,8 @@ const CnctrqClient = require(path.join(__dirname,
 const cnctrqClient = new CnctrqClient;
 cnctrqClient.call_me_first(__dirname);
 const fulfill202 = require('./lib/fulfill202');
-/**
- *  Top-level Express application object.
- *  @module
- */
-module.exports = (() => {
-  //
-  // ROUTES ===========================================================
 
-  const app = express();
-
+function configStaticContent() {
   //
   //  Configure the static content
   //
@@ -46,9 +43,48 @@ module.exports = (() => {
     '/v1/doc/api/spec',
     express.static(path.join(__dirname, 'api/swagger.json'))
   );
+}
 
-  const middleware = new Middleware(app);
+function install202Fulfillment() {
+  //
+  //  Install the 202 fulfillment controller
+  //
+  app.get(`${fulfill202.route}/:id`, (req, res) => {
+    // console.log('routed to fulfill ');
+    // const result = fulfill202.fetchFulfillmentResource(req.params.id);
+    fulfill202.fetchFulfillmentResource(req.params.id)
+    .then((result) => {
+      // console.log('about to fulfill ', result);
+      res.status(200).send(result);
+    });
+  });
+}
 
+function installErrorGenerator() {
+  //
+  //  An undocumented error generator for testing.
+  //
+  app.use('/_fail/sync', () => {
+    throw new Error('mock synchronous error for testing');
+  });
+}
+
+function serveWebAdmin() {
+  //
+  //  Serve the web admin console on its own port.
+  if (config.web.enabled) {
+    const admin = express();
+    admin.use(
+      '/',
+      express.static(path.join(__dirname, 'static/vcnc-web'))
+    );
+    const adminPort = parseInt(config.server.port) + parseInt(config.web.offset);
+    console.log('INFO: accepting vcnc-web connections on port', adminPort); // eslint-disable-line
+    http.createServer(admin).listen(adminPort);
+  }
+}
+
+function configSwaggerMiddleware() {
   //
   //  Any app.use(..) outside this block (i.e, lexically after) are,
   //  in effect, /earlier/ in the processing chain, because this
@@ -58,7 +94,7 @@ module.exports = (() => {
     //
     //  Enable CORS
     //
-    app.use(cors({ credentials: true, origin: true }))
+    app.use(cors({credentials: true, origin: true}))
     //
     //  Metadata middleware
     //
@@ -146,7 +182,7 @@ module.exports = (() => {
       if (err.status === 404) {
         res
         .status(err.status)
-        .json({ error_sym: 'ENOENT', message: err.message });
+        .json({error_sym: 'ENOENT', message: err.message});
       } else {
         res
         .status(err.status || 500)
@@ -172,8 +208,6 @@ module.exports = (() => {
         app.get('env') === 'development' ? err.stack : undefined
       );
     });
-
-
     //
     //  Announce we are ready.
     //
@@ -181,37 +215,35 @@ module.exports = (() => {
     console.log('INFO: accepting REST connections on port', port); // eslint-disable-line
     // create http service
     http.createServer(app).listen(port);
+    //
+    //  Start the WebAdmin server
+    //
+    serveWebAdmin();
   });
+}
 
+/**
+ *  Top-level Express application object.
+ *  @module
+ */
+module.exports = (() => {
   //
-  //  An undocumented error generator for testing.
-  //
-  app.use('/_fail/sync', () => {
-    throw new Error('mock synchronous error for testing');
-  });
-  //
-  //  Install the 202 fulfillment controller
-  //
-  app.get(`${fulfill202.route}/:id`, (req, res) => {
-    // console.log('routed to fulfill ');
-    // const result = fulfill202.fetchFulfillmentResource(req.params.id);
-    fulfill202.fetchFulfillmentResource(req.params.id)
-    .then((result) => {
-      // console.log('about to fulfill ', result);
-      res.status(200).send(result);
-    });
-  });
+  const app = express();
+  const middleware = new Middleware(app);
 
-  //
-  //  Serve the web admin console on its own port.
-  if (config.web.enabled) {
-    const admin = express();
-    admin.use(
-      '/',
-      express.static(path.join(__dirname, 'static/vcnc-web'))
-    );
-    const adminPort = parseInt(config.server.port) + parseInt(config.web.offset);
-    console.log('INFO: accepting vcnc-web connections on port', adminPort); // eslint-disable-line
-    http.createServer(admin).listen(adminPort);
-  }
+  grid.init()
+  .then(() => {
+    configureStaticContent();
+    install202Fulfillment();
+    installErrorGenerator();
+    //
+    //  configureSwaggerMiddleware() must be last
+    //
+    configureSwaggerMiddleware();
+  })
+  .catch(err => {
+    console.log(err);
+  });
 })();
+
+
