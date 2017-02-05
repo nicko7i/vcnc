@@ -18,6 +18,7 @@ const Middleware = require('swagger-express-middleware');
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
+const grid = require('./lib/grid.js');
 //
 //  Initialize the C++ extension
 //
@@ -27,7 +28,7 @@ const cnctrqClient = new CnctrqClient;
 cnctrqClient.call_me_first(__dirname);
 const fulfill202 = require('./lib/fulfill202');
 
-function configStaticContent() {
+function configureStaticContent(app) {
   //
   //  Configure the static content
   //
@@ -45,7 +46,7 @@ function configStaticContent() {
   );
 }
 
-function install202Fulfillment() {
+function install202Fulfillment(app) {
   //
   //  Install the 202 fulfillment controller
   //
@@ -60,7 +61,7 @@ function install202Fulfillment() {
   });
 }
 
-function installErrorGenerator() {
+function installErrorGenerator(app) {
   //
   //  An undocumented error generator for testing.
   //
@@ -84,7 +85,7 @@ function serveWebAdmin() {
   }
 }
 
-function configSwaggerMiddleware() {
+function configureSwaggerMiddleware(app, middleware) {
   //
   //  Any app.use(..) outside this block (i.e, lexically after) are,
   //  in effect, /earlier/ in the processing chain, because this
@@ -233,13 +234,13 @@ module.exports = (() => {
 
   grid.init()
   .then(() => {
-    configureStaticContent();
-    install202Fulfillment();
-    installErrorGenerator();
+    configureStaticContent(app);
+    install202Fulfillment(app);
+    installErrorGenerator(app);
     //
     //  configureSwaggerMiddleware() must be last
     //
-    configureSwaggerMiddleware();
+    configureSwaggerMiddleware(app, middleware);
   })
   .catch(err => {
     console.log(err);
