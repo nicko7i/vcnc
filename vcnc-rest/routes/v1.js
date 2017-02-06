@@ -67,10 +67,38 @@ module.exports = (app) => {
       (cb) => {
         latency()
         .then(()=> {
-          grid.createJob(
-            job_id,
+          //
+          //  The grid job tells us the name of the workspace specification
+          //  used by the job.  Here we get the associated spec, which we will
+          //  also store in the database.
+          //
+          cnctrqClient.workspace_get(
+            config.peercache.vtrq_id,
+            req.body.workspace_name,
             (result) => {
-              cb(adapter(result, { result: result.result }))
+              if (result.http_status === 200) {
+                grid.createJob(
+                  req.pathParams.job_id,
+                  { workspace_name: req.body.workspace_name, workspace_spec: result.spec })
+                .then(() => {
+                  cb(adapter({
+                    http_status: 200,
+                    error_sym: 'OK',
+                    error_description_brief: 'Request Processed',
+                  }));
+                })
+                .catch(err => {
+                  //  Error from database
+                  cb(adapter({
+                    http_status: 500,
+                    error_sym: 'EPROTO',
+                    error_description_brief: 'Server Error',
+                  }, {}, {server_msg: err.toString()}));
+                });
+              } else {
+                //  Error from cnctrq client
+                cb(adapter(result));
+              }
             });
         });
       });
@@ -79,17 +107,39 @@ module.exports = (app) => {
   //  Returns a grid job record
   //
   app.get('/grid/jobs/:job_id', (req, res) => {
+    const job_id = req.pathParams.job_id;
     fulfill202(
       req,
       res,
       (cb) => {
         latency()
         .then(()=> {
-          grid.getJob(
-            job_id,
-            (result) => {
-              cb(adapter(result, { result: result.result }))
-            });
+          return grid.getJob(job_id);
+        })
+        .then(result => {
+          if (result) {
+            cb(adapter({
+              http_status: 200,
+              error_sym: 'OK',
+              error_description_brief: 'Request processed',
+              job_spec: result.job_spec,
+            }));
+          } else {
+            // job ID was not found
+            cb(adapter({
+              http_status: 404,
+              error_sym: 'ENOENT',
+              error_description_brief: `Job \'${job_id}\' not found`,
+            }))
+          }
+        })
+        .catch(err => {
+          //  Error from database
+          cb(adapter({
+            http_status: 500,
+            error_sym: 'EPROTO',
+            error_description_brief: 'Server Error',
+          }, {}, {server_msg: err.toString()}));
         });
       });
   });
@@ -97,17 +147,36 @@ module.exports = (app) => {
   //  Deletes a grid job record
   //
   app.delete('/grid/jobs/:job_id', (req, res) => {
+    const job_id = req.pathParams.job_id;
     fulfill202(
       req,
       res,
       (cb) => {
         latency()
-        .then(()=> {
-          grid.deleteJob(
-            job_id,
-            (result) => {
-              cb(adapter(result, { result: result.result }))
-            });
+        .then(() => {
+          return grid.deleteJob(job_id);
+        })
+        .then((result) => {
+          if (result.deleted === 1) {
+            cb(adapter({
+              http_status: 200,
+              error_sym: 'OK',
+              error_description_brief: 'Request processed',
+            }));
+          } else {
+            cb(adapter({
+              http_status: 404,
+              error_sym: 'ENOENT',
+              error_description_brief: `Job \'${job_id}\' not found`,
+            }))
+          }
+        })
+        .catch(err => {
+          cb(adapter({
+            http_status: 500,
+            error_sym: 'EPROTO',
+            error_description_brief: 'Server Error',
+          }, {}, {server_msg: err.toString()}));
         });
       });
   });
@@ -370,7 +439,7 @@ module.exports = (app) => {
             req.pathParams.url_path,
             (result) => {
               //
-              //  this happens because we receive the workspace specification
+              //  We use json.parse(..) because we receive the workspace specification
               //  from the RPC as a JSON string rather than an object. Code at
               //  this level manipulates objects.
               //

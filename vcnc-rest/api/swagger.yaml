@@ -116,10 +116,13 @@ paths:
           schema:
             type: object
             properties:
-              workspace:
+              workspace_name:
+                type: string
+              workspace_spec:
                 type: string
             required:
-              - workspace
+              - workspace_name
+              - workspace_spec
             additionalProperties: false
       responses:
         '200':
@@ -129,7 +132,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /grid/jobs/{job_id}:
     get:
       summary: Retrieves data associated with a grid job.
       operationId: gridJobGet

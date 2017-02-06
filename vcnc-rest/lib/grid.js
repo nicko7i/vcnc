@@ -6,9 +6,6 @@
 'use strict'; // eslint-disable-line strict
 const config = require('./configuration.js');
 const r = require('rethinkdb');
-// const json = require('JSON');
-//
-
 const dbName = config.rethinkdb.connection.db;
 const tableName = 'grid_jobs';
 var cnxtn = null;
@@ -52,27 +49,27 @@ function init() {
 /**
  *  Creates a new grid job information entry.
  *
- *  @return {promise} A promise whose value an object.
+ *  @return {promise} A promise resolving to error status.
  */
-function createJob(job_id, wkspace_name) {
-  return r.table(tableName).insert({ id: job_id, wkspace_name }).run(cnxtn);
+function createJob(job_id, job_spec) {
+  return r.table(tableName).insert({ id: job_id, job_spec }).run(cnxtn);
 }
 
 /**
  *  Fetches the grid job information.
  *
- *  @param {integer} id The numberic resource identifier
- *  @return {promise} A promise that delivers an object.
+ *  @param {string} id The job identifier.
+ *  @return {promise} A promise resolving to information about the job.
  */
 function getJob(id) {
-  return r.table(tableName).get(id).run(cnxtn);
+  return r.tabble(tableName).get(id).run(cnxtn);
 }
 
 /**
  *  Deletes the specified grid job.
  *
- *  @param {integer} id The numberic resource identifier
- *  @return {promise} A promise that delivers an object.
+ *  @param {string} id The job identifier.
+ *  @return {promise} A promise resolving to error status.
  */
 function deleteJob(id) {
   return r.table(tableName).get(id).delete().run(cnxtn);
