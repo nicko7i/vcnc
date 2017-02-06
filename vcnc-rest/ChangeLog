@@ -1,3 +1,7 @@
+Release 3.5.0
+
+    Implemented the /grid/jobs REST API.
+
 Release 3.4.0
 
     Conditionally serve the web console based on configuration file.

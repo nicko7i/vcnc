@@ -17,6 +17,7 @@ var cnxtn = null;
  *  @return {promise} A promise fulfilled when the connection is ready.
  */
 function init() {
+  if (!config.test.enable_grid_jobs) return Promise.resolve();
   return r.connect(config.rethinkdb.connection)
   .then(conn => {
     cnxtn = conn;  // save the connection for later reuse
