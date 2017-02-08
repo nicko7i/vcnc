@@ -96,7 +96,7 @@ test:
   latency: 0
   #
   #  If truthy, enables the job grid API.  Should be false for production
-  enable_grid_jobs: 0
+  enable_grid_jobs: 1
 
 web:
   #
