@@ -118,11 +118,8 @@ paths:
             properties:
               workspace_name:
                 type: string
-              workspace_spec:
-                type: string
             required:
               - workspace_name
-              - workspace_spec
             additionalProperties: false
       responses:
         '200':

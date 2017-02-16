@@ -118,7 +118,7 @@ AC_PATH_PROGS(PROG_RM,rm,,[$TOOLROOT/bin:$PATH])
 AC_PATH_PROGS(PROG_SED,sed,,[$TOOLROOT/bin:$PATH])
 AC_PATH_PROGS(PROG_SH,bash sh,,[$TOOLROOT/bin:$PATH])
 AC_PATH_PROGS(PROG_TAR,tar,,[$TOOLROOT/bin:$PATH])
-AC_PATH_PROGS(PROG_NODE_GYP,node-gyp,,[$TOOLROOT/nvm/versions/node/$NODE_VERSION/lib/node_modules/npm/bin/node-gyp-bin:$PATH])
+AC_PATH_PROGS(PROG_NODE_GYP,node-gyp,,[$TOOLROOT/nvm/versions/node/$NODE_VERSION/lib/node_modules/npm/bin/node-gyp-bin:$TOOLROOT/share/vcnc/nvm/versions/node/$NODE_VERSION/lib/node_modules/npm/bin/node-gyp-bin:$PATH])
 #
 #  If node-gyp isn't there, might as well stop.
 #
@@ -170,9 +170,9 @@ AM_CONDITIONAL([SSL],[test "x$SSL_LIBS" != "x"])
 #
 #	Detect and use log4cpp
 #
-PKG_CHECK_MODULES(LOG4CPP,log4cpp >= 1.1)
-AC_SUBST(LOG4CPP_CFLAGS)
-AC_SUBST(LOG4CPP_LIBS)
+##PKG_CHECK_MODULES(LOG4CPP,log4cpp >= 1.1)
+##AC_SUBST(LOG4CPP_CFLAGS)
+##AC_SUBST(LOG4CPP_LIBS)
 #
 #	Type checks.
 #

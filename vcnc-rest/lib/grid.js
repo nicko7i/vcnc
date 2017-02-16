@@ -62,7 +62,7 @@ function createJob(job_id, job_spec) {
  *  @return {promise} A promise resolving to information about the job.
  */
 function getJob(id) {
-  return r.tabble(tableName).get(id).run(cnxtn);
+  return r.table(tableName).get(id).run(cnxtn);
 }
 
 /**
