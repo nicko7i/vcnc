@@ -54,7 +54,7 @@ function createFulfillmentResource() {
       return idx;
     })
     .catch((e) => {
-      console.log('caught', e);
+      console.log('caught', e); // eslint-disable-line
     });
   return p;
 }
