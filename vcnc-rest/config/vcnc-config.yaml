@@ -94,6 +94,9 @@ test:
   #  Introduces seconds of latency into the (apparent) response time of the vtrq.
   #  Only for testing; production deployments should use value 0.
   latency: 0
+  #
+  #  If truthy, enables the job grid API.  Should be false for production
+  enable_grid_jobs: 0
 
 web:
   #
