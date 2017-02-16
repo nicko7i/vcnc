@@ -97,7 +97,14 @@ module.exports = (app) => {
                 });
               } else {
                 //  Error from cnctrq client
-                cb(adapter(result));
+                if (result.error_sym == 'ENOENT') {
+                  cb(adapter(Object.assign(
+                    result,
+                    {message: `Workspace ${req.body.workspace_name} not found`})));
+                }
+                else {
+                  cb(adapter(result));
+                }
               }
             });
         });
@@ -122,6 +129,7 @@ module.exports = (app) => {
               http_status: 200,
               error_sym: 'OK',
               error_description_brief: 'Request processed',
+            },{
               job_spec: result.job_spec,
             }));
           } else {

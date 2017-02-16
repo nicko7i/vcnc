@@ -53,7 +53,11 @@ function init() {
  *  @return {promise} A promise resolving to error status.
  */
 function createJob(job_id, job_spec) {
-  return r.table(tableName).insert({ id: job_id, job_spec }).run(cnxtn);
+  return r.table(tableName).insert({
+    id: job_id,
+    job_spec,
+    timestamp: r.now()
+  }).run(cnxtn);
 }
 
 /**
