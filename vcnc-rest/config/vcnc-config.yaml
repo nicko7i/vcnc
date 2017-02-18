@@ -76,7 +76,7 @@ rethinkdb:
   #  must match where they intersect.
   connection:
     # The host to connect to.
-    host: 172.17.0.2
+    host: localhost
     # The port to connect on.
     port: 28015
     # The default database

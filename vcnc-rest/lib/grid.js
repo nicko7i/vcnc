@@ -8,7 +8,7 @@ const config = require('./configuration.js');
 const r = require('rethinkdb');
 const dbName = config.rethinkdb.connection.db;
 const tableName = 'grid_jobs';
-var cnxtn = null;
+let cnxtn = null;
 
 /**
  *  Initializes the grid module, creating a connection object
@@ -21,26 +21,22 @@ function init() {
   return r.connect(config.rethinkdb.connection)
   .then(conn => {
     cnxtn = conn;  // save the connection for later reuse
-    return r.dbList().filter(v => {
-      return v.eq(dbName);
-    }).run(conn);
+    return r.dbList().filter(v => v.eq(dbName)).run(conn);
   })
   .then(lst => {
     //  Create the database if necessary.
-    if (lst.length == 0) {
+    if (lst.length === 0) {
       return r.dbCreate(dbName).run(cnxtn);
     }
     return Promise.resolve();
   })
-  .then(() => {
+  .then(() =>
     //  Look for the table in the database
-    return r.tableList().filter(v => {
-      return v.eq(tableName);
-    }).run(cnxtn);
-  })
+    r.tableList().filter(v => v.eq(tableName)).run(cnxtn)
+  )
   .then(lst => {
     // Create the table if necessary.
-    if (lst.length == 0) {
+    if (lst.length === 0) {
       return r.tableCreate(tableName).run(cnxtn);
     }
     return Promise.resolve();
@@ -52,11 +48,11 @@ function init() {
  *
  *  @return {promise} A promise resolving to error status.
  */
-function createJob(job_id, job_spec) {
+function createJob(jobId, jobSpec) {
   return r.table(tableName).insert({
-    id: job_id,
-    job_spec,
-    timestamp: r.now()
+    id: jobId,
+    jobSpec,
+    timestamp: r.now(),
   }).run(cnxtn);
 }
 
@@ -87,7 +83,10 @@ function getJobs() {
  *  @return {promise} A promise resolving to error status.
  */
 function deleteJob(id) {
-  return r.table(tableName).get(id).delete().run(cnxtn);
+  return r.table(tableName)
+  .get(id)
+  .delete()
+  .run(cnxtn);
 }
 
 module.exports = {

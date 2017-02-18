@@ -111,7 +111,7 @@ module.exports = (app) => {
       res,
       (cb) => {
         latency()
-        .then(()=> {
+        .then(() => {
           //
           //  The grid job tells us the name of the workspace specification
           //  used by the job.  Here we get the associated spec, which we will
@@ -138,16 +138,15 @@ module.exports = (app) => {
                     http_status: 500,
                     error_sym: 'EPROTO',
                     error_description_brief: 'Server Error',
-                  }, {}, {server_msg: err.toString()}));
+                  }, {}, { server_msg: err.toString() }));
                 });
               } else {
                 //  Error from cnctrq client
-                if (result.error_sym == 'ENOENT') {
+                if (result.error_sym === 'ENOENT') {
                   cb(adapter(Object.assign(
                     result,
-                    {message: `Workspace ${req.body.workspace_name} not found`})));
-                }
-                else {
+                    { message: `Workspace ${req.body.workspace_name} not found` })));
+                } else {
                   cb(adapter(result));
                 }
               }
@@ -159,15 +158,14 @@ module.exports = (app) => {
   //  Returns a grid job record
   //
   app.get('/grid/job/:job_id', (req, res) => {
-    const job_id = req.pathParams.job_id;
+    const jobId = req.pathParams.job_id;
+
     fulfill202(
       req,
       res,
       (cb) => {
         latency()
-        .then(()=> {
-          return grid.getJob(job_id);
-        })
+        .then(() => grid.getJob(jobId))
         .then(result => {
           console.log(result)
           if (result) {
@@ -175,7 +173,7 @@ module.exports = (app) => {
               http_status: 200,
               error_sym: 'OK',
               error_description_brief: 'Request processed',
-            },{
+            }, {
               job_spec: result.job_spec,
             }));
           } else {
@@ -183,8 +181,8 @@ module.exports = (app) => {
             cb(adapter({
               http_status: 404,
               error_sym: 'ENOENT',
-              error_description_brief: `Job \'${job_id}\' not found`,
-            }))
+              error_description_brief: `Job \'${jobId}\' not found`,
+            }));
           }
         })
         .catch(err => {
@@ -193,7 +191,7 @@ module.exports = (app) => {
             http_status: 500,
             error_sym: 'EPROTO',
             error_description_brief: 'Server Error',
-          }, {}, {server_msg: err.toString()}));
+          }, {}, { server_msg: err.toString() }));
         });
       });
   });
@@ -201,15 +199,13 @@ module.exports = (app) => {
   //  Deletes a grid job record
   //
   app.delete('/grid/job/:job_id', (req, res) => {
-    const job_id = req.pathParams.job_id;
+    const jobId = req.pathParams.job_id;
     fulfill202(
       req,
       res,
       (cb) => {
         latency()
-        .then(() => {
-          return grid.deleteJob(job_id);
-        })
+        .then(() => grid.deleteJob(jobId))
         .then((result) => {
           if (result.deleted === 1) {
             cb(adapter({
@@ -221,8 +217,8 @@ module.exports = (app) => {
             cb(adapter({
               http_status: 404,
               error_sym: 'ENOENT',
-              error_description_brief: `Job \'${job_id}\' not found`,
-            }))
+              error_description_brief: `Job \'${jobId}\' not found`,
+            }));
           }
         })
         .catch(err => {
@@ -230,7 +226,7 @@ module.exports = (app) => {
             http_status: 500,
             error_sym: 'EPROTO',
             error_description_brief: 'Server Error',
-          }, {}, {server_msg: err.toString()}));
+          }, {}, { server_msg: err.toString() }));
         });
       });
   });
@@ -503,7 +499,7 @@ module.exports = (app) => {
                 cb(adapter(result));
               }
             });
-        })
+        });
       });
   });
 

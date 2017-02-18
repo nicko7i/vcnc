@@ -27,6 +27,7 @@ PROJECTIONS = 			\
 all-local:
 	(cd $(top_srcdir); \
 	  NVM_DIR=$(TOOLROOT)/nvm; \
+	  [ ! -d $(NVM_DIR) ] && (NVM_DIR=$(TOOLROOT)/share/vcnc/nvm); \
 	  [ ! -d $(NVM_DIR) ] && (echo "Can't find NVM_DIR"; exit 1); \
 	  . $(NVM_DIR)/nvm.sh;  \
 	  npm install; \
