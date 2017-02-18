@@ -67,6 +67,16 @@ function getJob(id) {
 }
 
 /**
+ *  Fetches names of all grid jobs
+ *
+ *  @param {string} id The job identifier.
+ *  @return {promise} A promise resolving to information about the jobs.
+ */
+function getJobs() {
+  return r.table(tableName).pluck('id').run(cnxtn);
+}
+
+/**
  *  Deletes the specified grid job.
  *
  *  @param {string} id The job identifier.
@@ -83,5 +93,6 @@ module.exports = {
   init,
   createJob,
   getJob,
+  getJobs,
   deleteJob,
 };

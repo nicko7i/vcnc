@@ -97,7 +97,21 @@ paths:
   ##
   ##  Grid computing support
   ##
-  /grid/jobs/{job_id}:
+  /grid/jobs:
+    get:
+      summary: Retrieves information about all jobs
+      operationId: gridJobList
+      tags:
+        - "Grid API"
+      responses:
+        '200':
+          description: Request processed.  See response body.
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /grid/job/{job_id}:
     post:
       summary: Creates a new resource describing a job with the specified id.
       operationId: gridJobPost
@@ -168,129 +182,6 @@ paths:
           description: unexpected error
           schema:
             $ref: '#/definitions/Error'
-  ##
-  ##  vCNC - vtrq
-  ##
-    post:
-      summary: Creates a new vTRQ resource and assigns the vTRQ ID.
-      operationId: vcncVtrqCreate
-      tags:
-        - "Admin API"
-      parameters:
-        - in: body
-          name: body
-          description: "Information about a host machine."
-          required: true
-          schema:
-            $ref: '#/definitions/Host'
-        - in: header
-          name: "Authorization"
-          description: JWT session token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-    put:
-      summary: Updates a vTRQ entry.
-      operationId: vcncVtrqUpdate
-      tags:
-        - "Admin API"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of vTRQ
-          required: true
-          type: integer
-          format: int64
-          minimum: 0
-          maximum: 1073741823
-        - in: body
-          name: body
-          description: "Information about a host machine."
-          required: true
-          schema:
-            $ref: '#/definitions/Host'
-        - in: header
-          name: "Authorization"
-          description: JWT session token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-    get:
-      summary: Retrieves data associated with a vTRQ.
-      operationId: vcncVtrqGet
-      tags:
-        - "Admin API"
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of vTRQ
-          required: true
-          type: integer
-          format: int64
-          minimum: 0
-          maximum: 1073741823
-        - in: header
-          name: "Authorization"
-          description: JWT session token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-          schema:
-            $ref: '#/definitions/Host'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-    delete:
-      summary: Deletes a vTRQ entry.
-      operationId: vcncVtrqDelete
-      tags:
-        - "Admin API"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of vTRQ
-          required: true
-          type: integer
-          format: int64
-          minimum: 0
-          maximum: 1073741823
-        - in: header
-          name: "Authorization"
-          description: JWT session token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-        '400':
-          description: Ill-formed or invalid request.
-          schema:
-            $ref: '#/definitions/Error'
-        default:
-          description: unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
   ##
   ##  vCNC - users
   ##
@@ -1477,54 +1368,6 @@ definitions:
           - EREMOTEIO
       message:
         type: string
-
-#  PSpaceNode:
-#    type: object
-#    properties:
-#      N:
-#        type: string
-#      C:
-#        type: array
-#        minItems: 0
-#        items:
-#          $ref: '#/definitions/PSpaceNode'
-#    required:
-#      - N
-#    additionalProperties: false
-#
-#  PSpace:
-#    type: object
-#    properties:
-#      P:
-#        type: string
-#      S:
-#        $ref: '#/definitions/PSpaceNode'
-#    required:
-#      - P
-#      - S
-#    additionalProperties: false
-
-  Host:
-    type: object
-    properties:
-      hname:
-        type: string
-      vtrq_id:
-        type: integer
-      port:
-        type: string
-      transport:
-        type: string
-        default: tcp
-        enum:
-          - tcp
-          - sctp
-    required:
-      - hname
-      - vtrq_id
-      - port
-      - transport
-    additionalProperties: false
 
   SourceDestinationPath:
     properties:

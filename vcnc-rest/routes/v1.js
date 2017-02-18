@@ -58,9 +58,54 @@ function adapter(fromRpc, onSuccess, onFailure) {
  */
 module.exports = (app) => {
   //
+  //  Returns the collection of grid job records
+  //
+  app.get('/grid/jobs', (req, res) => {
+    const job_id = req.pathParams.job_id;
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(()=> {
+          return grid.getJobs();
+        })
+        .then(result => {
+          return result.toArray()
+        })
+        .then(result => {
+          if (result) {
+            cb(adapter({
+              http_status: 200,
+              error_sym: 'OK',
+              error_description_brief: 'Request processed',
+            },{
+              job_names: result.map(e => e.id)
+            }));
+          } else {
+            // Something went wrong
+            cb(adapter({
+              http_status: 500,
+              error_sym: 'EREMOTEIO',
+              error_description_brief: 'Server Error',
+            }))
+          }
+        })
+        .catch(err => {
+          //  Error from database
+          cb(adapter({
+            http_status: 500,
+            error_sym: 'EPROTO',
+            error_description_brief: 'Server Error',
+          }, {}, {server_msg: err.toString()}));
+        });
+      });
+  });
+
+  //
   //  Creates a grid job record
   //
-  app.post('/grid/jobs/:job_id', (req, res) => {
+  app.post('/grid/job/:job_id', (req, res) => {
     fulfill202(
       req,
       res,
@@ -112,8 +157,9 @@ module.exports = (app) => {
   //
   //  Returns a grid job record
   //
-  app.get('/grid/jobs/:job_id', (req, res) => {
+  app.get('/grid/job/:job_id', (req, res) => {
     const jobId = req.pathParams.job_id;
+
     fulfill202(
       req,
       res,
@@ -121,6 +167,7 @@ module.exports = (app) => {
         latency()
         .then(() => grid.getJob(jobId))
         .then(result => {
+          console.log(result)
           if (result) {
             cb(adapter({
               http_status: 200,
@@ -151,7 +198,7 @@ module.exports = (app) => {
   //
   //  Deletes a grid job record
   //
-  app.delete('/grid/jobs/:job_id', (req, res) => {
+  app.delete('/grid/job/:job_id', (req, res) => {
     const jobId = req.pathParams.job_id;
     fulfill202(
       req,
