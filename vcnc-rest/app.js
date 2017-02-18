@@ -23,7 +23,7 @@ const grid = require('./lib/grid.js');
 //  Initialize the C++ extension
 //
 const CnctrqClient = require(path.join(__dirname,
-				 'addon/build/Release/cnctrq_client')).CnctrqClient;
+                            'addon/build/Release/cnctrq_client')).CnctrqClient;
 const cnctrqClient = new CnctrqClient;
 cnctrqClient.call_me_first(__dirname);
 const fulfill202 = require('./lib/fulfill202');
@@ -79,7 +79,7 @@ function serveWebAdmin() {
       '/',
       express.static(path.join(__dirname, 'static/vcnc-web'))
     );
-    const adminPort = parseInt(config.server.port) + parseInt(config.web.offset);
+    const adminPort = parseInt(config.server.port, 10) + parseInt(config.web.offset, 10);
     console.log('INFO: accepting vcnc-web connections on port', adminPort); // eslint-disable-line
     http.createServer(admin).listen(adminPort);
   }
@@ -95,7 +95,7 @@ function configureSwaggerMiddleware(app, middleware) {
     //
     //  Enable CORS
     //
-    app.use(cors({credentials: true, origin: true}))
+    app.use(cors({ credentials: true, origin: true }));
     //
     //  Metadata middleware
     //
@@ -122,13 +122,13 @@ function configureSwaggerMiddleware(app, middleware) {
     //  Install routers for each API version and variation
     //
     const v1Router = express.Router(); // eslint-disable-line new-cap
-    require(path.join(__dirname, 'routes/v1'))(v1Router);
+    require(path.join(__dirname, 'routes/v1'))(v1Router); // eslint-disable-line global-require
     app.use('/v1', v1Router);
     //
     //  Install a test router
     //
     const testRouter = express.Router(); // eslint-disable-line new-cap
-    require(path.join(__dirname, 'routes/test'))(testRouter);
+    require(path.join(__dirname, 'routes/test'))(testRouter); // eslint-disable-line global-require
     app.use('/v1/_test', testRouter);
     //
     // Catch undefined URLs (404) and forward to error handler
@@ -183,7 +183,7 @@ function configureSwaggerMiddleware(app, middleware) {
       if (err.status === 404) {
         res
         .status(err.status)
-        .json({error_sym: 'ENOENT', message: err.message});
+        .json({ error_sym: 'ENOENT', message: err.message });
       } else {
         res
         .status(err.status || 500)
@@ -243,8 +243,7 @@ module.exports = (() => {
     configureSwaggerMiddleware(app, middleware);
   })
   .catch(err => {
-    console.log(err);
+    console.log(err); // eslint-disable-line
   });
 })();
-
 

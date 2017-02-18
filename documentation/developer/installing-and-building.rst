@@ -1,3 +1,5 @@
+.. _installing_and_building:
+
 Installing and Building
 =======================
 
@@ -41,9 +43,6 @@ In the context of building vCNC, the PeerCache software is called the *TOOLROOT*
 Configuring the Development Environment
 ---------------------------------------
 
-vCNC is a collection of sub-projects knit together by a top-level autotools
-build system. Begin by installing autotools, GNU make and GNU C++ v4.8.
-
 Python
 ''''''
 
@@ -71,13 +70,20 @@ your *.bashrc* file:
     [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
 Building the Software
-----------------------
+---------------------
 
 The vCNC repository houses a suite of independent projects.  There
 is no top-level, "grand unified" build.  Each project is built separately.
 
 Building vnc-rest
 '''''''''''''''''
+
+*vcnc-rest* is a Node.js server using a custom V8 JavaScript extension object.
+An *autotools* build system ties together the C++ and JavaScript portions of
+the project. Once the project has been built with *autotools*, Node development
+proceeds using npm in the usual way.
+
+Begin by installing autotools, GNU make and GNU C++ v4.8.
 
 Configure, build and install is done in the familiar way.
 The build directory must be called 'Build'
@@ -95,7 +101,7 @@ Building vcnc-web
 '''''''''''''''''
 
 Building this documentation
-''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''
 The build must be done under the Python virtual environment.
 
 .. code-block:: console
