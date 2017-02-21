@@ -5,7 +5,7 @@
 #
 #	See the file 'COPYING' for license information.
 #
-AC_INIT(vCNC, 3.5.0, nick@icmanage.com)
+AC_INIT(vCNC, 3.5.1, nick@icmanage.com)
 AC_PREFIX_DEFAULT(/opt/vcnc)
 #
 AM_CONFIG_HEADER(config.h)
