@@ -7,11 +7,9 @@
 #
 GENERATE_MD=$(top_srcdir)/node_modules/markdown-styles/bin/generate-md
 MARKDOWN_SRCS = 		\
-	api-overview.md		\
 	index.md
 
 MARKDOWN_HTML =			\
-	api-overview.html	\
 	index.html
 
 $(MARKDOWN_HTML) : markdown-products-proxy

@@ -469,28 +469,6 @@ paths:
           description: URL-encoded path in the vTRQ namespace.
           required: true
           type: string
-        - in: query
-          name: filter
-          required: false
-          type: string
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
-        - in: query
-          name: details
-          description: If false the 'stat' field will not be returned.
-          required: false
-          type: boolean
-          default: false
       responses:
         '200':
           description: Request processed.  See response body.
@@ -842,23 +820,6 @@ paths:
           description: Fully qualified canonical path to the VP mount point.
           required: false
           type: string
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
-        - in: query
-          name: details
-          required: false
-          type: boolean
-          default: false
       responses:
         '200':
           description: Request processed, see response body.
@@ -1041,27 +1002,6 @@ paths:
           description: URL-encoded hierarchial name of the workspace.
           required: true
           type: string
-        - in: query
-          name: filter
-          required: false
-          type: string
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
-        - in: query
-          name: details
-          required: false
-          type: boolean
-          default: false
       responses:
         '200':
           description: Request processed, see response body.
@@ -1141,86 +1081,6 @@ paths:
                 enum:
                   - OK
                   - EACCESS
-                  - EREMOTEIO
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /_paginate/{id}:
-    post:
-      summary: Sets new sorting and filtering directives.
-      operationId: _paginatePost
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Unique grid job identifier
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-          schema:
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-            required:
-              - error_sym
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-    get:
-      summary: Iterates over the result set.
-      operationId: _paginateGet
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Unique grid job identifier
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-
-    delete:
-      summary: Releases the result set.
-      operationId: _paginateDelete
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Unique grid job identifier
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed, see response body.
-          schema:
-            required:
-              - error_sym
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCES
-                  - ENOENT
                   - EREMOTEIO
         default:
           description: HTTP error

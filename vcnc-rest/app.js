@@ -102,7 +102,7 @@ function installErrorResponses(app) {
   // When the server runs in 'development' mode, the object will also
   // have a 'stack' property whose value is the stack trace.
   //
-  // The CNC server can throw exception/errors in three different contexts:
+  // The vCNC server can throw exception/errors in three different contexts:
   // a) synchronously to Express handling (app.use(..)); b) during an Express
   // callback; and c) within libuv as part of processing a node/V8 extension.
   //
@@ -111,7 +111,7 @@ function installErrorResponses(app) {
   // method.  Case ((c)) is similar to ((b)), only within the C++ extension
   // context.
   //
-  // The policy is to not handle the ((b)) and ((c)) cases.  The CNC server
+  // The policy is to not handle the ((b)) and ((c)) cases.  The vCNC server
   // will terminate, and in production will be automatically restarted. Testing
   // will have to discover internal bugs which can generate such exceptions.
   // This will be sufficient as long as there is no user (REST) input which can
@@ -191,14 +191,14 @@ function installRouters(app) {
       //
       next();
     } else if (req.originalUrl === '/') {
-      res.redirect('/v1/doc');
+      res.redirect('/v2/doc');
     } else {
       //
       //  Otherwise, if we go here, we got here, we missed
       //  a URL that was outside the swagger-express-middleware
       //  domain, so perform our uniform JSON response handling.
       //
-      const err = new Error('URL not found.');
+      const err = new Error(`URL ${req.originalUrl} not found.`);
       err.status = 404;
       next(err);
     }
