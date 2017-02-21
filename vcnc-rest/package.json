@@ -6,7 +6,7 @@
     "build": "npm run json-ize; npm run generate",
     "start": "npm run build; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
     "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
-    "json-ize": "yaml2json ./api/swagger.yaml > ./api/swagger.json",
+    "json-ize": "yaml2json ./api/v1api.yaml > ./api/v1api.json; yaml2json ./api/v2api.yaml > ./api/v2api.json",
     "generate": "generate-md --input doc --output static/doc-html --layout mixu-page",
     "test": "echo ./node_modules/mocha/bin/mocha"
   },
