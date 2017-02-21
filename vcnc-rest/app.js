@@ -266,12 +266,14 @@ module.exports = (() => {
   installErrorGenerator(app);
   installLogging(app);
   installStaticContent(app);
-  installErrorResponses(app);
-  installRouters(app);
   grid.init()
   .then(() => configureSwaggerMiddleware(app, 'api/v1api.json'))
   .then(() => configureSwaggerMiddleware(app, 'api/v2api.json'))
-  .then(() => serveREST(app))
+  .then(() => {
+    installRouters(app);
+    installErrorResponses(app);
+    serveREST(app);
+  })
   .catch(err => {
     console.log(err); // eslint-disable-line
   });
