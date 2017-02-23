@@ -231,7 +231,7 @@ function serveREST(app) {
 }
 
 function configureSwaggerMiddleware(app, schema) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const middleware = new Middleware(app);
     middleware.init(path.join(__dirname, schema), () => {
       //
@@ -248,7 +248,7 @@ function configureSwaggerMiddleware(app, schema) {
       //
       app.use(middleware.validateRequest());
       //
-      resolve()
+      resolve();
     });
   });
 }

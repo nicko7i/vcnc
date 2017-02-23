@@ -1,5 +1,5 @@
 #
-#  Copyright (C) 2015 IC Manage Inc.
+#  Copyright (C) 2015-2017 IC Manage Inc.
 #
 #  See the file 'COPYING' for license information.
 #
@@ -21,11 +21,6 @@ info:
     Errors are reported at two levels: HTTP and operational.  With one exception, HTTP error codes represent the success or failure of the HTTP protocol, considered solely as a transport. Operational error codes, reported in the response body, reflect the success or failure of the operation itself.
 
     The exception is the operational error code __ENOENT__ (Does not exist).  REST operations which refer to exactly one resource in the URL convert __ENOENT__ to HTTP 404.  Doing so improves our compliance with [*HTTP/1.1*](http://tools.ietf.org/html/rfc7231).  Refer to the [vCNC API Overview](../api-overview.html) for a more detailed discussion.
-
-# Generic host; our customers deploy this service.
-# In production, comment out this line.  The correct host will be displayed
-# when the deployed vCNC server hosts this document set.
-#host: api.acme.com
 
 # Array of all schemes the API supports.
 schemes:
@@ -213,7 +208,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vcnc/users/{username}:
+  /vcnc/user/{username}:
     put:
       summary: Updates information about a vCNC user.
       operationId: vcncUserUpdate
@@ -277,7 +272,7 @@ paths:
   ##
   ##  vTRQ
   ##
-  /vtrq/delete_nodes/{vtrq_id}:
+  /vtrq/{vtrq_id}/delete_nodes:
     post:
       summary: Performs a vector of deletions in a vTRQ namespace
       tags:
@@ -317,7 +312,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/meta_copy/{vtrq_id}:
+  /vtrq/{vtrq_id}/meta_copy:
     post:
       summary: Performs a vector of meta-data copies
       description: |
@@ -369,7 +364,7 @@ paths:
             $ref: '#/definitions/Error'
 
 
-  /vtrq/namespace/{vtrq_id}/{url_path}:
+  /vtrq/{vtrq_id}/namespace/{url_path}:
     delete:
       summary: Deletes the node at the specified paath.
       operationId: vtrqNamespaceDelete
@@ -449,7 +444,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/namespace/{vtrq_id}/{url_path}/children:
+  /vtrq/{vtrq_id}/namespace/{url_path}/children:
     get:
       summary: Returns the child nodes of a namespace path
       operationId: vtrqNamespaceChildren
@@ -513,7 +508,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/namespace/{vtrq_id}/{url_path}/consistency:
+  /vtrq/{vtrq_id}/namespace/{url_path}/consistency:
     get:
       summary: Retreives the consistency attribute of a vTRQ node.
       operationId: vtrqNamespaceConsistencyGet
@@ -619,7 +614,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/namespace/{vtrq_id}/{url_path}/mkdir:
+  /vtrq/{vtrq_id}/namespace/{url_path}/mkdir:
     post:
       summary: Creates a directory at a namespace path.
       description: Clients must ensure the parent exists and is a directory.
@@ -678,7 +673,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/service/{vtrq_id}:
+  /vtrq/{vtrq_id}/service:
     delete:
       summary: Gracefully brings down a vTRQ
       operationId: vtrqShutdown
@@ -712,7 +707,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/vp/{vtrq_id}/{vp_id}:
+  /vtrq/{vtrq_id}/vp/{vp_id}:
     get:
       summary: Returns information about a VP instance
       operationId: vpGet
@@ -815,7 +810,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/vp/{vtrq_id}:
+  /vtrq/{vtrq_id}/vps:
     get:
       summary: Finds VP instances matching certain criteria
       description: |
@@ -833,59 +828,35 @@ paths:
           required: true
           type: integer
         - in: query
-          name: vp_host
-          description: Hostname of the machine running the VP
-          required: false
-          type: string
-        - in: query
-          name: mount_point
-          description: Fully qualified canonical path to the VP mount point.
-          required: false
-          type: string
-        - in: query
           name: limit
           description: Number of items to retreive. Default is 1000; maximum is 100,000.
           required: false
           type: integer
           default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
-        - in: query
-          name: details
-          required: false
-          type: boolean
-          default: false
       responses:
         '200':
           description: Request processed, see response body.
+          headers:
+            Location:
+              description: URL of a cursor resource.
+              type: string
           schema:
             required:
               - error_sym
             properties:
               error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-              vp_ids:
+                $ref: '#/definitions/ErrorSymbol'
+              vps:
                 type: array
                 description: ""
                 items:
-                  type: string
-                  example: "0x123456789ABCDEF0"
+                  $ref: '#/definitions/VpInstance'
         default:
           description: HTTP error
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}/{url_path}:
+  /vtrq/{vtrq_id}/workspace/{url_path}:
     put:
       summary: Updates a workspace
       operationId: vtrqWorkspaceUpdate
@@ -1019,7 +990,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}/{url_path}/children:
+  /vtrq/{vtrq_id}/workspace/{url_path}/children:
     get:
       summary: Returns child nodes of a workspace path
       description: |
@@ -1087,7 +1058,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}:
+  /vtrq/{vtrq_id}/workspaces:
     post:
       summary: Creates or updates a workspace
       operationId: vtrqWorkspaceCreate
@@ -1147,17 +1118,36 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /_paginate/{id}:
-    post:
-      summary: Sets new sorting and filtering directives.
-      operationId: _paginatePost
+  /_cursor/{id}:
+    put:
+      summary: Sets sorting and filtering directives.
+      operationId: _cursorPost
       tags:
         - "Internal API"
       parameters:
         - in: path
           name: id
-          description: Unique grid job identifier
+          description: Cursor object identifier
           required: true
+          type: string
+        - in: query
+          name: filter
+          description: Boolean expression over object fields.
+          required: false
+          type: string
+        - in: query
+          name: order
+          description: Ascending or descending sort
+          required: false
+          type: string
+          default: ascend
+          enum:
+            - ascend
+            - descend
+        - in: query
+          name: on
+          description: Field on which to sort
+          required: false
           type: string
       responses:
         '200':
@@ -1165,13 +1155,7 @@ paths:
           schema:
             properties:
               error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
+                $ref: '#/definitions/ErrorSymbol'
             required:
               - error_sym
             additionalProperties: false
@@ -1182,28 +1166,34 @@ paths:
 
     get:
       summary: Iterates over the result set.
-      operationId: _paginateGet
+      operationId: _cursorGet
       tags:
         - "Internal API"
       parameters:
         - in: path
           name: id
-          description: Unique grid job identifier
+          description: Unique cursor identifier
           required: true
           type: string
+        - in: query
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
+          required: false
+          type: integer
+          default: 0
       responses:
         '200':
           description: Request processed.  See response body.
 
     delete:
       summary: Releases the result set.
-      operationId: _paginateDelete
+      operationId: _cursorDelete
       tags:
         - "Internal API"
       parameters:
         - in: path
           name: id
-          description: Unique grid job identifier
+          description: Unique cursor identifier
           required: true
           type: string
       responses:
@@ -1249,30 +1239,7 @@ paths:
         '200':
           description: Completed
 
-  /_test/moxiate:
-    # /_test/moxiate is deprecated. Use /_test/latency instead
-    post:
-      summary: Tests 202 fulfillment mechanism
-      operationId: _testFulfill
-      tags:
-        - "Internal API"
-        - "Tests"
-      parameters:
-        - in: query
-          name: latency
-          description: Number of seconds needed to fulfill
-          required: true
-          type: integer
-        - in: query
-          name: input
-          description: Integer input value
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Completed
-
-#summary
+#
 #  Re-usable object definitions.
 #
 definitions:
@@ -1331,6 +1298,21 @@ definitions:
         type: string
       message:
         type: string
+
+  ErrorSymbol:
+    type: string
+    description: Symbolic error code value
+    default: OK
+    enum:
+      - OK
+      - EACCES
+      - EEXIST
+      - ENAMETOOLONG
+      - ENOENT
+      - ENOSPC
+      - ENOTDIR
+      - ENOTRECOVERABLE
+      - EREMOTEIO
 
   ErrorVtrq:
     description: |
@@ -1503,6 +1485,19 @@ definitions:
       - password
     additionalProperties: false
 
+  VpInstance:
+    type: object
+    properties:
+      id:
+        type: string
+        example: '0x123456789ABCDEF0'
+      host:
+        type: string
+        example: jupiter
+      mount:
+        type: string
+        example: /tmp/mnt/0xABCDE
+
   WorkspaceEntry:
     type: object
     properties:
@@ -1518,20 +1513,32 @@ definitions:
       vtrq_path:
         type: string
         example: /path/within/vtrq10
-      local:
-        type: boolean
-        example: false
     required:
       - vp_path
       - vtrq_id
       - vtrq_path
-      - local
     additionalProperties: false
 
   WorkspaceSpec:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceEntry'
+    type: object
+    properties:
+      maps:
+        type: array
+        items:
+          $ref: '#/definitions/WorkspaceEntry'
+      writeback:
+        type: string
+        description: Desired writeback semantics
+        default: never
+        enum:
+          - never
+          - explicit
+          - trickle
+          - always
+    required:
+      - maps
+      - writeback
+    additionalProperties: false
 
   Workspace:
     type: object
