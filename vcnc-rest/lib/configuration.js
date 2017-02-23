@@ -5,7 +5,9 @@ const os = require('os');
 //
 //  TODO: handle parse exception
 //
-const conf = yaml.load(path.join(__dirname, '../config/vcnc-config.yaml'));
+const confPath = path.join(__dirname, '../config/vcnc-config.yaml');
+const conf = yaml.load(confPath);
+console.log('INFO:   vcnc using configuration file', confPath); // eslint-disable-line
 
 //
 //  Get our port number
