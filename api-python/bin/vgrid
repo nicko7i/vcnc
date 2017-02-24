@@ -1,0 +1,81 @@
+#!/bin/bash
+
+#  whatdir solution
+#  http://stackoverflow.com/questions/59895
+#
+LINK_PATH=$(readlink -f "$0")
+WHERE_I_AM=$(dirname "$LINK_PATH")
+
+SHORT=dhl
+LONG=delete,help,list
+
+function usage {
+  echo "usage:"
+  echo "   vgrid jobid workspace_name"
+  echo "   vgrid -d jobid"
+  echo "   vgrid -l"
+}
+
+#
+#  Shamelessly adapted from http://stackoverflow.com/a/29754866
+#
+# -temporarily store output to be able to check for errors
+# -activate advanced mode getopt quoting e.g. via “--options”
+# -pass arguments only via   -- "$@"   to separate them correctly
+PARSED=`getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@"`
+if [[ $? -ne 0 ]]; then
+    # e.g. $? == 1
+    #  then getopt has complained about wrong arguments to stdout
+    exit 2
+fi
+# use eval with "$PARSED" to properly handle the quoting
+eval set -- "$PARSED"
+
+# now enjoy the options in order and nicely split until we see --
+while true; do
+    case "$1" in
+        -d|--delete)
+            d=y
+            shift
+            ;;
+        -h|--help)
+            h=y
+            shift
+            ;;
+        -l|--list)
+            l=y
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error"
+            exit 3
+            ;;
+    esac
+done
+
+
+if [[ "x$d" != "x" ]] ; then
+ [[ $# -ne 1 ]] && { echo "-d requires exactly one argument."; usage; exit 1; }
+ { ${WHERE_I_AM}/vclc grid delete $1; exit $?; }
+fi
+
+if [[ "x$l" != "x" ]] ; then
+ [[ $# -ne 0 ]] && { echo "-l takes no argument."; usage; exit 1; }
+ { ${WHERE_I_AM}/vclc grid list; exit $?; }
+fi
+
+if [[ "x$h" != "x" ]] ; then
+ usage
+ echo
+ echo 'vgrid' is configured by 'vclc':
+ echo
+ ${WHERE_I_AM}/vclc --help
+ exit 0
+fi
+
+[[ $# -ne 2 ]] && { echo "Exactly two arguments required."; usage; exit 2; }
+${WHERE_I_AM}/vclc grid post $1 $2;

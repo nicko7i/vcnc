@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#  whatdir solution
+#  http://stackoverflow.com/questions/59895
+#
+LINK_PATH=$(readlink -f "$0")
+WHERE_I_AM=$(dirname "$LINK_PATH")
+#
+#  Development has the traditional Python project layout,
+#  but production pushes everything into share/vclc, so that
+#  we can make unified releases by copying tools on top of each other.
+#
+(
+  cd "$WHERE_I_AM"/.. 
+  [ -e ./velstor ] && { python3 -m velstor.vsh $1 ; exit $?; }
+  [ -e ./share/vclc/velstor ] || { echo "vclc: python package missing, exiting"; exit 1; }
+  PYTHONPATH=$(pwd)/share/vclc ./bin/python3.5 -m velstor.vsh $@ 
+)&
