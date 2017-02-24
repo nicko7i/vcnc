@@ -51,7 +51,7 @@ function init() {
 function createJob(jobId, jobSpec) {
   return r.table(tableName).insert({
     id: jobId,
-    jobSpec,
+    job_spec: jobSpec,
     timestamp: r.now(),
   }).run(cnxtn);
 }
