@@ -44,12 +44,13 @@ def delete(session, jobid):
     return fulfill202(session, r)
 
 
-def post(session, jobid, workspace_name):
+def post(session, jobid, vtrq_id, workspace_name):
     """Posts information about a grid job.
 
     Args:
         session (:class:`~velstor.api.session.Session`): Provides security information.
         jobid (str): The job's identifying string.
+        vtrq_id (int): The vTRQ of the worksapce name.
         workspace_name (str): The PeerCache workspace employed by the job.
 
     Returns:
@@ -59,7 +60,11 @@ def post(session, jobid, workspace_name):
     url = '/'.join([session.base_url()
                     , 'grid/job'
                     , urlencode(jobid)])
-    r = requests.post(url, json={'workspace_name': workspace_name})
+    r = requests.post(url
+                      , json={
+                          'workspace_name': workspace_name
+                          , 'vtrq_id': vtrq_id
+                      })
     return fulfill202(session, r)
 
 def list(session):
