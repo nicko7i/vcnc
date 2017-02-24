@@ -1,3 +1,173 @@
 Release 3.4.2
 
 	Added 'vtrq_id' to the 'grid job' POST request body.
+
+	Remove supurious output from 'vsh'
+
+Release 3.4.1
+
+	vclc uses new-style workspace specifications. Set VELSTOR_VCLC_COMPAT=1
+	to get old-style.
+
+	New 'vclc grid list' command.
+
+	New 'vgrid --list' option.
+
+Release 3.4.0
+
+	The 'grid jobs' clients: vsh and vgrid
+
+	vclc extended to encompass the 'grid jobs' REST operations.
+
+	Automatically unmount vsh fuse mounts.
+
+Release 3.3.3
+
+	Changed the default vCNC port to its new value.
+
+	<B4998> Fixed exception thrown when trqid or vcnc host is
+	unspecified.
+
+Release 3.3.2
+
+	Fixed the ETIME message from vclc ns mkdir ...
+
+Release 3.3.1
+
+	<FRQU-119> Corrected description of --overwrite. Again.
+
+Release 3.3.0
+
+	Pretty-print JSON output
+
+	<FRQU-119> Corrected description of --overwrite.
+
+Release 3.2.6
+
+	API is 202/fulfill asynchronous protocol aware.
+
+	vCLC is fully synchronous against the vCNC.
+
+Release 3.2.5
+
+	Brought codebase into PEP8 conformance.
+
+Release 3.2.4
+
+	<FRQU-103> Improved responses when the value of --vcnc is an
+	existing web server or a non-existent machine/port.
+
+	Syntax errors in 'vclc ws set' JSON are reported by line and
+	column.
+
+Release 3.2.3
+
+	<B9430> Fixed exception thrown when 'ns copy' succeeded.
+
+	<FRQU-93> fixed the stack trace triggered by CTL-C
+
+	<FRQU-89> 'ws set' invalid JSON prints a descriptive error message
+	with line and column references.
+
+Release 3.2.2
+	Removed debug logging that was polluting stdout.
+
+	Added a --debug option that logs HTTP activity to stderr.
+
+Release 3.2.1
+	<B5413> Fixed the continual ENOENT in 'vp find'.
+
+	Re-structured the install directory tree so that the vclc release
+	can be copied on top of a velstor release for unified packaging.
+
+	Fixed the missing build number in 'vclc --version'
+
+Release 3.2.0
+	Changed the syntax of 'vp find' to make all the search criteria
+	optional.  This matches the way the vCNC REST API works.
+
+Release 3.1.1
+	Changed the default port to 5500 from 9080
+
+	Automated test that exercises every command except 'shutdown'
+
+	In the help, mention that 'vp delete' is a future feature.
+
+	Fixed a cut and paste error in 'ns rm' help.
+
+	Fixed bugs in 'ns mkdir'
+
+Release 3.1.0
+	Re-tagged for Xilinx release candidate.
+
+Release 3.0.1
+	Fixed bugs created due to refactoring errors.
+
+Release 3.0.0
+	Reflects VelStor branding all the way down.  Must be used against
+	a velstorized vCNC
+
+Release 2.3.0
+	Added vp commands 'clc vp get', 'clc vp find' and 'clc vp delete'
+
+Release 2.2.1
+
+	Fixed various crashes due to recent code refactoring.
+
+	Make the --json flag toggle a boolean.  Has no effect today;
+	scripts should specify --json for forward compatibility.
+
+	Increase the timeout on potentially long operations to 24
+	hours. This is a temporary measure until true HTPP asynchronous
+	handling can be implemented.
+
+	Increse the timeout on 'ns ls' to 5s from 1s.
+
+	CLC output is true JSON rather than a Python dict representation.
+
+Release 2.2.0:
+
+	Correct the help message for 'clc ns ls' to indicate that only
+	directories can be listed.
+
+	Suggest checking environment and command line switches if clc
+	fails to connect to the default CNC host:port value.  In any case,
+	present a friendlier message when the CNC doesn't respond at all.
+
+	The 'ns ls' command has a short (1 sec) connection timeout.
+	Eventually, all the commands will have a configurable timeout, but
+	in the meantime 'clc ns ls /' can be used for testing.
+
+	Fix <B9705>: exception on valid meta-data copy.
+
+Release 2.1.0:
+	Recursive delete option for namespace deletes.
+
+	Additional short-form options for most operations.
+
+Release 2.0.0:
+	Handle all corner cases for uniform JSON output.
+
+	Correctly return $? exit code for metadata copy
+
+Release 1.2.0:
+	Support the --parents option for mkdir
+
+Release 1.0.2:
+	--cnc default value is now 'cnc:9080'.
+
+	--trqid default value is now '0'
+
+	Gracefully handle failure to reach the specified CNC server.
+
+	Write informational messages and unstructured error messages to
+	stderr.  stdout is reserved for automated parsing.
+
+	--help provides information about option default values and
+	environment variables.
+
+Release 1.0.1:
+	Rebuilt with CPython bundled
+
+Release 1.0.0:
+	Initial release.
