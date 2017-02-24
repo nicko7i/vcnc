@@ -125,6 +125,13 @@ paths:
           schema:
             type: object
             properties:
+              vtrq_id:
+                description: ID of the vTRQ performing this operation.
+                type: integer
+                format: int64
+                minimum: 0
+                maximum: 1073741823
+                default: 0
               workspace_name:
                 type: string
             required:

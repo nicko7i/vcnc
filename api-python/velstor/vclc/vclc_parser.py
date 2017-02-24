@@ -90,7 +90,7 @@ def _configure_grid(grid_subparsers, handler):
     parser_grid_post.set_defaults(
         action=handler.action
         , api_func=grid.post
-        , api_args=['jobid', 'wkspc_name'])
+        , api_args=['jobid', 'vtrqid', 'wkspc_name'])
     #
     #  .. grid get job
     parser_grid_get = grid_subparsers.add_parser(

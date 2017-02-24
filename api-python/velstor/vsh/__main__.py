@@ -160,5 +160,6 @@ def worker(session, args):
 
 if __name__ == "__main__":
     (exit_code, response) = main()
-    print(json.dumps(response, sort_keys=True, indent=2))
+    if response:
+        print(json.dumps(response, sort_keys=True, indent=2))
     sys.exit(127 if (exit_code > 127) else exit_code)

@@ -61,26 +61,21 @@ module.exports = (app) => {
   //  Returns the collection of grid job records
   //
   app.get('/grid/jobs', (req, res) => {
-    const job_id = req.pathParams.job_id;
     fulfill202(
       req,
       res,
       (cb) => {
         latency()
-        .then(()=> {
-          return grid.getJobs();
-        })
-        .then(result => {
-          return result.toArray()
-        })
+        .then(() => grid.getJobs())
+        .then(result => result.toArray())
         .then(result => {
           if (result) {
             cb(adapter({
               http_status: 200,
               error_sym: 'OK',
               error_description_brief: 'Request processed',
-            },{
-              job_names: result.map(e => e.id)
+            }, {
+              job_names: result.map(e => e.id),
             }));
           } else {
             // Something went wrong
@@ -88,7 +83,7 @@ module.exports = (app) => {
               http_status: 500,
               error_sym: 'EREMOTEIO',
               error_description_brief: 'Server Error',
-            }))
+            }));
           }
         })
         .catch(err => {
@@ -97,7 +92,7 @@ module.exports = (app) => {
             http_status: 500,
             error_sym: 'EPROTO',
             error_description_brief: 'Server Error',
-          }, {}, {server_msg: err.toString()}));
+          }, {}, { server_msg: err.toString() }));
         });
       });
   });
@@ -118,7 +113,7 @@ module.exports = (app) => {
           //  also store in the database.
           //
           cnctrqClient.workspace_get(
-            config.peercache.vtrq_id,
+            req.body.vtrq_id,
             req.body.workspace_name,
             (result) => {
               if (result.http_status === 200) {
@@ -167,7 +162,6 @@ module.exports = (app) => {
         latency()
         .then(() => grid.getJob(jobId))
         .then(result => {
-          console.log(result)
           if (result) {
             cb(adapter({
               http_status: 200,
