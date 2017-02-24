@@ -2,15 +2,15 @@ Release 3.5.3
 
     Fix 'grid job POST' stuck on vTRQ ID 0
 
-    Fix supurious vsh output
+    Fix spurious vsh output
 
 Release 3.5.2
 
-    Hotfix for job_spec/JobSpec issue
+    Hotfix for job_spec/jobSpec issue
 
 Release 3.5.1
 
-    Refactored serve both v1 and v2 API simultaneously on the same port.
+    Refactored to serve both v1 and v2 API simultaneously on the same port.
 
 Release 3.5.0
 
