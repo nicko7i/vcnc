@@ -18,6 +18,9 @@ _build/
 # Webstorm 
 .idea/
 
+# Python
+__pycache__/
+
 # Python virtual environments
 venv*/
 

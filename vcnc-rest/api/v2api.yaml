@@ -3,6 +3,9 @@
 #
 #  See the file 'COPYING' for license information.
 #
+#  This file may be validated and viewed in a more readable form at
+#  http://editor.swagger.io/#!/
+#
 swagger: '2.0'
 
 # Document metadata
@@ -45,6 +48,7 @@ paths:
   /auth/token:
     post:
       summary: Returns a session authorization token
+      description: Not yet finalized or implemented.
       operationId: login
       tags:
         - "Admin API"
@@ -70,6 +74,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       summary: Ends a user session
+      description: Not yet finalized or implemented.
       operationId: logout
       tags:
         - "Admin API"
@@ -190,6 +195,7 @@ paths:
   /vcnc/users:
     post:
       summary: Creates a new vCNC user and assigns the initial password
+      description: Not yet finalized or implemented.
       operationId: vcncUserCreate
       tags:
         - "Admin API"
@@ -218,6 +224,7 @@ paths:
   /vcnc/user/{username}:
     put:
       summary: Updates information about a vCNC user.
+      description: Not yet finalized or implemented.
       operationId: vcncUserUpdate
       tags:
         - "Admin API"
@@ -254,6 +261,7 @@ paths:
 
     delete:
       summary: Deletes a vCNC user
+      description: Not yet finalized or implemented.
       operationId: vcncUserDelete
       tags:
         - "Admin API"

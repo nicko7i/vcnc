@@ -1,3 +1,7 @@
+Release 3.5.4
+
+    Mark the admin endpoints as "not finalized" in OpenAPI yaml.
+
 Release 3.5.3
 
     Fix 'grid job POST' stuck on vTRQ ID 0
