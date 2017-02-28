@@ -71,7 +71,7 @@ function init() {
       if (lst[0].schemaMinor === schemaMinor) {
         return Promise.resolve();
       }
-      if (list[0].schemaMinor > schemaMinor) {
+      if (lst[0].schemaMinor > schemaMinor) {
         //
         //  The database is newer than this code
         return Promise.reject(

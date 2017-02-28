@@ -278,6 +278,8 @@ module.exports = (() => {
   })
   .catch(err => {
     console.log(err); // eslint-disable-line
+    console.log('Exiting...'); // eslint-disable-line
+    process.exit(0);
   });
   //
   //  The web administration console is independent of all the above.
