@@ -3,6 +3,9 @@
 #
 #  See the file 'COPYING' for license information.
 #
+#  This file may be validated and viewed in a more readable form at
+#  http://editor.swagger.io/#!/
+#
 swagger: '2.0'
 
 # Document metadata
@@ -45,6 +48,7 @@ paths:
   /auth/token:
     post:
       summary: Returns a session authorization token
+      description: Not yet finalized or implemented.
       operationId: login
       tags:
         - "Admin API"
@@ -70,6 +74,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       summary: Ends a user session
+      description: Not yet finalized or implemented.
       operationId: logout
       tags:
         - "Admin API"
@@ -97,10 +102,28 @@ paths:
       summary: Retrieves information about all jobs
       operationId: gridJobList
       tags:
-        - "Grid API"
+        - 'Grid API'
+        - 'Cursor-able'
       responses:
         '200':
           description: Request processed.  See response body.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+              jobs:
+                type: array
+                items:
+                  $ref: '#/definitions/GridJobInfo'
         default:
           description: unexpected error
           schema:
@@ -161,6 +184,22 @@ paths:
       responses:
         '200':
           description: Request processed.  See response body.
+          schema:
+            required:
+              - error_sym
+              - job
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+              job:
+                $ref: '#/definitions/GridJobInfo'
         default:
           description: unexpected error
           schema:
@@ -190,6 +229,7 @@ paths:
   /vcnc/users:
     post:
       summary: Creates a new vCNC user and assigns the initial password
+      description: Not yet finalized or implemented.
       operationId: vcncUserCreate
       tags:
         - "Admin API"
@@ -218,6 +258,7 @@ paths:
   /vcnc/user/{username}:
     put:
       summary: Updates information about a vCNC user.
+      description: Not yet finalized or implemented.
       operationId: vcncUserUpdate
       tags:
         - "Admin API"
@@ -254,6 +295,7 @@ paths:
 
     delete:
       summary: Deletes a vCNC user
+      description: Not yet finalized or implemented.
       operationId: vcncUserDelete
       tags:
         - "Admin API"
@@ -445,7 +487,7 @@ paths:
                   - EACCESS
                   - EREMOTEIO
               stat:
-                $ref: '#/definitions/StructStat'
+                $ref: '#/definitions/NodeInfo'
         default:
           description: HTTP error
           schema:
@@ -457,6 +499,7 @@ paths:
       operationId: vtrqNamespaceChildren
       tags:
         - "vTRQ Namespace"
+        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
@@ -508,7 +551,7 @@ paths:
               result:
                 type: array
                 items:
-                  type: string
+                  $ref: '#/definitions/NodeInfo'
             additionalProperties: false
         default:
           description: HTTP error
@@ -828,6 +871,7 @@ paths:
       operationId: vpFind
       tags:
         - "VP Instances"
+        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
@@ -1008,6 +1052,7 @@ paths:
       operationId: vtrqWorkspaceChildren
       tags:
         - "vTRQ Workspaces"
+        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
@@ -1109,17 +1154,7 @@ paths:
         '200':
           description: Request processed. See response body.
           schema:
-            required:
-              - error_sym
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
+            $ref: '#/definitions/Error'
         default:
           description: HTTP error
           schema:
@@ -1303,8 +1338,10 @@ definitions:
     properties:
       error_sym:
         type: string
+        example: OK
       message:
         type: string
+        example: Request processed
 
   ErrorSymbol:
     type: string
@@ -1358,37 +1395,34 @@ definitions:
       message:
         type: string
 
-  SourceDestinationPath:
+  GridJobInfo:
+    type: object
     properties:
-      src:
+      id:
+        description: Grid job identifier.
         type: string
-        example: "/path/to/source"
-      dest:
+        example: XYZ:1234
+      vtrq_id:
+        description: ID of the vTRQ performing this operation.
+        type: integer
+        format: int64
+        minimum: 0
+        maximum: 1073741823
+        default: 0
+      workspace_name:
+        description: Name of the workspace used by the job
         type: string
-        example: "/path/to/destination"
+        example: /path/to/workspace
+      workspace_spec:
+        description: Workspace specification used by the job
+        type: string
+        example:
+          "{ \"maps\": [{\"vp_path\":\"/\", \"vtrq_id\":8, \"vtrq_path\":\"/\"}], \"writeback\": \"never\""
     required:
-      - src
-      - dest
+      - vtrq_id
+      - workspace_name
+      - workspace_spec
     additionalProperties: false
-
-  SourceDestinationVector:
-    type: array
-    items:
-      $ref: '#/definitions/SourceDestinationPath'
-
-  SourceDestinationErrorVector:
-    type: array
-    items:
-      properties:
-        error_sym:
-          type: string
-          example: OK
-        copy:
-          $ref: '#/definitions/SourceDestinationPath'
-      required:
-        - error_sym
-        - copy
-      additionalProperties: false
 
   MetaCopyRequest:
     type: object
@@ -1405,13 +1439,12 @@ definitions:
       result:
         $ref: '#/definitions/SourceDestinationErrorVector'
 
-  SessionToken:
+  NodeInfo:
+    type: object
     properties:
-      token:
+      name:
         type: string
-
-  StructStat:
-    properties:
+        example: foo
       st_dev:
         type: string
         format: uint64
@@ -1480,6 +1513,43 @@ definitions:
       - st_ctime
     additionalProperties: false
 
+  SourceDestinationPath:
+    properties:
+      src:
+        type: string
+        example: "/path/to/source"
+      dest:
+        type: string
+        example: "/path/to/destination"
+    required:
+      - src
+      - dest
+    additionalProperties: false
+
+  SourceDestinationVector:
+    type: array
+    items:
+      $ref: '#/definitions/SourceDestinationPath'
+
+  SourceDestinationErrorVector:
+    type: array
+    items:
+      properties:
+        error_sym:
+          type: string
+          example: OK
+        copy:
+          $ref: '#/definitions/SourceDestinationPath'
+      required:
+        - error_sym
+        - copy
+      additionalProperties: false
+
+  SessionToken:
+    properties:
+      token:
+        type: string
+
   UsernamePassword:
     type: object
     properties:
@@ -1497,13 +1567,35 @@ definitions:
     properties:
       id:
         type: string
-        example: '0x123456789ABCDEF0'
+        description: Opaquely identifies a mounted PeerCache filesystem.
+        example: '123456789ABCDEF0'
+      ip:
+        type: string
+        description: The IP address of the host running the vp process.
+        example: 172.17.0.1
       host:
         type: string
+        description: The hostanme of the machine running the vp process.
         example: jupiter
       mount:
         type: string
+        description: The absolute path at which the PeerCache filesystem is mounted.
         example: /tmp/mnt/0xABCDE
+      pc_user:
+        type: string
+        description: The PeerCache user id of the vp process.
+        example: /engr/sally
+      os_user:
+        type: string
+        description: The effective user id on the host operating system.
+        example: sally
+    required:
+      - id
+      - ip
+      - host
+      - mount
+      - pc_user
+      - os_user
 
   WorkspaceEntry:
     type: object
@@ -1552,6 +1644,6 @@ definitions:
     properties:
       name:
         type: string
-        example: my-workspace
+        example: /my/workspace
       spec:
         $ref: '#/definitions/WorkspaceSpec'

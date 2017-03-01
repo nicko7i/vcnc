@@ -1,3 +1,7 @@
+Release 3.6.1
+
+    Mark the admin endpoints as "not finalized" in OpenAPI yaml.
+
 Release 3.6.0
 
     Record RethinkDB major/minor schema version history.
