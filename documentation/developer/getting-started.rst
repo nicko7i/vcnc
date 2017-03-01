@@ -17,6 +17,9 @@ This description sets up a single WebStorm project for all of the subsystems
 under the GitHub repository root.  We will use the *vcnc-web* ESLint configuration
 for *vcnc-rest* as well.
 
+First run 'npm install' in directory vcnc-web.  This provides the ESLint package
+that WebStorm needs to perform linting.
+
 We will do the following:
 
 # Turn off all the JavaScript inspections except for ESLint
@@ -35,8 +38,8 @@ From there, navigate to Code Quality Tools :: ESLint.
 
 # Check the Enable box.
 # Set the Node interpreter to the project interpreter in TOOLROOT.
-# The ESLint package is *vcnc-web/node_modules/eslint*.
-# Set the configuration file explictly to *vcnc-web/.eslintrc.js*.
+# The ESLint package is */<project-dir>/vcnc-web/node_modules/eslint*.
+# Set the configuration file explicitly to */<project-dir>vcnc-web/.eslintrc.js*.
 
 Navigate to File :: Settings... :: Editor :: Code Style :: JavaScript.
 Ensue that "Use tab character" is *not* checked and "Indent" is "2".
