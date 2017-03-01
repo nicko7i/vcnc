@@ -1,3 +1,11 @@
+Release 3.6.0
+
+    Record RethinkDB major/minor schema version history.
+
+    Recognize environment variables VELSTOR_VCNC_RETHINKDB_HOST and
+    VELSTOR_VCNC_RETHINKDB_DB. They override vcnc-config.yaml entries
+    rethinkdb.connection.host and rethinkdb.connection.db, respectively.
+
 Release 3.5.3
 
     Fix 'grid job POST' stuck on vTRQ ID 0

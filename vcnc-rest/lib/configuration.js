@@ -15,6 +15,16 @@ console.log('INFO:   vcnc using configuration file', confPath); // eslint-disabl
 if ('VELSTOR_VCNC_PORT' in process.env) {
   conf.server.port = process.env.VELSTOR_VCNC_PORT;
 }
+//
+//  Get the RethinkDB host name/IP
+//  Get the RethinkDB database name
+//
+if ('VELSTOR_VCNC_RETHINKDB_HOST' in process.env) {
+  conf.rethinkdb.connection.host = process.env.VELSTOR_VCNC_RETHINKDB_HOST;
+}
+if ('VELSTOR_VCNC_RETHINKDB_DB' in process.env) {
+  conf.rethinkdb.connection.db = process.env.VELSTOR_VCNC_RETHINKDB_DB;
+}
 
 //
 //  Compute the default fulfillment URL.

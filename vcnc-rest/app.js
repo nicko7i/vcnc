@@ -19,6 +19,7 @@ const path = require('path');
 const http = require('http');
 const cors = require('cors');
 const grid = require('./lib/grid.js');
+const rethink = require('./lib/rethink.js');
 //
 //  Initialize the C++ extension
 //
@@ -266,7 +267,8 @@ module.exports = (() => {
   installErrorGenerator(app);
   installLogging(app);
   installStaticContent(app);
-  grid.init()
+  rethink.init()
+  .then(() => grid.init())
   .then(() => configureSwaggerMiddleware(app, 'api/v1api.json'))
   .then(() => configureSwaggerMiddleware(app, 'api/v2api.json'))
   .then(() => {
@@ -276,6 +278,8 @@ module.exports = (() => {
   })
   .catch(err => {
     console.log(err); // eslint-disable-line
+    console.log('Exiting...'); // eslint-disable-line
+    process.exit(0);
   });
   //
   //  The web administration console is independent of all the above.
