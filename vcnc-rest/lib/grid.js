@@ -26,7 +26,7 @@ function init() {
   .then(lst => {
     //  Create the database if necessary.
     if (lst.length === 0) {
-      return r.dbCreate(dbName).run(cnxtn);
+      return Promise.reject(`grid.js: database ${dbName} does not exist`);
     }
     return Promise.resolve();
   })
