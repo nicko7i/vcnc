@@ -1,7 +1,7 @@
 {
-  "name": "react-slingshot",
-  "version": "5.0.0",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "vcnc-web",
+  "version": "0.1.0",
+  "description": "PeerCache Web Admin Console",
   "engines": {
     "npm": ">=3"
   },
@@ -28,17 +28,20 @@
     "open:cover": "npm run test:cover && open coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
-  "author": "Cory House",
-  "license": "MIT",
+  "author": "Nick Okasinski",
+  "license": "Apache-2.0",
   "dependencies": {
+    "axios": "0.15.3",
+    "material-ui": "0.17.0",
     "object-assign": "4.1.0",
-    "react": "15.4.1",
-    "react-dom": "15.4.1",
-    "react-redux": "5.0.1",
-    "react-router": "3.0.0",
-    "react-router-redux": "4.0.7",
-    "redux": "3.6.0",
-    "redux-thunk": "2.1.0"
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.7",
+    "react-tap-event-plugin": "2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "6.5.4",
@@ -89,24 +92,10 @@
     "webpack-hot-middleware": "2.13.2",
     "webpack-md5-hash": "0.0.5"
   },
-  "keywords": [
-    "react",
-    "reactjs",
-    "react-router",
-    "hot",
-    "reload",
-    "hmr",
-    "live",
-    "edit",
-    "webpack",
-    "redux",
-    "flux",
-    "boilerplate",
-    "starter"
-  ],
+  "keywords": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/react-slingshot"
+    "url": ""
   },
   "jest": {
     "moduleNameMapper": {
