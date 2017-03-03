@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
-import workspaces from './workspacesReducer';
-import settings from './settingsReducer';
-import workspaceEdit from './workspaceEditReducer';
+import fuelSavings from './fuelSavingsReducer';
+import {routerReducer} from 'react-router-redux';
 
 const rootReducer = combineReducers({
-  workspaces,
-  settings,
-  workspaceEdit,
+  fuelSavings,
+  routing: routerReducer
 });
 
 export default rootReducer;

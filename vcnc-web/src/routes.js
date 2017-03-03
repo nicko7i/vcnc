@@ -1,11 +1,17 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import Master from './components/Master';
-import WorkspacesPage from './components/pages/workspaces/Page';
+
+import App from './components/App';
+import HomePage from './components/HomePage';
+import FuelSavingsPage from './containers/FuelSavingsPage'; // eslint-disable-line import/no-named-as-default
+import AboutPage from './components/AboutPage';
+import NotFoundPage from './components/NotFoundPage';
 
 export default (
-  <Route path="/" component={Master}>
-    <IndexRoute component={WorkspacesPage} />
-    <Route path="workspaces" component={WorkspacesPage} />
+  <Route path="/" component={App}>
+    <IndexRoute component={HomePage}/>
+    <Route path="fuel-savings" component={FuelSavingsPage}/>
+    <Route path="about" component={AboutPage}/>
+    <Route path="*" component={NotFoundPage}/>
   </Route>
 );

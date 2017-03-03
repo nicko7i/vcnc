@@ -3,20 +3,25 @@
 
 import browserSync from 'browser-sync';
 import historyApiFallback from 'connect-history-api-fallback';
+import {chalkProcessing} from './chalkConfig';
+
+/* eslint-disable no-console */
+
+console.log(chalkProcessing('Opening production build...'));
 
 // Run Browsersync
 browserSync({
-  port: 3000,
+  port: 4000,
   ui: {
-    port: 3001,
+    port: 4001
   },
   server: {
-    baseDir: 'dist',
+    baseDir: 'dist'
   },
 
   files: [
-    'src/*.html',
+    'src/*.html'
   ],
 
-  middleware: [historyApiFallback()],
+  middleware: [historyApiFallback()]
 });
