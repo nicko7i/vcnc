@@ -25,7 +25,12 @@ if ('VELSTOR_VCNC_RETHINKDB_HOST' in process.env) {
 if ('VELSTOR_VCNC_RETHINKDB_DB' in process.env) {
   conf.rethinkdb.connection.db = process.env.VELSTOR_VCNC_RETHINKDB_DB;
 }
-
+//
+//  Control whether vcnc-web is served (true/false)
+//
+if ('VELSTOR_VCNC_WEB_ENABLE' in process.env) {
+  conf.web.enable = process.env.VELSTOR_VCNC_WEB_ENABLE;
+}
 //
 //  Compute the default fulfillment URL.
 //

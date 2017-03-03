@@ -101,7 +101,7 @@ test:
 web:
   #
   #  If true, statically serve the web-based admin console
-  enabled: true
+  enabled: false
   #
   #  Serve the console at this offset from server.port
   offset: -10
