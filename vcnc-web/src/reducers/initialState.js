@@ -1,4 +1,13 @@
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+//
+//  One key per reducer.
+//
 export default {
+  app: {
+    muiTheme: getMuiTheme(),
+    navDrawerOpen: false,
+  },
   fuelSavings: {
     newMpg: '',
     tradeMpg: '',
@@ -14,5 +23,5 @@ export default {
       annual: 0,
       threeYear: 0
     }
-  }
+  },
 };
