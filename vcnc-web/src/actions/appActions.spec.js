@@ -3,15 +3,15 @@ import * as ActionCreators from './appActions';
 
 describe('Actions', () => {
 
-  it('should create an action to open the nav tray', () => {
-    const expected = { type: ActionTypes.OPEN_NAV_DRAWER };
-    const actual = ActionCreators.openNavDrawer();
+  it('should create an action to move the tray', () => {
+    const expected = { type: ActionTypes.OPEN_OR_CLOSE_NAV_DRAWER };
+    const actual = ActionCreators.openOrCloseNavDrawer();
     expect(actual).toEqual(expected);
   });
 
-  it('should create an action to close the nav tray', () => {
-    const expected = { type: ActionTypes.CLOSE_NAV_DRAWER };
-    const actual = ActionCreators.closeNavDrawer();
+  it('should create an action to toggle the tray position', () => {
+    const expected = { type: ActionTypes.TOGGLE_NAV_DRAWER };
+    const actual = ActionCreators.toggleNavDrawer();
     expect(actual).toEqual(expected);
   });
 

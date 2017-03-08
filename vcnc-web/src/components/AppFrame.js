@@ -19,7 +19,7 @@ const styles = {
   appBar: {
     position: 'fixed',
     // Needed to overlap the examples
-    zIndex: this.state.muiTheme.zIndex.appBar + 1,
+    zIndex: muiTheme.zIndex.appBar + 1,
     top: 0,
   },
   root: {
@@ -48,47 +48,30 @@ const styles = {
 };
 
 class AppFrame extends React.Component {
-
-  handleTouchTapLeftIconButton = () => {
-    this.setState({
-      navDrawerOpen: !this.state.navDrawerOpen,
-    });
-  };
-
-  handleChangeRequestNavDrawer = (open) => {
-    this.setState({
-      navDrawerOpen: open,
-    });
-  };
-
-  handleChangeList = (event, value) => {
-    this.context.router.push(value);
-    this.setState({
-      navDrawerOpen: false,
-    });
-  };
+  constructor(props, context) {
+    super(props, context);
+  }
 
   render() {
     const {
       location,
       children,
-    } = this.props;
-
-    let {
       navDrawerOpen,
-    } = this.state;
+      openOrCloseNavDrawer,
+      toggleNavDrawer,
+    } = this.props;
 
     const router = this.context.router;
     const title =
       router.isActive('/settings') ? 'Settings' :
-        router.isActive('/workspaces') ? 'Workspaces' : '';
+        router.isActive('/workspaces') ? 'Workspaces' : 'TITLE';
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Title render="PeerCache" />
           <AppBar
-            onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
+            onLeftIconButtonTouchTap={toggleNavDrawer}
             title={title}
             zDepth={0}
             style={styles.appBar}
@@ -99,44 +82,25 @@ class AppFrame extends React.Component {
           <AppNavDrawer
             location={location}
             docked={false}
-            onRequestChangeNavDrawer={this.handleChangeRequestNavDrawer}
-            onChangeList={this.handleChangeList}
+            onRequestChangeNavDrawer={openOrCloseNavDrawer}
+            onChangeList={(event, value) => {
+              this.context.router.push(value);
+              openOrCloseNavDrawer(false);
+            }}
             open={navDrawerOpen}
           />
-          <WorkspaceEditDialog />
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-/*
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <IndexLink to="/">Home</IndexLink>
-        {' | '}
-        <Link to="/fuel-savings">Demo App</Link>
-        {' | '}
-        <Link to="/about">About</Link>
-        <br/>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-App.propTypes = {
-  children: PropTypes.element
-};
-
- */
-
 AppFrame.propTypes = {
-  children: PropTypes.node,
-  location: PropTypes.object.isReqired,
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object,
   navDrawerOpen: PropTypes.bool.isRequired,
+  openOrCloseNavDrawer: PropTypes.func.isRequired,
+  toggleNavDrawer: PropTypes.func.isRequired,
 };
 
 AppFrame.contextTypes = {

@@ -10,7 +10,7 @@ const args = [
 ];
 
 const testCi = spawn('node', args);
-const consoleLogger = data => console.log(`${data}`);
+const consoleLogger = data => console.log(`${data}`); // eslint-disable no-console
 
-testCi.stdout.on('data', consoleLogger);
-testCi.stderr.on('data', consoleLogger);
+testCi.stdout.on('data', consoleLogger); // eslint-disable no-console
+testCi.stderr.on('data', consoleLogger); // eslint-disable no-console

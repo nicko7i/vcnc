@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 import React, { Component, PropTypes } from 'react';
 import Drawer from 'material-ui/Drawer';
-import CurrentVtrqSetter from './CurrentVtrqSetter.js';
-import { List, ListItem, MakeSelectable } from 'material-ui/List';
+import CurrentVtrqSetter from './CurrentVtrqSetter';
+import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { spacing, typography, zIndex } from 'material-ui/styles';
 import { cyan500 } from 'material-ui/styles/colors';
 
-const SelectableList = MakeSelectable(List); // eslint-disable-line new-cap
+const SelectableList = makeSelectable(List); // eslint-disable-line new-cap
 
 const styles = {
   logo: {
@@ -26,24 +26,16 @@ const styles = {
 };
 
 class AppNavDrawer extends Component {
-  static propTypes = {
-    docked: PropTypes.bool.isRequired,
-    location: PropTypes.object.isRequired,
-    onChangeList: PropTypes.func.isRequired,
-    onRequestChangeNavDrawer: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired,
-    style: PropTypes.object,
-  };
+  constructor(props, context) {
+    super(props, context);
 
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
-    router: PropTypes.object.isRequired,
-  };
+    this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
+  }
 
-  handleTouchTapHeader = () => {
+  handleTouchTapHeader() {
     this.context.router.push('/');
     this.props.onRequestChangeNavDrawer(false);
-  };
+  }
 
   render() {
     const {
@@ -78,5 +70,18 @@ class AppNavDrawer extends Component {
     );
   }
 }
+
+ AppNavDrawer.propTypes = {
+   docked: PropTypes.bool.isRequired,
+   location: PropTypes.object.isRequired,
+   onChangeList: PropTypes.func.isRequired,
+   onRequestChangeNavDrawer: PropTypes.func.isRequired,
+   open: PropTypes.bool.isRequired,
+   style: PropTypes.object,
+ };
+
+ AppNavDrawer.contextTypes = {
+   router: PropTypes.object.isRequired,
+ };
 
 export default AppNavDrawer;
