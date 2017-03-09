@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { PropTypes } from 'react';
 import Title from 'react-title-component';
-import AppBar from 'material-ui/AppBar';
 import spacing from 'material-ui/styles/spacing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -16,12 +15,6 @@ const muiTheme = getMuiTheme();
 injectTapEventPlugin();
 
 const styles = {
-  appBar: {
-    position: 'fixed',
-    // Needed to overlap the examples
-    zIndex: muiTheme.zIndex.appBar + 1,
-    top: 0,
-  },
   root: {
     paddingTop: spacing.desktopKeylineIncrement,
     minHeight: 400,
@@ -47,32 +40,20 @@ const styles = {
   },
 };
 
-//  context
-//
 const AppFrame = (props, context) => {
     const {
       location,
       children,
       navDrawerOpen,
       openOrCloseNavDrawer,
-      toggleNavDrawer,
     } = props;
 
     const router = context.router;
-    const title =
-      router.isActive('/settings') ? 'Settings' :
-        router.isActive('/workspaces') ? 'Workspaces' : 'TITLE';
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Title render="PeerCache" />
-          <AppBar
-            onLeftIconButtonTouchTap={toggleNavDrawer}
-            title={title}
-            zDepth={0}
-            style={styles.appBar}
-          />
           <div style={styles.root}>
             {children}
           </div>
@@ -89,14 +70,13 @@ const AppFrame = (props, context) => {
         </div>
       </MuiThemeProvider>
     );
-}
+};
 
 AppFrame.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object,
   navDrawerOpen: PropTypes.bool.isRequired,
   openOrCloseNavDrawer: PropTypes.func.isRequired,
-  toggleNavDrawer: PropTypes.func.isRequired,
 };
 
 AppFrame.contextTypes = {

@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 const HomePage = () => {
   return (
-    <div>
+    <div style={{ textAlign: 'center'}}>
       <h1>React Slingshot</h1>
 
       <h2>Get Started</h2>

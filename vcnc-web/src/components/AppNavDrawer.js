@@ -32,7 +32,7 @@ const AppNavDrawer = (props, context) => {
     onChangeList,
     open,
     style,
-  } = this.props;
+  } = props;
 
   function handleTouchTapHeader() {
     context.router.push('/');
