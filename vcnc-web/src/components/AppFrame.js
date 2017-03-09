@@ -47,21 +47,18 @@ const styles = {
   },
 };
 
-class AppFrame extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
-  render() {
+//  context
+//
+const AppFrame = (props, context) => {
     const {
       location,
       children,
       navDrawerOpen,
       openOrCloseNavDrawer,
       toggleNavDrawer,
-    } = this.props;
+    } = props;
 
-    const router = this.context.router;
+    const router = context.router;
     const title =
       router.isActive('/settings') ? 'Settings' :
         router.isActive('/workspaces') ? 'Workspaces' : 'TITLE';
@@ -84,7 +81,7 @@ class AppFrame extends React.Component {
             docked={false}
             onRequestChangeNavDrawer={openOrCloseNavDrawer}
             onChangeList={(event, value) => {
-              this.context.router.push(value);
+              router.push(value);
               openOrCloseNavDrawer(false);
             }}
             open={navDrawerOpen}
@@ -92,7 +89,6 @@ class AppFrame extends React.Component {
         </div>
       </MuiThemeProvider>
     );
-  }
 }
 
 AppFrame.propTypes = {

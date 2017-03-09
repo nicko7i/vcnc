@@ -1,5 +1,4 @@
-/* eslint-disable max-len */
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Drawer from 'material-ui/Drawer';
 import CurrentVtrqSetter from './CurrentVtrqSetter';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
@@ -25,63 +24,55 @@ const styles = {
   },
 };
 
-class AppNavDrawer extends Component {
-  constructor(props, context) {
-    super(props, context);
+const AppNavDrawer = (props, context) => {
+  const {
+    location,
+    docked,
+    onRequestChangeNavDrawer,
+    onChangeList,
+    open,
+    style,
+  } = this.props;
 
-    this.handleTouchTapHeader = this.handleTouchTapHeader.bind(this);
+  function handleTouchTapHeader() {
+    context.router.push('/');
+    onRequestChangeNavDrawer(false);
   }
 
-  handleTouchTapHeader() {
-    this.context.router.push('/');
-    this.props.onRequestChangeNavDrawer(false);
-  }
-
-  render() {
-    const {
-      location,
-      docked,
-      onRequestChangeNavDrawer,
-      onChangeList,
-      open,
-      style,
-    } = this.props;
-
-    return (
-      <Drawer
-        style={style}
-        docked={docked}
-        open={open}
-        onRequestChange={onRequestChangeNavDrawer}
-        containerStyle={{ zIndex: zIndex.drawer - 100 }}
+  return (
+    <Drawer
+      style={style}
+      docked={docked}
+      open={open}
+      onRequestChange={onRequestChangeNavDrawer}
+      containerStyle={{ zIndex: zIndex.drawer - 100 }}
+    >
+      <div style={styles.logo} onTouchTap={handleTouchTapHeader}>
+        PeerCache
+      </div>
+      <span style={styles.version}>vTRQ:</span>
+      <CurrentVtrqSetter />
+      <SelectableList
+        value={location.pathname}
+        onChange={onChangeList}
       >
-        <div style={styles.logo} onTouchTap={this.handleTouchTapHeader}>
-          PeerCache
-        </div>
-        <span style={styles.version}>vTRQ:</span>
-        <CurrentVtrqSetter />
-        <SelectableList
-          value={location.pathname}
-          onChange={onChangeList}
-        >
-          <ListItem primaryText="Workspaces" value="/workspaces" />,
-        </SelectableList>
-      </Drawer>
-    );
-  }
-}
+        <ListItem primaryText="Workspaces" value="/workspaces" />,
+      </SelectableList>
+    </Drawer>
+  );
+};
 
- AppNavDrawer.propTypes = {
-   docked: PropTypes.bool.isRequired,
-   location: PropTypes.object.isRequired,
-   onChangeList: PropTypes.func.isRequired,
-   onRequestChangeNavDrawer: PropTypes.func.isRequired,
-   open: PropTypes.bool.isRequired,
-   style: PropTypes.object,
- };
+AppNavDrawer.propTypes = {
+ docked: PropTypes.bool.isRequired,
+ location: PropTypes.object.isRequired,
+ onChangeList: PropTypes.func.isRequired,
+ onRequestChangeNavDrawer: PropTypes.func.isRequired,
+ open: PropTypes.bool.isRequired,
+ style: PropTypes.object,
+};
 
- AppNavDrawer.contextTypes = {
-   router: PropTypes.object.isRequired,
- };
+AppNavDrawer.contextTypes = {
+ router: PropTypes.object.isRequired,
+};
 
 export default AppNavDrawer;
