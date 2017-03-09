@@ -6,4 +6,5 @@ export const OPEN_OR_CLOSE_NAV_DRAWER = 'OPEN_OR_CLOSE_NAV_DRAWER';
 export const TOGGLE_NAV_DRAWER = 'TOGGLE_NAV_DRAWER';
 
 // settings
+export const SET_CURRENT_VCNC = 'SET_CURRENT_VCNC';
 export const SET_CURRENT_VTRQ = 'SET_CURRENT_VTRQ';

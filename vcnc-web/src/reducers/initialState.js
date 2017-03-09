@@ -23,6 +23,7 @@ export default {
     }
   },
   settings: {
+    currentVcnc: 'localhost:1630',
     currentVtrq: 0,
   },
 };

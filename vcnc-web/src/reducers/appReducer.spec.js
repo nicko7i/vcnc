@@ -16,33 +16,33 @@ describe('Reducers::app', () => {
 
   it('should open the nav drawer', () => {
     const action = { type: ActionTypes.OPEN_OR_CLOSE_NAV_DRAWER, open: true };
-    const expected = Object.assign({}, getAppState(), { navDrawerOpen: true });
+    const expected = { ...getAppState(), navDrawerOpen: true };
 
-    expect(reducer(Object.assign({}, getAppState(), { navDrawerOpen: false }), action))
+    expect(reducer({ ...getAppState(), navDrawerOpen: false }, action))
     .toEqual(expected);
   });
 
   it('should close the nav drawer', () => {
     const action = { type: ActionTypes.OPEN_OR_CLOSE_NAV_DRAWER, open: false };
-    const expected = Object.assign({}, getAppState(), { navDrawerOpen: false });
+    const expected = { ...getAppState(), navDrawerOpen: false };
 
-    expect(reducer(Object.assign({}, getAppState(), { navDrawerOpen: true }), action))
+    expect(reducer({ ...getAppState(), navDrawerOpen: true }, action))
     .toEqual(expected);
   });
 
   it('should toggle the nav drawer closed to open', () => {
     const action = { type: ActionTypes.TOGGLE_NAV_DRAWER };
-    const expected = Object.assign({}, getAppState(), { navDrawerOpen: true });
+    const expected = { ...getAppState(), navDrawerOpen: true };
 
-    expect(reducer(Object.assign({}, getAppState(), { navDrawerOpen: false }), action))
+    expect(reducer({ ...getAppState(), navDrawerOpen: false }, action))
     .toEqual(expected);
   });
 
   it('should toggle the nav drawer open to closed', () => {
     const action = { type: ActionTypes.TOGGLE_NAV_DRAWER };
-    const expected = Object.assign({}, getAppState(), { navDrawerOpen: false });
+    const expected = { ...getAppState(), navDrawerOpen: false };
 
-    expect(reducer(Object.assign({}, getAppState(), { navDrawerOpen: true }), action))
+    expect(reducer({ ...getAppState(), navDrawerOpen: true }, action))
     .toEqual(expected);
   });
 });

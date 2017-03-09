@@ -2,6 +2,8 @@ import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 
 const reducers = {
+  [types.SET_CURRENT_VCNC]:
+    (state, action) => ({ ...state, currentVcnc: action.authority }),
   [types.SET_CURRENT_VTRQ]:
     (state, action) => ({ ...state, currentVtrq: action.vtrqId }),
 };
