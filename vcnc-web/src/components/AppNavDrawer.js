@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Drawer from 'material-ui/Drawer';
-import CurrentVtrqSetter from './CurrentVtrqSetter';
+import CurrentVtrqSetter from '../containers/CurrentVtrqSetter';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { spacing, typography, zIndex } from 'material-ui/styles';
 import { cyan500 } from 'material-ui/styles/colors';
