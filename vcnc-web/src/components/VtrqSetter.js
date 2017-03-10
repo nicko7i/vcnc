@@ -13,9 +13,10 @@ const VtrqSetter = props => (
   >
     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(vtrqid => (
       <MenuItem
-        key={vtrqid}
-        value={vtrqid}
-        primaryText={vtrqid}
+        key={vtrqid+1}
+        value={vtrqid+1}
+        primaryText={"vtrq " + vtrqid}
+        label={"vTRQ ID: " + vtrqid}
       />
     ))}
   </DropDownMenu>

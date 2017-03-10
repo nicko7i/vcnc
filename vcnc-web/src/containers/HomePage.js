@@ -2,18 +2,18 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as appActions from '../actions/appActions';
-import WorkspacesPageLayout from '../components/WorkspacesPageLayout';
+import HomePageLayout from '../components/HomePageLayout';
 
-export const WorkspacesPage = props => {
+export const HomePage = props => {
   return (
-    <WorkspacesPageLayout
+    <HomePageLayout
       onMenuClick={props.actions.toggleNavDrawer}
-      title="Workspaces"
+      title="Home"
     />
   );
 };
 
-WorkspacesPage.propTypes = {
+HomePage.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
@@ -33,4 +33,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WorkspacesPage);
+)(HomePage);

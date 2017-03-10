@@ -16,7 +16,6 @@ injectTapEventPlugin();
 
 const styles = {
   root: {
-    paddingTop: spacing.desktopKeylineIncrement,
     minHeight: 400,
   },
   content: {

@@ -50,12 +50,13 @@ const AppNavDrawer = (props, context) => {
       <div style={styles.logo} onTouchTap={handleTouchTapHeader}>
         PeerCache
       </div>
-      <span style={styles.version}>vTRQ:</span>
       <CurrentVtrqSetter />
       <SelectableList
         value={location.pathname}
         onChange={onChangeList}
       >
+        <ListItem primaryText="Files" value="/files" />,
+        <ListItem primaryText="Mounts" value="/mounts" />,
         <ListItem primaryText="Workspaces" value="/workspaces" />,
       </SelectableList>
     </Drawer>
