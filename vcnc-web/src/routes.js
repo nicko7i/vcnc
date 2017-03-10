@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './containers/App';
-import HomePage from './containers/HomePage';
+import HomePage from './containers/HomePage'; // eslint-disable-line import/no-named-as-default
 import FilesPage from './containers/FilesPage'; // eslint-disable-line import/no-named-as-default
 import MountsPage from './containers/MountsPage'; // eslint-disable-line import/no-named-as-default
 import WorkspacesPage from './containers/WorkspacesPage'; // eslint-disable-line import/no-named-as-default
