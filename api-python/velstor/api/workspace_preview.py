@@ -6,8 +6,12 @@ import copy
 from velstor.api.util import fake_requests_response as fake_response
 from velstor.api import workspace as ws
 
-def _to_preview(body):
-    "Converts a response body from its original form to the preview form"
+def _to_preview_by_spec(spec):
+    """Returns a preview workspace spec from its legacy form
+
+       Returns the workspace spec as an object.  Accepts either 
+       objects or JSON strings.
+    """
 
     def munge(elem):
         "Converts a workspace entry to its preview form"
@@ -15,16 +19,23 @@ def _to_preview(body):
         del e['local']
         return e
 
+    if type(spec) is str:
+        spec = json.loads(spec)
+    writeback = 'never' if spec[0]['local'] else 'always'
+    return { "writeback": writeback
+            , "maps": [ munge(e) for e in spec ] }
+
+def _to_preview_by_body(body):
+    "Converts a response body from its original form to the preview form"
+
     b = json.loads(body)
-    writeback = 'never' if b['spec'][0]['local'] else 'always'
-    b['spec'] = { "writeback": writeback
-                  , "maps": [ munge(e) for e in b['spec'] ] }
+    b['spec'] = _to_preview_by_spec(b['spec'])
     return json.dumps(b)
 
 def _to_spec(preview):
     """Converts a workspace specification in preview form to its orignal form.
 
-    Operates at a different structural level from _to_preview(..).
+    Operates at a different structural level from _to_preview_by_body(..).
     """
 
     def munge(local):
@@ -54,7 +65,7 @@ def get(session, vtrqid, path):
     response = ws.get(session, vtrqid, path)
     if response['status_code'] == 200:
         return { "status_code": 200
-                 , "body": _to_preview(response['body']) }
+                 , "body": _to_preview_by_body(response['body']) }
     return response
 
 def list(session, vtrqid, path):

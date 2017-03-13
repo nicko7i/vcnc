@@ -1,5 +1,5 @@
 {
   "comment": "The vclc version nuber is set here, in this file. The build number is automatically set during the build. Scripts require the four zeros to be literally present."
-  , "version": "3.4.2"
+  , "version": "3.4.3"
   , "build": "0000"
 }

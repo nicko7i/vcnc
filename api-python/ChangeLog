@@ -1,3 +1,7 @@
+Release 3.4.3
+
+	'vclc grid get' honors VELSTOR_VCLC_COMPAT.
+
 Release 3.4.2
 
 	Added 'vtrq_id' to the 'grid job' POST request body.

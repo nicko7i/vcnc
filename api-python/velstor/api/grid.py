@@ -1,9 +1,11 @@
 import requests
+import json
 
 from velstor.api.util import print_error
 from velstor.api.util import urlencode
 from velstor.api.fulfill202 import fulfill202
 from velstor.api.util import fake_requests_response as fake_response
+from velstor.api.workspace_preview import _to_preview_by_spec
 
 #  grid.py:  Operations about grid jobs
 
@@ -24,6 +26,18 @@ def get(session, jobid):
                     , urlencode(jobid)])
     r = requests.get(url)
     return fulfill202(session, r)
+
+def get_as_preview(session, jobid):
+    response = get(session, jobid)
+    if response['status_code'] == 200:
+        #
+        #  The workspace spec is job_spec.workspace_spec within the response
+        #
+        b = json.loads(response['body'])
+        b['job_spec']['workspace_spec'] = json.dumps(_to_preview_by_spec(b['job_spec']['workspace_spec']))
+        return { "status_code": 200
+                 , "body": json.dumps(b) }
+    return response
 
 
 def delete(session, jobid):
