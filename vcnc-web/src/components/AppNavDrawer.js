@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import TextField from 'material-ui/TextField';
 import CurrentVtrqSetter from '../containers/CurrentVtrqSetter';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { spacing, typography, zIndex } from 'material-ui/styles';
@@ -35,6 +38,10 @@ const AppNavDrawer = (props, context) => {
   } = props;
 
   function handleTouchTapHeader() {
+    //
+    //  Clicking the nav drawer header re-routes to the home screen.
+    //  Clicking outside the drawer closes the drawer with non re-routing.
+    //  Yes, this is a feature: it's the only way to get to the Home page.
     context.router.push('/');
     onRequestChangeNavDrawer(false);
   }
@@ -50,7 +57,6 @@ const AppNavDrawer = (props, context) => {
       <div style={styles.logo} onTouchTap={handleTouchTapHeader}>
         PeerCache
       </div>
-      <CurrentVtrqSetter />
       <SelectableList
         value={location.pathname}
         onChange={onChangeList}
@@ -58,6 +64,13 @@ const AppNavDrawer = (props, context) => {
         <ListItem primaryText="Files" value="/files" />,
         <ListItem primaryText="Mounts" value="/mounts" />,
         <ListItem primaryText="Workspaces" value="/workspaces" />,
+        <Divider />
+        <Subheader>Settings</Subheader>
+        <TextField
+          hintText="vcnc:6300"
+          style={{ paddingLeft: 16 }}
+        />
+        <CurrentVtrqSetter />
       </SelectableList>
     </Drawer>
   );

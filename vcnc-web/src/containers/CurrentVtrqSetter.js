@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/settingsActions';
-import VtrqSetter from './VtrqSetter';
+import VtrqSetter from '../components/VtrqSetter';
 
 const CurrentVtrqSetter = props => (
   <VtrqSetter
