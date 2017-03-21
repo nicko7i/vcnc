@@ -1425,6 +1425,10 @@ definitions:
   VpInstance:
     type: object
     properties:
+      host:
+        type: string
+        description: The hostanme of the machine running the vp process.
+        example: jupiter
       id:
         type: string
         description: Opaquely identifies a mounted PeerCache filesystem.
@@ -1433,29 +1437,30 @@ definitions:
         type: string
         description: The IP address of the host running the vp process.
         example: 172.17.0.1
-      host:
+      job:
         type: string
-        description: The hostanme of the machine running the vp process.
-        example: jupiter
+        description: An arbitrary user-provided string, perhaps a grid job ID.
+        example: DRC-0-0-0-0
       mount:
         type: string
         description: The absolute path at which the PeerCache filesystem is mounted.
         example: /tmp/mnt/0xABCDE
-      pc_user:
-        type: string
-        description: The PeerCache user id of the vp process.
-        example: /engr/sally
       os_user:
         type: string
         description: The effective user id on the host operating system.
         example: sally
+      pc_user:
+        type: string
+        description: The PeerCache user id of the vp process.
+        example: /engr/sally
     required:
+      - host
       - id
       - ip
-      - host
+      - job
       - mount
-      - pc_user
       - os_user
+      - pc_user
 
   WorkspaceEntry:
     type: object
