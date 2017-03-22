@@ -2,7 +2,7 @@
 #define CNC_CNCTRQ_CNCTRQ_DELETE_WORKER_H
 
 #include <nan.h>
-#include <lib/pString.H>
+#include <pepsis/lib/pString.H>
 #include <prtcl/cnctrq/cnctrqClient.H>
 #include <prtcl/core/pcSessionExport.H>
 #include <frquCore/frquStd.H>

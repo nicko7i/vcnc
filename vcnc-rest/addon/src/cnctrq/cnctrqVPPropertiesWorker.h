@@ -2,7 +2,7 @@
 #define CNC_CNCTRQ_CNCTRQ_VPPROPERTIES_WORKER_H
 
 #include <nan.h>
-#include <lib/pString.H>
+#include <pepsis/lib/pString.H>
 #include <prtcl/cnctrq/cnctrqClient.H>
 #include <prtcl/core/pcSessionExport.H>
 #include <frquCore/frquStd.H>
@@ -26,6 +26,7 @@ namespace cnc {
     class cnctrqVPPropertiesWorker 
       : public Nan::AsyncWorker {
     public:
+      typedef pString string_type;
       //
       //  Constructor.
       //

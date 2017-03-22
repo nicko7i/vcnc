@@ -4,27 +4,28 @@
 
 #include <iostream>
 
-using v8::Array;
-using v8::Context;
-using v8::Function;
-using v8::FunctionTemplate;
-using v8::Handle;
-using v8::Local;
-using v8::Object;
-using v8::Persistent;
-using v8::String;
-using v8::Value;
-
-using cnc::cncSession;
-using pepsis::peer::cSession;
-using frqu::prtcl::core::pcSessionExport;
-using frqu::prtcl::cnctrq::cnctrqClient;
-
-typedef pepsis::peer::cName::name_ptr name_ptr;
-typedef pepsis::peer::cHost::host_ptr host_ptr;
 
 namespace cnc {
   namespace cnctrq {
+    using v8::Array;
+    using v8::Context;
+    using v8::Function;
+    using v8::FunctionTemplate;
+    using v8::Handle;
+    using v8::Local;
+    using v8::Object;
+    using v8::Persistent;
+    using v8::String;
+    using v8::Value;
+
+    using cnc::cncSession;
+    using pepsis::peer::cSession;
+    using frqu::prtcl::core::pcSessionExport;
+    using frqu::prtcl::cnctrq::cnctrqClient;
+
+    typedef pepsis::peer::cName::name_ptr name_ptr;
+    typedef pepsis::peer::cHost::host_ptr host_ptr;
+    typedef pString string_type;
 
     cnctrqMetaCopyWorker::cnctrqMetaCopyWorker(int trq_id
                                                , bool overwrite
