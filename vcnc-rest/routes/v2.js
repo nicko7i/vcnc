@@ -168,7 +168,7 @@ module.exports = (app) => {
               error_sym: 'OK',
               error_description_brief: 'Request processed',
             }, {
-              job_spec: result.job_spec,
+              job: result.job_spec,
             }));
           } else {
             // job ID was not found
@@ -227,7 +227,7 @@ module.exports = (app) => {
   //
   //  Vector delete node
   //
-  app.post('/vtrq/delete_nodes/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/delete_nodes', (req, res) => {
     fulfill202(
       req,
       res,
@@ -248,7 +248,7 @@ module.exports = (app) => {
   //
   //  Vector metadata Copy
   //
-  app.post('/vtrq/meta_copy/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/meta_copy/', (req, res) => {
     fulfill202(
       req,
       res,
@@ -266,7 +266,7 @@ module.exports = (app) => {
       });
   });
 
-  app.delete('/vtrq/namespace/:vtrq_id/:url_path', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/namespace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -288,7 +288,7 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:url_path/children', (req, res) => {
+  app.get('/vtrq/:vtrq_id/namespace/:url_path/children', (req, res) => {
     fulfill202(
       req,
       res,
@@ -305,7 +305,7 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/namespace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -322,45 +322,10 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_get(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            (result) => {
-              cb(adapter(result, { consistency: result.consistency }));
-            });
-        });
-      });
-  });
-
-  app.post('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_set(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            req.body.consistency,
-            (result) => {
-              cb(adapter(result));
-            });
-        });
-      });
-  });
-
   //
   //
   //
-  app.post('/vtrq/namespace/:vtrq_id/:path/mkdir', (req, res) => {
+  app.post('/vtrq/:vtrq_id/namespace/:path/mkdir', (req, res) => {
     fulfill202(
       req,
       res,
@@ -382,7 +347,7 @@ module.exports = (app) => {
   //
   //  Shutdown TRQ
   //
-  app.delete('/vtrq/service/:vtrq_id', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/service', (req, res) => {
     fulfill202(
       req,
       res,
@@ -401,7 +366,7 @@ module.exports = (app) => {
   //
   //  Discover VP IDs having certain qualities
   //
-  app.get('/vtrq/vp/:vtrq_id', (req, res) => {
+  app.get('/vtrq/:vtrq_id/vps', (req, res) => {
     fulfill202(
       req,
       res,
@@ -413,7 +378,8 @@ module.exports = (app) => {
             req.query.vp_host,
             req.query.mount_point,
             (result) => {
-              cb(adapter(result, { vp_ids: result.vp_ids }));
+              // TODO: this is probably something else now.
+              cb(adapter(result, { items: result.vp_ids }));
             });
         });
       });
@@ -422,7 +388,7 @@ module.exports = (app) => {
   //
   //  Retrieve information about a specific VP
   //
-  app.get('/vtrq/vp/:vtrq_id/:vp_id', (req, res) => {
+  app.get('/vtrq/:vtrq_id/vp/:vp_id', (req, res) => {
     fulfill202(
       req,
       res,
@@ -436,6 +402,7 @@ module.exports = (app) => {
               cb(adapter(
                 result,
                 {
+                  // TODO update to match v2api.yaml
                   gid: result.gid,
                   hostname: result.hostname,
                   mount_point: result.mount_point,
@@ -451,7 +418,7 @@ module.exports = (app) => {
   //
   //  Retrieve the workspaces names at this workspace path.
   //
-  app.get('/vtrq/workspaces/:vtrq_id/:url_path/children', (req, res) => {
+  app.get('/vtrq/:vtrq_id/workspace/:url_path/children', (req, res) => {
     fulfill202(
       req,
       res,
@@ -471,7 +438,7 @@ module.exports = (app) => {
   //
   //  Retrieves the workspace specification at this path.
   //
-  app.get('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -502,7 +469,7 @@ module.exports = (app) => {
   //  'put' is implicitly "overwrite: true".  It is an error 'put'
   //  to a workspace that doesn't exist.
   //
-  app.put('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.put('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -524,7 +491,7 @@ module.exports = (app) => {
   //
   //  Sets a workspace specification at this path.
   //
-  app.post('/vtrq/workspaces/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/workspaces', (req, res) => {
     fulfill202(
       req,
       res,
@@ -547,7 +514,7 @@ module.exports = (app) => {
   //
   //  Deletes a workspace specification at this path.
   //
-  app.delete('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
