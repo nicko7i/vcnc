@@ -108,7 +108,6 @@ paths:
       operationId: gridJobList
       tags:
         - 'Grid API'
-        - 'Cursor-able'
       responses:
         '200':
           description: Request processed.  See response body.
@@ -504,7 +503,6 @@ paths:
       operationId: vtrqNamespaceChildren
       tags:
         - "vTRQ Namespace"
-        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
@@ -519,22 +517,6 @@ paths:
           description: URL-encoded path in the vTRQ namespace.
           required: true
           type: string
-        - in: query
-          name: filter
-          required: false
-          type: string
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
         - in: query
           name: details
           description: If false the 'stat' field will not be returned.
@@ -748,19 +730,12 @@ paths:
       operationId: vpFind
       tags:
         - "VP Instances"
-        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
           description: ID of the vTRQ performing this operation.
           required: true
           type: integer
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
       responses:
         '200':
           description: Request processed, see response body.
@@ -929,7 +904,6 @@ paths:
       operationId: vtrqWorkspaceChildren
       tags:
         - "vTRQ Workspaces"
-        - 'Cursor-able'
       parameters:
         - in: path
           name: vtrq_id
@@ -941,22 +915,6 @@ paths:
           description: URL-encoded hierarchial name of the workspace.
           required: true
           type: string
-        - in: query
-          name: filter
-          required: false
-          type: string
-        - in: query
-          name: limit
-          description: Number of items to retreive. Default is 1000; maximum is 100,000.
-          required: false
-          type: integer
-          default: 1000
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
         - in: query
           name: details
           required: false
@@ -1022,105 +980,6 @@ paths:
           description: Request processed. See response body.
           schema:
             $ref: '#/definitions/Error'
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /_cursor/{id}:
-    put:
-      summary: Sets sorting and filtering directives.
-      operationId: _cursorPost
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Cursor object identifier
-          required: true
-          type: string
-        - in: query
-          name: filter
-          description: Boolean expression over object fields.
-          required: false
-          type: string
-        - in: query
-          name: order
-          description: Ascending or descending sort
-          required: false
-          type: string
-          default: ascend
-          enum:
-            - ascend
-            - descend
-        - in: query
-          name: on
-          description: Field on which to sort
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Request processed.  See response body.
-          schema:
-            properties:
-              error_sym:
-                $ref: '#/definitions/ErrorSymbol'
-            required:
-              - error_sym
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-    get:
-      summary: Iterates over the result set.
-      operationId: _cursorGet
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Unique cursor identifier
-          required: true
-          type: string
-        - in: query
-          name: cursor
-          description: Opaque value for start of next set of items. Zero means start at beginning.
-          required: false
-          type: integer
-          default: 0
-      responses:
-        '200':
-          description: Request processed.  See response body.
-
-    delete:
-      summary: Releases the result set.
-      operationId: _cursorDelete
-      tags:
-        - "Internal API"
-      parameters:
-        - in: path
-          name: id
-          description: Unique cursor identifier
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed, see response body.
-          schema:
-            required:
-              - error_sym
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCES
-                  - ENOENT
-                  - EREMOTEIO
         default:
           description: HTTP error
           schema:
