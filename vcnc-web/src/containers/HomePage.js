@@ -8,7 +8,7 @@ export const HomePage = props => {
   return (
     <HomePageLayout
       onMenuClick={props.actions.toggleNavDrawer}
-      title="Home"
+      title="Dashboard"
     />
   );
 };
