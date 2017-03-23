@@ -1028,7 +1028,7 @@ paths:
               children:
                 type: array
                 items:
-                  $ref: '#/definitions/Workspace'
+                  type: string
         default:
           description: HTTP error
           schema:
@@ -1400,11 +1400,3 @@ definitions:
     items:
       $ref: '#/definitions/WorkspaceEntry'
 
-  Workspace:
-    type: object
-    properties:
-      name:
-        type: string
-        example: my-workspace
-      spec:
-        $ref: '#/definitions/WorkspaceSpec'
