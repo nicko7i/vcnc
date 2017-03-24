@@ -1,6 +1,5 @@
 /* eslint-disable no-nested-ternary */
 import React, { PropTypes } from 'react';
-import Title from 'react-title-component';
 import spacing from 'material-ui/styles/spacing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -52,7 +51,6 @@ const AppFrame = (props, context) => {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <Title render="PeerCache" />
           <div style={styles.root}>
             {children}
           </div>

@@ -1,38 +1,50 @@
-/**
- * Created by nick on 10/4/16.
- */
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/settingsActions';
-import VtrqSetter from '../components/VtrqSetter';
 
-const FrquCacheTrend = props => (
-  <VtrqSetter
-    value={props.currentVtrq}
-    onChange={(event, index, val) => props.actions.setCurrentVtrq(val)}
-    style={{ width: 181 }}
-  />
-);
+import React from 'react';
+import {Doughnut} from 'react-chartjs-2';
 
-FrquCacheTrend.propTypes = {
-  actions: PropTypes.object,
-  currentVtrq: PropTypes.number,
-};
-
-function mapStateToProps(state) {
-  return {
-    currentVtrq: state.settings.currentVtrq,
-  };
+function getRandomInt (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch),
-  };
-}
+const getState = () => ({
+  labels: [
+    'vp',
+    'vpm',
+    'vtrq'
+  ],
+  datasets: [{
+    data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250)],
+    backgroundColor: [
+      '#CCC',
+      '#36A2EB',
+      '#FFCE56'
+    ],
+    hoverBackgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56'
+    ]
+  }]
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FrquCacheTrend);
+export default React.createClass({
+  displayName: 'DynamicDoughnutExample',
+
+  getInitialState() {
+    return getState();
+  },
+
+  componentWillMount() {
+    setInterval(() => {
+      this.setState(getState());
+    }, 5000);
+  },
+
+  render() {
+    return (
+      <div>
+        <Doughnut data={this.state} />
+      </div>
+    );
+  }
+});

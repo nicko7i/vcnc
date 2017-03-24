@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react';
 import PageBar from './PageBar';
 import Dashboard from 'react-dazzle';
-import FrquCacheTrend from '../containers/FrquCacheTrend';
+import FrquCacheDoughnut from '../containers/FrquCacheDoughnut';
 
 //  default Dazzle styles, at least for now...
 import 'react-dazzle/lib/style/style.css';
 
 const widgets = {
-  WordCounter: {
-    type: FrquCacheTrend,
+  FrquTrend: {
+    type: FrquCacheDoughnut,
     title: 'Counter widget',
   }
 };
@@ -17,7 +17,7 @@ const layout = {
   rows: [{
     columns: [{
       className: 'col-md-12',
-      widgets: [{key: 'WordCounter'}],
+      widgets: [{key: 'FrquTrend'}],
     }],
   }],
 };
@@ -29,9 +29,6 @@ const HomePageLayout = props => {
         onMenuClick={props.onMenuClick}
         title={props.title}
       />
-      <div style={{ textAlign: 'center'}}>
-        <h1>PeerCache</h1>
-      </div>
       <Dashboard widgets={widgets} layout={layout} />
     </div>
   );
