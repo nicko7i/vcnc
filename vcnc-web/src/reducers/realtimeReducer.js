@@ -11,7 +11,6 @@ const reducers = {
 const leaveStateUnchanged = (state) => state;
 
 export default (state = initialState.realtime, action) => {
-  console.log('rtreducer', state, action.payload)
   if (state === null) return {};
   const reducer = reducers[action.type] || leaveStateUnchanged;
   return reducer(state, action);

@@ -7,10 +7,6 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/realtimeActions';
 import { Doughnut } from 'react-chartjs-2';
 
-function getRandomInt (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const getState = (data) => ({
   labels: [
     'vp',
@@ -18,7 +14,6 @@ const getState = (data) => ({
     'vtrq'
   ],
   datasets: [{
-    // data: [getRandomInt(50, 200), getRandomInt(100, 150), getRandomInt(150, 250)],
     data: data,
     backgroundColor: [
       '#CCC',
@@ -43,7 +38,6 @@ FrquCacheDoughnut.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log('fcdonut mapstatetoprops', state)
   return {
     data: [
       state.realtime.rVtrq,

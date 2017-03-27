@@ -6,6 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { darkWhite, lightWhite, grey900 } from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
+import ExternalEvents from '../containers/ExternalEvents';
 
 const muiTheme = getMuiTheme();
 
@@ -51,6 +52,7 @@ const AppFrame = (props, context) => {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+          <ExternalEvents />
           <div style={styles.root}>
             {children}
           </div>
