@@ -22,15 +22,11 @@ function startPushSimulation(dispatch) {
       rVpm: getRandomInt(100, 150),
       rVp: getRandomInt(150, 250),
     };
-    return dispatch(actions.updatePeercachePerformance(data));
+    dispatch(actions.updatePeercachePerformance(data));
   },
   5000
   );
 }
-
-ExternalEvents.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
 
 class ExternalEvents extends Component {
   constructor(props) {
@@ -40,6 +36,10 @@ class ExternalEvents extends Component {
 
   render() {  return null; }
 }
+
+ExternalEvents.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 
 export default connect()(ExternalEvents);
