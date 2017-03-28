@@ -11,16 +11,71 @@ import * as actions from '../actions/realtimeActions';
 //
 //  See Dan Abramov's answer: https://github.com/reactjs/redux/issues/916#issuecomment-149190441
 
-function getRandomInt (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+
+//  Gaussian random number generation taken from
+//
+//  http://stackoverflow.com/a/22080644 and http://jsfiddle.net/Xotic750/3rfT6/
+//
+const boxMullerRandom = (function () {
+  let phase = 0,
+    RAND_MAX,
+    array,
+    random,
+    x1, x2, w, z;
+
+  if (crypto && typeof crypto.getRandomValues === 'function') {
+    RAND_MAX = Math.pow(2, 32) - 1;
+    array = new Uint32Array(1);
+    random = function () {
+      crypto.getRandomValues(array);
+
+      return array[0] / RAND_MAX;
+    };
+  } else {
+    random = Math.random;
+  }
+
+  return function () {
+    if (!phase) {
+      do {
+        x1 = 2.0 * random() - 1.0;
+        x2 = 2.0 * random() - 1.0;
+        w = x1 * x1 + x2 * x2;
+      } while (w >= 1.0);
+
+      w = Math.sqrt((-2.0 * Math.log(w)) / w);
+      z = x1 * w;
+    } else {
+      z = x2 * w;
+    }
+
+    phase ^= 1;
+
+    return z;
+  };
+}());
+
+/*
+function nextTimePoint(prev) {
+  return prev + boxMullerRandom();
 }
+*/
 
 function startPushSimulation(dispatch) {
+  let rVtrq = 50;
+  let rVpm = 25;
+  let rVp = 100 - rVtrq - rVpm;
   window.setInterval(() => {
+    rVtrq += boxMullerRandom();
+    rVpm += boxMullerRandom();
+    rVp = 100 - rVtrq - rVpm;
     const data = {
-      rVtrq: getRandomInt(50, 200),
-      rVpm: getRandomInt(100, 150),
-      rVp: getRandomInt(150, 250),
+      // rVtrq: getRandomInt(50, 200),
+      // rVpm: getRandomInt(100, 150),
+      // rVp: getRandomInt(150, 250),
+      rVtrq,
+      rVpm,
+      rVp,
     };
     dispatch(actions.updatePeercachePerformance(data));
   },

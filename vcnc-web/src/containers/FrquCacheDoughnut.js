@@ -29,7 +29,9 @@ const getState = (data) => ({
 });
 
 const FrquCacheDoughnut = props => (
+  <div width="300 px">
   <Doughnut data={getState(props.data)} />
+  </div>
 );
 
 FrquCacheDoughnut.propTypes = {

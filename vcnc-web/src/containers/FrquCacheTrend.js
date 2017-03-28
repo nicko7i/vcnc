@@ -51,7 +51,7 @@ const getState = (data) => ({
   ],
   datasets: [
     {
-      label: 'Signal',
+      label: 'vTRQ',
       fillColor: '#F1E7E5',
       strokeColor: '#E8575A',
       pointColor: '#E8575A',
@@ -61,7 +61,7 @@ const getState = (data) => ({
       data: [ ...data.rVtrqTrend ],
     },
     {
-      label: 'Disturbance',
+      label: 'vPM',
       fillColor: 'rgba(151,187,205,0.2)',
       strokeColor: 'rgba(151,187,205,1)',
       pointColor: 'rgba(151,187,205,1)',
@@ -70,11 +70,23 @@ const getState = (data) => ({
       pointHighlightStroke: 'rgba(151,187,205,1)',
       data: [ ...data.rVpmTrend ],
     },
+    {
+      label: 'VP',
+      fillColor: 'rgba(66,199,51,0.2)',
+      strokeColor: 'rgba(66,199,51,1)',
+      pointColor: 'rgba(66,199,51,1)',
+      pointStrokeColor: '#fff',
+      pointHighlightFill: '#fff',
+      pointHighlightStroke: 'rgba(66,199,51,1)',
+      data: [ ...data.rVpTrend ],
+    },
   ],
 });
 
 const FrquCacheTrend = props => (
+  <div width="980 px">
   <Line data={getState(props.data)} />
+  </div>
 );
 
 FrquCacheTrend.propTypes = {

@@ -5,7 +5,8 @@ const nTrendPoints = 42;
 
 function updateTrend(lst, pt) {
   const rtn = [ ...lst, pt ];
-  while (rtn.length <= nTrendPoints) rtn.unshift(null);
+  // while (rtn.length <= nTrendPoints) rtn.unshift(null);
+  while (rtn.length <= nTrendPoints) rtn.unshift(0);
   if (rtn.length > nTrendPoints) rtn.shift();
   return rtn;
 }
