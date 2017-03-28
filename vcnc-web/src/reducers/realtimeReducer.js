@@ -1,10 +1,11 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 
-const nTrendPoints = 100;
+const nTrendPoints = 42;
 
 function updateTrend(lst, pt) {
   const rtn = [ ...lst, pt ];
+  while (rtn.length <= nTrendPoints) rtn.unshift(null);
   if (rtn.length > nTrendPoints) rtn.shift();
   return rtn;
 }

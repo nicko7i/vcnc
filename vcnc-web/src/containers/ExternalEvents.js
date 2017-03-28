@@ -24,13 +24,16 @@ function startPushSimulation(dispatch) {
     };
     dispatch(actions.updatePeercachePerformance(data));
   },
-  5000
+  10000
   );
 }
 
 class ExternalEvents extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
     startPushSimulation(this.props.dispatch);
   }
 

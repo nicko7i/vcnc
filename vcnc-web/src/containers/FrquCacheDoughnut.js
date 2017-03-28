@@ -14,7 +14,7 @@ const getState = (data) => ({
     'vtrq'
   ],
   datasets: [{
-    data: data,
+    data: [ ...data ],
     backgroundColor: [
       '#CCC',
       '#36A2EB',
