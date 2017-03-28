@@ -4,38 +4,13 @@ import initialState from './initialState';
 const nTrendPoints = 100;
 
 function updateTrend(lst, pt) {
-  // const rtn = [ ...lst ];
-  const rtn = lst.slice();
-  rtn.push(pt);
+  const rtn = [ ...lst, pt ];
   if (rtn.length > nTrendPoints) rtn.shift();
   return rtn;
 }
 
-function updatePeercache(state, action) {
-  const newState = Object.assign(
-    {},
-    state,
-    {
-      rVtrqTrend: updateTrend(state.rVtrqTrend, action.payload.rVtrq),
-      rVpmTrend: updateTrend(state.rVpmTrend, action.payload.rVpm),
-      rVpTrend: updateTrend(state.rVpTrend, action.payload.rVp),
-    },
-    action.payload)
-  /*
- const newState = {
-      ...state,
-      rVtrqTrend: updateTrend(state.rVtrqTrend, action.payload.rVtrq),
-      rVpmTrend: updateTrend(state.rVpmTrend, action.payload.rVpm),
-      rVpTrend: updateTrend(state.rVpTrend, action.payload.rVp),
-      ...action.payload,
-    };
-  */
-  return newState;
-}
-
 const reducers = {
-  [types.UPDATE_PEERCACHE_PERFORMANCE]: updatePeercache,
-  /*
+  [types.UPDATE_PEERCACHE_PERFORMANCE]:
     (state, action) => ({
       ...state,
       rVtrqTrend: updateTrend(state.rVtrqTrend, action.payload.rVtrq),
@@ -43,7 +18,6 @@ const reducers = {
       rVpTrend: updateTrend(state.rVpTrend, action.payload.rVp),
       ...action.payload,
     }),
-  */
   [types.UPDATE_ZERO_TIME_SYNC_PERFORMANCE]:
     (state, action) => ({ ...state, ...action.payload}),
 };
