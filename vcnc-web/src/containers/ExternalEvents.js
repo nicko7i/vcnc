@@ -55,24 +55,16 @@ const boxMullerRandom = (function () {
   };
 }());
 
-/*
-function nextTimePoint(prev) {
-  return prev + boxMullerRandom();
-}
-*/
-
 function startPushSimulation(dispatch) {
   let rVtrq = 50;
   let rVpm = 25;
   let rVp = 100 - rVtrq - rVpm;
+  //
   window.setInterval(() => {
     rVtrq += boxMullerRandom();
     rVpm += boxMullerRandom();
     rVp = 100 - rVtrq - rVpm;
     const data = {
-      // rVtrq: getRandomInt(50, 200),
-      // rVpm: getRandomInt(100, 150),
-      // rVp: getRandomInt(150, 250),
       rVtrq,
       rVpm,
       rVp,

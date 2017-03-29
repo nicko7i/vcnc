@@ -1,14 +1,12 @@
 import * as types from '../constants/actionTypes';
 import initialState from './initialState';
 
-const nTrendPoints = 42;
+//
+//  Set this to be at least the number of points needed by any widget.
+const maxTrendPoints = 100;
 
 function updateTrend(lst, pt) {
-  const rtn = [ ...lst, pt ];
-  // while (rtn.length <= nTrendPoints) rtn.unshift(null);
-  while (rtn.length <= nTrendPoints) rtn.unshift(0);
-  if (rtn.length > nTrendPoints) rtn.shift();
-  return rtn;
+  return [ ...lst.slice(-maxTrendPoints+1), pt ];
 }
 
 const reducers = {
@@ -21,7 +19,16 @@ const reducers = {
       ...action.payload,
     }),
   [types.UPDATE_ZERO_TIME_SYNC_PERFORMANCE]:
-    (state, action) => ({ ...state, ...action.payload}),
+    (state, action) => ({
+      ...state,
+      ztsColdFilesTrend: updateTrend(state.ztsColdFilesTrend, action.payload.ztsColdFiles),
+      ztsWarmFilesTrend: updateTrend(state.ztsWarmFilesTrend, action.payload.ztsWarmFiles),
+      ztsHotFilesTrend: updateTrend(state.ztsHotFilesTrend, action.payload.ztsHotFiles),
+      ztsColdKBTrend: updateTrend(state.ztsColdKBTrend, action.payload.ztsColdKB),
+      ztsWarmKBTrend: updateTrend(state.ztsWarmKBTrend, action.payload.ztsWarmKB),
+      ztsHotKBTrend: updateTrend(state.ztsHotKBTrend, action.payload.ztsHotKB),
+      ...action.payload,
+    }),
 };
 
 const leaveStateUnchanged = (state) => state;

@@ -4,6 +4,12 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/realtimeActions';
 import {Line} from 'react-chartjs-2';
 
+function sliceAndFill(arr, size) {
+  const rtn = arr.slice(-size);
+  while (rtn.length <= size) rtn.unshift(0);
+  return rtn;
+}
+
 const getState = (data) => ({
   labels: [
     '-7 min',
@@ -58,7 +64,7 @@ const getState = (data) => ({
       pointStrokeColor: '#fff',
       pointHighlightFill: '#ff',
       pointHighlightStroke: 'rgba(220,220,220,1)',
-      data: [ ...data.rVtrqTrend ],
+      data: sliceAndFill(data.rVtrqTrend, 42),
     },
     {
       label: 'vPM',
@@ -68,7 +74,7 @@ const getState = (data) => ({
       pointStrokeColor: '#fff',
       pointHighlightFill: '#fff',
       pointHighlightStroke: 'rgba(151,187,205,1)',
-      data: [ ...data.rVpmTrend ],
+      data: sliceAndFill(data.rVpmTrend, 42),
     },
     {
       label: 'VP',
@@ -78,7 +84,7 @@ const getState = (data) => ({
       pointStrokeColor: '#fff',
       pointHighlightFill: '#fff',
       pointHighlightStroke: 'rgba(66,199,51,1)',
-      data: [ ...data.rVpTrend ],
+      data: sliceAndFill(data.rVpTrend, 42),
     },
   ],
 });

@@ -9,8 +9,11 @@ export default {
   realtime: {
     //
     //  PeerCache performance
-    //  ... Aggregate numbers over all vps and vpms
+    //
     storageEfficiency: 1,
+    //
+    //  PeerCache "caching" performance
+    //  ... Aggregate numbers over all vps and vpms
     rVtrq: 0, // read rate (kB/sec) at vTrq
     rVpm: 0, // read rate (kB/sec) resolved at vPM, over all vPMs
     rVp: 0, // read rate (kB/sec) resolved at VP, over all VPs
