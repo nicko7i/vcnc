@@ -9,9 +9,9 @@ import { Doughnut } from 'react-chartjs-2';
 
 const getState = (data) => ({
   labels: [
-    'vp',
+    'vtrq',
     'vpm',
-    'vtrq'
+    'vp',
   ],
   datasets: [{
     data: [ ...data ],

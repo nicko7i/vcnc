@@ -4,13 +4,14 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/realtimeActions';
 import {Line} from 'react-chartjs-2';
 
-function sliceAndFill(arr, size) {
+function sliceAndFill(arr, size, fill=null) {
   const rtn = arr.slice(-size);
-  while (rtn.length <= size) rtn.unshift(0);
+  while (rtn.length <= size) rtn.unshift(fill);
   return rtn;
 }
 
 const getState = (data) => ({
+  options: { duration: 10000 },
   labels: [
     '-7 min',
     '',
@@ -58,12 +59,12 @@ const getState = (data) => ({
   datasets: [
     {
       label: 'vTRQ',
-      fillColor: '#F1E7E5',
+      fill: false,
+      lineTension: 0.1,
       strokeColor: '#E8575A',
-      pointColor: '#E8575A',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#ff',
-      pointHighlightStroke: 'rgba(220,220,220,1)',
+      borderColor: '#E8575A',
+      pointBorderColor: '#E8575A',
+      pointBackgroundColor: '#fff',
       data: sliceAndFill(data.rVtrqTrend, 42),
     },
     {
@@ -90,9 +91,7 @@ const getState = (data) => ({
 });
 
 const FrquCacheTrend = props => (
-  <div width="980 px">
   <Line data={getState(props.data)} />
-  </div>
 );
 
 FrquCacheTrend.propTypes = {
