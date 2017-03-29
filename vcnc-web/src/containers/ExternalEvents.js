@@ -1,6 +1,7 @@
 import {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/realtimeActions';
+import {trend} from '../lib/sequence';
 
 //
 //  ExternalEvents injects external data (for example data received from a
@@ -11,63 +12,20 @@ import * as actions from '../actions/realtimeActions';
 //
 //  See Dan Abramov's answer: https://github.com/reactjs/redux/issues/916#issuecomment-149190441
 
-
-//  Gaussian random number generation taken from
-//
-//  http://stackoverflow.com/a/22080644 and http://jsfiddle.net/Xotic750/3rfT6/
-//
-const boxMullerRandom = (function () {
-  let phase = 0,
-    RAND_MAX,
-    array,
-    random,
-    x1, x2, w, z;
-
-  if (crypto && typeof crypto.getRandomValues === 'function') {
-    RAND_MAX = Math.pow(2, 32) - 1;
-    array = new Uint32Array(1);
-    random = function () {
-      crypto.getRandomValues(array);
-
-      return array[0] / RAND_MAX;
-    };
-  } else {
-    random = Math.random;
-  }
-
-  return function () {
-    if (!phase) {
-      do {
-        x1 = 2.0 * random() - 1.0;
-        x2 = 2.0 * random() - 1.0;
-        w = x1 * x1 + x2 * x2;
-      } while (w >= 1.0);
-
-      w = Math.sqrt((-2.0 * Math.log(w)) / w);
-      z = x1 * w;
-    } else {
-      z = x2 * w;
-    }
-
-    phase ^= 1;
-
-    return z;
-  };
-}());
-
 function startPushSimulation(dispatch) {
-  let rVtrq = 50;
-  let rVpm = 25;
-  let rVp = 100 - rVtrq - rVpm;
+  let fVtrq = trend(0, 80, 70, 2);
+  let fVpm = trend(10,70, 50, 2);
+  let fVp = trend(2, 30, 2, 2);
   //
   window.setInterval(() => {
-    rVtrq += boxMullerRandom();
-    rVpm += boxMullerRandom();
-    rVp = 100 - rVtrq - rVpm;
+    const rVtrq = fVtrq();
+    const rVpm = fVpm();
+    const rVp = fVp();
+    const sum = rVtrq + rVpm + rVp;
     const data = {
-      rVtrq,
-      rVpm,
-      rVp,
+      rVtrq: (rVtrq / sum) * 100,
+      rVpm: (rVpm / sum) * 100,
+      rVp: (rVp / sum) * 100,
     };
     dispatch(actions.updatePeercachePerformance(data));
   },
