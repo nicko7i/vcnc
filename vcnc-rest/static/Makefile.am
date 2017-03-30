@@ -12,7 +12,7 @@
 all:
 	if [ ! -d $(top_srcdir)/static/swagger-ui ]; then \
 	  (cd $(top_srcdir)/static; \
-	  $(PROG_GIT) clone https://github.com/swagger-api/swagger-ui.git; \
+	  $(PROG_GIT) clone --depth 1 --branch v2.2.10 https://github.com/swagger-api/swagger-ui.git; \
 	  rm -rf swagger-ui/.git) \
 	fi
 

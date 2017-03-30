@@ -736,6 +736,16 @@ paths:
           description: ID of the vTRQ performing this operation.
           required: true
           type: integer
+        - in: query
+          name: vp_host
+          description: Hostname of the machine running the VP
+          required: false
+          type: string
+        - in: query
+          name: mount_point
+          description: Fully qualified canonical path to the VP mount point.
+          required: false
+          type: string
       responses:
         '200':
           description: Request processed, see response body.
@@ -787,13 +797,7 @@ paths:
           description: "Workspace Specification"
           required: true
           schema:
-            type: object
-            required:
-              - spec
-            properties:
-              spec:
-                $ref: '#/definitions/Workspace'
-            additionalProperties: false
+            $ref: '#/definitions/Workspace'
       responses:
         '200':
           description: Request processed. See response body.
@@ -852,7 +856,7 @@ paths:
             $ref: '#/definitions/Error'
 
     get:
-      summary: Returns a workspace specification
+      summary: Returns the workspace specification at this path
       operationId: vtrqWorkspaceGet
       tags:
         - "vTRQ Workspaces"
@@ -897,9 +901,10 @@ paths:
     get:
       summary: Returns child nodes of a workspace path
       description: |
-        Workspaces are organized into a hierarchical namespace.  This method returns a
-        JSON array containing every workspace name which is a child of the specified
-        path.
+        Workspaces are organized into a hierarchical namespace. A child
+        workspace having only a 'name' key represents an additional level of
+        hierarchy. A child workspace having a 'name' key and also other keys
+        is a workspace.
 
       operationId: vtrqWorkspaceChildren
       tags:
