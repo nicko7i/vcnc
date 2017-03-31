@@ -1,4 +1,4 @@
-
+import * as color from '../constants/colorNames';
 //
 //  One key per reducer.
 //
@@ -41,5 +41,21 @@ export default {
   settings: {
     currentVcnc: 'localhost:1630',
     currentVtrq: 0,
+  },
+  theme: {
+    //
+    //  Associate a consistent color with certain entities and concepts.
+    //  These values need to be passed as props to dashboard widgets.  CSS
+    //  is not an alternative.
+    //
+    colorCold: color.Peterriver,
+    colorWarm: color.Orange,
+    colorHot: color.Alizarin,
+    //
+    //
+    colorVtrq: color.Silver,
+    colorVpm: color.Peterriver,
+    colorVp: color.mTeal,
+    colorZTS: color.Amethyst,  // zero-time sync
   },
 };

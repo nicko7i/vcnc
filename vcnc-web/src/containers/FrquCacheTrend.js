@@ -10,102 +10,91 @@ function sliceAndFill(arr, size, fill=null) {
   return rtn;
 }
 
-const getState = (data) => ({
-  options: { duration: 10000 },
+const labels = [
+  '-7 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-6 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-5 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-4 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-3 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-2 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+  '-1 min',
+  '',
+  '',
+  '',
+  '',
+  '',
+];
+
+const dataSet = (e) =>({
+  label: e.label,
+  fill: false,
+  lineTension: 0.1,
+  strokeColor: e.color,
+  borderColor: e.color,
+  pointBorderColor: e.color,
+  pointBackgroundColor: '#fff',
+  data: sliceAndFill(e.data, labels.length)
+});
+
+const getState = (lines) => ({
   labels: [
-    '-7 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-6 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-5 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-4 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-3 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-2 min',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '-1 min',
-    '',
-    '',
-    '',
-    '',
-    '',
+    '-7 min', '', '', '', '', '',
+    '-6 min', '', '', '', '', '',
+    '-5 min', '', '', '', '', '',
+    '-4 min', '', '', '', '', '',
+    '-3 min', '', '', '', '', '',
+    '-2 min', '', '', '', '', '',
+    '-1 min', '', '', '', '', '',
   ],
-  datasets: [
-    {
-      label: 'vTRQ',
-      fill: false,
-      lineTension: 0.1,
-      strokeColor: '#E8575A',
-      borderColor: '#E8575A',
-      pointBorderColor: '#E8575A',
-      pointBackgroundColor: '#fff',
-      data: sliceAndFill(data.rVtrqTrend, 42),
-    },
-    {
-      label: 'vPM',
-      fillColor: 'rgba(151,187,205,0.2)',
-      strokeColor: 'rgba(151,187,205,1)',
-      pointColor: 'rgba(151,187,205,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(151,187,205,1)',
-      data: sliceAndFill(data.rVpmTrend, 42),
-    },
-    {
-      label: 'VP',
-      fillColor: 'rgba(66,199,51,0.2)',
-      strokeColor: 'rgba(66,199,51,1)',
-      pointColor: 'rgba(66,199,51,1)',
-      pointStrokeColor: '#fff',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(66,199,51,1)',
-      data: sliceAndFill(data.rVpTrend, 42),
-    },
-  ],
+  datasets: lines.map(e => dataSet(e)),
 });
 
 const FrquCacheTrend = props => (
-  <Line data={getState(props.data)} />
+  <Line data={getState(props.lines)} />
 );
 
 FrquCacheTrend.propTypes = {
   actions: PropTypes.object,
-  data: PropTypes.object,
+  lines: PropTypes.array,
 };
 
 function mapStateToProps(state) {
   return {
-    data: {
-      rVtrqTrend: state.realtime.rVtrqTrend,
-      rVpmTrend: state.realtime.rVpmTrend,
-      rVpTrend: state.realtime.rVpTrend,
-    }
+    lines: [
+      { label: 'vTRQ', color: state.theme.colorVtrq, data: state.realtime.rVtrqTrend },
+      { label: 'vPM', color: state.theme.colorVpm, data: state.realtime.rVpmTrend },
+      { label: 'VP', color: state.theme.colorVp, data: state.realtime.rVpTrend },
+    ],
   };
 }
 

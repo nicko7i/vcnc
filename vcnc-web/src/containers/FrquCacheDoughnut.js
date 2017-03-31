@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/realtimeActions';
 import { Doughnut } from 'react-chartjs-2';
 
-const getState = (data) => ({
+const getState = (data, backgroundColor) => ({
   labels: [
     'vtrq',
     'vpm',
@@ -15,22 +15,13 @@ const getState = (data) => ({
   ],
   datasets: [{
     data: [ ...data ],
-    backgroundColor: [
-      '#CCC',
-      '#36A2EB',
-      '#FFCE56'
-    ],
-    hoverBackgroundColor: [
-      '#FF6384',
-      '#36A2EB',
-      '#FFCE56'
-    ]
+    backgroundColor: [ ...backgroundColor ],
   }]
 });
 
 const FrquCacheDoughnut = props => (
   <div width="300 px">
-  <Doughnut data={getState(props.data)} />
+  <Doughnut data={getState(props.data, props.backgroundColor)} />
   </div>
 );
 
@@ -41,11 +32,16 @@ FrquCacheDoughnut.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    backgroundColor: [
+      state.theme.colorVtrq,
+      state.theme.colorVpm,
+      state.theme.colorVp,
+    ],
     data: [
       state.realtime.rVtrq,
       state.realtime.rVpm,
       state.realtime.rVp,
-      ]
+      ],
   };
 }
 

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import app from './appReducer';
 import realtime from './realtimeReducer';
 import settings from './settingsReducer';
+import theme from './themeReducer';
 import {routerReducer} from 'react-router-redux';
 
 const rootReducer = combineReducers({
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   routing: routerReducer,
   realtime,
   settings,
+  theme,
 });
 
 export default rootReducer;
