@@ -63,7 +63,7 @@ const dataSet = (e) =>({
   borderColor: e.color,
   pointBorderColor: e.color,
   pointBackgroundColor: '#fff',
-  data: sliceAndFill(e.data, labels.length)
+  data: sliceAndFill(e.data, labels.length),
 });
 
 const getState = (lines) => ({
@@ -74,13 +74,13 @@ const getState = (lines) => ({
     '-4 min', '', '', '', '', '',
     '-3 min', '', '', '', '', '',
     '-2 min', '', '', '', '', '',
-    '-1 min', '', '', '', '', '',
+    '-1 min', '', '', '', '', 'now',
   ],
   datasets: lines.map(e => dataSet(e)),
 });
 
 const FrquCacheTrend = props => (
-  <Line data={getState(props.lines)} />
+  <Line data={getState(props.lines)} options={{ scales: { xAxes: [{ gridLines: false }] }}} />
 );
 
 FrquCacheTrend.propTypes = {
