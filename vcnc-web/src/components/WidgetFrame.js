@@ -34,8 +34,9 @@ const WidgetFrame = props => {
 };
 
 WidgetFrame.propTypes = {
-  title: PropTypes.string,
   children: PropTypes.node,
+  muiTheme: PropTypes.object,
+  title: PropTypes.string,
 };
 
 export default muiThemeable()(WidgetFrame);
