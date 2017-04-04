@@ -12,24 +12,36 @@ import {trend} from '../lib/sequence';
 //
 //  See Dan Abramov's answer: https://github.com/reactjs/redux/issues/916#issuecomment-149190441
 
-function startPushSimulation(dispatch) {
+function startFrquPushSimulation(dispatch) {
   let fVtrq = trend(0, 80, 70, 2);
   let fVpm = trend(10,70, 50, 2);
   let fVp = trend(2, 30, 2, 2);
-  //
-  window.setInterval(() => {
+  const makeData = () => {
     const rVtrq = fVtrq();
     const rVpm = fVpm();
     const rVp = fVp();
     const sum = rVtrq + rVpm + rVp;
-    const data = {
+    return {
       rVtrq: (rVtrq / sum) * 100,
       rVpm: (rVpm / sum) * 100,
       rVp: (rVp / sum) * 100,
     };
-    dispatch(actions.updatePeercachePerformance(data));
+  }
+  dispatch(actions.updatePeercachePerformance(makeData()));
+  //
+  window.setInterval(() => {
+    dispatch(actions.updatePeercachePerformance(makeData()));
   },
   10000
+  );
+}
+
+function startVtrqPullSimulation(dispatch) {
+  const fStorageEfficiency = trend(-1, 10, 1, 0.5);
+  window.setInterval(() => {
+    dispatch(actions.updateVtrqPerformance({ storageEfficiency: fStorageEfficiency() }));
+  },
+  15000
   );
 }
 
@@ -39,7 +51,8 @@ class ExternalEvents extends Component {
   }
 
   componentDidMount() {
-    startPushSimulation(this.props.dispatch);
+    startFrquPushSimulation(this.props.dispatch);
+    startVtrqPullSimulation(this.props.dispatch);
   }
 
   render() {  return null; }

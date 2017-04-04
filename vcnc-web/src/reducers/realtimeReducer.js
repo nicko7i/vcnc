@@ -18,6 +18,14 @@ const reducers = {
       rVpTrend: updateTrend(state.rVpTrend, action.payload.rVp),
       ...action.payload,
     }),
+  [types.UPDATE_VTRQ_PERFORMANCE]:
+    (state, action) => ({
+      ...state,
+      storageEfficiencyTrend: updateTrend(
+        state.storageEfficiencyTrend,
+        action.payload.storageEfficiency),
+      ...action.payload,
+    }),
   [types.UPDATE_ZERO_TIME_SYNC_PERFORMANCE]:
     (state, action) => ({
       ...state,
