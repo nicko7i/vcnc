@@ -12,7 +12,7 @@ import {
   pinkA200,
   grey100, grey300, grey400, grey500,
   white, darkBlack, fullBlack,
-  teal500, green500, lightGreen500,
+  indigo500, blue500, lightBlue500,
 } from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
@@ -43,9 +43,9 @@ const {primary1Color, textColor} = material_ui.palette;
 
 export const vcnc = {
   palette: {
-    vtrqColor: teal500,
-    vpmColor: green500,
-    vpColor: lightGreen500,
+    vtrqColor: indigo500,
+    vpmColor: blue500,
+    vpColor: lightBlue500,
   },
   widgetFrame: {
     backgroundColor: fade(primary1Color, 0.3),
