@@ -3,12 +3,13 @@ import React, { PropTypes } from 'react';
 import spacing from 'material-ui/styles/spacing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {material_ui, vcnc} from '../constants/muiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { darkWhite, lightWhite, grey900 } from 'material-ui/styles/colors';
 import AppNavDrawer from './AppNavDrawer';
 import ExternalEvents from '../containers/ExternalEvents';
 
-const muiTheme = getMuiTheme();
+const muiTheme = getMuiTheme(material_ui, vcnc);
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
