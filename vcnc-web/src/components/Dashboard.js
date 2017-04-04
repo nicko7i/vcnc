@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import FrquCacheDoughnut from '../containers/FrquCacheDoughnut';
+import FrquCacheDoughnutWidget from '../containers/FrquCacheDoughnutWidget';
 import FrquCacheTrend from '../containers/FrquCacheTrend';
 import WidgetFrame from '../components/WidgetFrame';
 
@@ -11,10 +11,10 @@ const Dashboard = () => {
     <div className="container-fluid">
       <div className="row no-gutters row-equal-height">
         <div className="col-md-6">
-          <WidgetFrame title="PeerCache"> <FrquCacheTrend/> </WidgetFrame>
+          <WidgetFrame title="PeerCache Trend"> <FrquCacheTrend/> </WidgetFrame>
         </div>
         <div className="col-md-6">
-          <WidgetFrame title="PeerCache Performance"> <FrquCacheDoughnut/> </WidgetFrame>
+          <WidgetFrame title="PeerCache Performance"> <FrquCacheDoughnutWidget/> </WidgetFrame>
         </div>
       </div>
     </div>
