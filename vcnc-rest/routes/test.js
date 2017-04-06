@@ -19,7 +19,7 @@ function cnctrqClientMoxiate(input, latency, cb) {
         result: { result: input + 1 },
       });
     },
-    latency * 1000,
+    latency * 1000
   );
 }
 
@@ -38,7 +38,7 @@ module.exports = (app) => {
         req.query.latency,
         (result) => {
           cb(result);
-        },
+        }
       );
     });
   });

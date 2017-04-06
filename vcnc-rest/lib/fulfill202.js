@@ -134,7 +134,7 @@ function fulfill202(req, res, operation) {
         });
       });
     },
-    fulfillmentTimeout,
+    fulfillmentTimeout
   );
   //
   //  Call the "TRQ" through the "client"
@@ -165,10 +165,10 @@ function fulfill202(req, res, operation) {
         stashFulfillmentResource(
           fulfillmentId,
           result.status,
-          result.body,
+          result.body
         );
       }
-    },
+    }
   );
 }
 module.exports = {

@@ -35,30 +35,30 @@ function installStaticContent(app) {
   //
   app.use(
     '/v1/doc/api',
-    express.static(path.join(__dirname, 'static/swagger-ui/dist')),
+    express.static(path.join(__dirname, 'static/swagger-ui/dist'))
   );
   app.use(
     '/v1/doc',
-    express.static(path.join(__dirname, 'static/doc-html')),
+    express.static(path.join(__dirname, 'static/doc-html'))
   );
   app.use(
     '/v1/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v1api.json')),
+    express.static(path.join(__dirname, 'api/v1api.json'))
   );
   //
   //  ... and for v2
   //
   app.use(
     '/v2/doc/api',
-    express.static(path.join(__dirname, 'static/swagger-ui/dist')),
+    express.static(path.join(__dirname, 'static/swagger-ui/dist'))
   );
   app.use(
     '/v2/doc',
-    express.static(path.join(__dirname, 'static/doc-html')),
+    express.static(path.join(__dirname, 'static/doc-html'))
   );
   app.use(
     '/v2/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v2api.json')),
+    express.static(path.join(__dirname, 'api/v2api.json'))
   );
 }
 
@@ -147,7 +147,7 @@ function installErrorResponses(app) {
       req,
       res,
       next,
-      app.get('env') === 'development' ? err.stack : undefined,
+      app.get('env') === 'development' ? err.stack : undefined
     );
   });
 }
@@ -213,7 +213,7 @@ function serveWebAdmin() {
     const admin = express();
     admin.use(
       '/',
-      express.static(path.join(__dirname, 'static/vcnc-web')),
+      express.static(path.join(__dirname, 'static/vcnc-web'))
     );
     const adminPort = parseInt(config.server.port, 10) + parseInt(config.web.offset, 10);
     console.log('INFO: accepting vcnc-web connections on port', adminPort); // eslint-disable-line

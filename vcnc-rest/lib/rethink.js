@@ -45,7 +45,7 @@ function init() {
   })
   .then(() =>
     //  Look for the table in the database
-    r.tableList().filter(v => v.eq(tableName)).run(cnxtn),
+    r.tableList().filter(v => v.eq(tableName)).run(cnxtn)
   )
   .then((lst) => {
     // Create the table if necessary.
