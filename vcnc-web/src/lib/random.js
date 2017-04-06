@@ -2,22 +2,27 @@
 //
 //  http://stackoverflow.com/a/22080644 and http://jsfiddle.net/Xotic750/3rfT6/
 //
+//  I expect more exported functions in the future...
+/* eslint-disable import/prefer-default-export */
 const crypto = window.crypto || null;
 export const boxMullerRandom = (() => {
-  let phase = 0,
-    RAND_MAX,
-    array,
-    random,
-    x1, x2, w, z;
+  let phase = 0;
+  let RAND_MAX;
+  let array;
+  let random;
+  let x1;
+  let x2;
+  let w;
+  let z;
 
   if (crypto && typeof crypto.getRandomValues === 'function') {
-    RAND_MAX = Math.pow(2, 32) - 1;
+    RAND_MAX = (2 ** 32) - 1;
     array = new Uint32Array(1);
-    random = function () {
+    random = (() => {
       crypto.getRandomValues(array);
 
       return array[0] / RAND_MAX;
-    };
+    });
   } else {
     random = Math.random;
   }
@@ -25,9 +30,9 @@ export const boxMullerRandom = (() => {
   return () => {
     if (!phase) {
       do {
-        x1 = 2.0 * random() - 1.0;
-        x2 = 2.0 * random() - 1.0;
-        w = x1 * x1 + x2 * x2;
+        x1 = (2.0 * random()) - 1.0;
+        x2 = (2.0 * random()) - 1.0;
+        w = (x1 * x1) + (x2 * x2);
       } while (w >= 1.0);
 
       w = Math.sqrt((-2.0 * Math.log(w)) / w);
@@ -36,7 +41,7 @@ export const boxMullerRandom = (() => {
       z = x2 * w;
     }
 
-    phase ^= 1;
+    phase = !phase;
 
     return z;
   };

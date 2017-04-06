@@ -2,7 +2,6 @@ import * as ActionTypes from '../constants/actionTypes';
 import * as ActionCreators from './appActions';
 
 describe('Actions', () => {
-
   it('should create an action to move the tray', () => {
     const expected = { type: ActionTypes.OPEN_OR_CLOSE_NAV_DRAWER, open: false };
     const actual = ActionCreators.openOrCloseNavDrawer(false);
@@ -14,5 +13,4 @@ describe('Actions', () => {
     const actual = ActionCreators.toggleNavDrawer();
     expect(actual).toEqual(expected);
   });
-
 });

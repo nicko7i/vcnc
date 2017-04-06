@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
-function sliceAndFill(arr, size, fill=null) {
+function sliceAndFill(arr, size, fill = null) {
   const rtn = arr.slice(-size);
   while (rtn.length <= size) rtn.unshift(fill);
   return rtn;
@@ -18,7 +18,7 @@ const labels = [
 ];
 
 
-const dataSet = (e) =>({
+const dataSet = e => ({
   label: e.label,
   fill: false,
   lineTension: 0.1,
@@ -37,7 +37,7 @@ function getState(props) {
 }
 
 const FrquCacheTrend = props => (
-  <Line data={getState(props)} options={{ scales: { xAxes: [{ gridLines: false }] }}} />
+  <Line data={getState(props)} options={{ scales: { xAxes: [{ gridLines: false }] } }} />
 );
 
 FrquCacheTrend.propTypes = {

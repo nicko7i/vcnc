@@ -2,7 +2,6 @@ import * as ActionTypes from '../constants/actionTypes';
 import reducer from './appReducer';
 
 describe('Reducers::app', () => {
-
   const getInitialState = () => ({ navDrawerOpen: false });
 
   const getAppState = () => ({ navDrawerOpen: true });

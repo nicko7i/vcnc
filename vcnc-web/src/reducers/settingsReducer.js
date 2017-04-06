@@ -8,10 +8,11 @@ const reducers = {
     (state, action) => ({ ...state, currentVtrq: action.vtrqId }),
 };
 
-const leaveStateUnchanged = (state) => state;
+const leaveStateUnchanged = state => state;
 
 export default (state = initialState.settings, action) => {
   if (state === null) return {};
   const reducer = reducers[action.type] || leaveStateUnchanged;
   return reducer(state, action);
 };
+

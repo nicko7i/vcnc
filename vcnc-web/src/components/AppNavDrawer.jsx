@@ -3,10 +3,10 @@ import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
-import CurrentVtrqSetter from '../containers/CurrentVtrqSetter';
 import { List, ListItem, makeSelectable } from 'material-ui/List';
 import { spacing, typography, zIndex } from 'material-ui/styles';
 import { cyan500 } from 'material-ui/styles/colors';
+import CurrentVtrqSetter from '../containers/CurrentVtrqSetter';
 
 const SelectableList = makeSelectable(List); // eslint-disable-line new-cap
 
@@ -77,16 +77,16 @@ const AppNavDrawer = (props, context) => {
 };
 
 AppNavDrawer.propTypes = {
- docked: PropTypes.bool.isRequired,
- location: PropTypes.object.isRequired,
- onChangeList: PropTypes.func.isRequired,
- onRequestChangeNavDrawer: PropTypes.func.isRequired,
- open: PropTypes.bool.isRequired,
- style: PropTypes.object,
+  docked: PropTypes.bool.isRequired,
+  location: PropTypes.object.isRequired,
+  onChangeList: PropTypes.func.isRequired,
+  onRequestChangeNavDrawer: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  style: PropTypes.object,
 };
 
 AppNavDrawer.contextTypes = {
- router: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
 };
 
 export default AppNavDrawer;

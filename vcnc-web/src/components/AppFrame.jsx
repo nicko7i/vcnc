@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react';
 import spacing from 'material-ui/styles/spacing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {material_ui, vcnc} from '../constants/muiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { darkWhite, lightWhite, grey900 } from 'material-ui/styles/colors';
+import materialUi, { vcnc } from '../constants/muiTheme';
 import AppNavDrawer from './AppNavDrawer';
 import ExternalEvents from '../containers/ExternalEvents';
 
-const muiTheme = getMuiTheme(material_ui, vcnc);
+const muiTheme = getMuiTheme(materialUi, vcnc);
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -41,35 +41,35 @@ const styles = {
 };
 
 const AppFrame = (props, context) => {
-    const {
-      location,
-      children,
-      navDrawerOpen,
-      openOrCloseNavDrawer,
-    } = props;
+  const {
+    location,
+    children,
+    navDrawerOpen,
+    openOrCloseNavDrawer,
+  } = props;
 
-    const router = context.router;
+  const router = context.router;
 
-    return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
-          <ExternalEvents />
-          <div style={styles.root}>
-            {children}
-          </div>
-          <AppNavDrawer
-            location={location}
-            docked={false}
-            onRequestChangeNavDrawer={openOrCloseNavDrawer}
-            onChangeList={(event, value) => {
-              router.push(value);
-              openOrCloseNavDrawer(false);
-            }}
-            open={navDrawerOpen}
-          />
+  return (
+    <MuiThemeProvider muiTheme={muiTheme}>
+      <div>
+        <ExternalEvents />
+        <div style={styles.root}>
+          {children}
         </div>
-      </MuiThemeProvider>
-    );
+        <AppNavDrawer
+          location={location}
+          docked={false}
+          onRequestChangeNavDrawer={openOrCloseNavDrawer}
+          onChangeList={(event, value) => {
+            router.push(value);
+            openOrCloseNavDrawer(false);
+          }}
+          open={navDrawerOpen}
+        />
+      </div>
+    </MuiThemeProvider>
+  );
 };
 
 AppFrame.propTypes = {
@@ -84,3 +84,4 @@ AppFrame.contextTypes = {
 };
 
 export default AppFrame;
+

@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as actions from '../actions/realtimeActions';
 import FrquCacheTrend from '../components/FrquCacheTrend';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
-const FrquCacheTrendWidget = props => {
+const FrquCacheTrendWidget = (props) => {
   //  merge the data for the lines (which comes in through 'state' with
   //  the themed colors for their display (which comes in through props).
   const colors = [
@@ -14,15 +14,16 @@ const FrquCacheTrendWidget = props => {
     props.muiTheme.palette.vpColor,
   ];
   return (
-    <FrquCacheTrend lines={props.lines.map((e, i) => (
-      { ...e, color: colors[i] }
-    ))} />
+    <FrquCacheTrend
+      lines={props.lines.map((e, i) => (
+        { ...e, color: colors[i] }
+      ))}
+    />
   );
 };
 
 
 FrquCacheTrendWidget.propTypes = {
-  actions: PropTypes.object,
   lines: PropTypes.array,
   muiTheme: PropTypes.object,
 };
@@ -45,6 +46,6 @@ function mapDispatchToProps(dispatch) {
 
 export default muiThemeable()(connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FrquCacheTrendWidget));
 
