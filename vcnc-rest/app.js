@@ -1,9 +1,9 @@
-'use strict'; // eslint-disable-line strict
 /*
  *    Copyright (C) 2015-2016    IC Manage Inc.
  *
  *    See the file 'COPYING' for license information.
  */
+/* eslint-disable import/no-dynamic-require */
 // Set the DEBUG environment variable to enable debug output
 // process.env.DEBUG = 'swagger:middleware';
 
@@ -23,9 +23,9 @@ const rethink = require('./lib/rethink.js');
 //
 //  Initialize the C++ extension
 //
-const CnctrqClient = require(path.join(__dirname,
-                            'addon/build/Release/cnctrq_client')).CnctrqClient;
-const cnctrqClient = new CnctrqClient;
+const addonPath = path.join(__dirname, 'addon/build/Release/cnctrq_client');
+const CnctrqClient = require(addonPath).CnctrqClient;
+const cnctrqClient = new CnctrqClient();
 cnctrqClient.call_me_first(__dirname);
 const fulfill202 = require('./lib/fulfill202');
 
@@ -232,7 +232,7 @@ function serveREST(app) {
 }
 
 function configureSwaggerMiddleware(app, schema) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const middleware = new Middleware(app);
     middleware.init(path.join(__dirname, schema), () => {
       //
@@ -276,7 +276,7 @@ module.exports = (() => {
     installErrorResponses(app);
     serveREST(app);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err); // eslint-disable-line
     console.log('Exiting...'); // eslint-disable-line
     process.exit(0);

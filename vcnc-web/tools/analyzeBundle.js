@@ -1,5 +1,7 @@
+//  This is a development file even though eslint doesn't think so.
+/* eslint-disable import/no-extraneous-dependencies */
 import webpack from 'webpack';
-import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import config from '../webpack.config.prod';
 
 config.plugins.push(new BundleAnalyzerPlugin());

@@ -1,4 +1,4 @@
-import {trend} from './sequence';
+import { trend } from './sequence';
 
 describe('lib::sequence', () => {
   it('should stay within bounds', () => {

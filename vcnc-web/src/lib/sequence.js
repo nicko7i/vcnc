@@ -1,4 +1,7 @@
-import {boxMullerRandom} from './random';
+import { boxMullerRandom } from './random';
+
+//  I expect more exported functions in the future...
+/* eslint-disable import/prefer-default-export */
 
 function within(min, max, f) {
   let rtn = f();
@@ -6,10 +9,10 @@ function within(min, max, f) {
   return rtn;
 }
 
-export function trend(min, max, initial=0, scale=1) {
+export function trend(min, max, initial = 0, scale = 1) {
   let value = initial;
   return () => {
-    value = within(min, max, () => value + scale * boxMullerRandom());
+    value = within(min, max, () => value + (scale * boxMullerRandom()));
     return value;
   };
 }

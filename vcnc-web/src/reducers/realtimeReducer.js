@@ -6,7 +6,7 @@ import initialState from './initialState';
 const maxTrendPoints = 100;
 
 function updateTrend(lst, pt) {
-  return [ ...lst.slice(-maxTrendPoints+1), pt ];
+  return [...lst.slice(-maxTrendPoints + 1), pt];
 }
 
 const reducers = {
@@ -39,7 +39,7 @@ const reducers = {
     }),
 };
 
-const leaveStateUnchanged = (state) => state;
+const leaveStateUnchanged = state => state;
 
 export default (state = initialState.realtime, action) => {
   if (state === null) return {};

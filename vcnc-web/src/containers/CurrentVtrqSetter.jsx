@@ -1,6 +1,3 @@
-/**
- * Created by nick on 10/4/16.
- */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -34,5 +31,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(CurrentVtrqSetter);

@@ -3,7 +3,6 @@ import initialState from './initialState';
 import reducer from './settingsReducer';
 
 describe('Reducers::settings', () => {
-
   const getAppState = () => ({
     currentVcnc: 'leaf:4444',
     currentVtrq: 5935,
@@ -32,3 +31,4 @@ describe('Reducers::settings', () => {
     .toEqual(expected);
   });
 });
+

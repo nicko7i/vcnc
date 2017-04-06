@@ -7,7 +7,6 @@
  *  Defines routes for test operations
  *  @module
  */
-'use strict'; // eslint-disable-line strict
 const config = require('./configuration.js');
 const Redis = require('ioredis');
 const json = require('JSON');
@@ -177,3 +176,4 @@ module.exports = {
   fetchFulfillmentResource,
   route: config.fulfill202.route,
 };
+

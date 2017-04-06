@@ -1,8 +1,7 @@
 import * as ActionTypes from '../constants/actionTypes';
 import reducer from './realtimeReducer';
-
+/* eslint-disable object-property-newline */
 describe('Reducers::realtime', () => {
-
   it('should not mutate state', () => {
     const action = {
       type: ActionTypes.UPDATE_PEERCACHE_PERFORMANCE,
@@ -10,11 +9,13 @@ describe('Reducers::realtime', () => {
     };
     const initial = {
       rVtrq: 0, rVpm: 0, rVp: 0,
-      rVtrqTrend: [], rVpmTrend: [], rVpTrend: [], };
+      rVtrqTrend: [], rVpmTrend: [], rVpTrend: [],
+    };
     const initialVtrqTrendRef = initial.rVtrqTrend;
     const expected = {
       rVtrq: 44, rVpm: 45, rVp: 46,
-      rVtrqTrend: [44], rVpmTrend: [45], rVpTrend: [46], };
+      rVtrqTrend: [44], rVpmTrend: [45], rVpTrend: [46],
+    };
     const result = reducer(initial, action);
 
     expect(result).toEqual(expected);
@@ -50,3 +51,4 @@ describe('Reducers::realtime', () => {
   });
   */
 });
+

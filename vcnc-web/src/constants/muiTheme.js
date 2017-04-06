@@ -14,11 +14,11 @@ import {
   white, darkBlack, fullBlack,
   indigo500, blue500, lightBlue500,
 } from 'material-ui/styles/colors';
-import {fade} from 'material-ui/utils/colorManipulator';
+import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 
-export const material_ui = {
-  spacing: spacing,
+const materialUi = {
+  spacing,
   fontFamily: 'Roboto, sans-serif',
   palette: {
     // material-ui...
@@ -39,7 +39,7 @@ export const material_ui = {
   },
 };
 
-const {primary1Color, textColor} = material_ui.palette;
+const { primary1Color, textColor } = materialUi.palette;
 
 export const vcnc = {
   palette: {
@@ -53,7 +53,8 @@ export const vcnc = {
     styles: {
       marginTop: '15px',
       marginBottom: '15px',
-    }
-  }
+    },
+  },
+};
 
-}
+export default materialUi;

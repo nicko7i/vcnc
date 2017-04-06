@@ -10,10 +10,10 @@ import NotFoundPage from './components/NotFoundPage';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage}/>
-    <Route path="files" component={FilesPage}/>
-    <Route path="mounts" component={MountsPage}/>
-    <Route path="workspaces" component={WorkspacesPage}/>
-    <Route path="*" component={NotFoundPage}/>
+    <IndexRoute component={HomePage} />
+    <Route path="files" component={FilesPage} />
+    <Route path="mounts" component={MountsPage} />
+    <Route path="workspaces" component={WorkspacesPage} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );

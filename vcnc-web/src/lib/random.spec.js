@@ -1,4 +1,4 @@
-import {boxMullerRandom} from './random';
+import { boxMullerRandom } from './random';
 
 describe('lib::random', () => {
   const samples = [...Array(100)].map(boxMullerRandom);

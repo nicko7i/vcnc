@@ -1,6 +1,3 @@
-/**
- * Created by nick on 10/4/16.
- */
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import FrquCacheDoughnut from '../components/FrquCacheDoughnut';
@@ -19,7 +16,7 @@ function mapStateToProps(state) {
       state.realtime.rVtrq,
       state.realtime.rVpm,
       state.realtime.rVp,
-      ],
+    ],
   };
 }
 
