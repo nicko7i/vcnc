@@ -7,7 +7,6 @@
  *  Defines routes for test operations
  *  @module
  */
-'use strict'; // eslint-disable-line strict
 const config = require('./configuration.js');
 const Redis = require('ioredis');
 const json = require('JSON');
@@ -135,7 +134,7 @@ function fulfill202(req, res, operation) {
         });
       });
     },
-    fulfillmentTimeout
+    fulfillmentTimeout,
   );
   //
   //  Call the "TRQ" through the "client"
@@ -166,10 +165,10 @@ function fulfill202(req, res, operation) {
         stashFulfillmentResource(
           fulfillmentId,
           result.status,
-          result.body
+          result.body,
         );
       }
-    }
+    },
   );
 }
 module.exports = {
@@ -177,3 +176,4 @@ module.exports = {
   fetchFulfillmentResource,
   route: config.fulfill202.route,
 };
+

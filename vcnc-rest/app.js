@@ -1,9 +1,9 @@
-'use strict'; // eslint-disable-line strict
 /*
  *    Copyright (C) 2015-2016    IC Manage Inc.
  *
  *    See the file 'COPYING' for license information.
  */
+/* eslint-disable import/no-dynamic-require */
 // Set the DEBUG environment variable to enable debug output
 // process.env.DEBUG = 'swagger:middleware';
 
@@ -23,9 +23,9 @@ const rethink = require('./lib/rethink.js');
 //
 //  Initialize the C++ extension
 //
-const CnctrqClient = require(path.join(__dirname,
-                            'addon/build/Release/cnctrq_client')).CnctrqClient;
-const cnctrqClient = new CnctrqClient;
+const addonPath = path.join(__dirname, 'addon/build/Release/cnctrq_client');
+const CnctrqClient = require(addonPath).CnctrqClient;
+const cnctrqClient = new CnctrqClient();
 cnctrqClient.call_me_first(__dirname);
 const fulfill202 = require('./lib/fulfill202');
 
@@ -35,30 +35,30 @@ function installStaticContent(app) {
   //
   app.use(
     '/v1/doc/api',
-    express.static(path.join(__dirname, 'static/swagger-ui/dist'))
+    express.static(path.join(__dirname, 'static/swagger-ui/dist')),
   );
   app.use(
     '/v1/doc',
-    express.static(path.join(__dirname, 'static/doc-html'))
+    express.static(path.join(__dirname, 'static/doc-html')),
   );
   app.use(
     '/v1/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v1api.json'))
+    express.static(path.join(__dirname, 'api/v1api.json')),
   );
   //
   //  ... and for v2
   //
   app.use(
     '/v2/doc/api',
-    express.static(path.join(__dirname, 'static/swagger-ui/dist'))
+    express.static(path.join(__dirname, 'static/swagger-ui/dist')),
   );
   app.use(
     '/v2/doc',
-    express.static(path.join(__dirname, 'static/doc-html'))
+    express.static(path.join(__dirname, 'static/doc-html')),
   );
   app.use(
     '/v2/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v2api.json'))
+    express.static(path.join(__dirname, 'api/v2api.json')),
   );
 }
 
@@ -147,7 +147,7 @@ function installErrorResponses(app) {
       req,
       res,
       next,
-      app.get('env') === 'development' ? err.stack : undefined
+      app.get('env') === 'development' ? err.stack : undefined,
     );
   });
 }
@@ -213,7 +213,7 @@ function serveWebAdmin() {
     const admin = express();
     admin.use(
       '/',
-      express.static(path.join(__dirname, 'static/vcnc-web'))
+      express.static(path.join(__dirname, 'static/vcnc-web')),
     );
     const adminPort = parseInt(config.server.port, 10) + parseInt(config.web.offset, 10);
     console.log('INFO: accepting vcnc-web connections on port', adminPort); // eslint-disable-line
@@ -232,7 +232,7 @@ function serveREST(app) {
 }
 
 function configureSwaggerMiddleware(app, schema) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const middleware = new Middleware(app);
     middleware.init(path.join(__dirname, schema), () => {
       //
@@ -276,7 +276,7 @@ module.exports = (() => {
     installErrorResponses(app);
     serveREST(app);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err); // eslint-disable-line
     console.log('Exiting...'); // eslint-disable-line
     process.exit(0);

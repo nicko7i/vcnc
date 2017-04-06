@@ -7,8 +7,8 @@
  *  Defines routes for test operations
  *  @module
  */
-'use strict'; // eslint-disable-line strict
 const fulfill202 = require('../lib/fulfill202.js').fulfill202;
+
 function cnctrqClientMoxiate(input, latency, cb) {
   //  Set the timeout emulating the backend latency
   setTimeout(
@@ -19,7 +19,7 @@ function cnctrqClientMoxiate(input, latency, cb) {
         result: { result: input + 1 },
       });
     },
-    latency * 1000
+    latency * 1000,
   );
 }
 
@@ -38,7 +38,7 @@ module.exports = (app) => {
         req.query.latency,
         (result) => {
           cb(result);
-        }
+        },
       );
     });
   });

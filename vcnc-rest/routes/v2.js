@@ -8,10 +8,10 @@
  *  @module
  */
 
-'use strict'; // eslint-disable-line strict
 const fulfill202 = require('../lib/fulfill202.js').fulfill202;
 const CnctrqClient = require('../addon/build/Release/cnctrq_client.node').CnctrqClient;
-const cnctrqClient = new CnctrqClient;
+
+const cnctrqClient = new CnctrqClient();
 const grid = require('../lib/grid.js');
 const json = require('JSON');
 const config = require('../lib/configuration.js');
@@ -68,7 +68,7 @@ module.exports = (app) => {
         latency()
         .then(() => grid.getJobs())
         .then(result => result.toArray())
-        .then(result => {
+        .then((result) => {
           if (result) {
             cb(adapter({
               http_status: 200,
@@ -86,7 +86,7 @@ module.exports = (app) => {
             }));
           }
         })
-        .catch(err => {
+        .catch((err) => {
           //  Error from database
           cb(adapter({
             http_status: 500,
@@ -127,7 +127,7 @@ module.exports = (app) => {
                     error_description_brief: 'Request Processed',
                   }));
                 })
-                .catch(err => {
+                .catch((err) => {
                   //  Error from database
                   cb(adapter({
                     http_status: 500,
@@ -135,15 +135,13 @@ module.exports = (app) => {
                     error_description_brief: 'Server Error',
                   }, {}, { server_msg: err.toString() }));
                 });
-              } else {
+              } else if (result.error_sym === 'ENOENT') {
                 //  Error from cnctrq client
-                if (result.error_sym === 'ENOENT') {
-                  cb(adapter(Object.assign(
-                    result,
-                    { message: `Workspace ${req.body.workspace_name} not found` })));
-                } else {
-                  cb(adapter(result));
-                }
+                cb(adapter(Object.assign(
+                  result,
+                  { message: `Workspace ${req.body.workspace_name} not found` })));
+              } else {
+                cb(adapter(result));
               }
             });
         });
@@ -161,7 +159,7 @@ module.exports = (app) => {
       (cb) => {
         latency()
         .then(() => grid.getJob(jobId))
-        .then(result => {
+        .then((result) => {
           if (result) {
             cb(adapter({
               http_status: 200,
@@ -175,11 +173,11 @@ module.exports = (app) => {
             cb(adapter({
               http_status: 404,
               error_sym: 'ENOENT',
-              error_description_brief: `Job \'${jobId}\' not found`,
+              error_description_brief: `Job '${jobId}' not found`,
             }));
           }
         })
-        .catch(err => {
+        .catch((err) => {
           //  Error from database
           cb(adapter({
             http_status: 500,
@@ -211,11 +209,11 @@ module.exports = (app) => {
             cb(adapter({
               http_status: 404,
               error_sym: 'ENOENT',
-              error_description_brief: `Job \'${jobId}\' not found`,
+              error_description_brief: `Job '${jobId}' not found`,
             }));
           }
         })
-        .catch(err => {
+        .catch((err) => {
           cb(adapter({
             http_status: 500,
             error_sym: 'EPROTO',
