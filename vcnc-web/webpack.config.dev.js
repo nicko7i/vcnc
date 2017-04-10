@@ -12,7 +12,7 @@ export default {
     // must be first entry to properly set public path
     './src/webpack-public-path',
     'webpack-hot-middleware/client?reload=true',
-    path.resolve(__dirname, 'src/index.js'), // Defining path seems necessary for this to work consistently on Windows machines.
+    path.resolve(__dirname, 'src/index.jsx'), // Defining path seems necessary for this to work consistently on Windows machines.
   ],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
