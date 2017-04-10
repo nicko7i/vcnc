@@ -16,8 +16,11 @@
 #include <cnctrq/cnctrqVPFindWorker.h>
 #include <cnctrq/cnctrqVPPropertiesWorker.h>
 #include <cnctrq/cnctrqWorkspaceWorker.h>
-#include <rev/Rev.H>
+#include <cnctrq/cnctrqIcrRunWorker.h>
+#include <cnctrq/cnctrqIcrWaitWorker.h>
+#include <cnctrq/cnctrqTrqStatisticWorker.h>
 
+#include <rev/Rev.H>
 #include <lib/pStd.H>
 #include <frquCore/frquStd.H>
 
@@ -86,6 +89,9 @@ namespace cnc {
       NODE_SET_PROTOTYPE_METHOD(tpl, "workspace_get", WorkspaceGet);
       NODE_SET_PROTOTYPE_METHOD(tpl, "workspace_put", WorkspacePut);
       NODE_SET_PROTOTYPE_METHOD(tpl, "workspace_set", WorkspaceSet);
+      NODE_SET_PROTOTYPE_METHOD(tpl, "icr_run", IcrRun);
+      NODE_SET_PROTOTYPE_METHOD(tpl, "icr_wait", IcrWait);
+	  NODE_SET_PROTOTYPE_METHOD(tpl, "trq_statistic", TrqStatistic);
       //
       //  Associate the C++ class with the JavaScript constructor
       //
@@ -284,7 +290,7 @@ namespace cnc {
                                                         , new Nan::Callback(callback)));
 
     }
-
+    
     void cnctrqClient::Delete(const FunctionCallbackInfo<Value>& args) {
       Isolate* isolate = args.GetIsolate();
       //
@@ -1063,5 +1069,110 @@ namespace cnc {
                                                       , new Nan::Callback(callback)));
     }
 
+    void cnctrqClient::IcrRun(const FunctionCallbackInfo<Value>& args) {
+      Isolate* isolate = args.GetIsolate();
+      //
+      //  Get the argument values
+      //
+      if (args.Length() < 3) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected three arguments: trq_id, path, and callback")));
+        return;
+      }
+      //
+      if (!args[0]->IsNumber()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected integer first argument (trq_id)")));
+        return;
+      }
+      int trq_id = args[0]->ToNumber()->NumberValue();
+      //
+      if (!args[1]->IsString()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected string second argument (url_path)")));
+        return;
+      }
+      path_type path(*String::Utf8Value(args[1]->ToString()));
+      //
+        
+      Local<Function> callback = args[2].As<Function>();
+      Nan::AsyncQueueWorker(new cnctrqIcrRunWorker(trq_id
+                                                    , path
+                                                    , new Nan::Callback(callback)));
+    }
+
+    void cnctrqClient::IcrWait(const FunctionCallbackInfo<Value>& args) {
+      Isolate* isolate = args.GetIsolate();
+      //
+      //  Get the argument values
+      //
+      if (args.Length() < 3) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected three arguments: trq_id, mod, and callback")));
+        return;
+      }
+      //
+      if (!args[0]->IsNumber()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected integer first argument (trq_id)")));
+        return;
+      }
+      int trq_id = args[0]->ToNumber()->NumberValue();
+      //
+      if (!args[1]->IsNumber()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected integer third argument (mod)")));
+        return;
+      }
+      int mod = args[1]->ToNumber()->NumberValue();
+        
+        
+      Local<Function> callback = args[2].As<Function>();
+      Nan::AsyncQueueWorker(new cnctrqIcrWaitWorker(trq_id
+                                                    , mod
+                                                    , new Nan::Callback(callback)));
+    }
+    
+    void cnctrqClient::TrqStatistic(const FunctionCallbackInfo<Value>& args) {
+      Isolate* isolate = args.GetIsolate();
+      //
+      //  Get the argument values
+      //
+      if (args.Length() < 3) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected three arguments: trq_id, url_path, and callback")));
+        return;
+      }
+      //
+      if (!args[0]->IsNumber()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected integer first argument (trq_id)")));
+        return;
+      }
+      int trq_id = args[0]->ToNumber()->NumberValue();
+      //
+      if (!args[1]->IsString()) {
+        isolate->ThrowException(
+          Exception::TypeError(
+            String::NewFromUtf8(isolate, "Expected string second argument (url_path)")));
+        return;
+      }
+      path_type path(*String::Utf8Value(args[1]->ToString()));
+      //
+        
+      Local<Function> callback = args[2].As<Function>();
+      Nan::AsyncQueueWorker(new cnctrqTrqStatisticWorker(trq_id
+                                                    , path
+                                                    , new Nan::Callback(callback)));
+    }
+	
   } // namespace 'cnctrq'
 } // namespace 'cnc'

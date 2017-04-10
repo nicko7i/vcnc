@@ -1,3 +1,4 @@
+#include <sstream>
 #include <cnctrq/cnctrqWorkspaceWorker.h>
 #include <prtcl/core/pcSessionExport.H>
 #include <cncSession.h>
@@ -10,14 +11,17 @@ namespace cnc {
     using v8::Context;
     using v8::Function;
     using v8::FunctionTemplate;
+    using v8::Isolate;
     using v8::Handle;
     using v8::Local;
     using v8::Object;
     using v8::Persistent;
+    using v8::Null;
+    using v8::Number;
     using v8::String;
     using v8::Value;
 
-    using frqu::prtcl::core::pcSessionExport;
+	using frqu::prtcl::core::pcSessionExport;
     using cnc::cncSession;
 
     typedef pepsis::peer::cName::name_ptr name_ptr;
@@ -87,11 +91,11 @@ namespace cnc {
     //  Execute
     //
     void cnctrqWorkspaceWorker::Execute() {
-      if (_errcode) 
+      if (_errcode)
         return;  // An error has occurred before we were called.
       switch (_operation) {
       case op_children:
-        _errcode = _client->WorkspaceChildren(_path, _children);
+        _errcode = _client->WorkspaceChildren(_path, _workspace_list);
         break;
       case op_delete:
         _errcode = _client->WorkspaceDelete(_path
@@ -131,6 +135,12 @@ namespace cnc {
                                         , http_status
                                         , error_sym
                                         , error_description_brief);
+      std::ostringstream buffer;
+      std::cout << "http_status=" << http_status <<"\n";
+      std::cout << "_errcode=" << _errcode <<"\n";
+      std::cout << "error_sym=" << error_sym <<"\n";
+      std::cout << "error_description_brief=" << error_description_brief <<"\n";
+      std::cout << "_errcode=" << _errcode <<"\n";
       //
       //  Allocate the return object
       //
@@ -151,19 +161,13 @@ namespace cnc {
         switch (_operation) {
         case op_children:
         {
-          //  construct a JavaScript array called "children" with the names of the children.
-          Local<Array> arr = Nan::New<Array>(_children.size());
-          int i(0);
-          for (iCncTrq::string_list_t::iterator itr = _children.begin()
-                 ; itr != _children.end()
-                 ; ++i, ++itr) {
-            Nan::Set(arr
-                     , i
-                     , Nan::New(itr->c_str()).ToLocalChecked());
-              }
+//          std::cout << "Workspace children\n";
+          string_type arr_ws;
+//          _workspace_list.ExportJson(arr_ws, true);
+//          std::cout << "arr_ws: " << arr_ws << "\n";
           Nan::Set(rtn
-                   , Nan::New("children").ToLocalChecked()
-                   , arr);
+                   , Nan::New("ws_children").ToLocalChecked()
+                   , Nan::New(arr_ws.c_str()).ToLocalChecked());
         }
         break;
         case op_delete:
@@ -171,11 +175,9 @@ namespace cnc {
           break;
         case op_get:
         {
-          // construct a string in JSON format describing the spec.
-          //  the spec is in _workspace
           Nan::Set(rtn
-                   , Nan::New("spec").ToLocalChecked()
-                   , Nan::New(_workspace.AsJson(true).c_str()).ToLocalChecked());
+                   , Nan::New("ws").ToLocalChecked()
+                   , Nan::New(_workspace.ExportJson(true).c_str()).ToLocalChecked());
         }
         break;
         case op_set:
