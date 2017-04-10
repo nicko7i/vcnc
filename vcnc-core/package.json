@@ -1,0 +1,28 @@
+{
+  "name": "vcnc-core",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "npm link ../vcnc-rest/addon",
+    "start": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
+    "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
+    "lint": "eslint app.js api lib routes",
+    "lint:watch": "npm run lint -- --watch",
+    "test": "jest"
+  },
+  "author": "Nick Okasinski",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "rethinkdb": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "6.9.0",
+    "eslint-watch": "2.1.14",
+    "jest": "^19.0.2"
+  }
+}
