@@ -163,7 +163,7 @@ namespace cnc {
         {
 //          std::cout << "Workspace children\n";
           string_type arr_ws;
-//          _workspace_list.ExportJson(arr_ws, true);
+          _workspace_list.ExportJson(arr_ws, true);
 //          std::cout << "arr_ws: " << arr_ws << "\n";
           Nan::Set(rtn
                    , Nan::New("ws_children").ToLocalChecked()
