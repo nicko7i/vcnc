@@ -6,7 +6,7 @@
       #
       "target_name": "cnctrq_client",
       "sources": [ "./src/cnctrq/cnctrq_client.cc" 
-      		   , "./src/cnctrq/cnctrqClient.cc"
+	           , "./src/cnctrq/cnctrqClient.cc"
       		   , "./src/cnctrq/cnctrqConsistencyWorker.cc"
       		   , "./src/cnctrq/cnctrqDeleteWorker.cc"
       		   , "./src/cnctrq/cnctrqGetattrWorker.cc"
@@ -17,6 +17,9 @@
       		   , "./src/cnctrq/cnctrqVPFindWorker.cc"
       		   , "./src/cnctrq/cnctrqVPPropertiesWorker.cc"
       		   , "./src/cnctrq/cnctrqWorkspaceWorker.cc"
+       		   , "./src/cnctrq/cnctrqIcrRunWorker.cc"
+               , "./src/cnctrq/cnctrqIcrWaitWorker.cc"
+               , "./src/cnctrq/cnctrqTrqStatisticWorker.cc"
       		   , "./src/cncSession.cc"
       		 ],
       # https://github.com/nodejs/node-gyp/issues/26
@@ -49,6 +52,7 @@
 	"/opt/frqu/TOOLROOT/lib64/pepsis/libPepsis.a",
 	"/opt/frqu/TOOLROOT/lib64/libcpuid.a",
 	"/opt/frqu/TOOLROOT/lib64/libev.a",
+	"/opt/frqu/TOOLROOT/lib64/libutils.a",
 	"-ltbbmalloc",
 	"-lboost_thread",
 	"-lboost_system"

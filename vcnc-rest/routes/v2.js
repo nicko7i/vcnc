@@ -32,6 +32,30 @@ function latency() {
   });
   return p;
 }
+
+function workspace(jso_in, p) {
+  const ws = jso_in.ws;
+  const jso_ws = json.parse(ws);
+  jso_ws.name = p;
+  const jso_result = {
+      "error_sym":   jso_in.error_sym,
+      "workspace": jso_ws
+  }
+  console.log("workspace: jso_result: " + json.stringify(jso_result));
+  return jso_result;
+}
+
+function workspaceChilden(jso_in) {
+  const children = jso_in.ws_children;
+  const jso_children = json.parse(children);
+  const jso_result = {
+      "error_sym":   jso_in.error_sym,
+      "children": jso_children.children
+  }
+  console.log("workspace children: v2.js:  json: " + json.stringify(jso_result));
+  return jso_result;
+}
+
 //
 //  Constructs and returns an object which represents the operation's outcome.
 //
@@ -50,6 +74,7 @@ function adapter(fromRpc, onSuccess, onFailure) {
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
+//   console.log("adapter: " + json.stringify(rtn));
   return rtn;
 }
 
@@ -412,7 +437,6 @@ module.exports = (app) => {
         });
       });
   });
-
   //
   //  Retrieve the workspaces names at this workspace path.
   //
@@ -427,7 +451,12 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, { children: result.children }));
+ //             console.log("Workspace children: v2.js: " + json.stringify(result));
+              if (result.http_status === 200) {
+                cb(adapter(result, workspaceChilden(result)));
+              } else {
+                cb(adapter(result));
+              }
             });
         });
       });
@@ -453,7 +482,7 @@ module.exports = (app) => {
               //  this level manipulates objects.
               //
               if (result.http_status === 200) {
-                cb(adapter(result, { spec: json.parse(result.spec) }));
+                cb(adapter(result, workspace(result,req.pathParams.url_path)));
               } else {
                 cb(adapter(result));
               }

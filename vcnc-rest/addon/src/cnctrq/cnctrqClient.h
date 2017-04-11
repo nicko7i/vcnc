@@ -37,6 +37,9 @@ namespace cnc {
       static void WorkspaceGet(const v8::FunctionCallbackInfo<v8::Value>& info);
       static void WorkspacePut(const v8::FunctionCallbackInfo<v8::Value>& info);
       static void WorkspaceSet(const v8::FunctionCallbackInfo<v8::Value>& info);
+      static void IcrRun(const v8::FunctionCallbackInfo<v8::Value>& info);
+      static void IcrWait(const v8::FunctionCallbackInfo<v8::Value>& info);
+	  static void TrqStatistic(const v8::FunctionCallbackInfo<v8::Value>& info);
     };
   } // namespace 'cnctrq'
 } // namespace 'cnc'

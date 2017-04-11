@@ -12,9 +12,11 @@ using v8::Array;
 using v8::Local;
 using v8::Object;
 using v8::Value;
+using v8::FunctionCallbackInfo;
 using frqu::prtcl::cnctrq::cnctrqClient;
 using frqu::prtcl::core::pcSessionExport;
 using frqu::prtcl::pidlWorkspace;
+using frqu::prtcl::pidlWorkspaceArray;
 using frqu::path_type;
 using frqu::string_type;
 using frqu::prtcl::iCncTrq;
@@ -78,7 +80,7 @@ namespace cnc {
       //
       //  Outputs from the RPC
       pidlWorkspace _workspace;
-      iCncTrq::string_list_t _children;
+      pidlWorkspaceArray _workspace_list;
       //
       //  The iCncTrq RPC error code (from errno.h)
       //
