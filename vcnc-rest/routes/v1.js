@@ -33,6 +33,41 @@ function latency() {
   return p;
 }
 //
+// Convert v2-format of workspace to v1 format for back compatibility
+//
+function workspace(jstr) {
+    const ws = jstr.ws;
+    const jso_ws = json.parse(ws);
+    var jso_map = jso_ws.maps;
+    var local = jso_ws.writeback === "never" ? true : false;
+    for( var i=0; i<jso_map.length; ++i) {
+       jso_map[i].local = local;
+    };
+    const jso_result = {
+        "spec": jso_map
+    }
+    return jso_result;
+}
+
+//
+// Extract workspace children names from  v2-format for back compatibility
+//
+function workspaceChildren(jso_in) {
+  const children = jso_in.ws_children;
+  const jso = json.parse(children);
+  const jso_children = jso.children;
+  console.log("jso_children =  " + json.stringify(jso_children) + "jso_children.length= " + jso_children.length);
+  var arr = [];
+  for(var i=0; i<jso_children.length; ++i) {
+    arr.push(jso_children[i].name);
+  }
+    console.log("arr: " + arr);
+  const jso_result = {
+      "children": arr
+  }
+  return jso_result;
+}
+//
 //  Constructs and returns an object which represents the operation's outcome.
 //
 //  The return value has two top-level properties. 'status' contains the
@@ -396,6 +431,69 @@ module.exports = (app) => {
   });
 
   //
+  //  Start invariants chains reduction process.
+  //
+  app.post('/vtrq/service/icr_run/:vtrq_id/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_run(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Wait/stop invariants chains reduction process.
+  //
+  app.post('/vtrq/service/icr_wait/:vtrq_id/:mod', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            req.pathParams.mod,
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Request statistic form TRQ.
+  //
+  app.post('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.trq_statistic(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result, { result: result.result
+                                  , sum_st_size: result.sum_st_size
+                                  , sum_extents: result.sum_extents 
+                          }));
+            });
+        });
+      });
+  });
+
+  //
   //  Discover VP IDs having certain qualities
   //
   app.get('/vtrq/vp/:vtrq_id', (req, res) => {
@@ -459,7 +557,7 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, { children: result.children }));
+              cb(adapter(result, workspaceChildren(result)));
             });
         });
       });
@@ -485,7 +583,7 @@ module.exports = (app) => {
               //  this level manipulates objects.
               //
               if (result.http_status === 200) {
-                cb(adapter(result, { spec: json.parse(result.spec) }));
+                cb(adapter(result, workspace(result)));
               } else {
                 cb(adapter(result));
               }
