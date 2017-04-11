@@ -15,6 +15,10 @@ const express = require('express');
 //  Swagger
 const Middleware = require('swagger-express-middleware');
 //
+//  Websockets
+const WebSocket = require('ws');
+const WebSocketHandler = require('./lib/websocket');
+//
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
@@ -226,9 +230,18 @@ function serveREST(app) {
   //  Announce we are ready.
   //
   const port = config.server.port;
-  console.log('INFO: accepting REST connections on port', port); // eslint-disable-line
-  // create http service
-  http.createServer(app).listen(port);
+  //
+  // Create http server
+  const server = http.createServer(app);
+  //
+  //  Create the websocket service
+  const wss = new WebSocket.Server({ server });
+  wss.on('connection', ws => WebSocketHandler.makeHandler()(ws));
+  //
+  //
+  server.listen(port, () => {
+    console.log('INFO: accepting REST connections on port %d', server.address().port); // eslint-disable-line
+  });
 }
 
 function configureSwaggerMiddleware(app, schema) {
