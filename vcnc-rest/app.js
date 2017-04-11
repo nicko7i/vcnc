@@ -4,10 +4,11 @@
  *    See the file 'COPYING' for license information.
  */
 /* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/no-extraneous-dependencies */
 // Set the DEBUG environment variable to enable debug output
 // process.env.DEBUG = 'swagger:middleware';
 
-const config = require('./lib/configuration');
+const config = require('vcnc-core/src/lib/configuration');
 //
 //  Express
 const express = require('express');
@@ -17,13 +18,13 @@ const Middleware = require('swagger-express-middleware');
 //
 //  Websockets
 const WebSocket = require('ws');
-const WebSocketHandler = require('./lib/websocket');
+const WebSocketHandler = require('vcnc-core/src/lib/websocket');
 //
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
-const grid = require('./lib/grid.js');
-const rethink = require('./lib/rethink.js');
+const grid = require('vcnc-core/src/lib/grid');
+const rethink = require('vcnc-core/src/lib/rethink');
 //
 //  Initialize the C++ extension
 //
@@ -31,7 +32,7 @@ const addonPath = path.join(__dirname, 'addon/build/Release/cnctrq_client');
 const CnctrqClient = require(addonPath).CnctrqClient;
 const cnctrqClient = new CnctrqClient();
 cnctrqClient.call_me_first(__dirname);
-const fulfill202 = require('./lib/fulfill202');
+const fulfill202 = require('vcnc-core/src/lib/fulfill202');
 
 function installStaticContent(app) {
   //

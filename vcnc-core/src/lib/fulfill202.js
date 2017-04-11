@@ -9,7 +9,7 @@
  */
 const config = require('./configuration.js');
 const Redis = require('ioredis');
-const json = require('JSON');
+// const json = require('JSON');
 //
 const redis = new Redis(config.redis.connection);
 const fulfillmentUrl = `${config.fulfill202.baseUrl}${config.fulfill202.route}`;
@@ -67,13 +67,13 @@ function createFulfillmentResource() {
  */
 function stashFulfillmentResource(id, status, body) {
   const key = `fulfill202.${id}`;
-  // const b = json.stringify(body);
+  // const b = JSON.stringify(body);
   const p = redis.multi()
     .hmset(
       key, {
         status,
         delivery: 'completed',
-        body: json.stringify(body),
+        body: JSON.stringify(body),
       })
     .expire(key, config.fulfill202.expires)
     .exec();

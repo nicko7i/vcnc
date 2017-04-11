@@ -6,29 +6,19 @@
 const config = require('./configuration.js');
 const r = require('rethinkdb');
 
-const dbName = config.rethinkdb.connection.db;
 const tableName = 'grid_jobs';
 let cnxtn = null;
 
 /**
  *  Initializes the grid module, creating a connection object
- *  and creating the database if necessary.
+ *  and creating the table if necessary.
  *
  *  @return {promise} A promise fulfilled when the connection is ready.
  */
 function init() {
-  if (!config.test.enable_grid_jobs) return Promise.resolve();
   return r.connect(config.rethinkdb.connection)
   .then((conn) => {
     cnxtn = conn;  // save the connection for later reuse
-    return r.dbList().filter(v => v.eq(dbName)).run(conn);
-  })
-  .then((lst) => {
-    //  Create the database if necessary.
-    if (lst.length === 0) {
-      return Promise.reject(`grid.js: database ${dbName} does not exist`);
-    }
-    return Promise.resolve();
   })
   .then(() =>
     //  Look for the table in the database

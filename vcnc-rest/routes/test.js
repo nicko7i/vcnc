@@ -7,7 +7,8 @@
  *  Defines routes for test operations
  *  @module
  */
-const fulfill202 = require('../lib/fulfill202.js').fulfill202;
+// eslint-disable-next-line import/no-extraneous-dependencies
+const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
 
 function cnctrqClientMoxiate(input, latency, cb) {
   //  Set the timeout emulating the backend latency
