@@ -14,12 +14,13 @@ export const App = props => (
     openOrCloseNavDrawer={props.actions.openOrCloseNavDrawer}
     toggleNavDrawer={props.actions.toggleNavDrawer}
   >
-    children
+    {props.children}
   </AppFrame>
 );
 
 App.propTypes = {
   actions: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
   location: PropTypes.object.isRequired,
   navDrawerOpen: PropTypes.bool.isRequired,
   openOrCloseNavDrawer: PropTypes.func,

@@ -23,11 +23,11 @@ function makeHandler() {
     });
 
     interval = setInterval(() => {
-      ws.send({
+      ws.send(JSON.stringify({
         rVtrq: 50 + count,
         rVpm: 40 + count,
         rVp: 30 + 2 * count,
-      });
+      }));
       count += 1;
     }, 15000);
   };
