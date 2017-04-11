@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "npm link ../vcnc-core",
     "build": "npm run json-ize; npm run generate",
     "start": "npm run build; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
+    "foo": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
     "generate": "generate-md --input doc --output static/doc-html --layout mixu-page",
     "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
     "json-ize": "yaml2json ./api/v1api.yaml > ./api/v1api.json; yaml2json ./api/v2api.yaml > ./api/v2api.json",
@@ -22,6 +24,7 @@
     "rethinkdb": "^2.3.3",
     "swagger-express-middleware": "1.0.0-alpha.12",
     "tv4": "^1.2.7",
+    "ws": "^2.2.3",
     "yamljs": "^0.2.7"
   },
   "devDependencies": {

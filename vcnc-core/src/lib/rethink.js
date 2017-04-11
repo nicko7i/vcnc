@@ -10,8 +10,8 @@ const dbName = config.rethinkdb.connection.db;
 const tableName = 'about';
 let cnxtn = null;
 
-const schemaMajor = 1;
-const schemaMinor = 0;
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { schemaMajor, schemaMinor } = require('../constants/rethinkdbSchema');
 
 function newAboutRow() {
   return r.table(tableName).insert({
@@ -23,14 +23,14 @@ function newAboutRow() {
 
 /**
  *  Initializes the rethinkdb module, creating a connection object
- *  and creating the database if necessary.
+ *  and creating the database if necessary. If the database already exists,
+ *  it checks the schema revision for compatibility.
  *
  *  Must be called before any other rethinkdb related module.
  *
  *  @return {promise} A promise fulfilled when the connection is ready.
  */
 function init() {
-  if (!config.test.enable_grid_jobs) return Promise.resolve();
   return r.connect(config.rethinkdb.connection)
   .then((conn) => {
     cnxtn = conn;  // save the connection for later reuse

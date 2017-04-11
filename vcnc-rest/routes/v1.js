@@ -7,14 +7,15 @@
  *  Defines routes for every API v1 operation.
  *  @module
  */
+/* eslint-disable import/no-extraneous-dependencies */
 
-const fulfill202 = require('../lib/fulfill202.js').fulfill202;
+const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
 const CnctrqClient = require('../addon/build/Release/cnctrq_client.node').CnctrqClient;
 
 const cnctrqClient = new CnctrqClient();
-const grid = require('../lib/grid.js');
+const grid = require('vcnc-core/src/lib/grid.js');
 const json = require('JSON');
-const config = require('../lib/configuration.js');
+const config = require('vcnc-core/src/lib/configuration.js');
 
 //
 //  Inject latency for testing

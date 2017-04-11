@@ -1,5 +1,6 @@
-import { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Websocket from 'react-websocket';
 import * as actions from '../actions/realtimeActions';
 import { trend } from '../lib/sequence';
 
@@ -45,6 +46,11 @@ function startVtrqPullSimulation(dispatch) {
   );
 }
 
+function handleData(data) {
+  console.log(JSON.parse(data));
+}
+
+
 class ExternalEvents extends Component {
 
   componentDidMount() {
@@ -52,7 +58,11 @@ class ExternalEvents extends Component {
     startVtrqPullSimulation(this.props.dispatch);
   }
 
-  render() { return null; }
+  render() {
+    return (
+      <Websocket url="ws://localhost:6130/" onMessage={handleData} />
+    );
+  }
 }
 
 ExternalEvents.propTypes = {
