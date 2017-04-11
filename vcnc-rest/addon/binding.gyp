@@ -53,7 +53,6 @@
 	"/opt/frqu/TOOLROOT/lib64/libcpuid.a",
 	"/opt/frqu/TOOLROOT/lib64/libev.a",
 	"/opt/frqu/TOOLROOT/lib64/libutils.a",
-	"/opt/frqu/TOOLROOT/lib64/liblog4cpp.a",
 	"-ltbbmalloc",
 	"-lboost_thread",
 	"-lboost_system"
