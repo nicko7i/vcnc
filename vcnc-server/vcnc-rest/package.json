@@ -1,0 +1,39 @@
+{
+  "name": "vcnc-rest",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "npm link ../vcnc-core; npm link ../js-extension",
+    "build": "npm run json-ize; npm run generate",
+    "start": "npm run build; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
+    "generate": "generate-md --input doc --output static/doc-html --layout mixu-page",
+    "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
+    "json-ize": "yaml2json ./src/api/v1api.yaml > ./src/api/v1api.json; yaml2json ./src/api/v2api.yaml > ./src/api/v2api.json",
+    "lint": "eslint app.js src",
+    "lint:watch": "npm run lint -- --watch",
+    "test": "echo ./node_modules/mocha/bin/mocha"
+  },
+  "dependencies": {
+    "cors": "^2.8.1",
+    "express": "^4.0.0",
+    "ioredis": "^1.15.1",
+    "json-stringify": "^1.0.0",
+    "markdown-styles": "^3.1.5",
+    "rethinkdb": "^2.3.3",
+    "swagger-express-middleware": "1.0.0-alpha.12",
+    "tv4": "^1.2.7",
+    "ws": "^2.2.3",
+    "yamljs": "^0.2.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "chakram": "^1.3.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "6.9.0",
+    "eslint-watch": "2.1.14",
+    "mocha": "^2.4.5"
+  }
+}
