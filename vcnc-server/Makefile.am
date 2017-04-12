@@ -1,5 +1,5 @@
 #
-#	'cnc_server/vcnc-rest' makefile
+#	'cnc-server' makefile
 #
 #	Copyright (C) 2015	IC Manage Inc
 #
@@ -8,7 +8,7 @@
 ACLOCAL_AMFLAGS = -I m4
 SUB_LOCAL = $(top_srcdir)/sub_local.pl
 
-SUBDIRS = src addon static . doc installer
+SUBDIRS = version js-extension vcnc-core vcnc-rest vcnc-sampler . installer
 #
 PROJECTIONS = 			\
 	VERSION=$(VERSION)
@@ -24,29 +24,11 @@ PROJECTIONS = 			\
 #etc_DATA = velstor-vcnc.conf velstor-vcnc-settings.js
 
 
-all-local:
-	(cd $(top_srcdir); \
-	  NVM_DIR=$(TOOLROOT)/nvm; \
-	  [ ! -d $(NVM_DIR) ] && (NVM_DIR=$(TOOLROOT)/share/vcnc/nvm); \
-	  [ ! -d $(NVM_DIR) ] && (echo "Can't find NVM_DIR"; exit 1); \
-	  . $(NVM_DIR)/nvm.sh;  \
-	  npm install; \
-	  npm run json-ize )
-
-#
-#  Install an API spec editor which may be useful for development but is not
-#  needed for deployment
-#
-swagger-editor:
-	if [ ! -d $(top_srcdir)/swagger-editor ]; then \
-	  $(PROG_GIT) clone https://github.com/swagger-api/swagger-editor.git $(top_srcdir)/swagger-editor; \
-	fi
 #
 #
 clean-local:
-	rm -rf swagger-editor
 
 install-data-local:
 	find $(top_srcdir) -name '*~' -exec rm '{}' ';'
-	mkdir $(DESTDIR)$(prefix)/share/vcnc/vcnc-rest
-	rsync -a $(top_srcdir) $(DESTDIR)$(prefix)/share/vcnc/vcnc-rest
+	mkdir $(DESTDIR)$(prefix)/share/vcnc
+	rsync -a $(top_srcdir) $(DESTDIR)$(prefix)/share/vcnc

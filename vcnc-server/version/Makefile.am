@@ -1,5 +1,5 @@
 #
-#	'cnc_server/src' makefile
+#	'cnc_server/version' makefile
 #
 #	Copyright (C) 2015-2016	IC Manage Inc
 #
@@ -7,8 +7,8 @@
 #
 
 AM_CPPFLAGS =				\
-	-I${top_srcdir}/src		\
-	-I$(top_builddir)/src		\
+	-I${top_srcdir}/version		\
+	-I$(top_builddir)/version		\
 	$(PEPSIS_CFLAGS)		\
 	-I$(pepsis_dir)/bld/src		\
 	-D_FILE_OFFSET_BITS=64		\
@@ -21,7 +21,7 @@ SUBDIRS =						\
 bin_PROGRAMS = vcnc_version
 #
 vcnc_version_SOURCES = 					\
-	$(top_srcdir)/src/vcnc_version.cc
+	$(top_srcdir)/version/vcnc_version.cc
 #
 vcnc_version_LDFLAGS = 					\
 	$(STATIC_LINK) $(FRPATH)			\
@@ -29,4 +29,4 @@ vcnc_version_LDFLAGS = 					\
 #
 vcnc_version_LDADD = 					\
 	$(PEPSIS_LIBS)					\
-	$(top_builddir)/src/rev/libcnc-rev.la
+	$(top_builddir)/version/rev/libcnc-rev.la

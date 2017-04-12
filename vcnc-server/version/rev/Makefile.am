@@ -1,5 +1,5 @@
 #
-#	'pepsis/src/rev' makefile
+#	'cnc-server/version/rev' makefile
 #
 #	Copyright (C) 2008-2013	Roger March
 #
@@ -61,7 +61,7 @@ make_rev.pl : $(MAKE_REV) $(SUB_LOCAL) Makefile.am
 Change.C : make_rev.pl							\
 	$(pkginclude_HEADERS)						\
 	$(REV_FILES)
-	$(top_builddir)/src/rev/$< $(top_srcdir) > $@
+	$(top_builddir)/version/rev/$< $(top_srcdir) > $@
 #
 BUILT_SOURCES =								\
 	Change.C							\

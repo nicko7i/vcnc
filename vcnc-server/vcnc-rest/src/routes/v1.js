@@ -10,11 +10,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
-const CnctrqClient = require('../addon/build/Release/cnctrq_client.node').CnctrqClient;
+const CnctrqClient = require('../../../js-extension/build/Release/cnctrq_client.node').CnctrqClient;
 
 const cnctrqClient = new CnctrqClient();
 const grid = require('vcnc-core/src/lib/grid.js');
-const json = require('JSON');
 const config = require('vcnc-core/src/lib/configuration.js');
 
 //
@@ -38,7 +37,7 @@ function latency() {
 //
 function workspace(jstr) {
     const ws = jstr.ws;
-    const jso_ws = json.parse(ws);
+    const jso_ws = JSON.parse(ws);
     var jso_map = jso_ws.maps;
     var local = jso_ws.writeback === "never" ? true : false;
     for( var i=0; i<jso_map.length; ++i) {
@@ -55,9 +54,9 @@ function workspace(jstr) {
 //
 function workspaceChildren(jso_in) {
   const children = jso_in.ws_children;
-  const jso = json.parse(children);
+  const jso = JSON.parse(children);
   const jso_children = jso.children;
-  console.log("jso_children =  " + json.stringify(jso_children) + "jso_children.length= " + jso_children.length);
+  console.log("jso_children =  " + JSON.stringify(jso_children) + "jso_children.length= " + jso_children.length);
   var arr = [];
   for(var i=0; i<jso_children.length; ++i) {
     arr.push(jso_children[i].name);
@@ -579,7 +578,7 @@ module.exports = (app) => {
             req.pathParams.url_path,
             (result) => {
               //
-              //  We use json.parse(..) because we receive the workspace specification
+              //  We use JSON.parse(..) because we receive the workspace specification
               //  from the RPC as a JSON string rather than an object. Code at
               //  this level manipulates objects.
               //
@@ -608,7 +607,7 @@ module.exports = (app) => {
           cnctrqClient.workspace_put(
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
-            json.stringify(req.body.spec),
+            JSON.stringify(req.body.spec),
             req.query.push,
             (result) => {
               cb(adapter(result));
@@ -630,7 +629,7 @@ module.exports = (app) => {
           cnctrqClient.workspace_set(
             req.pathParams.vtrq_id,
             req.body.name,
-            json.stringify(req.body.spec),
+            JSON.stringify(req.body.spec),
             req.query.overwrite,
             req.query.push,
             (result) => {

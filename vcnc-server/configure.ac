@@ -238,10 +238,13 @@ AC_SUBST(FRPATH)
 #	Build the 'Makefiles'.
 #
 AC_OUTPUT([Makefile
-	doc/Makefile
 	installer/Makefile
-	addon/Makefile
-	static/Makefile
-	src/Makefile
-	src/rev/Makefile
+	js-extension/Makefile
+	vcnc-core/Makefile
+	vcnc-rest/Makefile
+	vcnc-rest/doc/Makefile
+	vcnc-rest/static/Makefile
+	vcnc-sampler/Makefile
+	version/Makefile
+	version/rev/Makefile
 	])

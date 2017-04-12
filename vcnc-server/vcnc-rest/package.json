@@ -3,19 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "npm link ../vcnc-core",
+    "preinstall": "npm link ../vcnc-core; npm link ../js-extension",
     "build": "npm run json-ize; npm run generate",
     "start": "npm run build; LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
-    "foo": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
     "generate": "generate-md --input doc --output static/doc-html --layout mixu-page",
     "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
-    "json-ize": "yaml2json ./api/v1api.yaml > ./api/v1api.json; yaml2json ./api/v2api.yaml > ./api/v2api.json",
-    "lint": "eslint app.js api lib routes",
+    "json-ize": "yaml2json ./src/api/v1api.yaml > ./src/api/v1api.json; yaml2json ./src/api/v2api.yaml > ./src/api/v2api.json",
+    "lint": "eslint app.js src",
     "lint:watch": "npm run lint -- --watch",
     "test": "echo ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
-    "JSON": "^1.0.0",
     "cors": "^2.8.1",
     "express": "^4.0.0",
     "ioredis": "^1.15.1",

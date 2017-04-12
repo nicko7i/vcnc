@@ -28,10 +28,11 @@ const rethink = require('vcnc-core/src/lib/rethink');
 //
 //  Initialize the C++ extension
 //
-const addonPath = path.join(__dirname, 'addon/build/Release/cnctrq_client');
-const CnctrqClient = require(addonPath).CnctrqClient;
+const extensionPath = '../js-extension/build/Release/cnctrq_client';
+// const CnctrqClient = require('cnctrqClient').CnctrqClient;
+const CnctrqClient = require(extensionPath).CnctrqClient;
 const cnctrqClient = new CnctrqClient();
-cnctrqClient.call_me_first(__dirname);
+cnctrqClient.call_me_first(path.join(__dirname, '..'));
 const fulfill202 = require('vcnc-core/src/lib/fulfill202');
 
 function installStaticContent(app) {
@@ -48,7 +49,7 @@ function installStaticContent(app) {
   );
   app.use(
     '/v1/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v1api.json'))
+    express.static(path.join(__dirname, 'src/api/v1api.json'))
   );
   //
   //  ... and for v2
@@ -63,7 +64,7 @@ function installStaticContent(app) {
   );
   app.use(
     '/v2/doc/api/spec',
-    express.static(path.join(__dirname, 'api/v2api.json'))
+    express.static(path.join(__dirname, 'src/api/v2api.json'))
   );
 }
 
@@ -174,17 +175,17 @@ function installRouters(app) {
   //  Install routers for each API version and variation
   //
   const v1Router = express.Router(); // eslint-disable-line new-cap
-  require(path.join(__dirname, 'routes/v1'))(v1Router); // eslint-disable-line global-require
+  require(path.join(__dirname, 'src/routes/v1'))(v1Router); // eslint-disable-line global-require
   app.use('/v1', v1Router);
   //
   const v2Router = express.Router(); // eslint-disable-line new-cap
-  require(path.join(__dirname, 'routes/v2'))(v2Router); // eslint-disable-line global-require
+  require(path.join(__dirname, 'src/routes/v2'))(v2Router); // eslint-disable-line global-require
   app.use('/v2', v2Router);
   //
   //  Install a test router
   //
   const testRouter = express.Router(); // eslint-disable-line new-cap
-  require(path.join(__dirname, 'routes/test'))(testRouter); // eslint-disable-line global-require
+  require(path.join(__dirname, 'src/routes/test'))(testRouter); // eslint-disable-line global-require
   app.use('/v1/_test', testRouter);
   //
   // Catch undefined URLs (404) and forward to error handler
@@ -283,8 +284,8 @@ module.exports = (() => {
   installStaticContent(app);
   rethink.init()
   .then(() => grid.init())
-  .then(() => configureSwaggerMiddleware(app, 'api/v1api.json'))
-  .then(() => configureSwaggerMiddleware(app, 'api/v2api.json'))
+  .then(() => configureSwaggerMiddleware(app, 'src/api/v1api.json'))
+  .then(() => configureSwaggerMiddleware(app, 'src/api/v2api.json'))
   .then(() => {
     installRouters(app);
     installErrorResponses(app);

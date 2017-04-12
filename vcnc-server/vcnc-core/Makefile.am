@@ -1,5 +1,5 @@
 #
-#	'cnc-server/js-extension' makefile
+#	'cnc-server/vcnc-core' makefile
 #
 #	Copyright (C) 2015	IC Manage Inc
 #
@@ -7,17 +7,17 @@
 #
 
 #
-#  Builds the JavaScript (v8) extension that wraps PIDL calls.
+#  Builds the core libraries and component
 #
 all:
-	(cd $(top_srcdir)/js-extension; \
+	(                               \
+	  cd $(top_srcdir)/vcnc-core    \
 	  NVM_DIR=$(TOOLROOT)/nvm; \
 	  [ ! -d $(NVM_DIR) ] && (NVM_DIR=$(TOOLROOT)/share/vcnc/nvm); \
 	  [ ! -d $(NVM_DIR) ] && (echo "Can't find NVM_DIR"; exit 1); \
 	  . $(NVM_DIR)/nvm.sh;  \
-	  npm install; \
-	  $(PROG_NODE_GYP) configure; \
-	  $(PROG_NODE_GYP) build)
+	  npm install                   \
+	)
 
 clean-local:
 	echo TBD

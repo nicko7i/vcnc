@@ -33,8 +33,7 @@
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
         "src",
-        #"/fast/Devel/cnc_server-nick/Build/src",
-        "../Build/src",
+        "../Build/version",
 	"/opt/frqu/TOOLROOT/include",
 	"/opt/frqu/TOOLROOT/include/pepsis",
 	"/opt/frqu/TOOLROOT/include/frqu"
@@ -46,7 +45,7 @@
 	"/opt/frqu/TOOLROOT/lib64/libVS-prtcl-cnctrq-mes.a",
 	"/opt/frqu/TOOLROOT/lib64/libVS-prtcl.a",
 	"/opt/frqu/TOOLROOT/lib64/libfrquCore.a",
-	"../../Build/src/rev/.libs/libcnc-rev.a",
+	"../../Build/version/rev/.libs/libcnc-rev.a",
 	#"/opt/frqu/TOOLROOT/lib64/libtbbmalloc.so.2",
 	"/opt/frqu/TOOLROOT/lib64/pepsis/libPepsis-peer.a",
 	"/opt/frqu/TOOLROOT/lib64/pepsis/libPepsis.a",

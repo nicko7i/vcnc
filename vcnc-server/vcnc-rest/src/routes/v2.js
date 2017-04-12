@@ -10,11 +10,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
-const CnctrqClient = require('../addon/build/Release/cnctrq_client.node').CnctrqClient;
+const CnctrqClient = require('../../../js-extension/build/Release/cnctrq_client.node').CnctrqClient;
 
 const cnctrqClient = new CnctrqClient();
 const grid = require('vcnc-core/src/lib/grid.js');
-const json = require('JSON');
 const config = require('vcnc-core/src/lib/configuration.js');
 
 //
@@ -36,24 +35,24 @@ function latency() {
 
 function workspace(jso_in, p) {
   const ws = jso_in.ws;
-  const jso_ws = json.parse(ws);
+  const jso_ws = JSON.parse(ws);
   jso_ws.name = p;
   const jso_result = {
       "error_sym":   jso_in.error_sym,
       "workspace": jso_ws
   }
-  console.log("workspace: jso_result: " + json.stringify(jso_result));
+  console.log("workspace: jso_result: " + JSON.stringify(jso_result));
   return jso_result;
 }
 
 function workspaceChilden(jso_in) {
   const children = jso_in.ws_children;
-  const jso_children = json.parse(children);
+  const jso_children = JSON.parse(children);
   const jso_result = {
       "error_sym":   jso_in.error_sym,
       "children": jso_children.children
   }
-  console.log("workspace children: v2.js:  json: " + json.stringify(jso_result));
+  console.log("workspace children: v2.js:  JSON: " + JSON.stringify(jso_result));
   return jso_result;
 }
 
@@ -75,7 +74,7 @@ function adapter(fromRpc, onSuccess, onFailure) {
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
-//   console.log("adapter: " + json.stringify(rtn));
+//   console.log("adapter: " + JSON.stringify(rtn));
   return rtn;
 }
 
@@ -452,7 +451,7 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
- //             console.log("Workspace children: v2.js: " + json.stringify(result));
+ //             console.log("Workspace children: v2.js: " + JSON.stringify(result));
               if (result.http_status === 200) {
                 cb(adapter(result, workspaceChilden(result)));
               } else {
@@ -478,7 +477,7 @@ module.exports = (app) => {
             req.pathParams.url_path,
             (result) => {
               //
-              //  We use json.parse(..) because we receive the workspace specification
+              //  We use JSON.parse(..) because we receive the workspace specification
               //  from the RPC as a JSON string rather than an object. Code at
               //  this level manipulates objects.
               //
@@ -507,7 +506,7 @@ module.exports = (app) => {
           cnctrqClient.workspace_put(
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
-            json.stringify(req.body.spec),
+            JSON.stringify(req.body.spec),
             req.query.push,
             (result) => {
               cb(adapter(result));
@@ -529,7 +528,7 @@ module.exports = (app) => {
           cnctrqClient.workspace_set(
             req.pathParams.vtrq_id,
             req.body.name,
-            json.stringify(req.body.spec),
+            JSON.stringify(req.body.spec),
             req.query.overwrite,
             req.query.push,
             (result) => {
