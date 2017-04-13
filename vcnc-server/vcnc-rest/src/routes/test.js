@@ -8,7 +8,7 @@
  *  @module
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
+const fulfill202 = require('../../../vcnc-core/src/lib/fulfill202.js').fulfill202;
 
 function cnctrqClientMoxiate(input, latency, cb) {
   //  Set the timeout emulating the backend latency

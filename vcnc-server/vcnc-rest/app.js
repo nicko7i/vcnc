@@ -8,7 +8,7 @@
 // Set the DEBUG environment variable to enable debug output
 // process.env.DEBUG = 'swagger:middleware';
 
-const config = require('vcnc-core/src/lib/configuration');
+const config = require('../vcnc-core/src/lib/configuration');
 //
 //  Express
 const express = require('express');
@@ -18,13 +18,13 @@ const Middleware = require('swagger-express-middleware');
 //
 //  Websockets
 const WebSocket = require('ws');
-const WebSocketHandler = require('vcnc-core/src/lib/websocket');
+const WebSocketHandler = require('../vcnc-core/src/lib/websocket');
 //
 const path = require('path');
 const http = require('http');
 const cors = require('cors');
-const grid = require('vcnc-core/src/lib/grid');
-const rethink = require('vcnc-core/src/lib/rethink');
+const grid = require('../vcnc-core/src/lib/grid');
+const rethink = require('../vcnc-core/src/lib/rethink');
 //
 //  Initialize the C++ extension
 //
@@ -33,7 +33,7 @@ const extensionPath = '../js-extension/build/Release/cnctrq_client';
 const CnctrqClient = require(extensionPath).CnctrqClient;
 const cnctrqClient = new CnctrqClient();
 cnctrqClient.call_me_first(path.join(__dirname, '..'));
-const fulfill202 = require('vcnc-core/src/lib/fulfill202');
+const fulfill202 = require('../vcnc-core/src/lib/fulfill202');
 
 function installStaticContent(app) {
   //
