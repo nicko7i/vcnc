@@ -9,12 +9,12 @@
  */
 /* eslint-disable import/no-extraneous-dependencies */
 
-const fulfill202 = require('vcnc-core/src/lib/fulfill202.js').fulfill202;
+const fulfill202 = require('../../../vcnc-core/src/lib/fulfill202.js').fulfill202;
 const CnctrqClient = require('../../../js-extension/build/Release/cnctrq_client.node').CnctrqClient;
 
 const cnctrqClient = new CnctrqClient();
-const grid = require('vcnc-core/src/lib/grid.js');
-const config = require('vcnc-core/src/lib/configuration.js');
+const grid = require('../../../vcnc-core/src/lib/grid.js');
+const config = require('../../../vcnc-core/src/lib/configuration.js');
 
 //
 //  Inject latency for testing
