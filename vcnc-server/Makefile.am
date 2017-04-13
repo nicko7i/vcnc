@@ -30,5 +30,5 @@ clean-local:
 
 install-data-local:
 	find $(top_srcdir) -name '*~' -exec rm '{}' ';'
-	mkdir $(DESTDIR)$(prefix)/share/vcnc
+	mkdir -p $(DESTDIR)$(prefix)/share/vcnc
 	rsync -a $(top_srcdir) $(DESTDIR)$(prefix)/share/vcnc
