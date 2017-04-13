@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "npm link ../js-extension",
     "start": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 node ./app.js",
     "gdb": "LD_LIBRARY_PATH=/opt/frqu/TOOLROOT/lib64 gdb --args node ./app.js",
     "lint": "eslint app.js api lib routes",
