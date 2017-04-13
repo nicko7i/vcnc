@@ -40,7 +40,7 @@ function workspace(jso_in, p) {
   const jso_result = {
       "error_sym":   jso_in.error_sym,
       "workspace": jso_ws
-  }
+  };
   console.log("workspace: jso_result: " + JSON.stringify(jso_result));
   return jso_result;
 }
@@ -51,8 +51,7 @@ function workspaceChilden(jso_in) {
   const jso_result = {
       "error_sym":   jso_in.error_sym,
       "children": jso_children.children
-  }
-  console.log("workspace children: v2.js:  JSON: " + JSON.stringify(jso_result));
+  };
   return jso_result;
 }
 
@@ -74,7 +73,6 @@ function adapter(fromRpc, onSuccess, onFailure) {
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
-//   console.log("adapter: " + JSON.stringify(rtn));
   return rtn;
 }
 
@@ -451,7 +449,6 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
- //             console.log("Workspace children: v2.js: " + JSON.stringify(result));
               if (result.http_status === 200) {
                 cb(adapter(result, workspaceChilden(result)));
               } else {

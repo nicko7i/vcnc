@@ -38,14 +38,14 @@ function latency() {
 function workspace(jstr) {
     const ws = jstr.ws;
     const jso_ws = JSON.parse(ws);
-    var jso_map = jso_ws.maps;
-    var local = jso_ws.writeback === "never" ? true : false;
-    for( var i=0; i<jso_map.length; ++i) {
+    const jso_map = jso_ws.maps;
+    const local = jso_ws.writeback === "never";
+    for( let i=0; i<jso_map.length; ++i) {
        jso_map[i].local = local;
-    };
+    }
     const jso_result = {
         "spec": jso_map
-    }
+    };
     return jso_result;
 }
 
@@ -57,14 +57,14 @@ function workspaceChildren(jso_in) {
   const jso = JSON.parse(children);
   const jso_children = jso.children;
   console.log("jso_children =  " + JSON.stringify(jso_children) + "jso_children.length= " + jso_children.length);
-  var arr = [];
-  for(var i=0; i<jso_children.length; ++i) {
+  let arr = [];
+  for(let i=0; i<jso_children.length; ++i) {
     arr.push(jso_children[i].name);
   }
     console.log("arr: " + arr);
   const jso_result = {
       "children": arr
-  }
+  };
   return jso_result;
 }
 //
