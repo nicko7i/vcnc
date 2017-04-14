@@ -12,9 +12,17 @@
 Description=VelStor vCNC server
 After=vcnc-redis.service
 BindsTo=vcnc-redis.service
+After=vcnc-rethinkdb.service
+BindsTo=vcnc-rethinkdb.service
 
 [Service]
 Type=simple
+#
+#  Two configuration files have fixed locations:
+#    ${DEPLOY_DIR}/share/vcnc/config/vcnc-pepsis.conf
+#    ${DEPLOY_DIR}/share/vcnc/config/vcnc-config.yaml
+#
+#  Use "ExecStartPre cp src dest" to support other configuration file locations.
 ExecStart=/opt/velstor-vcnc/bin/vcnc
 Restart=always
 StandardOutput=syslog+console
@@ -23,7 +31,7 @@ SyslogIdentifier=velstor-vcnc
 User=root
 Group=root
 Environment=NODE_ENV=production
-Environment=VELSTOR_VCNC_PORT=5500
+Environment=VELSTOR_VCNC_PORT=6130
 
 [Install]
 WantedBy=remote-fs.target
