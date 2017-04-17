@@ -85,4 +85,4 @@ function mockDashboardData() {
   });
 }
 
-module.exports = mockDashboardData;
+module.exports = mockDashboardData();
