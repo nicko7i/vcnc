@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Websocket from 'react-websocket';
 import * as actions from '../actions/realtimeActions';
