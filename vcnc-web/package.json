@@ -36,6 +36,7 @@
     "chart.js": "2.5.0",
     "material-ui": "0.17.0",
     "object-assign": "4.1.0",
+    "prop-types": "15.5.8",
     "react": "^15.4.1",
     "react-chartjs-2": "2.0.5",
     "react-dom": "^15.4.1",
