@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import spacing from 'material-ui/styles/spacing';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
