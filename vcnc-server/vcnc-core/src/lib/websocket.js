@@ -1,11 +1,11 @@
 //
 /* eslint-disable no-console */
 const url = require('url');
+const mockDashboardData = require('./mockDashboardData')();
 
 function makeHandler() {
   let interval = null;
-  let count = 0;
-  return ws => {
+  return (ws) => {
     const location = url.parse(ws.upgradeReq.url, true);
     console.log('INFO-WS: Connected from ', location);
 
@@ -13,8 +13,8 @@ function makeHandler() {
       console.log('INFO-WS: opened');
     });
 
-    ws.on('message', message => {
-      console.log('INFO-ws: received: %s', message)
+    ws.on('message', (message) => {
+      console.log('INFO-ws: received: %s', message);
     });
 
     ws.on('close', () => {
@@ -23,13 +23,8 @@ function makeHandler() {
     });
 
     interval = setInterval(() => {
-      ws.send(JSON.stringify({
-        rVtrq: 50 + count,
-        rVpm: 40 + count,
-        rVp: 30 + 2 * count,
-      }));
-      count += 1;
-    }, 15000);
+      ws.send(JSON.stringify(mockDashboardData()));
+    }, 10000);
   };
 }
 

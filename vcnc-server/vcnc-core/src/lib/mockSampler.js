@@ -5,7 +5,7 @@
  */
 const config = require('./configuration.js');
 const r = require('rethinkdb');
-const mockDashBoardData = require('./mockDashboardData');
+const mockDashBoardData = require('./mockDashboardData')();
 
 let cnxtn = null;
 const { table, maxEntries } = config.mockSampler;
