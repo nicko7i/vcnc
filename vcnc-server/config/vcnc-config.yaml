@@ -32,6 +32,17 @@ fulfill202:
   #  response is issued.
   response: 1
 
+mockSampler:
+  #
+  #  The maximum number of samples stored.
+  maxEntries: 100
+  #
+  #  The RethinkDB table where the real-time dashboard data is stored.
+  table: mockSampler
+  #
+  #  The period (1/rate) of the data in ms
+  period: 10000
+
 peercache:
   #
   #  The /vtrq/... endpoints specify the vTRQ ID as part of the request.
