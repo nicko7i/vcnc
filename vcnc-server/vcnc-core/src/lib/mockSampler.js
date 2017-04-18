@@ -58,6 +58,14 @@ function trim() {
   .delete({ durability: 'soft' }).run(cnxtn);
 }
 
+function getTable() {
+  return r.table(table);
+}
+
+function getConnection() {
+  return cnxtn;
+}
+
 /**
  * Runs the mock data simulation.
  *
@@ -69,6 +77,8 @@ function run() {
 }
 
 module.exports = {
+  getConnection,
+  getTable,
   init,
   run,
 };
