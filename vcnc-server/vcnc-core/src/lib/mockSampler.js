@@ -30,7 +30,9 @@ function init() {
   .then((lst) => {
     // Create the table if necessary.
     if (lst.length === 0) {
-      return r.tableCreate(table).indexCreate('timestamp').run(cnxtn);
+      // return r.tableCreate(table).indexCreate('timestamp').run(cnxtn);
+      return r.tableCreate(table).run(cnxtn)
+        .then(() => r.table(table).indexCreate('timestamp').run(cnxtn));
     }
     return Promise.resolve();
   });
