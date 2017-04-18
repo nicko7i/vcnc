@@ -8,7 +8,9 @@ const r = require('rethinkdb');
 const mockDashBoardData = require('./mockDashboardData')();
 
 let cnxtn = null;
-const { table, maxEntries } = config.mockSampler;
+const { table, maxEntries, period } = config.mockSampler;
+const timespanMillisec = maxEntries * period;
+const timespanSec = timespanMillisec / 1000.0;
 
 /**
  *  Initializes the mockSampler module, creating a connection object
@@ -28,35 +30,42 @@ function init() {
   .then((lst) => {
     // Create the table if necessary.
     if (lst.length === 0) {
-      return r.tableCreate(table).run(cnxtn);
+      return r.tableCreate(table).indexCreate('timestamp').run(cnxtn);
     }
     return Promise.resolve();
   });
 }
 
+/**
+ * Adds real time data for timepoint "now".
+ *
+ * @param entry
+ * @returns {Promise.<TResult>|*|Request}
+ *
+ * The table is trimmed to size with every entry. This is unnecessarily
+ * computational. It's probably better to trim periodically in the background.
+ */
 function push(entry) {
   return r.table(table).insert(
     Object.assign({}, entry, { timestamp: r.now() })
-  ).run(cnxtn)
-  .then(() => r.table(table).count().run(cnxtn))
-  .then((size) => {
-    //
-    //  Reduce the size of the table when it grows to twice its desired size.
-    //  This is pretty silly.  We won't actually do this.  Instead,
-    //  we'll have a table that acts like a ring buffer. Or something else.
-    if (size > maxEntries * 2) {
-      return r.table(table)
-      .orderBy(r.asc('timestamp'))
-      .limit(maxEntries)
-      .delete({ durability: 'soft' })
-      .run(cnxtn);
-    }
-    return Promise.resolve();
-  });
+  ).run(cnxtn);
 }
 
-function run(period) {
-  return () => setInterval(() => push(mockDashBoardData()), period);
+function trim() {
+  return r.table(table)
+  .filter(r.row('timestamp')
+  .le(r.now().sub(timespanSec)))
+  .delete({ durability: 'soft' }).run(cnxtn);
+}
+
+/**
+ * Runs the mock data simulation.
+ *
+ * @returns {function(): number}
+ */
+function run() {
+  setInterval(() => push(mockDashBoardData()), period);
+  setInterval(() => trim(), timespanMillisec);
 }
 
 module.exports = {
