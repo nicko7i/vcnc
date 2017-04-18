@@ -36,37 +36,48 @@ function latency() {
 // Convert v2-format of workspace to v1 format for back compatibility
 //
 function workspace(jstr) {
-    const ws = jstr.ws;
-    const jso_ws = JSON.parse(ws);
-    var jso_map = jso_ws.maps;
-    var local = jso_ws.writeback === "never" ? true : false;
-    for( var i=0; i<jso_map.length; ++i) {
-       jso_map[i].local = local;
-    };
-    const jso_result = {
-        "spec": jso_map
-    }
-    return jso_result;
+  const ws = jstr.ws;
+  const jsonWs = JSON.parse(ws);
+  const jsonMap = jsonWs.maps;
+  const local = jsonWs.writeback === 'never';
+  for (let i = 0; i < jsonMap.length; i++) {
+    jsonMap[i].local = local;
+  }
+  const jsonResult = {
+    spec: jsonMap,
+  };
+  return jsonResult;
 }
 
 //
 // Extract workspace children names from  v2-format for back compatibility
 //
-function workspaceChildren(jso_in) {
-  const children = jso_in.ws_children;
+function workspaceChildren(jsonIn) {
+  const children = jsonIn.ws_children;
   const jso = JSON.parse(children);
-  const jso_children = jso.children;
-  console.log("jso_children =  " + JSON.stringify(jso_children) + "jso_children.length= " + jso_children.length);
-  var arr = [];
-  for(var i=0; i<jso_children.length; ++i) {
-    arr.push(jso_children[i].name);
+  const jsonChildren = jso.children;
+  const arr = [];
+  for (let i = 0; i < jsonChildren.length; ++i) {
+    arr.push(jsonChildren[i].name);
   }
-    console.log("arr: " + arr);
-  const jso_result = {
-      "children": arr
-  }
-  return jso_result;
+  const jsonResult = {
+    children: arr,
+  };
+  return jsonResult;
 }
+
+//
+// Convert v2-format of namespace to v1 format for back compatibility
+//
+function namespace(jstr) {
+  const ns = jstr.ns;
+  const jsonNs = JSON.parse(ns);
+  const jsonResult = {
+    stat: jsonNs.stat,
+  };
+  return jsonResult;
+}
+
 //
 //  Constructs and returns an object which represents the operation's outcome.
 //
@@ -80,9 +91,12 @@ function adapter(fromRpc, onSuccess, onFailure) {
     body: {},
   };
   rtn.body.error_sym = fromRpc.error_sym;
-  rtn.body.message = fromRpc.error_description_brief;
   //
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
+  if (successful === false) {
+    rtn.body.message = fromRpc.error_description_brief;
+  }
+
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
   return rtn;
@@ -348,7 +362,11 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, { stat: result.stat }));
+              if (result.http_status === 200) {
+                cb(adapter(result, namespace(result)));
+              } else {
+                cb(adapter(result));
+              }
             });
         });
       });
@@ -484,10 +502,10 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, { result: result.result
-                                  , sum_st_size: result.sum_st_size
-                                  , sum_extents: result.sum_extents 
-                          }));
+              cb(adapter(result, { result: result.result,
+                sum_st_size: result.sum_st_size,
+                sum_extents: result.sum_extents,
+              }));
             });
         });
       });
@@ -658,4 +676,4 @@ module.exports = (app) => {
         });
       });
   });
-};
+}

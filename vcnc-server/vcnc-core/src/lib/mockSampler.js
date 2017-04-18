@@ -8,6 +8,7 @@ const r = require('rethinkdb');
 const mockDashBoardData = require('./mockDashboardData')();
 
 let cnxtn = null;
+
 const { table, maxEntries, period } = config.mockSampler;
 const timespanMillisec = maxEntries * period;
 const timespanSec = timespanMillisec / 1000.0;
@@ -43,9 +44,6 @@ function init() {
  *
  * @param entry
  * @returns {Promise.<TResult>|*|Request}
- *
- * The table is trimmed to size with every entry. This is unnecessarily
- * computational. It's probably better to trim periodically in the background.
  */
 function push(entry) {
   return r.table(table).insert(
