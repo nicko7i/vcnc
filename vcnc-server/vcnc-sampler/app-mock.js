@@ -26,4 +26,4 @@ rethink.init()
 });
 //
 //  Start the mock process. Stopped by external SIGTERM
-mockSampler.run(config.mockSampler.period)();
+mockSampler.run(config.mockSampler.period);

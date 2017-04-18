@@ -19,6 +19,9 @@ const Middleware = require('swagger-express-middleware');
 //  Websockets
 const WebSocket = require('ws');
 const WebSocketHandler = require('../vcnc-core/src/lib/websocket');
+const mockSampler = require('../vcnc-core/src/lib/mockSampler');
+const websocket = require('../vcnc-core/src/lib/websocket');
+
 //
 const path = require('path');
 const http = require('http');
@@ -284,6 +287,8 @@ module.exports = (() => {
   installStaticContent(app);
   rethink.init()
   .then(() => grid.init())
+  .then(() => mockSampler.init())
+  .then(() => websocket.init())
   .then(() => configureSwaggerMiddleware(app, 'src/api/v1api.json'))
   .then(() => configureSwaggerMiddleware(app, 'src/api/v2api.json'))
   .then(() => {
