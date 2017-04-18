@@ -63,10 +63,23 @@ function workspaceChildren(jso_in) {
   }
     console.log("arr: " + arr);
   const jso_result = {
-      "children": arr
+    "children": arr
   };
   return jso_result;
 }
+
+//
+// Convert v2-format of namespace to v1 format for back compatibility
+//
+function namespace(jstr) {
+    const ns = jstr.ns;
+    const jso_ns = JSON.parse(ns);
+    const jso_result = {
+      "stat": jso_ns.stat
+    };
+    return jso_result;
+}
+
 //
 //  Constructs and returns an object which represents the operation's outcome.
 //
@@ -80,9 +93,12 @@ function adapter(fromRpc, onSuccess, onFailure) {
     body: {},
   };
   rtn.body.error_sym = fromRpc.error_sym;
-  rtn.body.message = fromRpc.error_description_brief;
   //
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
+  if(successful === false) {
+    rtn.body.message = fromRpc.error_description_brief;
+  }
+
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
   return rtn;
@@ -348,7 +364,12 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, { stat: result.stat }));
+               if(result.http_status === 200) {
+                 cb(adapter(result, namespace(result)));
+               } else {
+                 cb(adapter(result));
+               }
+
             });
         });
       });

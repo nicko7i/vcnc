@@ -32,28 +32,38 @@ function latency() {
   });
   return p;
 }
-
+//
 function workspace(jso_in, p) {
   const ws = jso_in.ws;
   const jso_ws = JSON.parse(ws);
   jso_ws.name = p;
   const jso_result = {
-      "error_sym":   jso_in.error_sym,
       "workspace": jso_ws
   };
   console.log("workspace: jso_result: " + JSON.stringify(jso_result));
   return jso_result;
 }
-
+//
 function workspaceChilden(jso_in) {
   const children = jso_in.ws_children;
   const jso_children = JSON.parse(children);
   const jso_result = {
-      "error_sym":   jso_in.error_sym,
       "children": jso_children.children
   };
   return jso_result;
 }
+//
+function namespace(jso_in, p) {
+    const ns = jso_in.ns;
+    const jso_ns = JSON.parse(ns);
+    jso_ns.name = p;
+    const jso_result = {
+        "name": p,
+        "stat": jso_ns.stat,
+    };
+    return jso_result;
+}
+
 
 //
 //  Constructs and returns an object which represents the operation's outcome.
@@ -68,10 +78,12 @@ function adapter(fromRpc, onSuccess, onFailure) {
     body: {},
   };
   rtn.body.error_sym = fromRpc.error_sym;
-  rtn.body.message = fromRpc.error_description_brief;
   //
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
   const moreProperties = successful ? onSuccess : onFailure;
+  if(successful === false) {
+    rtn.body.message = fromRpc.error_description_brief;
+  }
   Object.assign(rtn.body, moreProperties);
   return rtn;
 }
@@ -336,8 +348,13 @@ module.exports = (app) => {
           cnctrqClient.getattr(
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
+
             (result) => {
-              cb(adapter(result, { stat: result.stat }));
+              if (result.http_status === 200) {
+                cb(adapter(result, namespace(result, req.pathParams.url_path)));
+              } else {
+                  cb(adapter(result));
+              }
             });
         });
       });
@@ -479,7 +496,7 @@ module.exports = (app) => {
               //  this level manipulates objects.
               //
               if (result.http_status === 200) {
-                cb(adapter(result, workspace(result,req.pathParams.url_path)));
+                cb(adapter(result, workspace(result, req.pathParams.url_path)));
               } else {
                 cb(adapter(result));
               }
