@@ -8,7 +8,7 @@ import WidgetFrame from '../components/WidgetFrame';
 
 const Dashboard = () => (
   <div className="container-fluid">
-    <div className="row no-gutters row-equal-height">
+    <div className="row no-gutters row-equal-height" style={{ height: '400px', display: 'flex', flexWrap: 'wrap'}}>
       <div className="col-md-4">
         <WidgetFrame title="PeerCache Trend"> <FrquCacheTrendWidget /> </WidgetFrame>
       </div>
