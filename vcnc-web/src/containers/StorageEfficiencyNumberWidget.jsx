@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+const myStyle = {
+  fontWeight: 'bold',
+  fontSize: 64,
+  margin: 50,
+  height: '100%',
+  width: '100%',
+};
+
 const StorageEfficiencyNumberWidget = props => (
-  <h1>{props.value}</h1>
+  <div style={myStyle}>{props.value.toFixed(1)}</div>
 );
 
 StorageEfficiencyNumberWidget.propTypes = {

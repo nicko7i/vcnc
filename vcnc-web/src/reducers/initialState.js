@@ -10,7 +10,7 @@ export default {
     //  PeerCache performance
     //
     storageEfficiency: 1,
-    storageEfficiencyTrend: [1],
+    storageEfficiencyTrend: [],
     //
     //  PeerCache "caching" performance
     //  ... Aggregate numbers over all vps and vpms

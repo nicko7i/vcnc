@@ -41,7 +41,7 @@ mockSampler:
   table: mockSampler
   #
   #  The period (1/rate) of the data in ms
-  period: 10000
+  period: 2000
 
 peercache:
   #
