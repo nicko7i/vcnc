@@ -77,7 +77,7 @@ function trend(min, max, initial = 0, scale = 1) {
 function mockDashboardData() {
   const fVtrq = trend(0, 80, 70, 2);
   const fVpm = trend(10, 70, 50, 2);
-  const fStorageEfficiency = trend(-1, 10, 1, 0.5);
+  const fStorageEfficiency = trend(0.1, 10, 1, 0.1);
   return () => ({
     storageEfficiency: fStorageEfficiency(),
     rVtrq: fVtrq(),

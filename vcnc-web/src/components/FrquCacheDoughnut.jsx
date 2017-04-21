@@ -20,11 +20,15 @@ function getState(props) {
 }
 
 const FrquCacheDoughnut = props => (
-  <Doughnut data={getState(props)} />
+  <div style={{ height: props.muiTheme.dashboard.canvasHeight }}>
+    <Doughnut data={getState(props)} options={{ maintainAspectRatio: false }} />
+  </div>
 );
 
 FrquCacheDoughnut.propTypes = {
-  data: PropTypes.array,
+  canvasHeight: PropTypes.string,
+  data: PropTypes.array,  // eslint-disable-line react/no-unused-prop-types
+  muiTheme: PropTypes.object,
 };
 
 export default muiThemeable()(FrquCacheDoughnut);
