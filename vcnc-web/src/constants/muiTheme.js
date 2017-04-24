@@ -56,7 +56,7 @@ export const vcnc = {
     },
   },
   dashboard: {
-    canvasHeight: '25vh',
+    canvasHeight: '35vh',
   },
 };
 
