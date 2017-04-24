@@ -2,6 +2,7 @@ node_modules
 docs
 .git
 venv*
+.idea
 _build
 _static
 swagger-ui
