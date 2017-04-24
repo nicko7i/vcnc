@@ -43,6 +43,7 @@
         "-L/opt/frqu/TOOLROOT/lib64",
 	"/opt/frqu/TOOLROOT/lib64/libVS-prtcl-cnctrq-cnc.a",
 	"/opt/frqu/TOOLROOT/lib64/libVS-prtcl-cnctrq-mes.a",
+	"/opt/frqu/TOOLROOT/lib64/libVS-bs.a",
 	"/opt/frqu/TOOLROOT/lib64/libVS-prtcl.a",
 	"/opt/frqu/TOOLROOT/lib64/libfrquCore.a",
 	"../../Build/version/rev/.libs/libcnc-rev.a",
