@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Line } from 'react-chartjs-2';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 function sliceAndFill(arr, size, fill = null) {
   const rtn = arr.slice(-size);
@@ -17,7 +18,6 @@ const labels = [
   '-2 min', '', '', '', '', '',
   '-1 min', '', '', '', '', 'now',
 ];
-
 
 const dataSet = e => ({
   label: e.label,
@@ -38,12 +38,20 @@ function getState(props) {
 }
 
 const FrquCacheTrend = props => (
-  <Line data={getState(props)} options={{ scales: { xAxes: [{ gridLines: false }] } }} />
+  <div style={{ height: props.muiTheme.dashboard.canvasHeight }}>
+    <Line
+      data={getState(props)} options={{
+        maintainAspectRatio: false,
+        scales: { xAxes: [{ gridLines: false }] },
+      }}
+    />
+  </div>
 );
 
 FrquCacheTrend.propTypes = {
-  lines: PropTypes.array,
+  lines: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
+  muiTheme: PropTypes.object,
 };
 
-export default FrquCacheTrend;
+export default muiThemeable()(FrquCacheTrend);
 

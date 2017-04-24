@@ -8,15 +8,15 @@ import WidgetFrame from '../components/WidgetFrame';
 
 const Dashboard = () => (
   <div className="container-fluid">
-    <div className="row no-gutters row-equal-height">
-      <div className="col-md-4">
+    <div className="row no-gutters row-equal-height" >
+      <div className="col-md-8">
         <WidgetFrame title="PeerCache Trend"> <FrquCacheTrendWidget /> </WidgetFrame>
       </div>
-      <div className="col-md-4">
-        <WidgetFrame title="PeerCache Performance"> <FrquCacheDoughnutWidget /> </WidgetFrame>
+      <div className="col-md-2">
+        <WidgetFrame title="Performance"> <FrquCacheDoughnutWidget /> </WidgetFrame>
       </div>
-      <div className="col-md-4">
-        <WidgetFrame title="Storage Efficiency"> <StorageEfficiencyNumberWidget /> </WidgetFrame>
+      <div className="col-md-2">
+        <WidgetFrame title="Efficiency"> <StorageEfficiencyNumberWidget /> </WidgetFrame>
       </div>
     </div>
   </div>

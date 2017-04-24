@@ -55,6 +55,9 @@ export const vcnc = {
       marginBottom: '15px',
     },
   },
+  dashboard: {
+    canvasHeight: '25vh',
+  },
 };
 
 export default materialUi;
