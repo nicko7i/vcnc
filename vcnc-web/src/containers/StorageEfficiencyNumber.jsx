@@ -5,11 +5,18 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import NumberWidget from '../components/widgets/NumberWidget';
 
 const StorageEfficiencyNumber = props => (
-  <NumberWidget title={props.title} value={props.value} digits={1} fontSize="15vw" />
+  <NumberWidget
+    title={props.title}
+    value={props.value}
+    digits={1}
+    color={props.muiTheme.palette.storageEfficiencyColor}
+    fontSize="15vw"
+  />
 );
 
 
 StorageEfficiencyNumber.propTypes = {
+  muiTheme: PropTypes.object,
   title: PropTypes.string.isRequired,
   value: PropTypes.number,
 };

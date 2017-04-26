@@ -5,6 +5,7 @@ import WidgetFrame from './WidgetFrame';
 
 const textStyle = {
   position: 'relative',
+  color: 'pink',
   float: 'left',
   fontWeight: 'bold',
   fontSize: '15vw',
@@ -19,7 +20,7 @@ const NumberWidget = props => (
   <WidgetFrame title={props.title}>
     <div style={{ width: '100%', height: props.muiTheme.dashboard.canvasHeight, position: 'relative' }}>
       <div style={{ width: '100%', height: props.muiTheme.dashboard.canvasHeight, position: 'absolute' }}>
-        <div style={{ ...textStyle, fontSize: props.fontSize }} >
+        <div style={{ ...textStyle, color: props.color, fontSize: props.fontSize }} >
           {props.value.toFixed(props.digits)}
         </div>
       </div>
@@ -30,6 +31,7 @@ const NumberWidget = props => (
 
 NumberWidget.propTypes = {
   canvasHeight: PropTypes.string,
+  color: PropTypes.string,
   digits: PropTypes.number,
   fontSize: PropTypes.string,
   muiTheme: PropTypes.object,

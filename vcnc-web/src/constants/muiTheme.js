@@ -9,7 +9,7 @@
 
 import {
   cyan500, cyan700,
-  orange500,
+  grey800,
   pinkA200,
   red500,
   grey100, grey300, grey400, grey500,
@@ -48,7 +48,7 @@ export const vcnc = {
     vtrqColor: blue500,
     vpmColor: red500,
     vpColor: lightBlue500,
-    storageEfficiencyColor: orange500,
+    storageEfficiencyColor: grey800,
   },
   widgetFrame: {
     backgroundColor: fade(primary1Color, 0.3),

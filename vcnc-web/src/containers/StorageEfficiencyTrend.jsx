@@ -7,13 +7,12 @@ import * as actions from '../actions/realtimeActions';
 import TrendWidget from '../components/widgets/TrendWidget';
 
 const labels = [
-  '-7 min', '', '', '', '', '',
-  '-6 min', '', '', '', '', '',
-  '-5 min', '', '', '', '', '',
-  '-4 min', '', '', '', '', '',
-  '-3 min', '', '', '', '', '',
-  '-2 min', '', '', '', '', '',
-  '-1 min', '', '', '', '', 'now',
+  '-2 min', '', '', '', '', '', '', '', '', '',
+  '', '', '', '', '', '', '', '', '', '',
+  '', '', '', '', '', '', '', '', '', '',
+  '-1 min', '', '', '', '', '', '', '', '', '',
+  '', '', '', '', '', '', '', '', '', '',
+  '', '', '', '', '', '', '', '', '', 'now',
 ];
 
 const StorageEfficiencyTrend = (props) => {
