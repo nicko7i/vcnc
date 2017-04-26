@@ -1,22 +1,27 @@
 import React from 'react';
 //  Using bootstrap to produce the grid
 import 'bootstrap/dist/css/bootstrap.css';
-import FrquCacheDoughnutWidget from '../containers/FrquCacheDoughnutWidget';
-import FrquCacheTrendWidget from '../containers/FrquCacheTrendWidget';
-import StorageEfficiencyNumberWidget from '../containers/StorageEfficiencyNumberWidget';
-import WidgetFrame from '../components/WidgetFrame';
+import VtrqVpmReadDoughnut from '../containers/VtrqVpmReadDoughnut';
+import VtrqVpmReadTrend from '../containers/VtrqVpmReadTrend';
+import StorageEfficiencyTrend from '../containers/StorageEfficiencyTrend';
+import StorageEfficiencyNumber from '../containers/StorageEfficiencyNumber';
 
 const Dashboard = () => (
   <div className="container-fluid">
-    <div className="row no-gutters row-equal-height" >
-      <div className="col-md-8">
-        <WidgetFrame title="PeerCache Trend"> <FrquCacheTrendWidget /> </WidgetFrame>
+    <div className="row no-gutters" >
+      <div className="col-xs-8">
+        <VtrqVpmReadTrend title="Load Transfer Trend" />
       </div>
-      <div className="col-md-2">
-        <WidgetFrame title="Performance"> <FrquCacheDoughnutWidget /> </WidgetFrame>
+      <div className="col-xs-4">
+        <VtrqVpmReadDoughnut title="Load" />
       </div>
-      <div className="col-md-2">
-        <WidgetFrame title="Efficiency"> <StorageEfficiencyNumberWidget /> </WidgetFrame>
+    </div>
+    <div className="row no-gutters" >
+      <div className="col-xs-8">
+        <StorageEfficiencyTrend title="Efficiency Trend" />
+      </div>
+      <div className="col-xs-4">
+        <StorageEfficiencyNumber title="Efficiency" />
       </div>
     </div>
   </div>
