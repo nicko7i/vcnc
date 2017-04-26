@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FrquCacheDoughnut from '../components/FrquCacheDoughnut';
+import FrquCacheDoughnutWidget from '../components/widgets/FrquCacheDoughnutWidget';
 
-const FrquCacheDoughnutWidget = props => (
-  <FrquCacheDoughnut data={props.data} />
+const FrquCacheDoughnut = props => (
+  <FrquCacheDoughnutWidget data={props.data} title={props.title} />
 );
 
-FrquCacheDoughnutWidget.propTypes = {
+FrquCacheDoughnut.propTypes = {
   data: PropTypes.array,
+  title: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -23,4 +24,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-)(FrquCacheDoughnutWidget);
+)(FrquCacheDoughnut);

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import WidgetFrame from './WidgetFrame';
 
 function getState(props) {
   const { vtrqColor, vpmColor, vpColor } = props.muiTheme.palette;
@@ -19,17 +20,20 @@ function getState(props) {
   };
 }
 
-const FrquCacheDoughnut = props => (
-  <div style={{ height: props.muiTheme.dashboard.canvasHeight }}>
-    <Doughnut data={getState(props)} options={{ maintainAspectRatio: false }} />
-  </div>
+const FrquCacheDoughnutWidget = props => (
+  <WidgetFrame title={props.title}>
+    <div style={{ height: props.muiTheme.dashboard.canvasHeight }}>
+      <Doughnut data={getState(props)} options={{ maintainAspectRatio: false }} />
+    </div>
+  </WidgetFrame>
 );
 
-FrquCacheDoughnut.propTypes = {
+FrquCacheDoughnutWidget.propTypes = {
   canvasHeight: PropTypes.string,
   data: PropTypes.array,  // eslint-disable-line react/no-unused-prop-types
   muiTheme: PropTypes.object,
+  title: PropTypes.string,
 };
 
-export default muiThemeable()(FrquCacheDoughnut);
+export default muiThemeable()(FrquCacheDoughnutWidget);
 
