@@ -3,6 +3,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import FrquCacheDoughnut from '../containers/FrquCacheDoughnut';
 import FrquCacheTrend from '../containers/FrquCacheTrend';
+import StorageEfficiencyTrend from '../containers/StorageEfficiencyTrend';
 import StorageEfficiencyNumber from '../containers/StorageEfficiencyNumber';
 
 const Dashboard = () => (
@@ -17,7 +18,7 @@ const Dashboard = () => (
     </div>
     <div className="row no-gutters" >
       <div className="col-xs-8">
-        <FrquCacheTrend title="Efficiency Trend" />
+        <StorageEfficiencyTrend title="Efficiency Trend" />
       </div>
       <div className="col-xs-4">
         <StorageEfficiencyNumber title="Efficiency" />
