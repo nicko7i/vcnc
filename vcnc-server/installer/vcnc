@@ -54,6 +54,7 @@ fi
 #
 #  Start the server
 #
+$NODE_EXE $SAMPLER_NODE_APP&
 $NODE_EXE $REST_NODE_APP
 
 
