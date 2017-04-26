@@ -157,35 +157,33 @@ namespace cnc {
       Nan::Set(rtn
                , Nan::New("error_description_brief").ToLocalChecked()
                , Nan::New(error_description_brief.c_str()).ToLocalChecked());
-      if (!_errcode) {
-        switch (_operation) {
-        case op_children:
-        {
+      switch (_operation) {
+      case op_children:
+      {
 //          std::cout << "Workspace children\n";
-          string_type arr_ws;
-          _workspace_list.ExportJson(arr_ws, true);
+        string_type arr_ws;
+        _workspace_list.ExportJson(arr_ws, true);
 //          std::cout << "arr_ws: " << arr_ws << "\n";
-          Nan::Set(rtn
-                   , Nan::New("ws_children").ToLocalChecked()
-                   , Nan::New(arr_ws.c_str()).ToLocalChecked());
-        }
+        Nan::Set(rtn
+                 , Nan::New("ws_children").ToLocalChecked()
+                 , Nan::New(arr_ws.c_str()).ToLocalChecked());
+      }
+      break;
+      case op_delete:
+        // intentionally empty
         break;
-        case op_delete:
-          // intentionally empty
-          break;
-        case op_get:
-        {
-          Nan::Set(rtn
-                   , Nan::New("ws").ToLocalChecked()
-                   , Nan::New(_workspace.ExportJson(true).c_str()).ToLocalChecked());
-        }
+      case op_get:
+      {
+        Nan::Set(rtn
+                 , Nan::New("ws").ToLocalChecked()
+                 , Nan::New(_workspace.ExportJson(true).c_str()).ToLocalChecked());
+      }
+      break;
+      case op_set:
         break;
-        case op_set:
-          break;
-        default:
-          std::cerr << "cnctrqWorkspaceWorker: ASSERTION" << std::endl;
-          assert(0);
-        }
+      default:
+        std::cerr << "cnctrqWorkspaceWorker: ASSERTION" << std::endl;
+        assert(0);
       }
       //
       //  Prepare for callback
