@@ -10,17 +10,7 @@ function sliceAndFill(arr, size, fill = null) {
   return rtn;
 }
 
-const labels = [
-  '-7 min', '', '', '', '', '',
-  '-6 min', '', '', '', '', '',
-  '-5 min', '', '', '', '', '',
-  '-4 min', '', '', '', '', '',
-  '-3 min', '', '', '', '', '',
-  '-2 min', '', '', '', '', '',
-  '-1 min', '', '', '', '', 'now',
-];
-
-const dataSet = e => ({
+const dataSet = (e, length) => ({
   label: e.label,
   fill: false,
   lineTension: 0.1,
@@ -28,17 +18,17 @@ const dataSet = e => ({
   borderColor: e.color,
   pointBorderColor: e.color,
   pointBackgroundColor: '#fff',
-  data: sliceAndFill(e.data, labels.length),
+  data: sliceAndFill(e.data, length),
 });
 
 function getState(props) {
   return {
-    labels,
-    datasets: props.lines.map(e => dataSet(e)),
+    labels: props.labels,
+    datasets: props.lines.map(e => dataSet(e, props.labels.length)),
   };
 }
 
-const FrquCacheTrendWidget = props => (
+const TrendWidget = props => (
   <WidgetFrame title={props.title}>
     <div style={{ height: props.muiTheme.dashboard.canvasHeight }}>
       <Line
@@ -51,11 +41,12 @@ const FrquCacheTrendWidget = props => (
   </WidgetFrame>
 );
 
-FrquCacheTrendWidget.propTypes = {
+TrendWidget.propTypes = {
+  labels: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
   lines: PropTypes.array, // eslint-disable-line react/no-unused-prop-types
   muiTheme: PropTypes.object,
   title: PropTypes.string,
 };
 
-export default muiThemeable()(FrquCacheTrendWidget);
+export default muiThemeable()(TrendWidget);
 

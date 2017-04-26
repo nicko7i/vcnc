@@ -4,7 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as actions from '../actions/realtimeActions';
-import FrquCacheTrendWidget from '../components/widgets/FrquCacheTrendWidget';
+import TrendWidget from '../components/widgets/TrendWidget';
+
+const labels = [
+  '-7 min', '', '', '', '', '',
+  '-6 min', '', '', '', '', '',
+  '-5 min', '', '', '', '', '',
+  '-4 min', '', '', '', '', '',
+  '-3 min', '', '', '', '', '',
+  '-2 min', '', '', '', '', '',
+  '-1 min', '', '', '', '', 'now',
+];
 
 const FrquCacheTrend = (props) => {
   //  merge the data for the lines (which comes in through 'state' with
@@ -15,7 +25,8 @@ const FrquCacheTrend = (props) => {
     props.muiTheme.palette.vpColor,
   ];
   return (
-    <FrquCacheTrendWidget
+    <TrendWidget
+      labels={labels}
       lines={props.lines.map((e, i) => (
         { ...e, color: colors[i] }
       ))}
