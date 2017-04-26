@@ -11,9 +11,10 @@ import {
   cyan500, cyan700,
   orange500,
   pinkA200,
+  red500,
   grey100, grey300, grey400, grey500,
   white, darkBlack, fullBlack,
-  indigo500, blue500, lightBlue500,
+  blue500, lightBlue500,
 } from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
@@ -44,8 +45,8 @@ const { primary1Color, textColor } = materialUi.palette;
 
 export const vcnc = {
   palette: {
-    vtrqColor: indigo500,
-    vpmColor: blue500,
+    vtrqColor: blue500,
+    vpmColor: red500,
     vpColor: lightBlue500,
     storageEfficiencyColor: orange500,
   },
