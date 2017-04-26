@@ -15,16 +15,28 @@ if [ ! -d "$NVM_DIR" ]; then
   echo "VCNC: $NVM_DIR missing. Exiting.";  exit 1
 fi
 #
-#  Sanity spot-check our installation
+#  Set up the REST server
 #
-SERVER_DIR="$VELSTOR_VCNC_DIR/share/vcnc/vcnc-rest"
-if [ ! -d $SERVER_DIR/node_modules ]; then 
-  echo "VCNC: $SERVER_DIR/node_modules doesn't exist. Exiting."; exit 6
+REST_SERVER_DIR="$VELSTOR_VCNC_DIR/share/vcnc/vcnc-rest"
+if [ ! -d $REST_SERVER_DIR/node_modules ]; then
+  echo "VCNC: $REST_SERVER_DIR/node_modules doesn't exist. Exiting."; exit 6
 fi
-NODE_APP="$SERVER_DIR/app.js"
-if [ ! -s $NODE_APP ]; then 
-  echo "VCNC: $NODE_APP empty or doesn't exist. Exiting."; exit 7
+REST_NODE_APP="$REST_SERVER_DIR/app.js"
+if [ ! -s $REST_NODE_APP ]; then
+  echo "VCNC: $REST_NODE_APP empty or doesn't exist. Exiting."; exit 7
 fi
+#
+#  Set up the sampler.
+#
+SAMPLER_SERVER_DIR="$VELSTOR_VCNC_DIR/share/vcnc/vcnc-sampler"
+#if [ ! -d $SAMPLER_SERVER_DIR/node_modules ]; then
+#  echo "VCNC: $SAMPLER_SERVER_DIR/node_modules doesn't exist. Exiting."; exit 6
+#fi
+SAMPLER_NODE_APP="$SAMPLER_SERVER_DIR/app-mock.js"
+if [ ! -s $SAMPLER_NODE_APP ]; then
+  echo "VCNC: $SAMPLER_NODE_APP empty or doesn't exist. Exiting."; exit 7
+fi
+
 #
 #  Did we correctly locate node.js?
 #
@@ -42,7 +54,7 @@ fi
 #
 #  Start the server
 #
-$NODE_EXE $NODE_APP
+$NODE_EXE $REST_NODE_APP
 
 
 
