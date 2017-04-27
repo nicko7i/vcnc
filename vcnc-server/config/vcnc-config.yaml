@@ -112,7 +112,8 @@ test:
 web:
   #
   #  If true, statically serve the web-based admin console
-  enabled: false
+  enabled: true
   #
   #  Serve the console at this offset from server.port
+  #  If you change this you must also change vcnc-web/src/lib/restHost.js
   offset: -10
