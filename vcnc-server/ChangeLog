@@ -1,3 +1,9 @@
+Release 3.7.0
+
+    Web dashboard running with mock data.
+
+    Configuration file serves vcnc-web from vcnc-rest by default.
+
 Release 3.6.1
 
     Mark the admin endpoints as "not finalized" in OpenAPI yaml.

@@ -14,4 +14,3 @@ function restHost() {
 
 export default restHost;
 
-
