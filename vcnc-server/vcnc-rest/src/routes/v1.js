@@ -52,9 +52,15 @@ function workspace(jstr) {
 //
 // Extract workspace children names from  v2-format for back compatibility
 //
-function workspaceChildren(jsonIn) {
+function workspaceChildren(jsonIn) {	
   const children = jsonIn.ws_children;
-  const jso = JSON.parse(children);
+  if(children === "") {
+	const noResult = {
+	  children: " ",
+	};
+	return noResult;	  
+  }
+  const jso = JSON.parse(children); 
   const jsonChildren = jso.children;
   const arr = [];
   for (let i = 0; i < jsonChildren.length; ++i) {
@@ -168,7 +174,7 @@ module.exports = (app) => {
               if (result.http_status === 200) {
                 grid.createJob(
                   req.pathParams.job_id,
-                  { workspace_name: req.body.workspace_name, workspace_spec: result.spec })
+                  { workspace_name: req.body.workspace_name, workspace_spec: workspace(result) })
                 .then(() => {
                   cb(adapter({
                     http_status: 200,

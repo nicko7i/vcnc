@@ -46,6 +46,12 @@ function workspace(jsonIn, p) {
 //
 function workspaceChilden(jsonIn) {
   const children = jsonIn.ws_children;
+  if(children === "") {
+	const noResult = {
+	  children: " ",
+	};
+	return noResult;	  
+  }
   const jsonChildren = JSON.parse(children);
   const jsonResult = {
     children: jsonChildren.children,
