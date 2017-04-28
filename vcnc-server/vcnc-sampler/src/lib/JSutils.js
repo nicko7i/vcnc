@@ -12,8 +12,8 @@ const path = require('path');
 // Global variables
 //
 // const ARG_COUNT = 0;
-const VERSION = 0;
-const BUILD = 0;
+let VERSION = 0;
+let BUILD = 0;
 // const opt_dict = new dct.Dict();
 
 /**
