@@ -1,18 +1,10 @@
 
 // Include the necessary modules.
 
-const util = require('util');
-const json = require('JSON');
 const Set = require('collections/set');
 
 // Default values of configuration parameters
 
-// NUmber of messages grouped together to be sent to client/server
-const messageBunch = 70;
-
-//  Waiting time of collecting messages from VDA internal buffer collecting messages from VPMDA before send them
-// to server/client
-//
 const sampleTime = 5000;  // ms
 const waitTimeSend = 5000;  // ms
 
@@ -27,15 +19,12 @@ const waitTimeSend = 5000;  // ms
 const logFile = '';
 
 // List of all tags of VDA configutation parameters
-const daKeywords = new Set([
-  '--version',
-  '--message_bunch',
-  '--wait_send',
-  '--postServer',
-  '--transport',
-  '--config',
-  '--logfile',
+const daVcncKeywords = new Set([
+  '--logDir',
+  '--postVDA',
+  '--sampleTime',
 ]);
+
 
 // Consumer server/client default parameters
 //
@@ -55,7 +44,6 @@ const FILE_TIMEOUT = 3600000; // 30 min in ms
 // Flush buffer timeout
 const FLUSH_TIMEOUT = 30000; // 30 s
 
-exports.msg_bunch = function msgBunch() { return messageBunch; };
 // exports.verbose = function  verbose() {return verbose_level;}
 exports.logfile = function logfile() { return logFile; };
 exports.BufferTimeout = function BufferTimeout() { return BUFFER_TIMEOUT; };
@@ -64,15 +52,8 @@ exports.MaxFileSize = function MaxFileSize() { return MAX_FILE_SIZE; };
 exports.FileTimeDelay = function FileTimeDelay() { return FILE_TIMEOUT; };
 exports.FlushTimeout = function FlushTimeout() { return FLUSH_TIMEOUT; };
 exports.SampleTime = function SampleTime() { return sampleTime; };
+exports.defWaitSend = function defWaitSend() {return waitTimeSend;};
 
-exports.defMsgBunch = function defMsgBunch() {
-  const mb = { messageBunch };
-  return mb;
-};
-exports.defWaitSend = function defWaitSend() {
-  const wts = { waitTimeSend };
-  return wts;
-};
 /*
 exports.def_verbose= function  def_verbose() {
     var vs = {"verbose": verbose};
@@ -83,5 +64,5 @@ exports.defLogfile = function defLlogfile() {
   const log = { def_logfile: logFile };
   return log;
 };
-exports.daKeys = function daKeys() { return daKeywords; };
+exports.vcncSamplerKeys = function vcncSamplerKeys() { return daVcncKeywords; };
 

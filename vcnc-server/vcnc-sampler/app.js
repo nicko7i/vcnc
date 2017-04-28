@@ -1,12 +1,14 @@
-/**
+ /**
  * Starts server to get DA messages using POST method of REST API
  *
- * Run file: node vda_consumer_server.js --postServer=POST,host,port --logfile=path_to_da_messages.log > path_to_console_ouput.log
- *  @param --postServer=POST,host,port - POST - using REST API method (if it's not POST exit with Error);
- *                                host - server IP;
- *                                port - listening port
- *  @param --logFile=log-file            log-file - contains all data post by DA in packed json-format; to extract messages from
- *                                packed format javascript file 'read_parse_js.js' (see description of this file)
+ * Run file: node app.js --postServer=POST,host,port
+ *                                       --logfile=<path_to_da_messages.log> -
+ *                                                    path_to_console_ouput.log
+ *  @param --postServer=POST,host,port - POST - using REST API method
+ *                                              (if it's not POST exit with Error);
+ *                                              host - server IP;
+ *                                              port - listening port
+ *  @param --logFile=log-file          - log-file - contains all data post by DA in json-format;
  *
  */
 
@@ -16,7 +18,6 @@ const http = require('http');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const json = require('JSON');
-const Set = require('collections/set');
 
 const jsu = require('./src/lib/JSutils');
 const conf = require('./src/velstor-davcnc.conf');
@@ -24,18 +25,13 @@ const dawfs = require('./src/lib/daWriteFileStream');
 const vdap = require('./src/lib/vdaParser');
 
 const cmdl = jsu.cmd_line();
-
-const validKeys = new Set([
-  '--logDir',
-  '--postVDA',
-  '--sampleTime',
-]);
-
+const validKeys = conf.vcncSamplerKeys();
 const args = cmdl.Input(validKeys);
+
 // TODO: get vcnc version
 // jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
 console.log('\nStart VCnC sampler');
-
+console.log('Input arguments: ' + args);
 const options = cmdl.JSNode('postVDA');
 const logDir = cmdl.JSparam('logDir');
 const parser = vdap.CreateVdaParser();
@@ -62,17 +58,18 @@ if (!options.host || !options.port) {
 }
 
 mkdirp(logDir, (err) => {
-  if (err) {
+  if(err) {
     console.log(`Directory ${logDir} could not be created: ${err}`);
     process.exit(1);
   }
 });
 fs.access(logDir, fs.W_OK, (err) => {
-  if (err !== null) {
-    console.log(`No directory or no permission to create ${logDir}`);
-    console.log('Invalid input parameters');
-    process.exit(1);
-  }
+  if(err !== null)
+ {
+   console.log(`No directory or no permission to create ${logDir}`);
+   console.log('Invalid input parameters');
+   process.exit(1);
+ }
 });
 
 const host = options.host;
@@ -83,7 +80,7 @@ const dawStream = dawfs.DAWriteFileStream(logDir, 'post_');
 
 // var https = require( "https" );
 
-const COUNT = 0;
+// const COUNT = 0;
 let socketCount = 0;
 
 if (!Date.now) {
@@ -100,11 +97,11 @@ console.log(`Time (ms):${tsStart}`);
 function requestHandler(request, response) {
 //  console.log("--------------------------");
 //  console.log(request.method + ": " + request.url);
-  if (request.method == 'POST') {
+  if (request.method === 'POST') {
     request.setEncoding('utf8');
     request.on('data', (data) => {
-            // Parsing  of buffered messages on a fly
-            //
+      // Parsing  of buffered messages on a fly
+      //
       const result = [0, 1];
       const parseData = parser.parseLine(data, result);
       if (result[1] === 0) {
@@ -156,14 +153,14 @@ server.listen(port, host, () => {
 //
 const flushTimeout = conf.FlushTimeout();
 setInterval(() => {
-  dawStream._time_flush();
+  dawStream.time_flush();
 }, flushTimeout);
 
 // Processing of Linux signals
 //
 process.on('SIGINT', () => {
   console.log('Caught SIGINT interrupt signal');
-  dawStream._flush();
+  dawStream.flush();
   process.exit(0);
 });
 
@@ -172,12 +169,12 @@ process.on('SIGINT', () => {
 //
 process.on('SIGTERM', () => {
   console.log('Caught SIGTERM interrupt signal');
-  dawStream._flush();
+  dawStream.flush();
   process.exit(0);
 });
 
 process.on('SIGUSR1', () => {
   console.log('Caught SIGUSR1 interrupt signal');
-  dawStream._flush();
+  dawStream.flush();
 });
 
