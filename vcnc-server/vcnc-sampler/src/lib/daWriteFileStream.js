@@ -54,7 +54,7 @@ DA_WriteFileStream.prototype._write = function(data, encoding, cb)
     if (self._fileMgr.ValidStream(self._buf_size) === false) {
 //        console.log('Write buffer: ' + self._stockBuffer.length);
         self._fileStat();
-        self._flush();
+        self.flush();
     }
 
     // Check file size exceeded max size or date changed (It's time to create a new file)
@@ -80,7 +80,7 @@ DA_WriteFileStream.prototype._write = function(data, encoding, cb)
 
 // Flush stockBuffer
 //
-DA_WriteFileStream.prototype._flush = function(data, encoding, cb)
+DA_WriteFileStream.prototype.flush = function(data, encoding, cb)
 {
     var self = this;
     if (self._stockBuffer.length > 0) {
@@ -93,13 +93,13 @@ DA_WriteFileStream.prototype._flush = function(data, encoding, cb)
 
 // Timeout flush stockBuffer
 //
-DA_WriteFileStream.prototype._time_flush = function()
+DA_WriteFileStream.prototype.time_flush = function()
 {
     var self = this;
     var curr_timeout = Date.now() - self._last_record;
     var timeout = conf.FlushTimeout();
     if (curr_timeout > timeout) {
-        self._flush();
+        self.flush();
         self._last_record = Date.now();
     }
 }
