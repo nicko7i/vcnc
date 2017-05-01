@@ -44,13 +44,10 @@ function workspace(jsonIn, p) {
   return jsonResult;
 }
 //
-function workspaceChilden(jsonIn) {
+function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
-  if(children === "") {
-	const noResult = {
-	  children: " ",
-	};
-	return noResult;	  
+  if (children === '') {
+    return ' ';
   }
   const jsonChildren = JSON.parse(children);
   const jsonResult = {
@@ -408,6 +405,89 @@ module.exports = (app) => {
   });
 
   //
+  //  Start an invariant chain reduction process.
+  //
+  app.post('/vtrq/:vtrq_id/icr/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_run(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Get the status of an invariant chain reduction.
+  //
+  app.get('/vtrq/:vtrq_id/icr', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            0,  // wait for finish mode.
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Cancel invariant chain reduction process.
+  //
+  app.delete('/vtrq/:vtrq_id/icr', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            1,  // "cancel" mode
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Request storage info from  TRQ.
+  //
+  app.post('/vtrq/:vtrq_id/storage/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.trq_statistic(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result, { result: result.result,
+                sum_st_size: result.sum_st_size,
+                sum_extents: result.sum_extents,
+              }));
+            });
+        });
+      });
+  });
+
+  //
   //  Discover VP IDs having certain qualities
   //
   app.get('/vtrq/:vtrq_id/vps', (req, res) => {
@@ -473,7 +553,7 @@ module.exports = (app) => {
             req.pathParams.url_path,
             (result) => {
               if (result.http_status === 200) {
-                cb(adapter(result, workspaceChilden(result)));
+                cb(adapter(result, workspaceChildren(result)));
               } else {
                 cb(adapter(result));
               }

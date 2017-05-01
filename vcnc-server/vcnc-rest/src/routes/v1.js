@@ -40,7 +40,7 @@ function workspace(jstr) {
   const jsonWs = JSON.parse(ws);
   const jsonMap = jsonWs.maps;
   const local = jsonWs.writeback === 'never';
-  for (let i = 0; i < jsonMap.length; i++) {
+  for (let i = 0; i < jsonMap.length; i += 1) {
     jsonMap[i].local = local;
   }
   const jsonResult = {
@@ -52,18 +52,15 @@ function workspace(jstr) {
 //
 // Extract workspace children names from  v2-format for back compatibility
 //
-function workspaceChildren(jsonIn) {	
+function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
-  if(children === "") {
-	const noResult = {
-	  children: " ",
-	};
-	return noResult;	  
+  if (children === '') {
+    return ' ';
   }
-  const jso = JSON.parse(children); 
+  const jso = JSON.parse(children);
   const jsonChildren = jso.children;
   const arr = [];
-  for (let i = 0; i < jsonChildren.length; ++i) {
+  for (let i = 0; i < jsonChildren.length; i += 1) {
     arr.push(jsonChildren[i].name);
   }
   const jsonResult = {
@@ -475,27 +472,7 @@ module.exports = (app) => {
   });
 
   //
-  //  Wait/stop invariants chains reduction process.
-  //
-  app.post('/vtrq/service/icr_wait/:vtrq_id/:mod', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.icr_wait(
-            req.pathParams.vtrq_id,
-            req.pathParams.mod,
-            (result) => {
-              cb(adapter(result));
-            });
-        });
-      });
-  });
-
-  //
-  //  Request statistic form TRQ.
+  //  Request storage info from  TRQ.
   //
   app.post('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
     fulfill202(
