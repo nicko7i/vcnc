@@ -34,67 +34,56 @@ function latency() {
 }
 
 function convertVtrqID(map) {
-  map.vtrq_id = parseInt(map.vtrq_id);
+  return { ...map, vtrq_id: parseInt(map.vtrq_id, 10) };
 }
 
 function convertMapVtrqID(maps) {
-  for (let i = 0; i < maps.length; i++) {
-    convertVtrqID(maps[i]);  
-  }
+  return maps.map(e => convertVtrqID(e));
 }
 
 //
-function workspace(jsonIn, p) {
-  const ws = jsonIn.ws;
-  const jsonWs = JSON.parse(ws);
-  jsonWs.name = p;
-  if(jsonWs.maps.length > 0) {
-    convertMapVtrqID(jsonWs.maps);  
-  } else {
-    jsonWs.maps = [];  
-  }
+//  Converts a workspace in PIDL JSON format into a workspace in REST JSON
+//  format.
+//
+function workspace(jsonIn, name) {
+  const jsonWs = JSON.parse(jsonIn.ws);
   const jsonResult = {
-    workspace: jsonWs,
+    workspace: { ...jsonWs, name, maps: convertMapVtrqID(jsonWs.maps) },
   };
-//  console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
+  //  console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
   return jsonResult;
 }
 //
-function workspaceChilden(jsonIn) {
+//  Converts the PIDL format for workspace children into the REST format.
+//
+function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
-  if(children.length === 0) {
-    const noResult = {
-      children: [],
-	};
-	return noResult;	  
+  if (children === '') {
+    return [];
   }
   const jsonChildren = JSON.parse(children);
-  for (let i = 0; i < jsonChildren.children.length; i++) {
-    let jsonMap = jsonChildren.children[i].maps; 
-    console.log("jsonMap.length=" + jsonMap.length);
-    if( jsonChildren.children[i].maps.length === 0) {
-      jsonChildren.children[i].maps = [];   
-    } else {
-      convertMapVtrqID(jsonChildren.children[i].maps);	
-    }
-  }
-  const jsonResult = {
-    children: jsonChildren.children,
+  return {
+    children: jsonChildren.map((e) => {
+      // e.maps may be either an empty string or an array
+      if (e.maps.length === 0) {
+        return [];
+      }
+      return {
+        children: convertMapVtrqID(e.maps),
+      };
+    }),
   };
-  return jsonResult;
 }
 //
 function namespace(jsonIn, p) {
   const ns = jsonIn.ns;
   const jsonNs = JSON.parse(ns);
-  jsonNs.name = p;
   const jsonResult = {
     name: p,
     stat: jsonNs.stat,
   };
   return jsonResult;
 }
-
 
 //
 //  Constructs and returns an object which represents the operation's outcome.
@@ -433,6 +422,89 @@ module.exports = (app) => {
   });
 
   //
+  //  Start an invariant chain reduction process.
+  //
+  app.post('/vtrq/:vtrq_id/icr/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_run(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Get the status of an invariant chain reduction.
+  //
+  app.get('/vtrq/:vtrq_id/icr', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            0,  // wait for finish mode.
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Cancel invariant chain reduction process.
+  //
+  app.delete('/vtrq/:vtrq_id/icr', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            1,  // "cancel" mode
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
+  //
+  //  Request storage info from  TRQ.
+  //
+  app.post('/vtrq/:vtrq_id/storage/:url_path', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.trq_statistic(
+            req.pathParams.vtrq_id,
+            req.pathParams.url_path,
+            (result) => {
+              cb(adapter(result, { result: result.result,
+                sum_st_size: result.sum_st_size,
+                sum_extents: result.sum_extents,
+              }));
+            });
+        });
+      });
+  });
+
+  //
   //  Discover VP IDs having certain qualities
   //
   app.get('/vtrq/:vtrq_id/vps', (req, res) => {
@@ -498,7 +570,7 @@ module.exports = (app) => {
             req.pathParams.url_path,
             (result) => {
               if (result.http_status === 200) {
-                cb(adapter(result, workspaceChilden(result)));
+                cb(adapter(result, workspaceChildren(result)));
               } else {
                 cb(adapter(result));
               }
