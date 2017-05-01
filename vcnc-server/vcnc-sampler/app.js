@@ -31,7 +31,7 @@ const args = cmdl.Input(validKeys);
 // TODO: get vcnc version
 // jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
 console.log('\nStart VCnC sampler');
-console.log('Input arguments: ' + args);
+console.log(`Input arguments: ${args}`);
 const options = cmdl.JSNode('postVDA');
 const logDir = cmdl.JSparam('logDir');
 const parser = vdap.CreateVdaParser();
@@ -58,18 +58,17 @@ if (!options.host || !options.port) {
 }
 
 mkdirp(logDir, (err) => {
-  if(err) {
+  if (err) {
     console.log(`Directory ${logDir} could not be created: ${err}`);
     process.exit(1);
   }
 });
 fs.access(logDir, fs.W_OK, (err) => {
-  if(err !== null)
- {
-   console.log(`No directory or no permission to create ${logDir}`);
-   console.log('Invalid input parameters');
-   process.exit(1);
- }
+  if (err !== null) {
+    console.log(`No directory or no permission to create ${logDir}`);
+    console.log('Invalid input parameters');
+    process.exit(1);
+  }
 });
 
 const host = options.host;
@@ -107,7 +106,7 @@ function requestHandler(request, response) {
       if (result[1] === 0) {
         console.log('Warning: Data corrupted');
       }
-      dawStream._write(parseData);
+      dawStream.write(parseData);
 
 // Collectiong data without parsing
 //            data += "\n";
@@ -120,7 +119,10 @@ function requestHandler(request, response) {
     console.error(err);
   });
   response.end();
-  // response.end(COUNT + ". Response done: request method: " + request.method + " URI: '" + request.url + "'");
+  /*
+   response.end(COUNT + ". Response done: request method: " + request.method + " URI: '"
+   + request.url + "'");
+   */
 }
 
 const server = http.createServer(requestHandler);

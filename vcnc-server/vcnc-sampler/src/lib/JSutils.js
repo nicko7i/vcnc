@@ -291,15 +291,15 @@ exports.GetDirectories = function (p) {
 };
 
 exports.ReadFileAndDelete = function ReadFileAndDelete(p, defInput, callback) {
-  var dt;
+  let dt;
   fs.access(p, fs.F_OK, (err) => {
     if (err) {
       return callback(defInput);
     }
     fs.readFile(p, 'utf8', (err, dt) => {
       if (err) return callback(defInput);
-      return callback(dt.toString());
     });
+    return callback(dt.toString());
   });
 };
 
