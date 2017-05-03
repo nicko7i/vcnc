@@ -475,7 +475,25 @@ module.exports = (app) => {
         });
       });
   });
-
+  //  Wait/stop invariants chains reduction process.
+  //  Request storage info from  TRQ.
+  //
+  app.post('/vtrq/service/icr_wait/:vtrq_id/:mod', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            req.pathParams.mod,
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
   //
   //  Request storage info from  TRQ.
   //
