@@ -34,7 +34,7 @@ function latency() {
 }
 
 function convertVtrqID(map) {
-  return { ...map, vtrq_id: parseInt(map.vtrq_id, 10) };
+  return Object.assign({}, map, { vtrq_id: parseInt(map.vtrq_id, 10) });
 }
 
 function convertMapVtrqID(maps) {
@@ -50,7 +50,7 @@ function workspace(jstr) {
   return {
     spec:
       convertMapVtrqID(jsonWs.maps)
-      .map(e => ({ ...e, local })),
+      .map(e => Object.assign({}, e, { local })),
   };
 }
 
@@ -60,7 +60,7 @@ function workspace(jstr) {
 function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
   if (children === '') {
-    return [];
+    return { children: [] };
   }
   const jso = JSON.parse(children);
   const jsonChildren = jso.children;

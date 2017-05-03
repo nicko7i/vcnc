@@ -136,11 +136,11 @@ namespace cnc {
                                         , error_sym
                                         , error_description_brief);
       std::ostringstream buffer;
-      std::cout << "http_status=" << http_status <<"\n";
-      std::cout << "_errcode=" << _errcode <<"\n";
-      std::cout << "error_sym=" << error_sym <<"\n";
-      std::cout << "error_description_brief=" << error_description_brief <<"\n";
-      std::cout << "_errcode=" << _errcode <<"\n";
+      // std::cout << "http_status=" << http_status <<"\n";
+      // std::cout << "_errcode=" << _errcode <<"\n";
+      // std::cout << "error_sym=" << error_sym <<"\n";
+      // std::cout << "error_description_brief=" << error_description_brief <<"\n";
+      // std::cout << "_errcode=" << _errcode <<"\n";
       //
       //  Allocate the return object
       //

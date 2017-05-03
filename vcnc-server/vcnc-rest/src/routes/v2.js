@@ -34,7 +34,7 @@ function latency() {
 }
 
 function convertVtrqID(map) {
-  return { ...map, vtrq_id: parseInt(map.vtrq_id, 10) };
+  return Object.assign({}, map, { vtrq_id: parseInt(map.vtrq_id, 10) });
 }
 
 function convertMapVtrqID(maps) {
@@ -48,7 +48,7 @@ function convertMapVtrqID(maps) {
 function workspace(jsonIn, name) {
   const jsonWs = JSON.parse(jsonIn.ws);
   const jsonResult = {
-    workspace: { ...jsonWs, name, maps: convertMapVtrqID(jsonWs.maps) },
+    workspace: Object.assign({}, jsonWs, { name, maps: convertMapVtrqID(jsonWs.maps) }),
   };
   //  console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
   return jsonResult;
@@ -58,20 +58,20 @@ function workspace(jsonIn, name) {
 //
 function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
+  //
+  //  If there are no children at all return an empty array.
   if (children === '') {
-    return [];
+    return { children: [] };
   }
   const jsonChildren = JSON.parse(children);
   return {
-    children: jsonChildren.map((e) => {
-      // e.maps may be either an empty string or an array
-      if (e.maps.length === 0) {
-        return [];
-      }
-      return {
-        children: convertMapVtrqID(e.maps),
-      };
-    }),
+    children:
+      jsonChildren.children.map(e => Object.assign(
+        {},
+        e,
+        {
+          maps: convertMapVtrqID(e.maps),
+        })),
   };
 }
 //
