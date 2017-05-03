@@ -32,11 +32,27 @@ function latency() {
   });
   return p;
 }
+
+function convertVtrqID(map) {
+  map.vtrq_id = parseInt(map.vtrq_id);
+}
+
+function convertMapVtrqID(maps) {
+  for (let i = 0; i < maps.length; i++) {
+    convertVtrqID(maps[i]);  
+  }
+}
+
 //
 function workspace(jsonIn, p) {
   const ws = jsonIn.ws;
   const jsonWs = JSON.parse(ws);
   jsonWs.name = p;
+  if(jsonWs.maps.length > 0) {
+    convertMapVtrqID(jsonWs.maps);  
+  } else {
+    jsonWs.maps = [];  
+  }
   const jsonResult = {
     workspace: jsonWs,
   };
@@ -46,13 +62,22 @@ function workspace(jsonIn, p) {
 //
 function workspaceChilden(jsonIn) {
   const children = jsonIn.ws_children;
-  if(children === "") {
-	const noResult = {
-	  children: " ",
+  if(children.length === 0) {
+    const noResult = {
+      children: [],
 	};
 	return noResult;	  
   }
   const jsonChildren = JSON.parse(children);
+  for (let i = 0; i < jsonChildren.children.length; i++) {
+    let jsonMap = jsonChildren.children[i].maps; 
+    console.log("jsonMap.length=" + jsonMap.length);
+    if( jsonChildren.children[i].maps.length === 0) {
+      jsonChildren.children[i].maps = [];   
+    } else {
+      convertMapVtrqID(jsonChildren.children[i].maps);	
+    }
+  }
   const jsonResult = {
     children: jsonChildren.children,
   };
@@ -160,7 +185,7 @@ module.exports = (app) => {
               if (result.http_status === 200) {
                 grid.createJob(
                   req.pathParams.job_id,
-                  { workspace_name: req.body.workspace_name, workspace_spec: result.spec })
+                  { workspace_name: req.body.workspace_name, workspace_spec: workspace(result) })
                 .then(() => {
                   cb(adapter({
                     http_status: 200,
