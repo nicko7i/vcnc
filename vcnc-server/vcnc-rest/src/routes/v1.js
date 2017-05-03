@@ -32,6 +32,17 @@ function latency() {
   });
   return p;
 }
+
+function convertVtrqID(map) {
+  map.vtrq_id = parseInt(map.vtrq_id);
+}
+
+function convertMapVtrqID(maps) {
+  for (let i = 0; i < maps.length; i++) {
+    convertVtrqID(maps[i]);  
+  }
+}
+
 //
 // Convert v2-format of workspace to v1 format for back compatibility
 //
@@ -40,8 +51,12 @@ function workspace(jstr) {
   const jsonWs = JSON.parse(ws);
   const jsonMap = jsonWs.maps;
   const local = jsonWs.writeback === 'never';
-  for (let i = 0; i < jsonMap.length; i++) {
-    jsonMap[i].local = local;
+  if(jsonMap.length !== 0) {convertMapVtrqID(jsonMap);  
+    for (let i = 0; i < jsonMap.length; i++) {
+      jsonMap[i].local = local;
+    }
+  } else {
+    jsonMap = [];
   }
   const jsonResult = {
     spec: jsonMap,
@@ -55,10 +70,10 @@ function workspace(jstr) {
 function workspaceChildren(jsonIn) {	
   const children = jsonIn.ws_children;
   if(children === "") {
-	const noResult = {
-	  children: " ",
-	};
-	return noResult;	  
+    const noResult = {
+      children: [],
+    };
+    return noResult;	  
   }
   const jso = JSON.parse(children); 
   const jsonChildren = jso.children;
