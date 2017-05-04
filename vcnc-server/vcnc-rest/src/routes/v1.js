@@ -34,51 +34,38 @@ function latency() {
 }
 
 function convertVtrqID(map) {
-  map.vtrq_id = parseInt(map.vtrq_id);
+  return Object.assign({}, map, { vtrq_id: parseInt(map.vtrq_id, 10) });
 }
 
 function convertMapVtrqID(maps) {
-  for (let i = 0; i < maps.length; i++) {
-    convertVtrqID(maps[i]);  
-  }
+  return maps.map(e => convertVtrqID(e));
 }
 
 //
 // Convert v2-format of workspace to v1 format for back compatibility
 //
 function workspace(jstr) {
-  const ws = jstr.ws;
-  const jsonWs = JSON.parse(ws);
-  const jsonMap = jsonWs.maps;
+  const jsonWs = JSON.parse(jstr.ws);
   const local = jsonWs.writeback === 'never';
-  if(jsonMap.length !== 0) {convertMapVtrqID(jsonMap);  
-    for (let i = 0; i < jsonMap.length; i++) {
-      jsonMap[i].local = local;
-    }
-  } else {
-    jsonMap = [];
-  }
-  const jsonResult = {
-    spec: jsonMap,
+  return {
+    spec:
+      convertMapVtrqID(jsonWs.maps)
+      .map(e => Object.assign({}, e, { local })),
   };
-  return jsonResult;
 }
 
 //
 // Extract workspace children names from  v2-format for back compatibility
 //
-function workspaceChildren(jsonIn) {	
+function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
-  if(children === "") {
-    const noResult = {
-      children: [],
-    };
-    return noResult;	  
+  if (children === '') {
+    return { children: [] };
   }
-  const jso = JSON.parse(children); 
+  const jso = JSON.parse(children);
   const jsonChildren = jso.children;
   const arr = [];
-  for (let i = 0; i < jsonChildren.length; ++i) {
+  for (let i = 0; i < jsonChildren.length; i += 1) {
     arr.push(jsonChildren[i].name);
   }
   const jsonResult = {
@@ -488,9 +475,8 @@ module.exports = (app) => {
         });
       });
   });
-
-  //
   //  Wait/stop invariants chains reduction process.
+  //  Request storage info from  TRQ.
   //
   app.post('/vtrq/service/icr_wait/:vtrq_id/:mod', (req, res) => {
     fulfill202(
@@ -508,9 +494,8 @@ module.exports = (app) => {
         });
       });
   });
-
   //
-  //  Request statistic form TRQ.
+  //  Request storage info from  TRQ.
   //
   app.post('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
     fulfill202(
@@ -697,4 +682,4 @@ module.exports = (app) => {
         });
       });
   });
-}
+};
