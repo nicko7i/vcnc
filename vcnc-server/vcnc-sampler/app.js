@@ -1,3 +1,8 @@
+/*
+ *    Copyright (C) 2017    IC Manage Inc.
+ *
+ *    See the file 'COPYING' for license information.
+ */
  /**
  * Starts server to get DA messages using POST method of REST API
  *
@@ -22,7 +27,7 @@ const json = require('JSON');
 const jsu = require('./src/lib/JSutils');
 const conf = require('./src/velstor-davcnc.conf');
 const dawfs = require('./src/lib/daWriteFileStream');
-const vdap = require('./src/lib/vdaParser');
+const vs = require('./src/lib/vcncSampling');
 
 const cmdl = jsu.cmd_line();
 const validKeys = conf.vcncSamplerKeys();
@@ -32,9 +37,8 @@ const args = cmdl.Input(validKeys);
 // jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
 console.log('\nStart VCnC sampler');
 console.log(`Input arguments: ${args}`);
-const options = cmdl.JSNode('postVDA');
+const options = cmdl.JSHost('vda');
 const logDir = cmdl.JSparam('logDir');
-const parser = vdap.CreateVdaParser();
 
 console.log(json.stringify(options));
 console.log(`logDir = ${logDir}`);
@@ -42,16 +46,16 @@ console.log(`logDir = ${logDir}`);
 // Validate input parameters
 //
 
-if (logDir === undefined || options.method === 'INVALID') {
+if (logDir === undefined) { // || options.method === 'INVALID') {
   console.log('Invalid input parameters');
   process.exit(1);
 }
-
+/*
 if (options.method !== 'POST') {
   console.log(`Invalid REST method (should be POST): ${json.stringify(options)}`);
   process.exit(1);
 }
-
+*/
 if (!options.host || !options.port) {
   console.log(`Invalid host/port: ${json.stringify(options)}`);
   process.exit(1);
@@ -65,7 +69,7 @@ mkdirp(logDir, (err) => {
 });
 fs.access(logDir, fs.W_OK, (err) => {
   if (err !== null) {
-    console.log(`No directory or no permission to create ${logDir}`);
+     console.log(`No directory or no permission to create ${logDir}`);
     console.log('Invalid input parameters');
     process.exit(1);
   }
@@ -94,42 +98,24 @@ console.log(`Time (ms):${tsStart}`);
 // Process buffered messages from VDA
 //
 function requestHandler(request, response) {
-//  console.log("--------------------------");
-//  console.log(request.method + ": " + request.url);
-  if (request.method === 'POST') {
-    request.setEncoding('utf8');
-    request.on('data', (data) => {
-      // Parsing  of buffered messages on a fly
-      //
-      const result = [0, 1];
-      const parseData = parser.parseLine(data, result);
-      if (result[1] === 0) {
-        console.log('Warning: Data corrupted');
-      }
-      dawStream.write(parseData);
-
-// Collectiong data without parsing
-//            data += "\n";
-//            daw_stream._write(data);
-            // console.log(COUNT++ + ". Server: POST DATA: " + data);
-            // console.log(COUNT++ + ". Server: POST DATA: " + data);
-    });
-  }
+  request.setEncoding('utf8');
+  request.on('data', (data) => {
+    vcncSample.Run(data);
+  });
   response.on('error', (err) => {
     console.error(err);
   });
   response.end();
-  /*
-   response.end(COUNT + ". Response done: request method: " + request.method + " URI: '"
-   + request.url + "'");
-   */
 }
+
+const vcncSample = vs.CreateVcncSampling();
+// vcncSample.Init();
 
 const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
 });
 server.on('connection', (socket) => {
-  ++socketCount;
+  socketCount += 1;
   console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
   socket.on('close', () => {
     --socketCount;
@@ -150,13 +136,6 @@ server.on('close', () => {
 server.listen(port, host, () => {
   console.log(`Listening on ${host}:${port}`);
 });
-
-// Initiate flushing of output buffer in case of no input data in a given timeout
-//
-const flushTimeout = conf.FlushTimeout();
-setInterval(() => {
-  dawStream.time_flush();
-}, flushTimeout);
 
 // Processing of Linux signals
 //

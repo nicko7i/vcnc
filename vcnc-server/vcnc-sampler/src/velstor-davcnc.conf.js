@@ -7,13 +7,8 @@ const Set = require('collections/set');
 
 const sampleTime = 5000;  // ms
 const waitTimeSend = 5000;  // ms
-
-// Level of output to log-file:
-// 3 - error messages only;
-// 4 - + warning messages
-// 6 - + info messages;
-// 7 - + debug messages
-// const verboseLevel = 6;
+const maxSize = 100;
+const latency = 500; // ms
 
 // Patthto Vcnc-sampler log-file
 const logFile = '';
@@ -21,12 +16,24 @@ const logFile = '';
 // List of all tags of VDA configutation parameters
 const daVcncKeywords = new Set([
   '--logDir',
-  '--postVDA',
+  '--vda',
   '--sampleTime',
+  '--latency',
 ]);
 
 // Consumer server/client default parameters
 //
+
+// Vda messages used for sampling
+const samples =
+  {
+    read: 1,
+    read_vtrq: 1,
+  };
+
+// Maximal number of buckets
+const maxBeans = 100; // ~5M   (10M is fine too)
+
 
 // timeout of forced client/server  message buffer output
 const BUFFER_TIMEOUT = 5000; // ms (5 s)
@@ -44,24 +51,35 @@ const FILE_TIMEOUT = 3600000; // 30 min in ms
 const FLUSH_TIMEOUT = 30000; // 30 s
 
 // exports.verbose = function  verbose() {return verbose_level;}
-exports.logfile = function logfile() { return logFile; };
-exports.BufferTimeout = function BufferTimeout() { return BUFFER_TIMEOUT; };
-exports.MaxBufferSize = function MaxBufferSize() { return MAX_BUFFER_SIZE; };
-exports.MaxFileSize = function MaxFileSize() { return MAX_FILE_SIZE; };
-exports.FileTimeDelay = function FileTimeDelay() { return FILE_TIMEOUT; };
-exports.FlushTimeout = function FlushTimeout() { return FLUSH_TIMEOUT; };
-exports.SampleTime = function SampleTime() { return sampleTime; };
-exports.defWaitSend = function defWaitSend() {return waitTimeSend;};
+function Logfile() { return logFile; }
+function BufferTimeout() { return BUFFER_TIMEOUT; }
+function MaxBufferSize() { return MAX_BUFFER_SIZE; }
+function MaxFileSize() { return MAX_FILE_SIZE; }
+function FileTimeDelay() { return FILE_TIMEOUT; }
+function FlushTimeout() { return FLUSH_TIMEOUT; }
+function DefSampleTime() { return sampleTime; }
+function DefLatency() {return latency;}
+function DefWaitSend() { return waitTimeSend; }
+function DefLogfile() { return { def_logfile: logFile }; }
+function vcncSamplerKeys() { return daVcncKeywords; }
+function MaxSize() { return maxSize; }
+function Samples() { return samples; }
+function MaxBeans() { return maxBeans; }
 
-/*
-exports.def_verbose= function  def_verbose() {
-    var vs = {"verbose": verbose};
-    return vs;
-}
-*/
-exports.defLogfile = function defLlogfile() {
-  const log = { def_logfile: logFile };
-  return log;
+
+module.exports = {
+  Logfile,
+  BufferTimeout,
+  MaxBufferSize,
+  MaxFileSize,
+  FileTimeDelay,
+  FlushTimeout,
+  DefSampleTime,
+  DefLatency,
+  DefWaitSend,
+  DefLogfile,
+  vcncSamplerKeys,
+  MaxSize,
+  Samples,
+  MaxBeans,
 };
-exports.vcncSamplerKeys = function vcncSamplerKeys() { return daVcncKeywords; };
-

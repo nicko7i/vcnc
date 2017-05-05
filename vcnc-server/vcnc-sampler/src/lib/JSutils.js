@@ -121,6 +121,45 @@ ProcessCommandLine.prototype.JSNode = function (key, defNode) {
 };
 
 /**
+ * Input consumer-node options
+ *
+ * @param {string} key      - keyword of command line or configuration node option
+ * @param (string) defNode  - default node settings
+ * @return (JS object)      - host node (REST API method, IP address, port, usability:
+ *                            (enabled, 0 disabled)
+ *
+ */
+ProcessCommandLine.prototype.JSHost = function (key, defNode) {
+  const self = this;
+  const options =
+    {
+      host: '',
+      port: 0,
+    };
+
+  const prefix = '--';
+  const preKey = prefix + key;
+  let value;
+
+  if (self.argsDict.has(preKey)) {
+    value = self.argsDict.get(preKey);
+  } else if (defNode === undefined) {
+    return options;
+  } else {
+    value = defNode;
+  }
+  const args = value.split(',');
+  if (args.length === 0) {
+    return options;
+  }
+
+  options.host = args[0];
+  options.port = args[1];
+  return options;
+};
+
+
+/**
  * Get JS config parameter by its name in a command line (this parameter will not be passed to C++)
  *
  * @param (string) key        - keyword of command line or configuration node option
