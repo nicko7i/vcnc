@@ -44,14 +44,13 @@ function convertMapVtrqID(maps) {
 //
 // Convert v2-format of workspace to v1 format for back compatibility
 //
-function workspace(jstr) {
+function v2WorkspaceAsV1(jstr) {
   const jsonWs = JSON.parse(jstr.ws);
   const local = jsonWs.writeback === 'never';
-  return {
-    spec:
-      convertMapVtrqID(jsonWs.maps)
-      .map(e => Object.assign({}, e, { local })),
-  };
+  return (
+    convertMapVtrqID(jsonWs.maps)
+    .map(e => Object.assign({}, e, { local }))
+  );
 }
 
 //
@@ -176,7 +175,10 @@ module.exports = (app) => {
               if (result.http_status === 200) {
                 grid.createJob(
                   req.pathParams.job_id,
-                  { workspace_name: req.body.workspace_name, workspace_spec: workspace(result) })
+                  {
+                    workspace_name: req.body.workspace_name,
+                    workspace_spec: v2WorkspaceAsV1(result),
+                  })
                 .then(() => {
                   cb(adapter({
                     http_status: 200,
@@ -607,7 +609,7 @@ module.exports = (app) => {
               //  this level manipulates objects.
               //
               if (result.http_status === 200) {
-                cb(adapter(result, workspace(result)));
+                cb(adapter(result, { spec: v2WorkspaceAsV1(result) }));
               } else {
                 cb(adapter(result));
               }
