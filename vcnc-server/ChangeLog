@@ -1,6 +1,8 @@
 Release 3.7.1
 
-    Fixed bug <FRQU-211> 
+    Fixed bug <B6927> ('grid get' fails)
+
+    Fixed bug <FRQU-211> (problem listing non-existent workspace)
 
 Release 3.7.0
 
