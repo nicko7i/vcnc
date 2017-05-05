@@ -95,17 +95,13 @@ namespace cnc {
       Nan::Set(rtn
                , Nan::New("error_description_brief").ToLocalChecked()
                , Nan::New(error_description_brief.c_str()).ToLocalChecked());
-	  
-      pString member;
-      member = pcSessionExport::self().UInt64AsString(_sum_st_size);
       Nan::Set(rtn
                , Nan::New("sum_st_size").ToLocalChecked()
-               , Nan::New(member.c_str()).ToLocalChecked());
+               , Nan::New(static_cast<double>(_sum_st_size)));
 	  
-      member = pcSessionExport::self().UInt64AsString(_sum_extents);
       Nan::Set(rtn
                , Nan::New("sum_extents").ToLocalChecked()
-               , Nan::New(member.c_str()).ToLocalChecked());
+               , Nan::New(static_cast<double>(_sum_extents)));
 	  
       //
       //  Prepare for callback
