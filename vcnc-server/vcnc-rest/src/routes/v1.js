@@ -38,11 +38,17 @@ function convertVtrqID(map) {
 }
 
 function convertMapVtrqID(maps) {
+  if (!Array.isArray(maps)) {
+    return [];
+  }
   return maps.map(e => convertVtrqID(e));
 }
 
 //
-// Convert v2-format of workspace to v1 format for back compatibility
+//  Convert v2-format of workspace to v1 format for back compatibility
+//
+//  This function receives PIDL JSON format (integers are strings and empty
+//  arrays may be empty strings).
 //
 function v2WorkspaceAsV1(jstr) {
   const jsonWs = JSON.parse(jstr.ws);
@@ -55,6 +61,9 @@ function v2WorkspaceAsV1(jstr) {
 
 //
 // Extract workspace children names from  v2-format for back compatibility
+//
+//  This function receives PIDL JSON format (integers are strings and empty
+//  arrays may be empty strings).
 //
 function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
