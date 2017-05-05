@@ -107,12 +107,9 @@ function adapter(fromRpc, onSuccess, onFailure) {
     body: {},
   };
   rtn.body.error_sym = fromRpc.error_sym;
+  rtn.body.message = fromRpc.error_description_brief;
   //
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
-  if (successful === false) {
-    rtn.body.message = fromRpc.error_description_brief;
-  }
-
   const moreProperties = successful ? onSuccess : onFailure;
   Object.assign(rtn.body, moreProperties);
   return rtn;
