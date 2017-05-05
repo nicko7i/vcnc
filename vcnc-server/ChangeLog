@@ -1,6 +1,12 @@
-Release 3.7.1
+Release 3.7.2
 
     Fixed bug <B6927> ('grid get' fails)
+
+    Storage Efficiency numbers (v2 only)
+
+    Every REST response carries a 'message' key.
+
+Release 3.7.1
 
     Fixed bug <FRQU-211> (problem listing non-existent workspace)
 
