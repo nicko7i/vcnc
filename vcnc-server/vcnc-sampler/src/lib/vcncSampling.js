@@ -14,6 +14,11 @@ const rtdb = require('rethinkdb');
 //
 const json = require('JSON');
 const async = require('async');
+//
+// const jsu = require('./JSutils');
+const conf = require('../vcncSampler.conf');
+const vsm = require('./vcncSampler');
+// const vdaRec = require('./src/lib/vdaReceiver');
 
 
 let cnxtn = null;
@@ -23,23 +28,19 @@ let cnxtn = null;
 // const timespanSec = timespanMillisec / 1000.0;
 
 
-// const jsu = require('./JSutils');
-const conf = require('../velstor-davcnc.conf');
-const vdap = require('./vdaParser');
-const vsm = require('./vcncSampler');
-// const vdaRec = require('./src/lib/vdaReceiver');
-
  /**
   * This class is a custom write stream to output VDA messages to multiple files
   * to date names directories
   */
 function VcncSampling(dt, ltc) {
-  this.parser = vdap.CreateVdaParser();
-  this.msgSampler = vsm.CreateVcncSampler(dt);
   this.sampleTime = (dt !== undefined) ? dt : conf.DefSampleTime();
   this.latency = (ltc !== undefined) ? ltc : conf.DefLatency();
-  this.sendTime = this.sampleTime + this.latency;
+  this.msgSampler = vsm.CreateVcncSampler(this.sampleTime);
 }
+
+VcncSampling.prototype.BeanTimeout = function () {
+  return (this.sampleTime + this.latency);
+};
 
 /**
  *  Initializes the mockSampler module, creating a connection object
@@ -71,13 +72,12 @@ VcncSampling.prototype.Init = function () {
 VcncSampling.prototype.Run = function (data) {
   const self = this;
   try {
+//    console.log(`VcncSampling::Run: ${data}`);
     const jsonData = json.parse(data);
-    self.vcncSample.Run(data);
-//    dawStream.write(parseData);
-    async.each(jsonData.messagesa, (msg) => {
+    async.each(jsonData.messages, (msg) => {
       self.msgSampler.Add(msg);
     });
-    setInterval(self.Send, self.sendTime);
+    //
   } catch (err) {
     console.log('Warning: VDa data corrupted');
   }
@@ -85,10 +85,16 @@ VcncSampling.prototype.Run = function (data) {
 
 VcncSampling.prototype.Send = function () {
   const self = this;
+  console.log('>>> Start Send');
   const bean = self.msgSampler.ReleaseBean();
-  console.log(json.stringify(bean));
+  if (bean !== undefined) {
+    console.log(`Bean: ${json.stringify(bean)}`);
+  }
+  console.log('<<< Finished Send');
+  return bean;
 };
 
 exports.CreateVcncSampling = function CreateVcncSampling() {
   return new VcncSampling();
 };
+

@@ -23,10 +23,9 @@ const http = require('http');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const json = require('JSON');
-
-const jsu = require('./src/lib/JSutils');
-const conf = require('./src/velstor-davcnc.conf');
-const dawfs = require('./src/lib/daWriteFileStream');
+//
+const jsu = require('./src/lib/vcncSamplerUtils');
+const conf = require('./src/vcncSampler.conf');
 const vs = require('./src/lib/vcncSampling');
 
 const cmdl = jsu.cmd_line();
@@ -36,8 +35,8 @@ const args = cmdl.Input(validKeys);
 // TODO: get vcnc version
 // jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
 console.log('\nStart VCnC sampler');
-console.log(`Input arguments: ${args}`);
-const options = cmdl.JSHost('vda');
+// console.log(`Input arguments: ' + json.stringify(args));
+const options = cmdl.JSNode('vda');
 const logDir = cmdl.JSparam('logDir');
 
 console.log(json.stringify(options));
@@ -52,7 +51,7 @@ if (logDir === undefined) { // || options.method === 'INVALID') {
 }
 /*
 if (options.method !== 'POST') {
-  console.log(`Invalid REST method (should be POST): ${json.stringify(options)}`);
+  console.log(`Invalid REST method (should be POST): json.stringify(options));
   process.exit(1);
 }
 */
@@ -69,7 +68,7 @@ mkdirp(logDir, (err) => {
 });
 fs.access(logDir, fs.W_OK, (err) => {
   if (err !== null) {
-     console.log(`No directory or no permission to create ${logDir}`);
+    console.log(`No directory or no permission to create ${logDir}`);
     console.log('Invalid input parameters');
     process.exit(1);
   }
@@ -78,10 +77,6 @@ fs.access(logDir, fs.W_OK, (err) => {
 const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
-const dawStream = dawfs.DAWriteFileStream(logDir, 'post_');
-// var wstream = fs.createWriteStream(logfile);
-
-// var https = require( "https" );
 
 // const COUNT = 0;
 let socketCount = 0;
@@ -95,11 +90,16 @@ if (!Date.now) {
 const tsStart = Date.now();
 console.log(`Time (ms):${tsStart}`);
 
+
+const vcncSample = vs.CreateVcncSampling();
+// vcncSample.Init();
+
 // Process buffered messages from VDA
 //
 function requestHandler(request, response) {
   request.setEncoding('utf8');
   request.on('data', (data) => {
+//    console.log(data);
     vcncSample.Run(data);
   });
   response.on('error', (err) => {
@@ -108,8 +108,6 @@ function requestHandler(request, response) {
   response.end();
 }
 
-const vcncSample = vs.CreateVcncSampling();
-// vcncSample.Init();
 
 const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
@@ -118,11 +116,11 @@ server.on('connection', (socket) => {
   socketCount += 1;
   console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
   socket.on('close', () => {
-    --socketCount;
+    socketCount -= 1;
     console.log(`POST socket closed: ${socketCount}`);
   });
 });
-server.on('connect', (request, socket, head) => {
+server.on('connect', (request, socket) => {
   console.log(`POST Client requests connection: ${json.stringify(socket.address())}`);
 });
 server.on('clientError', (exception, socket) => {
@@ -137,25 +135,27 @@ server.listen(port, host, () => {
   console.log(`Listening on ${host}:${port}`);
 });
 
+// Pass data to rethinkdb
+const pushTimeout = vcncSample.BeanTimeout();
+setInterval(() => {
+  vcncSample.Send();
+}, pushTimeout);
+
+// Process Linux signals
+//
 // Processing of Linux signals
 //
 process.on('SIGINT', () => {
   console.log('Caught SIGINT interrupt signal');
-  dawStream.flush();
   process.exit(0);
 });
 
-
-// Process Linux signals
-//
 process.on('SIGTERM', () => {
   console.log('Caught SIGTERM interrupt signal');
-  dawStream.flush();
   process.exit(0);
 });
 
 process.on('SIGUSR1', () => {
   console.log('Caught SIGUSR1 interrupt signal');
-  dawStream.flush();
 });
 

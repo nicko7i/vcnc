@@ -36,6 +36,7 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
   let argkey;
   let argvalue;
   let invalidKeyCount = 0;
+  let ARG_COUNT = 0;
 
   process.argv.forEach((val, index) => {
     if (index === 1) {
@@ -49,10 +50,11 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
       argkey = res[0];
       argvalue = res.length === 1 ? '' : res[1];
 
-            // Validate input parameters
+      // Validate input parameters
+      //
       if (validKeys.has(argkey)) {
         self.argsDict.add(argvalue, argkey);
-                //   console.log(ARG_COUNT + ". " + argkey + " " + argvalue);
+        console.log(ARG_COUNT++ + ". " + argkey + " " + argvalue);
       } else {
         console.log(`Invalid key: ${argkey}`);
         invalidKeyCount += 1;
@@ -69,8 +71,9 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
   return self.argsDict;
 };
 
+
 /**
- * Input consumer-node options
+ * Input node options
  *
  * @param {string} key      - keyword of command line or configuration node option
  * @param (string) defNode  - default node settings
@@ -79,57 +82,6 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
  *
  */
 ProcessCommandLine.prototype.JSNode = function (key, defNode) {
-  const self = this;
-  const options =
-    {
-      host: '',
-      method: 'INVALID',
-      port: 0,
-      subscription_port: 0,
-    };
-
-  const prefix = '--';
-  const preKey = prefix + key;
-  let value;
-
-  if (self.argsDict.has(preKey)) {
-    value = self.argsDict.get(preKey);
-  } else if (defNode === undefined) {
-    return options;
-  } else {
-    value = defNode;
-  }
-  const args = value.split(',');
-  if (args.length === 0) {
-    return options;
-  }
-
-  const restFunc = args[0].toLowerCase();
-
-  if (restFunc === 'post') {
-    options.method = 'POST';
-  } else if (restFunc === 'get') {
-    options.method = 'GET';
-  } else {
-    return options;
-  }
-
-  options.host = args[1];
-  options.port = args[2];
-  options.subscription_port = args[3];
-  return options;
-};
-
-/**
- * Input consumer-node options
- *
- * @param {string} key      - keyword of command line or configuration node option
- * @param (string) defNode  - default node settings
- * @return (JS object)      - host node (REST API method, IP address, port, usability:
- *                            (enabled, 0 disabled)
- *
- */
-ProcessCommandLine.prototype.JSHost = function (key, defNode) {
   const self = this;
   const options =
     {
