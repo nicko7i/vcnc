@@ -16,7 +16,7 @@ function VcncSampler(dt) {
   this.pmReadBeans = {};
   this.vtrqReadBeans = {};
   this.samplePeriod = dt;
-  this.startTime;
+  this.startTime = 0;
   this.empty = true;
   this.minIndex = -1;
   this.maxIndex = -1;
@@ -41,7 +41,7 @@ VcncSampler.prototype.Add = function (jsnMsg) {
   const self = this;
   const ts = new Date(jsnMsg.ts).getTime() / 1000;
   const index = self.BeanIndex(ts);
-  if (index < 0) {
+  if (index < self.minIndex) {
     self.ignoredMsgCount += 1;
     return;
   }
@@ -57,7 +57,7 @@ VcncSampler.prototype.Add = function (jsnMsg) {
     self.minIndex = index;
   }
   if (index > self.maxIndex) {
-    if (index - self.fistIndex > conf.MaxBeans()) {
+    if (index - self.minIndex > conf.MaxBeans()) {
       self.ignoredMsgCount += 1;
       return;
     }
