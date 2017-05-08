@@ -484,7 +484,7 @@ module.exports = (app) => {
   //
   //  Request storage info from  TRQ.
   //
-  app.post('/vtrq/:vtrq_id/storage/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/storage/:url_path', (req, res) => {
     fulfill202(
       req,
       res,

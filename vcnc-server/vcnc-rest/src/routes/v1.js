@@ -505,7 +505,7 @@ module.exports = (app) => {
   //
   //  Request storage info from  TRQ.
   //
-  app.post('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
