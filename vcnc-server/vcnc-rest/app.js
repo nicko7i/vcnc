@@ -21,7 +21,10 @@ const WebSocket = require('ws');
 const WebSocketHandler = require('../vcnc-core/src/lib/websocket');
 const mockSampler = require('../vcnc-core/src/lib/mockSampler');
 const websocket = require('../vcnc-core/src/lib/websocket');
-
+//
+//  Storage Polling
+//  (Eventually polling will be performed by vcnc-core)
+const storagePolling = require('../vcnc-core/src/lib/pollStorageStats');
 //
 const path = require('path');
 const http = require('http');
@@ -32,7 +35,6 @@ const rethink = require('../vcnc-core/src/lib/rethink');
 //  Initialize the C++ extension
 //
 const extensionPath = '../js-extension/build/Release/cnctrq_client';
-// const CnctrqClient = require('cnctrqClient').CnctrqClient;
 const CnctrqClient = require(extensionPath).CnctrqClient;
 const cnctrqClient = new CnctrqClient();
 cnctrqClient.call_me_first(path.join(__dirname, '..'));
@@ -289,6 +291,7 @@ module.exports = (() => {
   .then(() => grid.init())
   .then(() => mockSampler.init())
   .then(() => websocket.init())
+  .then(() => storagePolling.init())
   .then(() => configureSwaggerMiddleware(app, 'src/api/v1api.json'))
   .then(() => configureSwaggerMiddleware(app, 'src/api/v2api.json'))
   .then(() => {
