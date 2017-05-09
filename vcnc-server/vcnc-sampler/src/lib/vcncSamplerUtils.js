@@ -36,6 +36,7 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
   let argkey;
   let argvalue;
   let invalidKeyCount = 0;
+  let ARG_COUNT = 0;
 
   process.argv.forEach((val, index) => {
     if (index === 1) {
@@ -49,10 +50,11 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
       argkey = res[0];
       argvalue = res.length === 1 ? '' : res[1];
 
-            // Validate input parameters
+      // Validate input parameters
+      //
       if (validKeys.has(argkey)) {
         self.argsDict.add(argvalue, argkey);
-                //   console.log(ARG_COUNT + ". " + argkey + " " + argvalue);
+        console.log(ARG_COUNT++ + ". " + argkey + " " + argvalue);
       } else {
         console.log(`Invalid key: ${argkey}`);
         invalidKeyCount += 1;
@@ -69,8 +71,9 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
   return self.argsDict;
 };
 
+
 /**
- * Input consumer-node options
+ * Input node options
  *
  * @param {string} key      - keyword of command line or configuration node option
  * @param (string) defNode  - default node settings
@@ -83,9 +86,7 @@ ProcessCommandLine.prototype.JSNode = function (key, defNode) {
   const options =
     {
       host: '',
-      method: 'INVALID',
       port: 0,
-      subscription_port: 0,
     };
 
   const prefix = '--';
@@ -104,21 +105,11 @@ ProcessCommandLine.prototype.JSNode = function (key, defNode) {
     return options;
   }
 
-  const restFunc = args[0].toLowerCase();
-
-  if (restFunc === 'post') {
-    options.method = 'POST';
-  } else if (restFunc === 'get') {
-    options.method = 'GET';
-  } else {
-    return options;
-  }
-
-  options.host = args[1];
-  options.port = args[2];
-  options.subscription_port = args[3];
+  options.host = args[0];
+  options.port = args[1];
   return options;
 };
+
 
 /**
  * Get JS config parameter by its name in a command line (this parameter will not be passed to C++)
@@ -291,15 +282,15 @@ exports.GetDirectories = function (p) {
 };
 
 exports.ReadFileAndDelete = function ReadFileAndDelete(p, defInput, callback) {
-  var dt;
+  let dt;
   fs.access(p, fs.F_OK, (err) => {
     if (err) {
       return callback(defInput);
     }
     fs.readFile(p, 'utf8', (err, dt) => {
       if (err) return callback(defInput);
-      return callback(dt.toString());
     });
+    return callback(dt.toString());
   });
 };
 
