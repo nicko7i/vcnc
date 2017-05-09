@@ -41,14 +41,10 @@ VcncSampler.prototype.Add = function (jsnMsg) {
   const self = this;
   const ts = new Date(jsnMsg.ts).getTime() / 1000;
   const index = self.BeanIndex(ts);
-  if (index < self.minIndex) {
+  if (index < self.minIndex || index - self.minIndex > conf.MaxBeans()) {
     self.ignoredMsgCount += 1;
     return;
   }
-  //
-  const op = jsnMsg.opID;
-  const readBytes = parseInt(jsnMsg.errCode, 10);
-//  console.log(`op=${op}`);
 
   // First call
   //
@@ -57,12 +53,13 @@ VcncSampler.prototype.Add = function (jsnMsg) {
     self.minIndex = index;
   }
   if (index > self.maxIndex) {
-    if (index - self.minIndex > conf.MaxBeans()) {
-      self.ignoredMsgCount += 1;
-      return;
-    }
     self.maxIndex = index;
   }
+  //
+  //
+  const op = jsnMsg.opID;
+  const readBytes = parseInt(jsnMsg.errCode, 10);
+  //  console.log(`op=${op}`);
   //
   switch (op) {
     case 'read':

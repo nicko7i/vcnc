@@ -71,16 +71,16 @@ VcncSampling.prototype.Init = function () {
 
 VcncSampling.prototype.Run = function (data) {
   const self = this;
-  try {
+  let jsonData;
 //    console.log(`VcncSampling::Run: ${data}`);
-    const jsonData = json.parse(data);
-    async.each(jsonData.messages, (msg) => {
-      self.msgSampler.Add(msg);
-    });
-    //
+  try {
+    jsonData = json.parse(data);
   } catch (err) {
     console.log('Warning: VDa data corrupted');
   }
+  async.each(jsonData.messages, (msg) => {
+    self.msgSampler.Add(msg);
+  });
 };
 
 VcncSampling.prototype.Send = function () {
