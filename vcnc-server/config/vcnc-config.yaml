@@ -11,6 +11,12 @@ server:
   #  listens on all interfaces. (Value is currently ignored; server listens on all
   #  interfaces)
   interface: all
+  #
+  #  The period (1/rate) at which to poll the vtrq for storage statistics, in ms.
+  #
+  #  A rate of a few seconds is intendend for customer demo, not production.
+  #
+  vtrqPollPeriod: 5000
 
 fulfill202:
   #

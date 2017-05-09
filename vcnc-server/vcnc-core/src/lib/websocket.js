@@ -4,6 +4,7 @@ const config = require('./configuration.js');
 const url = require('url');
 const mockDashboardData = require('./mockDashboardData')();
 const mockSampler = require('./mockSampler');
+const storagePolling = require('./pollStorageStats');
 const r = require('rethinkdb');
 
 let connection = null;
@@ -69,7 +70,14 @@ function makeMockRethinkHandler() {
       cursor.each((error, change) => {
         if (change !== undefined && change.new_val) {
           const { rVpm, rVtrq, storageEfficiency } = change.new_val;
-          ws.send(JSON.stringify({ rVpm, rVtrq, storageEfficiency }));
+          if (storagePolling.connected()) {
+            ws.send(JSON.stringify({
+              rVpm,
+              rVtrq,
+              storageEfficiency: storagePolling.currentValue().value }));
+          } else {
+            ws.send(JSON.stringify({ rVpm, rVtrq, storageEfficiency }));
+          }
         }
       });
     })
