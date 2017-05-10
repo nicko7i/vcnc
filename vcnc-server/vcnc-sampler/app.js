@@ -92,7 +92,7 @@ console.log(`Time (ms):${tsStart}`);
 
 
 const vcncSample = vs.CreateVcncSampling();
-// vcncSample.Init();
+vs.Init();
 
 // Process buffered messages from VDA
 //
@@ -140,6 +140,12 @@ const pushTimeout = vcncSample.BeanTimeout();
 setInterval(() => {
   vcncSample.Send();
 }, pushTimeout);
+
+// Remove old data from rethinkdb table
+setInterval(() => {
+  vcncSample.Trim();
+}, pushTimeout);
+
 
 // Process Linux signals
 //

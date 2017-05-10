@@ -49,6 +49,23 @@ mockSampler:
   #  The period (1/rate) of the data in ms
   period: 2000
 
+vdaSampler:
+  #
+  #  The maximum number of samples stored.
+  maxEntries: 100
+  #
+  #  The maximum number of beans to collect messages
+  maxBeans: 100
+  #
+  #  The RethinkDB table where the real-time dashboard data is stored.
+  table: vdasampler
+  #
+  #  The period (1/rate) of the data in ms
+  period: 2000
+  #
+  #  The period extension in ms to prevent data loss
+  latency: 500
+
 peercache:
   #
   #  The /vtrq/... endpoints specify the vTRQ ID as part of the request.
