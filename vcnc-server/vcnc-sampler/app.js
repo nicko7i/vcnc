@@ -136,7 +136,7 @@ server.listen(port, host, () => {
 });
 
 // Pass data to rethinkdb
-const pushTimeout = vcncSample.BeanTimeout();
+const pushTimeout = vcncSample.BinTimeout();
 setInterval(() => {
   vcncSample.Send();
 }, pushTimeout);

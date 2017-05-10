@@ -14,8 +14,8 @@ const conf = require('../vcncSampler.conf');
  */
 class VcncSampler {
   constructor(dt) {
-    this.pmReadBeans = {};
-    this.vtrqReadBeans = {};
+    this.pmReadBins = {};
+    this.vtrqReadBins = {};
     this.samplePeriod = (dt / 1000.0);
     this.startTime = 0;
     this.empty = true;
@@ -25,15 +25,15 @@ class VcncSampler {
     this.ignoredMsgCount = 0;
   }
 
-  BeanIndex(ts) {
-    //  console.log('>>> Start BeanIndex');
+  BinIndex(ts) {
+    //  console.log('>>> Start BinIndex');
     const self = this;
     // Add extra bean just in case to reserve it for messages out of order
     //
     if (self.empty === true) {
       self.startTime = parseInt(ts, 10) - self.samplePeriod;
     }
-    //  console.log('<<< Finished BeanIndex');
+    //  console.log('<<< Finished BinIndex');
     return parseInt((ts - self.startTime) / self.samplePeriod, 10);
   }
 
@@ -41,8 +41,8 @@ class VcncSampler {
     //  console.log('>>> Add started');
     const self = this;
     const ts = new Date(jsnMsg.ts).getTime() / 1000;
-    const index = self.BeanIndex(ts);
-    if (index < self.minIndex || index - self.minIndex > conf.MaxBeans()) {
+    const index = self.BinIndex(ts);
+    if (index < self.minIndex || index - self.minIndex > conf.MaxBins()) {
       self.ignoredMsgCount += 1;
       return;
     }
@@ -64,14 +64,14 @@ class VcncSampler {
     //
     switch (op) {
       case 'read':
-        self.pmReadBeans[index] = (self.pmReadBeans[index] === undefined) ?
-          readBytes : self.pmReadBeans[index] + readBytes;
-        //      console.log(` self.pmReadBeans[index] = ${self.pmReadBeans[index]} index=${index}`);
+        self.pmReadBins[index] = (self.pmReadBins[index] === undefined) ?
+          readBytes : self.pmReadBins[index] + readBytes;
+        //      console.log(` self.pmReadBins[index] = ${self.pmReadBins[index]} index=${index}`);
         break;
       case 'read_vtrq':
-        self.vtrqReadBeans[index] = (self.vtrqReadBeans[index] === undefined) ?
-          readBytes : self.vtrqReadBeans[index] + readBytes;
-        // console.log(` self.vtrqReadBeans[index] = ${self.vtrqReadBeans[index]} index=${index}`);
+        self.vtrqReadBins[index] = (self.vtrqReadBins[index] === undefined) ?
+          readBytes : self.vtrqReadBins[index] + readBytes;
+        // console.log(` self.vtrqReadBins[index] = ${self.vtrqReadBins[index]} index=${index}`);
         break;
       default:
         self.ignoredMsgCount += 1;
@@ -82,39 +82,39 @@ class VcncSampler {
     //  console.log('<<< Add finished');
   }
 
-  ReleaseBean() {
-//    console.log('>>> Start ReleaseBean');
+  ReleaseBin() {
+//    console.log('>>> Start ReleaseBin');
     const self = this;
-    let bean;
-    if (self.empty === true) return bean;
+    let bin;
+    if (self.empty === true) return bin;
     let samplerTs = self.startTime + (self.samplePeriod * self.minIndex);
 
     // Set time to a center af sample interval
     samplerTs -= Math.round(self.samplePeriod / 2);
-    console.log(`ReleaseBean: self.minIndex${self.minIndex} samplerTs${samplerTs}`);
-    const pmRead = (self.pmReadBeans[self.minIndex] === undefined) ?
-      0 : self.pmReadBeans[self.minIndex];
-    const vtrqRead = (self.vtrqReadBeans[self.minIndex] === undefined) ?
-      0 : self.vtrqReadBeans[self.minIndex];
-    bean = {
+//    console.log(`ReleaseBin: self.minIndex${self.minIndex} samplerTs${samplerTs}`);
+    const pmRead = (self.pmReadBins[self.minIndex] === undefined) ?
+      0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
+    const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
+      0 : parseInt(self.vtrqReadBins[self.minIndex] / self.samplePeriod, 10);
+    bin = {
       storageEfficiency: 0,
       rVtrq: vtrqRead,
       rVpm: pmRead,
       sampleTimestamp: samplerTs,
     };
-    if (self.pmReadBeans[self.minIndex] !== undefined) delete self.pmReadBeans[self.minIndex];
-    if (self.vtrqReadBeans[self.minIndex] !== undefined) delete self.vtrqReadBeans[self.minIndex];
+    if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
+    if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
     if (self.minIndex === self.maxIndex) {
       self.empty = true;
       self.maxIndex = -1;
       self.minIndex = -1;
     } else {
-      const keys = Object.keys(self.pmReadBeans);
+      const keys = Object.keys(self.pmReadBins);
       self.minIndex = keys[0];
     }
-    console.log(`Bean: ${json.stringify(bean)}`);
-//    console.log('<<< Finished ReleaseBean');
-    return bean;
+    console.log(`Bin: ${json.stringify(bin)}`);
+//    console.log('<<< Finished ReleaseBin');
+    return bin;
   }
 }
 

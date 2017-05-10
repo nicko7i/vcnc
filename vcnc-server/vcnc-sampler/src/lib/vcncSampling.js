@@ -29,7 +29,7 @@ class VcncSampling {
     this.rdb = rs.CreaterethinkdbSampler(this.sampleTime, this.latency);
   }
 
-  BeanTimeout() {
+  BinTimeout() {
     return (this.sampleTime + this.latency);
   }
 
@@ -50,10 +50,10 @@ class VcncSampling {
   Send() {
     const self = this;
 //    console.log('>>> Start Send');
-    const bean = self.msgSampler.ReleaseBean();
-    if (bean !== undefined) {
-      console.log(`Bean: ${json.stringify(bean)}`);
-      self.rdb.Push(bean);
+    const bin = self.msgSampler.ReleaseBin();
+    if (bin !== undefined) {
+      console.log(`Bin: ${json.stringify(bin)}`);
+      self.rdb.Push(bin);
     }
 //    console.log('<<< Finished Send');
   }
