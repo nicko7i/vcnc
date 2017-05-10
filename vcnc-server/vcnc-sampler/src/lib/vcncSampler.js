@@ -83,7 +83,7 @@ class VcncSampler {
   }
 
   ReleaseBean() {
-    console.log('>>> Start ReleaseBean');
+//    console.log('>>> Start ReleaseBean');
     const self = this;
     let bean;
     if (self.empty === true) return bean;
@@ -113,7 +113,7 @@ class VcncSampler {
       self.minIndex = keys[0];
     }
     console.log(`Bean: ${json.stringify(bean)}`);
-    console.log('<<< Finished ReleaseBean');
+//    console.log('<<< Finished ReleaseBean');
     return bean;
   }
 }

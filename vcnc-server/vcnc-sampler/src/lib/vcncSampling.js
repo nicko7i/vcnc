@@ -49,13 +49,13 @@ class VcncSampling {
 
   Send() {
     const self = this;
-    console.log('>>> Start Send');
+//    console.log('>>> Start Send');
     const bean = self.msgSampler.ReleaseBean();
     if (bean !== undefined) {
       console.log(`Bean: ${json.stringify(bean)}`);
       self.rdb.Push(bean);
     }
-    console.log('<<< Finished Send');
+//    console.log('<<< Finished Send');
   }
 
   Trim() {
