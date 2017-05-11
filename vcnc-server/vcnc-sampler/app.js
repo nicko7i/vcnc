@@ -115,29 +115,6 @@ const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
 });
 
-/*
-server.on('connection', (socket) => {
-  socketCount += 1;
-  console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
-  socket.on('close', () => {
-    socketCount -= 1;
-    console.log(`POST socket closed: ${socketCount}`);
-  });
-});
-*/
-/*
-server.on('connect', (request, socket) => {
-  console.log(`POST Client requests connection: ${json.stringify(socket.address())}`);
-});
-server.on('clientError', (exception, socket) => {
-  console.log(`POST Client error: ${json.stringify(socket.address())}`);
-});
-
-server.on('close', () => {
-  console.log('POST Server Closed');
-});
-*/
-
 server.listen(port, host, () => {
   console.log(`Listening on ${host}:${port}`);
 });
