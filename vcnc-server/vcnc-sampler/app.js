@@ -23,10 +23,19 @@ const http = require('http');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const json = require('JSON');
+const path = require('path');
 //
 const jsu = require('./src/lib/vcncSamplerUtils');
 const conf = require('./src/vcncSampler.conf');
 const vs = require('./src/lib/vcncSampling');
+
+//
+//  Initialize the C++ extension
+//
+const extensionPath = '../js-extension/build/Release/cnctrq_client';
+const CnctrqClient = require(extensionPath).CnctrqClient;
+const cnctrqClient = new CnctrqClient();
+cnctrqClient.call_me_first(path.join(__dirname, '..'));
 
 const cmdl = jsu.cmd_line();
 const validKeys = conf.vcncSamplerKeys();
@@ -106,6 +115,7 @@ const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
 });
 
+/*
 server.on('connection', (socket) => {
   socketCount += 1;
   console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
@@ -114,7 +124,8 @@ server.on('connection', (socket) => {
     console.log(`POST socket closed: ${socketCount}`);
   });
 });
-
+*/
+/*
 server.on('connect', (request, socket) => {
   console.log(`POST Client requests connection: ${json.stringify(socket.address())}`);
 });
@@ -125,6 +136,7 @@ server.on('clientError', (exception, socket) => {
 server.on('close', () => {
   console.log('POST Server Closed');
 });
+*/
 
 server.listen(port, host, () => {
   console.log(`Listening on ${host}:${port}`);
