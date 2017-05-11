@@ -2,12 +2,11 @@
 // Include the necessary modules.
 
 const Set = require('collections/set');
+//
+const config = require('../../vcnc-core/src/lib/configuration.js');
 
 // Default values of configuration parameters
-
-const sampleTime = 2000;  // ms
-const maxSize = 100;
-const latency = 500; // ms
+const { maxEntries, maxBins, table, period, latency } = config.vdaSampler;
 
 // Patthto Vcnc-sampler log-file
 const logFile = '';
@@ -30,26 +29,23 @@ const samples =
     read_vtrq: 1,
   };
 
-// Maximal number of buckets
-const maxBeans = 100; // ~5M   (10M is fine too)
 
-
-// exports.verbose = function  verbose() {return verbose_level;}
 function Logfile() { return logFile; }
-function DefSampleTime() { return sampleTime; }
-function DefLatency() {return latency;}
+function DefSampleTime() { return period; }
+function DefLatency() { return latency; }
 function vcncSamplerKeys() { return daVcncKeywords; }
-function MaxSize() { return maxSize; }
+function MaxEntries() { return maxEntries; }
 function Samples() { return samples; }
-function MaxBeans() { return maxBeans; }
-
+function MaxBins() { return maxBins; }
+function Table() { return table; }
 
 module.exports = {
   Logfile,
   DefSampleTime,
   DefLatency,
   vcncSamplerKeys,
-  MaxSize,
+  MaxEntries,
   Samples,
-  MaxBeans,
+  MaxBins,
+  Table,
 };

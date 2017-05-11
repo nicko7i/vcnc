@@ -49,12 +49,7 @@ if (logDir === undefined) { // || options.method === 'INVALID') {
   console.log('Invalid input parameters');
   process.exit(1);
 }
-/*
-if (options.method !== 'POST') {
-  console.log(`Invalid REST method (should be POST): json.stringify(options));
-  process.exit(1);
-}
-*/
+
 if (!options.host || !options.port) {
   console.log(`Invalid host/port: ${json.stringify(options)}`);
   process.exit(1);
@@ -78,7 +73,6 @@ const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
 
-// const COUNT = 0;
 let socketCount = 0;
 
 if (!Date.now) {
@@ -92,7 +86,7 @@ console.log(`Time (ms):${tsStart}`);
 
 
 const vcncSample = vs.CreateVcncSampling();
-// vcncSample.Init();
+vcncSample.Init();
 
 // Process buffered messages from VDA
 //
@@ -108,10 +102,10 @@ function requestHandler(request, response) {
   response.end();
 }
 
-
 const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
 });
+
 server.on('connection', (socket) => {
   socketCount += 1;
   console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
@@ -120,6 +114,7 @@ server.on('connection', (socket) => {
     console.log(`POST socket closed: ${socketCount}`);
   });
 });
+
 server.on('connect', (request, socket) => {
   console.log(`POST Client requests connection: ${json.stringify(socket.address())}`);
 });
@@ -136,10 +131,19 @@ server.listen(port, host, () => {
 });
 
 // Pass data to rethinkdb
-const pushTimeout = vcncSample.BeanTimeout();
+const pushTimeout = vcncSample.PushTimeout();
+const trimTimeout = vcncSample.TrimTimeout();
+// console.log('pushTimeout = ' + pushTimeout +  ' trimTimeout = ' + trimTimeout);
+
 setInterval(() => {
   vcncSample.Send();
 }, pushTimeout);
+
+// Remove old data from rethinkdb table
+setInterval(() => {
+  vcncSample.Trim();
+}, trimTimeout);
+
 
 // Process Linux signals
 //
