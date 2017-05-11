@@ -42,7 +42,7 @@ const validKeys = conf.vcncSamplerKeys();
 const args = cmdl.Input(validKeys);
 
 // TODO: get vcnc version
-// jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
+
 console.log('\nStart VCnC sampler');
 // console.log(`Input arguments: ' + json.stringify(args));
 const options = cmdl.JSNode('vda');
@@ -81,8 +81,6 @@ fs.access(logDir, fs.W_OK, (err) => {
 const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
-
-let socketCount = 0;
 
 if (!Date.now) {
   Date.now = function () {
