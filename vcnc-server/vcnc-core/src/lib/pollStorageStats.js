@@ -42,7 +42,12 @@ function init() {
         //  A vtrq will only have zero sum_extents when it is newly created. At that
         //  time, sum_st_size is also zero, so the storage efficiency is '1'.
         //
-        const value = result.sum_extents ? result.sum_st_size / result.sum_extents : 1;
+        // ... TODO Workaround to show numbers changing on the dashboard
+        // ... vTRQ bug gives the same value for sum_extents and sum_st_size
+        // ... By taking the log, we can see the value change while keeping it the
+        // ... same magnitude as the real storage efficiency.
+        // const value = result.sum_extents ? result.sum_st_size / result.sum_extents : 1;
+        const value = Math.log10(1 + result.sum_st_size);
         latestValue = {
           value,
           timestamp: Date.now(),
