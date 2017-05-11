@@ -6,6 +6,8 @@
 // const DateTime = require('datetime-converter-nodejs');
 const json = require('JSON');
 //
+const storPoll = require('../../../vcnc-core/src/lib/pollStorageStats');
+//
 const conf = require('../vcncSampler.conf');
 
 /**
@@ -23,6 +25,11 @@ class VcncSampler {
     this.maxIndex = -1;
     this.msgCount = 0;
     this.ignoredMsgCount = 0;
+  }
+
+  Init() {
+    storPoll.init();
+//    console.log('StorageEfficiency: ' + storPoll.currentValue().value);
   }
 
   BinIndex(ts) {
@@ -96,12 +103,19 @@ class VcncSampler {
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.vtrqReadBins[self.minIndex] / self.samplePeriod, 10);
+    const se = storPoll.currentValue().value;
+
+    // Set output bin
+    //
     bin = {
-      storageEfficiency: 0,
+      storageEfficiency: se,
       rVtrq: vtrqRead,
       rVpm: pmRead,
       sampleTimestamp: samplerTs,
     };
+
+    // Delete processed bin
+    //
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
     if (self.minIndex === self.maxIndex) {

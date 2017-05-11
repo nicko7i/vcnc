@@ -61,7 +61,7 @@ vdaSampler:
   table: vdasampler
   #
   #  The period (1/rate) of the data in ms
-  period: 2000
+  period: 5000
   #
   #  The period extension in ms to prevent data loss
   latency: 500

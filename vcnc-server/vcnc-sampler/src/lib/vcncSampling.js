@@ -3,12 +3,11 @@
  *
  *    See the file 'COPYING' for license information.
  */
-/**
- * Implement Vcnc sampling process and input sampled data to rethinkdb
+/*
+ * Implementation of Vcnc sampling process and input sampled data to rethinkdb
  *
  */
 
-//
 const json = require('JSON');
 const async = require('async');
 //
@@ -28,15 +27,36 @@ class VcncSampling {
     this.msgSampler = vsm.CreateVcncSampler(this.sampleTime);
     this.rdb = rs.CreaterethinkdbSampler(this.sampleTime, this.latency);
   }
+   /**
+    *  Initializes the vcncSampler module, creating a connection object
+    *  and creating the table if necessary.
+    *
+    *  @return {promise} A promise fulfilled when the connection is ready.
+    */
+  Init() {
+    const self = this;
+//    console.log('>>> Start Init');
+    self.msgSampler.Init();
+    rs.Init();
+//    console.log('>>> Finished Init');
+  }
 
-  BinTimeout() {
-    return (this.sampleTime + this.latency);
+  PushTimeout() {
+    const period = this.sampleTime + this.latency;
+ //   console.log(`pushTimeout = ${period}`);
+    return period;
+  }
+
+  TrimTimeout() {
+    const period = (this.sampleTime + this.latency) * conf.MaxEntries();
+//    console.log(`trimTimeout = ${period}`);
+    return period;
   }
 
   Run(data) {
     const self = this;
     let jsonData;
-    //    console.log(`VcncSampling::Run: ${data}`);
+    // console.log(`VcncSampling::Run: ${data}`);
     try {
       jsonData = json.parse(data);
     } catch (err) {
@@ -52,7 +72,7 @@ class VcncSampling {
 //    console.log('>>> Start Send');
     const bin = self.msgSampler.ReleaseBin();
     if (bin !== undefined) {
-      console.log(`Bin: ${json.stringify(bin)}`);
+//      console.log(`Bin: ${json.stringify(bin)}`);
       self.rdb.Push(bin);
     }
 //    console.log('<<< Finished Send');
@@ -67,20 +87,7 @@ function CreateVcncSampling(dt, ltc) {
   return new VcncSampling(dt, ltc);
 }
 
-
-/**
- *  Initializes the vdaSampler module, creating a connection object
- *  and creating the table if necessary.
- *
- *  @return {promise} A promise fulfilled when the connection is ready.
- */
-function Init() {
-  rs.Init();
-}
-
-
 module.exports = {
   CreateVcncSampling,
-  Init,
 };
 
