@@ -36,8 +36,13 @@ class VcncSampling {
   Init() {
     const self = this;
 //    console.log('>>> Start Init');
-    self.msgSampler.Init();
-    rs.Init();
+    const p = rs.Init();
+    p.then(() => {
+      self.msgSampler.Init();
+    }, (e) => {
+      console.error(`ERROR: rethinkdb is not running\n ${e}`);
+      process.exit(1);
+    });
 //    console.log('>>> Finished Init');
   }
 
