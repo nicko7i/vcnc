@@ -97,7 +97,16 @@
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Coding Policies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coding Policies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-policies">General Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#javascript">JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#node">Node</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#version-control">Version Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ides">IDEs</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installing-and-building.html">Installing and Building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vcnc-rest.html">vCNC REST</a></li>
@@ -152,7 +161,36 @@
             
   <div class="section" id="coding-policies">
 <h1>Coding Policies<a class="headerlink" href="#coding-policies" title="Permalink to this headline">¶</a></h1>
-<p>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. 2 Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. 3 Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, 4 proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. 5 Eorum una pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. 6 Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem.</p>
+<div class="section" id="general-policies">
+<h2>General Policies<a class="headerlink" href="#general-policies" title="Permalink to this headline">¶</a></h2>
+<p>Indent using spaces. Do not use tabs.</p>
+<p>Python indents four, per PEP 8.  All other languages indent by two.</p>
+<p>Maintain 80 character margins.</p>
+</div>
+<div class="section" id="javascript">
+<h2>JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h2>
+<p>JavaScript follows the AirBnb <a class="reference external" href="https://github.com/airbnb/javascript">JavaScript</a> and <a class="reference external" href="https://github.com/airbnb/javascript/tree/master/react">React</a> standards.</p>
+<p>JavaScript standards are enforced by <a class="reference external" href="http://eslint.org/">ESLint</a>. See vcnc-web/.eslintrc.js</p>
+<p>Node.js code uses &#8216;require(..)&#8217;. All other code uses ES6 import/export.</p>
+</div>
+<div class="section" id="node">
+<h2>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h2>
+<p>Use npm for scripting. Do not use Grunt, Gulp or similar.</p>
+<div class="section" id="version-control">
+<h3>Version Control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h3>
+<p>The project is hosted at <a class="reference external" href="https://github.com/nicko7i/vcnc.git">GitHub</a>.</p>
+<p>Use <a class="reference external" href="https://help.github.com/articles/github-flow/">GitHub Flow</a>.</p>
+<p>The <em>node_modules</em> directory is not checked into version control.</p>
+<p>IDE metadata directories (such as WebStorm&#8217;s <em>.idea</em>) are not checked
+into version control.</p>
+</div>
+<div class="section" id="ides">
+<h3>IDEs<a class="headerlink" href="#ides" title="Permalink to this headline">¶</a></h3>
+<p>The project must always be buildable from the command line.</p>
+<p>Developers may use any IDE they wish.  An IDE capable of performing continual
+ESLInt validation is recommended.</p>
+</div>
+</div>
 </div>
 
 
