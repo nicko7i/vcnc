@@ -141,11 +141,13 @@ setInterval(() => {
 //
 process.on('SIGINT', () => {
   console.log('Caught SIGINT interrupt signal');
+  delete cnctrqClient;
   process.exit(0);
 });
 
 process.on('SIGTERM', () => {
   console.log('Caught SIGTERM interrupt signal');
+  delete cnctrqClient;
   process.exit(0);
 });
 
