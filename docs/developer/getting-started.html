@@ -96,7 +96,13 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#optional-set-up-an-ide">(optional) Set up an IDE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#webstorm">WebStorm</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Coding Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installing-and-building.html">Installing and Building</a></li>
@@ -152,7 +158,39 @@
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>His rebus fiebat ut et minus late vagarentur et minus facile finitimis bellum inferre possent; 5 qua ex parte homines bellandi cupidi magno dolore adficiebantur. 6 Pro multitudine autem hominum et pro gloria belli atque fortitudinis angustos se fines habere arbitrabantur, qui in longitudinem milia passuum CCXL, in latitudinem CLXXX patebant.</p>
+<p>Begin by working through <a class="reference internal" href="installing-and-building.html#installing-and-building"><span class="std std-ref">Installing and Building</span></a>.  When finished, you will be
+able to demo working software on your workstation.</p>
+<div class="section" id="optional-set-up-an-ide">
+<h2>(optional) Set up an IDE<a class="headerlink" href="#optional-set-up-an-ide" title="Permalink to this headline">¶</a></h2>
+<p>Developers are not required to use a particular IDE, or any IDE at all.
+Tips for setting up some IDEs are provided in the following sections.</p>
+<div class="section" id="webstorm">
+<h3>WebStorm<a class="headerlink" href="#webstorm" title="Permalink to this headline">¶</a></h3>
+<p>This description sets up a single WebStorm project for all of the subsystems
+under the GitHub repository root.  We will use the <em>vcnc-web</em> ESLint configuration
+for <em>vcnc-rest</em> as well.</p>
+<p>First run &#8216;npm install&#8217; in directory vcnc-web.  This provides the ESLint package
+that WebStorm needs to perform linting.</p>
+<p>We will do the following:</p>
+<p># Turn off all the JavaScript inspections except for ESLint
+# Configure JavaScript for &#8220;React JSX&#8221; (which implies ES6) and &#8220;strict mode&#8221;.
+# Configure ESLint to point explicitly to vcnc-web/.eslintrc.js.
+# Configure indenting in the editor.</p>
+<p>Navigate to File :: Settings... :: Editor :: Inspections :: JavaScript.
+Clear all inspections, then under &#8220;Code Quality&#8221; enable only &#8220;ESLint&#8221;.</p>
+<p>Navigate to File :: Settings... :: Languages &amp; Frameworks :: JavaScript.
+Set &#8220;JavaScript Language Version&#8221; to &#8220;React JSX&#8221; and enable &#8220;Prefer strict
+mode&#8221;.</p>
+<p>From there, navigate to Code Quality Tools :: ESLint.</p>
+<p># Check the Enable box.
+# Set the Node interpreter to the project interpreter in TOOLROOT.
+# The ESLint package is <em>/&lt;project-dir&gt;/vcnc-web/node_modules/eslint</em>.
+# Set the configuration file explicitly to <em>/&lt;project-dir&gt;vcnc-web/.eslintrc.js</em>.</p>
+<p>Navigate to File :: Settings... :: Editor :: Code Style :: JavaScript.
+Ensue that &#8220;Use tab character&#8221; is <em>not</em> checked and &#8220;Indent&#8221; is &#8220;2&#8221;.
+Ensure that &#8220;Indent chained methods&#8221; is <em>not</em> checked.</p>
+</div>
+</div>
 </div>
 
 

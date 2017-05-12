@@ -287,6 +287,14 @@ module.exports = (() => {
   installErrorGenerator(app);
   installLogging(app);
   installStaticContent(app);
+  //
+  //  This is a chain of promises.  It ensures that each of these mostly
+  //  asynchronous methods have completed before then next is invoked.
+  //
+  //  rethink.init() must be called first.
+  //  installRouters, etc, must be called last.
+  //  The order of the others doesn't matter.
+  //
   rethink.init()
   .then(() => grid.init())
   .then(() => mockSampler.init())

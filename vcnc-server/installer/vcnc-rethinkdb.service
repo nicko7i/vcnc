@@ -3,17 +3,16 @@
 ;
 ;  See also http://www.freedesktop.org/software/systemd/man/systemd.unit.html
 ;
-;  On machine 'cnc', we are running one reThinkDB instance for all of the vcnc 
-;  instances.  They currently don't collide even if they use the same reThinkDB
-;  prefix.
+;  This script allows RethinkDB to use its default configuration.
 ;
 [Unit]
 Description=reThinkDB for VelStor vCNC
 
 [Service]
 Type=simple
-Environment=LD_LIBRARY_PATH=/opt/vcnc-saluki/current/lib64
-ExecStart=/opt/vcnc-saluki/current/bin/rethinkdb --config-file /opt/vcnc-saluki/current/share/vcnc/vcnc-rest/config/vcnc-rethinkdb.conf
+Environment=LD_LIBRARY_PATH=/opt/velstor/current/lib64
+ExecStartPre=mkdir -p /var/opt/velstor/rethinkdb
+ExecStart=/opt/velstor/current/bin/rethinkdb --directory=/var/opt/velstor/rethinkdb
 Restart=always
 StandardOutput=syslog+console
 StandardError=syslog+console
