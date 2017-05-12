@@ -15,7 +15,7 @@ directory.  It may be viewed at
 file:///*project-root*/documentation/_build/html/index.html
 
 Publishing this documentation
-'''''''''''''''''''''''''''''
+-----------------------------
 
 The documentation is published on GitHub Pages by placing the
 generated files into the /docs directory of the 'master'
