@@ -104,7 +104,17 @@
 <li class="toctree-l1"><a class="reference internal" href="vcnc-web.html">vCNC Web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vclc.html">vCLC (Command Line Client)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rest-api-conventions">REST API Conventions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#singular-and-plural">Singular and Plural</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#post-and-put">POST and PUT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hierarchical-names">Hierarchical Names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#endpoint-vtrq">Endpoint /vtrq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extended-operations">Extended Operations</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="about-this-document.html">About this Document</a></li>
 </ul>
 
@@ -152,7 +162,79 @@
             
   <div class="section" id="design-notes">
 <h1>Design Notes<a class="headerlink" href="#design-notes" title="Permalink to this headline">¶</a></h1>
-<p>Apud Helvetios longe nobilissimus fuit et ditissimus Orgetorix. Is M. Messala, [et P.] M. Pisone consulibus regni cupiditate inductus coniurationem nobilitatis fecit et civitati persuasit ut de finibus suis cum omnibus copiis exirent: 2 perfacile esse, cum virtute omnibus praestarent, totius Galliae imperio potiri. 3 Id hoc facilius iis persuasit, quod undique loci natura Helvetii continentur: una ex parte flumine Rheno latissimo atque altissimo, qui agrum Helvetium a Germanis dividit; altera ex parte monte Iura altissimo, qui est inter Sequanos et Helvetios; tertia lacu Lemanno et flumine Rhodano, qui provinciam nostram ab Helvetiis dividit.</p>
+<div class="section" id="rest-api-conventions">
+<h2>REST API Conventions<a class="headerlink" href="#rest-api-conventions" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;REpresentational State Transfer&#8221; (REST) comprises two ideas:</p>
+<p># <em>resources</em> found at <em>URLs</em> are manipulated with HTTP verbs such as GET and DELETE
+# State transitions are explicitly modeled with <a class="reference external" href="https://en.wikipedia.org/wiki/HATEOAS">HATEOAS</a></p>
+<p>This section describes the conventions by which <strong>vcnc-rest</strong> models resources
+and operations.  <strong>vcnc</strong> does not use HATEOAS.</p>
+<p>We will use the term <em>endpoint</em> for the left-hand portion of the resource URL
+from the beginning of the route to the resource ID.  For example, in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">blog</span><span class="o">/</span><span class="n">post</span><span class="o">/</span><span class="mi">2000</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">12345</span>
+</pre></div>
+</div>
+<p><em>/blog/post</em> is the <em>endpoint</em>.  While this term is not universally accepted
+for REST we use it here because it is more specific than &#8220;URL&#8221;.</p>
+<div class="section" id="singular-and-plural">
+<h3>Singular and Plural<a class="headerlink" href="#singular-and-plural" title="Permalink to this headline">¶</a></h3>
+<p>Plural endpoints refer to a resource collection as a whole.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">grid</span><span class="o">/</span><span class="n">jobs</span>
+</pre></div>
+</div>
+<p>returns the collection of all grid jobs.  Singular endpoints operate on a single
+resource:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DELETE</span> <span class="o">/</span><span class="n">grid</span><span class="o">/</span><span class="n">job</span><span class="o">/</span><span class="mi">12345</span>
+</pre></div>
+</div>
+<p>Creating a new resource without specifying the ID would be a POST on the
+(plural) endpoint:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">_cursors</span>
+</pre></div>
+</div>
+<p>produces a new cursor resource having a server-generated ID, while:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="mi">0</span><span class="o">/%</span><span class="mi">2</span><span class="n">Fmy</span><span class="o">%</span><span class="mi">2</span><span class="n">Fnew</span><span class="o">%</span><span class="mi">2</span><span class="n">Fworkspace</span>
+</pre></div>
+</div>
+<p>creates a new workspace called  <em>/my/new/workspace</em> on vTRQ 0.</p>
+</div>
+<div class="section" id="post-and-put">
+<h3>POST and PUT<a class="headerlink" href="#post-and-put" title="Permalink to this headline">¶</a></h3>
+<p>The fundamental difference is idempotency (calling it once
+has the same effect as calling it more than once). PUT is idempotent; POST is
+not.  <strong>vcnc</strong> uses PUT to create or modify a resource whose name is
+already known, and POST to create a new resource with a server-generated name.</p>
+</div>
+<div class="section" id="hierarchical-names">
+<h3>Hierarchical Names<a class="headerlink" href="#hierarchical-names" title="Permalink to this headline">¶</a></h3>
+<p>Many PeerCache entities have hierarchical names, which are represented by <em>paths</em>
+such as <em>/a/path/name</em>.  Hierarchical names are URL-encoded when passed as part
+of the URL. Consequently, a path name is always a single URL element.</p>
+</div>
+<div class="section" id="endpoint-vtrq">
+<h3>Endpoint /vtrq<a class="headerlink" href="#endpoint-vtrq" title="Permalink to this headline">¶</a></h3>
+<p>Every endpoint under <em>/vtrq</em> takes an integer vTRQ ID as part of the URL,
+immediately after the endpoint.  For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span><span class="n">vtrq</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="mi">1</span><span class="o">/%</span><span class="mi">2</span><span class="n">Fsilver</span><span class="o">%</span><span class="mi">2</span><span class="n">Fmoon</span>
+</pre></div>
+</div>
+<p>returns information about workspace <em>/silver/moon</em> on the vTRQ having ID &#8216;1&#8217;.</p>
+</div>
+<div class="section" id="extended-operations">
+<h3>Extended Operations<a class="headerlink" href="#extended-operations" title="Permalink to this headline">¶</a></h3>
+<p>In some cases, the HTTP 1.1 verbs are not sufficient to everything we wish to
+do with a resource.  <strong>vcnc</strong> has two ways of dealing with this.</p>
+<p>When the operation applies to a single resource, an operator is added at the
+end of the URL.  <em>/vtrq/namespace/0/%2Fa%2Fdirectory/children returns the child
+nodes of */a/directory</em> on vTRQ 0.</p>
+<p>Otherwise, the operation name is placed immediately before the vTRQ ID and POST
+is use to tunnel the data needed by the operation.  For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">POST</span> <span class="o">/</span><span class="n">vtrq</span><span class="o">/</span><span class="n">meta_copy</span><span class="o">/</span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>performs a meta-data copy on vTRQ 5. Details are sent in the request body.</p>
+</div>
+</div>
 </div>
 
 
