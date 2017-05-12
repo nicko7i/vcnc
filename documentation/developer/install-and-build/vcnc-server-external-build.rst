@@ -1,7 +1,5 @@
-.. _external_build:
-
 External Builds
-===============
+'''''''''''''''
 
 This build process produces a vCNC that is compatible with a specific
 PeerCache product release. The software is built using header files
@@ -18,7 +16,7 @@ The installation process involves:
 * Running a sanity check.
 
 Obtaining the vCNC sources
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Fork the `GitHub project`_ to your GitHub account and then clone it to your
 development machine.
@@ -26,7 +24,7 @@ development machine.
 .. _GitHub project: https://github.com/nicko7i/vcnc
 
 Installing PeerCache
---------------------
+''''''''''''''''''''
 
 Please refer to the `PeerCache installation document`_ maintained on the
 IC Manage Google Drive account.
@@ -42,43 +40,16 @@ In the context of building vCNC, the PeerCache software is called the *TOOLROOT*
   may cause problems with NVM.  Using /opt/velstor/current causes problems with 
   js-extension/binding.gyp.
 
-Configuring the Development Environment
----------------------------------------
-
-Python
-''''''
-
-Python is needed for the documentation generator *Sphinx* and for vCNC software
-written in Python.  Ensure you are using the Python 3.5 bundled in *TOOLROOT*.
-
-.. code-block:: console
-
-    % sudo pip install --upgrade pip
-    % sudo pip install virtualenv
-    % virtualenv -p /opt/frqu/TOOLROOT/bin/python3 venv
-    % source ./venv/bin/activate
-    % (venv) pip install sphinx sphinx-autobuild sphinx_rtd_theme
-
-node.js
-'''''''
-
-The build system uses the nvm bundled with *TOOLROOT*. Place the following in
-your *.bashrc* file:
-
-.. code-block:: bash
-
-    export NVM_DIR="/opt/frqu/TOOLROOT/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-    [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+.. include:: /developer/install-and-build/config-dev-env.rst
 
 Building the Software
----------------------
+'''''''''''''''''''''
 
 The vCNC repository houses a suite of independent projects.  There
 is no top-level, "grand unified" build.  Each project is built separately.
 
-Building vnc-rest
-'''''''''''''''''
+Building vnc-server
+~~~~~~~~~~~~~~~~~~~
 
 *vcnc-rest* is a Node.js server using a custom V8 JavaScript extension object.
 An *autotools* build system ties together the C++ and JavaScript portions of
@@ -99,44 +70,4 @@ because node_gyp is hardwired to find its dependencies there.
   % ../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
   % make 
 
-Building vcnc-web
-'''''''''''''''''
 
-Building this documentation
-'''''''''''''''''''''''''''
-The build must be done under the Python virtual environment.
-
-.. code-block:: console
-
-  % cd *project-root*
-  % source ./venv/bin/activate
-  (venv) cd documentation
-  (venv) make html
-
-Sphinx will generate a static HTML website in the documentation/_build
-directory.  It may be viewed at
-file:///*project-root*/documentation/_build/html/index.html
-
-Publishing this documentation
-'''''''''''''''''''''''''''''
-
-The documentation is published on GitHub Pages by placing the
-generated files into the /docs directory of the 'master'
-branch of 'vcnc'.
-
-After pushing the latest documentation sources to origin/master, build
-the documentation as described above and then publish as follows:
-
-.. code-block:: console
-
-  % cd *project-root*
-  % git checkout master
-  % git pull
-  % cd documentation
-  % make publish
-  % git add ../docs
-  % git commit -m "publish documentation"
-  % git push
-
-The updated, generated, documentation is now in master/docs on GitHub.
-From there, it automagically appears on GitHub pages.

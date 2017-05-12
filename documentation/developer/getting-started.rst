@@ -4,14 +4,14 @@ Getting Started
 Begin by working through :ref:`installing_and_building`.  When finished, you will be
 able to demo working software on your workstation.
 
-Set up an IDE
-=============
+(optional) Set up an IDE
+------------------------
 
 Developers are not required to use a particular IDE, or any IDE at all.
 Tips for setting up some IDEs are provided in the following sections.
 
 WebStorm
---------
+''''''''
 
 This description sets up a single WebStorm project for all of the subsystems
 under the GitHub repository root.  We will use the *vcnc-web* ESLint configuration
