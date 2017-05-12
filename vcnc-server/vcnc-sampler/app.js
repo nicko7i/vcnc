@@ -42,11 +42,13 @@ const validKeys = conf.vcncSamplerKeys();
 const args = cmdl.Input(validKeys);
 
 // TODO: get vcnc version
-// jsu.DisplayVersion("Velstor Data Aggregator Consumer Server", 'da_version.json');
-console.log('\nStart VCnC sampler');
+
+console.log('\nStart Vcnc Sampler');
 // console.log(`Input arguments: ' + json.stringify(args));
 const options = cmdl.JSNode('vda');
 const logDir = cmdl.JSparam('logDir');
+const samplePeriod = cmdl.JSparam('samplePeriod', conf.DefSamplePeriod());
+const latency = cmdl.JSparam('latency', conf.DefLatency());
 
 console.log(json.stringify(options));
 console.log(`logDir = ${logDir}`);
@@ -82,8 +84,6 @@ const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
 
-let socketCount = 0;
-
 if (!Date.now) {
   Date.now = function () {
     return new Date().getTime();
@@ -92,9 +92,10 @@ if (!Date.now) {
 
 const tsStart = Date.now();
 console.log(`Time (ms):${tsStart}`);
+console.log(`Sample period:  ${samplePeriod}`);
+console.log(`Output latency:  ${latency}`);
 
-
-const vcncSample = vs.CreateVcncSampling();
+const vcncSample = vs.CreateVcncSampling(samplePeriod, latency);
 vcncSample.Init();
 
 // Process buffered messages from VDA
@@ -114,29 +115,6 @@ function requestHandler(request, response) {
 const server = http.createServer(requestHandler);
 server.setTimeout(5000, () => {
 });
-
-/*
-server.on('connection', (socket) => {
-  socketCount += 1;
-  console.log(`Get POST connection ${socketCount}: ${json.stringify(socket.address())}`);
-  socket.on('close', () => {
-    socketCount -= 1;
-    console.log(`POST socket closed: ${socketCount}`);
-  });
-});
-*/
-/*
-server.on('connect', (request, socket) => {
-  console.log(`POST Client requests connection: ${json.stringify(socket.address())}`);
-});
-server.on('clientError', (exception, socket) => {
-  console.log(`POST Client error: ${json.stringify(socket.address())}`);
-});
-
-server.on('close', () => {
-  console.log('POST Server Closed');
-});
-*/
 
 server.listen(port, host, () => {
   console.log(`Listening on ${host}:${port}`);
