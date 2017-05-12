@@ -15,7 +15,7 @@ const logFile = '';
 const daVcncKeywords = new Set([
   '--logDir',
   '--vda',
-  '--sampleTime',
+  '--samplePeriod',
   '--latency',
 ]);
 
@@ -31,7 +31,7 @@ const samples =
 
 
 function Logfile() { return logFile; }
-function DefSampleTime() { return period; }
+function DefSamplePeriod() { return period; }
 function DefLatency() { return latency; }
 function vcncSamplerKeys() { return daVcncKeywords; }
 function MaxEntries() { return maxEntries; }
@@ -41,7 +41,7 @@ function Table() { return table; }
 
 module.exports = {
   Logfile,
-  DefSampleTime,
+  DefSamplePeriod,
   DefLatency,
   vcncSamplerKeys,
   MaxEntries,

@@ -43,10 +43,12 @@ const args = cmdl.Input(validKeys);
 
 // TODO: get vcnc version
 
-console.log('\nStart VCnC sampler');
+console.log('\nStart Vcnc Sampler');
 // console.log(`Input arguments: ' + json.stringify(args));
 const options = cmdl.JSNode('vda');
 const logDir = cmdl.JSparam('logDir');
+const samplePeriod = cmdl.JSparam('samplePeriod', conf.DefSamplePeriod());
+const latency = cmdl.JSparam('latency', conf.DefLatency());
 
 console.log(json.stringify(options));
 console.log(`logDir = ${logDir}`);
@@ -90,9 +92,10 @@ if (!Date.now) {
 
 const tsStart = Date.now();
 console.log(`Time (ms):${tsStart}`);
+console.log(`Sample period:  ${samplePeriod}`);
+console.log(`Output latency:  ${latency}`);
 
-
-const vcncSample = vs.CreateVcncSampling();
+const vcncSample = vs.CreateVcncSampling(samplePeriod, latency);
 vcncSample.Init();
 
 // Process buffered messages from VDA
