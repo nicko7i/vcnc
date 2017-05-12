@@ -107,7 +107,25 @@ because node_gyp is hardwired to find its dependencies there.
   % ../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
   % make 
 
-Running the Software
-~~~~~~~~~~~~~~~~~~~~
+Running *vcnc-server*
++++++++++++++++++++++
 
-TBD
+Run *vcnc-rest* as follows:
+
+.. code-block:: console
+
+  % cd vcnc-server/vcnc-rest
+  % npm start
+
+This is sufficient to use the REST API.  If you also want real-time data
+sent to the web dashboard, start *vcnc-sampler*:
+
+.. code-block:: console
+
+  % cd vcnc-server/vcnc-sampler
+  % npm start
+
+.. note::
+
+  When run this way, *vcnc-rest* does *not* serve *vcnc-web*.  Instead, run
+  *vcnc-web* separately from the command line.
