@@ -1,12 +1,3 @@
-# Ignore all
-*
-
-# Unignore all with extensions
-!*.*
-
-# Unignore all dirs
-!*/
-
 # Perforce as used at IC Manage
 .icmconfig
 
@@ -15,8 +6,13 @@ build/
 Build/
 _build/
 
-# Webstorm 
+# IDEs
+# .. Webstorm
 .idea/
+# .. Visual Studio Code
+.vscode/
+# .. Eclipse
+.settings/
 
 # Python
 __pycache__/
@@ -55,7 +51,6 @@ autoscan-*.log
 config.h.in
 configure
 configure.scan
-depcomp
 stamp-h1
 *.in
 
