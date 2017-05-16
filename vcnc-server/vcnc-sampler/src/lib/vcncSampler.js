@@ -139,7 +139,7 @@ class VcncSampler {
       }
     }
     console.log(`Bin: ${json.stringify(bin)}`);
-    console.log('minIndex = ' + self.minIndex + ' maxIndex = ' + self.maxIndex');
+    console.log('minIndex = ' + self.minIndex + ' maxIndex = ' + self.maxIndex);
     console.log('<<< Finished ReleaseBin');
     return bin;
   }
