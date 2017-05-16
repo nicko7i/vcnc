@@ -130,7 +130,6 @@ setInterval(() => {
 }, pushTimeout);
 
 // Remove old data from rethinkdb table
-
 setInterval(() => {
   vcncSample.Trim();
 }, trimTimeout);
