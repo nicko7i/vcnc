@@ -16,43 +16,59 @@ The code is open source, and `available on github`_.
 .. _available on github: http://github.com/nicko7i/vcnc
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: About the vCNC
 
    about-vcnc/vcnc-architecture
 
-.. toctree::
-   :maxdepth: 2
-   :caption: User Information
+..
+  .. toctree::
+     :maxdepth: 1
+     :caption: User Information
 
-   user/getting-started
-   user/vcnc-clients
-   user/users-and-security
+     user/getting-started
+     user/vcnc-clients
+     user/users-and-security
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Developer Information
 
-   developer/getting-started
+   developer/ide
    developer/coding-policies
    developer/workflow
-   developer/installing-and-building
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Building
+
+   developer/build/build-prepare.rst
+   developer/build/vcnc-server-build.rst
+   developer/build/vcnc-web-build.rst
+   developer/build/vclc-pyapi-build.rst
+   developer/build/documentation-build.rst
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Running
+
+   developer/run/run-prepare.rst
+   developer/run/vcnc-server-run.rst
+   developer/run/vclc-run.rst
+   developer/run/vcnc-web-run.rst
+
+..
    developer/vcnc-rest
    developer/vcnc-web
    developer/vclc
    developer/python-api
    developer/design-notes
-   developer/about-this-document
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: About this Document
 
-Indices and tables
-==================
+   developer/about-this-document
+   developer/documentation-publish.rst
 
-* :ref:`genindex`
-* :ref:`search`
 
-..
-  * :ref:`modindex`
