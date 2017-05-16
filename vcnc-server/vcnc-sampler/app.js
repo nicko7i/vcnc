@@ -84,12 +84,6 @@ const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
 
-if (!Date.now) {
-  Date.now = function () {
-    return new Date().getTime();
-  };
-}
-
 const tsStart = Date.now();
 console.log(`Time (ms):${tsStart}`);
 console.log(`Sample period:  ${samplePeriod}`);
@@ -104,7 +98,13 @@ function requestHandler(request, response) {
   request.setEncoding('utf8');
   request.on('data', (data) => {
 //    console.log(data);
-    vcncSample.Run(data);
+    setInterval(() => {
+      vcncSample.Run(data)
+    }, 0);
+//    .catch (err => {
+//      console.log('Warning: VDa data corrupted: ${err}');
+//    });
+
   });
   response.on('error', (err) => {
     console.error(err);
@@ -130,10 +130,10 @@ setInterval(() => {
 }, pushTimeout);
 
 // Remove old data from rethinkdb table
+
 setInterval(() => {
   vcncSample.Trim();
 }, trimTimeout);
-
 
 // Process Linux signals
 //
