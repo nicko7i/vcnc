@@ -1,5 +1,5 @@
 Publishing this Document
-------------------------
+========================
 
 The documentation is published on GitHub Pages by placing the
 generated files into the /docs directory of the 'master'

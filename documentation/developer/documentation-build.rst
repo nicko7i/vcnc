@@ -1,5 +1,5 @@
 Building this document
-----------------------
+======================
 
 The build must be done under the Python virtual environment.
 
