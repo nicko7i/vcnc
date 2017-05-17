@@ -99,7 +99,10 @@ function requestHandler(request, response) {
   request.on('data', (data) => {
 //    console.log(data);
     setInterval(() => {
-      vcncSample.Run(data)
+      if(data !== null) {
+        vcncSample.Run(data);
+        data = null;
+      }
     }, 0);
 //    .catch (err => {
 //      console.log('Warning: VDa data corrupted: ${err}');

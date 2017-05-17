@@ -39,7 +39,9 @@ class VcncSampling {
     const p = rs.Init();
     p.then(() => {
       self.msgSampler.Init();
-      self.Trim();
+      p.then(() => {
+        self.Trim();
+      });
     }, (e) => {
       console.error(`ERROR: rethinkdb is not running\n ${e}`);
       process.exit(1);
@@ -91,26 +93,30 @@ class VcncSampling {
   Run(data) {
     const self = this;
     let jsonData;
- //   console.log(`VcncSampling::Run: ${data}`);
+//    console.log(`VcncSampling::Run: ${data}`);
     try {
       jsonData = json.parse(data);
     } catch (err) {
-      console.log('Warning: VDa data corrupted');
+//      console.log('Warning: VDa data corrupted');
       return;
     }
-    self.Process(jsonData);
+    if (!jsonData.messages.empty) {
+//      console.log(`New messages = ${jsonData.messages.length}`);
+      self.Process(jsonData);
+//   console.log(`Total messages: ${self.msgSampler.MessageCount()}');
+//   console.log(Ignored messages = ${self.msgSampler.IgNoreMessaageCount()}`);
+    }
   }
 
   Send() {
     const self = this;
-    console.log('>>> Start Send');
+//    console.log('>>> Start Send');
     const bin = self.msgSampler.ReleaseBin();
-    if (bin !== undefined) {
-      console.log(`Send to rethinkdb: Bin: ${json.stringify(bin)}`);
-      self.rdb.Push(bin);
-    }
-    console.log('<<< Finished Send');
+//    console.log(`Send to rethinkdb: Bin: ${json.stringify(bin)}`);
+
+    self.rdb.Push(bin);
   }
+//    console.log('<<< Finished Send');
 
   Trim() {
     this.rdb.Trim();
