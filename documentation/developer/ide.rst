@@ -1,5 +1,5 @@
-IDEs (optional)
-===============
+IDEs
+====
 
 Developers are not required to use a particular IDE, or any IDE at all.
 Tips for setting up some IDEs are provided in the following sections.

@@ -22,5 +22,4 @@ An interactive REST interface is available:
 
 .. code-block:: console
 
-  firefox http://localhost:6130/
-
+  firefox http://localhost:6130/v1/doc/api/?url=spec

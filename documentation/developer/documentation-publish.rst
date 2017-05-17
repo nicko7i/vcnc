@@ -10,9 +10,6 @@ the documentation as described above and then publish as follows:
 
 .. code-block:: console
 
-  % cd *project-root*
-  % git checkout master
-  % git pull
   % cd documentation
   % make publish
   % git add ../docs

@@ -23,6 +23,12 @@ be listening on port ``6100`` of *localhost* (or 127.0.0.x).
 
   Most *triptych* scripts use port ``5700``.  You may need to change your script accordingly.
 
+.. note::
+
+  Most *triptych* scripts assign *vtrq_id* 10.  *vcnc-rest* can successfully use
+  *vtrq_id* 0 with such a *vtrq*.  However, connecting *vps* with workspaces that
+  refer to *vtrq_id* 0 has not been tested.
+
 *vtrq* from PeerCache Product Release
 -------------------------------------
 

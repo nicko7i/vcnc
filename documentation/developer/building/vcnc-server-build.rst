@@ -14,9 +14,10 @@ Configure, build and install is done in the familiar way.
 
 .. code-block:: console
 
-  % autoreconf
-  % mkdir Build
-  % cd Build
-  % ../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
-  % make
+  cd vcnc-server
+  autoreconf
+  mkdir Build
+  cd Build
+  ../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
+  make
 
