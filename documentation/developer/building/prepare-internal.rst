@@ -1,12 +1,12 @@
 Internal Builds
-'''''''''''''''
+===============
 
 The vCNC software is built using header files and libraries provided by a
 PeerCache customer release bundle, and tested using a lightweight PeerCache
 deployment running on the developer's laptop or workstation.
 
 Configuring the Development Environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Python and Node.js are obtained from TOOLROOT. The database,
 redis and RethinkDB, can be obtained from any PeerCache unified
@@ -62,7 +62,7 @@ and then:
   systemctl start velstor-vcnc-redis.service
 
 Building the Software
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 The vCNC repository houses a suite of independent projects.  There
 is no top-level, "grand unified" build.  Each project is built separately.

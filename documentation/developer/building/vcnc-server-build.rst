@@ -1,5 +1,5 @@
 Building *vcnc-server*
-----------------------
+======================
 
 *vcnc-server* contains two node.js projects and a C++ extension to
 Google's *V8* JavaScript interpreter.  All are built as a single

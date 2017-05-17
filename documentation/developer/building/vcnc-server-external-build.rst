@@ -1,5 +1,5 @@
 External Builds
-'''''''''''''''
+===============
 
 This build process produces a vCNC that is compatible with a specific
 PeerCache product release. The software is built using header files
@@ -16,7 +16,6 @@ The installation process involves:
 * Running a sanity check.
 
 Obtaining the vCNC sources
-~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Fork the `GitHub project`_ to your GitHub account and then clone it to your
 development machine.
@@ -24,7 +23,6 @@ development machine.
 .. _GitHub project: https://github.com/nicko7i/vcnc
 
 Installing PeerCache
-''''''''''''''''''''
 
 Please refer to the `PeerCache installation document`_ maintained on the
 IC Manage Google Drive account.
@@ -40,16 +38,13 @@ In the context of building vCNC, the PeerCache software is called the *TOOLROOT*
   may cause problems with NVM.  Using /opt/velstor/current causes problems with 
   js-extension/binding.gyp.
 
-.. include:: /developer/build/config-dev-env.rst
 
 Building the Software
-'''''''''''''''''''''
 
 The vCNC repository houses a suite of independent projects.  There
 is no top-level, "grand unified" build.  Each project is built separately.
 
 Building vnc-server
-~~~~~~~~~~~~~~~~~~~
 
 *vcnc-rest* is a Node.js server using a custom V8 JavaScript extension object.
 An *autotools* build system ties together the C++ and JavaScript portions of
