@@ -26,6 +26,7 @@ class VcncSampling {
     this.latency = (ltc !== undefined) ? parseInt(ltc, 10) : conf.DefLatency(); // ms
     this.msgSampler = vsm.CreateVcncSampler(this.sampleTime);
     this.rdb = rs.CreaterethinkdbSampler(this.sampleTime, this.latency);
+    this.msgCount = 0;
   }
    /**
     *  Initializes the vcncSampler module, creating a connection object
@@ -96,15 +97,13 @@ class VcncSampling {
 //    console.log(`VcncSampling::Run: ${data}`);
     try {
       jsonData = json.parse(data);
+      self.msgCount += jsonData.messages.length;
     } catch (err) {
-//      console.log('Warning: VDa data corrupted');
+      console.warn('Warning: VDa data corrupted');
       return;
     }
     if (!jsonData.messages.empty) {
-//      console.log(`New messages = ${jsonData.messages.length}`);
       self.Process(jsonData);
-//   console.log(`Total messages: ${self.msgSampler.MessageCount()}');
-//   console.log(Ignored messages = ${self.msgSampler.IgNoreMessaageCount()}`);
     }
   }
 
@@ -120,6 +119,15 @@ class VcncSampling {
 
   Trim() {
     this.rdb.Trim();
+  }
+
+  ProcessCheck() {
+    const self = this;
+    console.info(`Total Vda messages: ${self.msgCount}`);
+    console.info(`Total sampled vpm messages: ${self.msgSampler.VpmMessageCount()}`);
+    console.info(`Total sampled vtrq messages: ${self.msgSampler.VtrqMessageCount()}`);
+    console.info(`Total sampled messages: ${self.msgSampler.MessageCount()}`);
+    console.info(`Total ignored messages = ${self.msgSampler.IgNoreMessaageCount()}`);
   }
 }
 

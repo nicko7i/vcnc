@@ -4,7 +4,7 @@
  *    See the file 'COPYING' for license information.
  */
 // const DateTime = require('datetime-converter-nodejs');
-const json = require('JSON');
+// const json = require('JSON');
 //
 const storPoll = require('../../../vcnc-core/src/lib/pollStorageStats');
 //
@@ -23,7 +23,8 @@ class VcncSampler {
     this.empty = true;
     this.minIndex = 0;
     this.maxIndex = 0;
-    this.msgCount = 0;
+    this.vpmMsgCount = 0;
+    this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
   }
 
@@ -93,12 +94,15 @@ class VcncSampler {
       case 'read':
         self.pmReadBins[index] = (self.pmReadBins[index] === undefined) ?
         readBytes : self.pmReadBins[index] + readBytes;
+        self.vpmMsgCount += 1;
         break;
       case 'read_vtrq':
         self.vtrqReadBins[index] = (self.vtrqReadBins[index] === undefined) ?
         readBytes : self.vtrqReadBins[index] + readBytes;
+        self.vtrqMsgCount += 1;
         break;
       default:
+        console.error('Invalid operation');
         self.ignoredMsgCount += 1;
         return;
     }
@@ -116,7 +120,6 @@ class VcncSampler {
 
     // Set time to a center af sample interval
     samplerTs -= Math.round(self.samplePeriod / 2);
-//    console.log(`ReleaseBin: minIndex= ${self.minIndex} maxIndex = ${self.maxIndex} samplerTs= ${samplerTs}`);
     const pmRead = (self.pmReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
@@ -131,7 +134,7 @@ class VcncSampler {
       rVpm: pmRead,
       sampleTimestamp: samplerTs,
     };
-
+//    console.info(`Processed messages: ${self.MessageCount()} Ignored messages: ${self.IgNoreMessaageCount()}`);
     // Delete processed bin
     //
 //    let keys1 = Object.keys(self.pmReadBins);
@@ -156,8 +159,9 @@ class VcncSampler {
     return bin;
   }
 
-  MessageCount() { return this.msgCount; }
-
+  MessageCount() { return (this.vpmMsgCount + this.vtrqMsgCount); }
+  VpmMessageCount() { return this.vpmMsgCount; }
+  VtrqMessageCount() { return this.vtrqMsgCount; }
   IgNoreMessaageCount() { return this.ignoredMsgCount; }
 }
 

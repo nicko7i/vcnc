@@ -143,17 +143,20 @@ setInterval(() => {
 //
 process.on('SIGINT', () => {
   console.log('Caught SIGINT interrupt signal');
+  vcncSample.ProcessCheck();
   delete cnctrqClient;
   process.exit(0);
 });
 
 process.on('SIGTERM', () => {
   console.log('Caught SIGTERM interrupt signal');
+  vcncSample.ProcessCheck();
   delete cnctrqClient;
   process.exit(0);
 });
 
 process.on('SIGUSR1', () => {
   console.log('Caught SIGUSR1 interrupt signal');
+  vcncSample.ProcessCheck();
 });
 
