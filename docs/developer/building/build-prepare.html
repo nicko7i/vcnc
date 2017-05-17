@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Preparing to Build &mdash; vcnc 1.0-beta documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../index.html"/>
+        <link rel="next" title="Building vcnc-server" href="vcnc-server-build.html"/>
+        <link rel="prev" title="Workflow" href="../workflow.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> vcnc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ide.html">IDEs (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Preparing to Build</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#internal-toolroot">Internal TOOLROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-toolroot">External TOOLROOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-gnu-tools">Install GNU Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configure-the-environment">Configure the Environment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-publish.html">Publishing this Document</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">vcnc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>Preparing to Build</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/developer/building/build-prepare.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="preparing-to-build">
+<span id="build-prepare"></span><h1>Preparing to Build<a class="headerlink" href="#preparing-to-build" title="Permalink to this headline">¶</a></h1>
+<p>The following is needed to build the software:</p>
+<ul class="simple">
+<li>Libraries from PeerCache</li>
+<li>Node Version Manager (nvm)</li>
+</ul>
+<p>The libraries and programs on which the software depends have been gathered
+into a directory called <em>TOOLROOT</em>. Build preparation comes down to
+obtaining the appropriate TOOLROOT and configuring the developer&#8217;s environment
+to use it.</p>
+<p>We consider two situations. The first is a PeerCache developer who will be
+working on <em>vcnc</em> and PeerCache at the same time. The goal is to run PeerCache
+and <em>vcnc</em> from their respective development directories and have everything
+work together correctly. This is called the <em>internal</em> case.</p>
+<p>The second situation is a customer who is modifying <em>vcnc</em> and wants it to
+run correctly against a PeerCache product release.  This is called the <em>external</em>
+case.</p>
+<div class="section" id="internal-toolroot">
+<h2>Internal TOOLROOT<a class="headerlink" href="#internal-toolroot" title="Permalink to this headline">¶</a></h2>
+<p><em>vcnc</em> uses the same TOOLROOT as PeerCache.  Build PeerCache first. When the
+build is finished, run <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> to put the latest PeerCache libraries
+into your TOOLROOT.  You are now ready to install GNU Tools.</p>
+</div>
+<div class="section" id="external-toolroot">
+<span id="id1"></span><h2>External TOOLROOT<a class="headerlink" href="#external-toolroot" title="Permalink to this headline">¶</a></h2>
+<p>Each PeerCache product distribution is, when unpacked, <em>also</em> a TOOLROOT for <em>vcnc</em>.</p>
+<p>Install the distribution onto your workstation, and then create a symbolic link:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">./peercache-leap42.run --target /opt/velstor/current</span>
+<span class="go">mkdir -p /opt/frqu</span>
+<span class="go">ln -s /opt/velstor/current /opt/frqu/TOOLROOT</span>
+</pre></div>
+</div>
+<p>You are now ready to install GNU tools.</p>
+</div>
+<div class="section" id="install-gnu-tools">
+<h2>Install GNU Tools<a class="headerlink" href="#install-gnu-tools" title="Permalink to this headline">¶</a></h2>
+<p>Parts of <em>vcnc-server</em> rely on <em>autotools</em>, <em>boost</em>, and <em>gcc</em>.
+TOOLROOT provides <em>autotools</em> and <em>boost</em>.  The platform (CentOS 7
+or Leap 42) provides GCC 4.8.  On SuSE, it sufficient to install the
+&#8220;C++ Development&#8221; pattern using YAST.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The software does not build with GCC 6.x.</p>
+</div>
+</div>
+<div class="section" id="configure-the-environment">
+<h2>Configure the Environment<a class="headerlink" href="#configure-the-environment" title="Permalink to this headline">¶</a></h2>
+<p>We need <code class="docutils literal"><span class="pre">$TOOLROOT/bin</span></code> on our path, and <em>nvm</em> configured to use <code class="docutils literal"><span class="pre">$TOOLROOT/nvm</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/opt/frqu/TOOLROOT/bin:<span class="nv">$PATH</span>
+<span class="nb">export</span> <span class="nv">NVM_DIR</span><span class="o">=</span><span class="s2">&quot;/opt/frqu/TOOLROOT/nvm&quot;</span>
+<span class="o">[</span> -s <span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span>  <span class="c1"># This loads nvm</span>
+<span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
+</pre></div>
+</div>
+<p>You are now ready to build the <em>vcnc</em> software. At minimum, you will need to build
+<em>vcnc-server</em>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vcnc-server-build.html" class="btn btn-neutral float-right" title="Building vcnc-server" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../workflow.html" class="btn btn-neutral" title="Workflow" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, IC Manage Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0-beta',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

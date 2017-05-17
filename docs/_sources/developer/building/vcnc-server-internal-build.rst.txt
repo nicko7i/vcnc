@@ -1,19 +1,17 @@
 Internal Builds
-'''''''''''''''
+===============
 
 The vCNC software is built using header files and libraries provided by a
 PeerCache customer release bundle, and tested using a lightweight PeerCache
 deployment running on the developer's laptop or workstation.
 
 Configuring the Development Environment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Python and Node.js are obtained from TOOLROOT. The database,
 redis and RethinkDB, can be obtained from any PeerCache unified
 release file.
 
-Python
-++++++
+**Python**
 
 Python is needed for the documentation generator *Sphinx* and for vCNC software
 written in Python.  Ensure you are using the Python 3.5 bundled in *TOOLROOT*.
@@ -26,8 +24,7 @@ written in Python.  Ensure you are using the Python 3.5 bundled in *TOOLROOT*.
     % source ./venv/bin/activate
     % (venv) pip install sphinx sphinx-autobuild sphinx_rtd_theme
 
-node.js
-+++++++
+**node.js**
 
 The build system uses the nvm bundled with *TOOLROOT*. Place the following in
 your *.bashrc* file:
@@ -38,8 +35,7 @@ your *.bashrc* file:
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
     [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
-redis and RethinkDB
-+++++++++++++++++++
+**redis and RethinkDB**
 
 By default, vCNC expects redis and RethinkDB running with their default
 configuration at their default ports.
@@ -65,20 +61,17 @@ and then:
   systemctl start velstor-vcnc-redis.service
 
 Building the Software
-~~~~~~~~~~~~~~~~~~~~~
 
 The vCNC repository houses a suite of independent projects.  There
 is no top-level, "grand unified" build.  Each project is built separately.
 
-Build and Install PeerCache
-+++++++++++++++++++++++++++
+**Build and Install PeerCache**
 
 vCNC is dependent on PeerCache libraries.  Running 'make install' after
 building PeerCache puts the libraries in TOOLROOT for the vCNC
 build to use.
 
-Building vnc-server
-+++++++++++++++++++
+**Building vnc-server**
 
 vCNC server comprises two programs.
 
@@ -107,8 +100,7 @@ because node_gyp is hardwired to find its dependencies there.
   % ../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
   % make 
 
-Running *vcnc-server*
-+++++++++++++++++++++
+**Running vcnc-server**
 
 Run *vcnc-rest* as follows:
 

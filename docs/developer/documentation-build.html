@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>vCNC REST &mdash; vcnc 1.0-beta documentation</title>
+  <title>Building this document &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,7 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/>
+        <link rel="next" title="Publishing this Document" href="documentation-publish.html"/>
+        <link rel="prev" title="About this Document" href="about-this-document.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -107,9 +109,9 @@
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
 </ul>
 <p class="caption"><span class="caption-text">About this Document</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about-this-document.html">About this Document</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation-build.html">Building this document</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building this document</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation-publish.html">Publishing this Document</a></li>
 </ul>
 
@@ -141,11 +143,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>vCNC REST</li>
+    <li>Building this document</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/developer/vcnc-rest.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/developer/documentation-build.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,19 +157,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="vcnc-rest">
-<h1>vCNC REST<a class="headerlink" href="#vcnc-rest" title="Permalink to this headline">¶</a></h1>
-<p>Cum civitas ob eam rem incitata armis ius suum exsequi conaretur multitudinemque hominum ex agris magistratus cogerent, Orgetorix mortuus est; 4 neque abest suspicio, ut Helvetii arbitrantur, quin ipse sibi mortem consciverit.</p>
-<div class="section" id="technology-stack">
-<h2>Technology Stack<a class="headerlink" href="#technology-stack" title="Permalink to this headline">¶</a></h2>
-<p>Post eius mortem nihilo minus Helvetii id quod constituerant facere conantur, ut e finibus suis exeant. 2 Ubi iam se ad eam rem paratos esse arbitrati sunt, oppida sua omnia, numero ad duodecim, vicos ad quadringentos, reliqua privata aedificia incendunt; 3 frumentum omne, praeter quod secum portaturi erant, comburunt, ut domum reditionis spe sublata paratiores ad omnia pericula subeunda essent; trium mensum molita cibaria sibi quemque domo efferre iubent. Persuadent Rauracis et Tulingis et Latobrigis finitimis, uti eodem usi consilio oppidis suis vicisque exustis una cum iis proficiscantur, Boiosque, qui trans Rhenum incoluerant et in agrum Noricum transierant Noreiamque oppugnabant, receptos ad se socios sibi adsciscunt.</p>
+  <div class="section" id="building-this-document">
+<h1>Building this document<a class="headerlink" href="#building-this-document" title="Permalink to this headline">¶</a></h1>
+<p>The build must be done under the Python virtual environment.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">cd</span> *project-root*
+<span class="gp">%</span> <span class="nb">source</span> ./venv/bin/activate
+<span class="go">(venv) cd documentation</span>
+<span class="go">(venv) make html</span>
+</pre></div>
 </div>
+<p>Sphinx will generate a static HTML website in the documentation/_build
+directory.  It may be viewed at
+<a class="reference external" href="file:///">file:///</a><em>project-root</em>/documentation/_build/html/index.html</p>
 </div>
 
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="documentation-publish.html" class="btn btn-neutral float-right" title="Publishing this Document" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="about-this-document.html" class="btn btn-neutral" title="About this Document" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

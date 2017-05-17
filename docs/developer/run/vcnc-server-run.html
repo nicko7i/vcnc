@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuring the Development Environment &mdash; vcnc 12345 documentation</title>
+  <title>Running vcnc-server &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,7 +33,9 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="vcnc 12345 documentation" href="../../index.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../index.html"/>
+        <link rel="next" title="Running vclc" href="vclc-run.html"/>
+        <link rel="prev" title="Preparing to Run" href="run-prepare.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -86,24 +88,31 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
-<p class="caption"><span class="caption-text">User Information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../user/getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/vcnc-clients.html">vCNC Clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/users-and-security.html">Users and Security</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Coding Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ide.html">IDEs (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installing-and-building.html">Installing and Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vcnc-rest.html">vCNC REST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vcnc-web.html">vCNC Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vclc.html">vCLC (Command Line Client)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../python-api.html">Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design-notes.html">Design Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-publish.html">Publishing this Document</a></li>
 </ul>
 
             
@@ -134,11 +143,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
-    <li>Configuring the Development Environment</li>
+    <li>Running <em>vcnc-server</em></li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/developer/install-and-build/config-dev-env.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/developer/run/vcnc-server-run.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -148,30 +157,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="configuring-the-development-environment">
-<h1>Configuring the Development Environment<a class="headerlink" href="#configuring-the-development-environment" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
-<div class="section" id="python">
-<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
-<p>Python is needed for the documentation generator <em>Sphinx</em> and for vCNC software
-written in Python.  Ensure you are using the Python 3.5 bundled in <em>TOOLROOT</em>.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> sudo pip install --upgrade pip
-<span class="gp">%</span> sudo pip install virtualenv
-<span class="gp">%</span> virtualenv -p /opt/frqu/TOOLROOT/bin/python3 venv
-<span class="gp">%</span> <span class="nb">source</span> ./venv/bin/activate
-<span class="gp">%</span> <span class="o">(</span>venv<span class="o">)</span> pip install sphinx sphinx-autobuild sphinx_rtd_theme
+  <div class="section" id="running-vcnc-server">
+<h1>Running <em>vcnc-server</em><a class="headerlink" href="#running-vcnc-server" title="Permalink to this headline">¶</a></h1>
+<p><em>vcnc-server</em> comprises two programs: <em>vcnc-rest</em> and <em>vcnc-sampler</em>.</p>
+<p><em>vcnc-rest</em> is the REST server that talks to the <em>vtrq</em> and to which <em>vclc</em> connects.
+You&#8217;ll probably want to run that.</p>
+<p><em>vcnc-sampler</em> takes in data from <em>vtrq</em> and <em>vpms</em>, processes it,
+and makes it available to <em>vcnc-rest</em>.  The environment we prepared doesn&#8217;t
+include a <em>vda</em>, so this document won&#8217;t talk about running <em>vcnc-sampler</em>.</p>
+<p>The following code moves to the <em>vcnc-rest</em> directory and runs the server
+in the foreground:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">cd vcnc-server/vcnc-rest</span>
+<span class="go">npm start</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="node-js">
-<h2>node.js<a class="headerlink" href="#node-js" title="Permalink to this headline">¶</a></h2>
-<p>The build system uses the nvm bundled with <em>TOOLROOT</em>. Place the following in
-your <em>.bashrc</em> file:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">NVM_DIR</span><span class="o">=</span><span class="s2">&quot;/opt/frqu/TOOLROOT/nvm&quot;</span>
-<span class="o">[</span> -s <span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;</span><span class="nv">$NVM_DIR</span><span class="s2">/nvm.sh&quot;</span>  <span class="c1"># This loads nvm</span>
-<span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
+<p>An interactive REST interface is available:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">firefox http://localhost:6130/v1/doc/api/?url=spec</span>
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -180,12 +182,21 @@ your <em>.bashrc</em> file:</p>
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vclc-run.html" class="btn btn-neutral float-right" title="Running vclc" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="run-prepare.html" class="btn btn-neutral" title="Preparing to Run" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, IC Manage.
+        &copy; Copyright 2017, IC Manage Inc..
 
     </p>
   </div>
@@ -207,7 +218,7 @@ your <em>.bashrc</em> file:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'12345',
+            VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

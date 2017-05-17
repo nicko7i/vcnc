@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>vCNC REST &mdash; vcnc 1.0-beta documentation</title>
+  <title>Publishing this Document &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,7 +33,8 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/>
+        <link rel="prev" title="Building this document" href="documentation-build.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,7 +89,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ide.html">IDEs (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ide.html">IDEs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
 </ul>
@@ -107,10 +108,10 @@
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
 </ul>
 <p class="caption"><span class="caption-text">About this Document</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="about-this-document.html">About this Document</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation-build.html">Building this document</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation-publish.html">Publishing this Document</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Publishing this Document</a></li>
 </ul>
 
             
@@ -141,11 +142,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>vCNC REST</li>
+    <li>Publishing this Document</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/developer/vcnc-rest.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/developer/documentation-publish.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,19 +156,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="vcnc-rest">
-<h1>vCNC REST<a class="headerlink" href="#vcnc-rest" title="Permalink to this headline">¶</a></h1>
-<p>Cum civitas ob eam rem incitata armis ius suum exsequi conaretur multitudinemque hominum ex agris magistratus cogerent, Orgetorix mortuus est; 4 neque abest suspicio, ut Helvetii arbitrantur, quin ipse sibi mortem consciverit.</p>
-<div class="section" id="technology-stack">
-<h2>Technology Stack<a class="headerlink" href="#technology-stack" title="Permalink to this headline">¶</a></h2>
-<p>Post eius mortem nihilo minus Helvetii id quod constituerant facere conantur, ut e finibus suis exeant. 2 Ubi iam se ad eam rem paratos esse arbitrati sunt, oppida sua omnia, numero ad duodecim, vicos ad quadringentos, reliqua privata aedificia incendunt; 3 frumentum omne, praeter quod secum portaturi erant, comburunt, ut domum reditionis spe sublata paratiores ad omnia pericula subeunda essent; trium mensum molita cibaria sibi quemque domo efferre iubent. Persuadent Rauracis et Tulingis et Latobrigis finitimis, uti eodem usi consilio oppidis suis vicisque exustis una cum iis proficiscantur, Boiosque, qui trans Rhenum incoluerant et in agrum Noricum transierant Noreiamque oppugnabant, receptos ad se socios sibi adsciscunt.</p>
+  <div class="section" id="publishing-this-document">
+<h1>Publishing this Document<a class="headerlink" href="#publishing-this-document" title="Permalink to this headline">¶</a></h1>
+<p>The documentation is published on GitHub Pages by placing the
+generated files into the /docs directory of the &#8216;master&#8217;
+branch of &#8216;vcnc&#8217;.</p>
+<p>After pushing the latest documentation sources to origin/master, build
+the documentation as described above and then publish as follows:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">cd</span> documentation
+<span class="gp">%</span> make publish
+<span class="gp">%</span> git add ../docs
+<span class="gp">%</span> git commit -m <span class="s2">&quot;publish documentation&quot;</span>
+<span class="gp">%</span> git push
+</pre></div>
 </div>
+<p>The updated, generated, documentation is now in master/docs on GitHub.
+From there, it automagically appears on GitHub pages.</p>
 </div>
 
 
            </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="documentation-build.html" class="btn btn-neutral" title="Building this document" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

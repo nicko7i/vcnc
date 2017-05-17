@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Internal Builds &mdash; vcnc 12345 documentation</title>
+  <title>Internal Builds &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,7 +33,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="vcnc 12345 documentation" href="../../index.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../index.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -86,24 +86,31 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
-<p class="caption"><span class="caption-text">User Information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../user/getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/vcnc-clients.html">vCNC Clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user/users-and-security.html">Users and Security</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Coding Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ide.html">IDEs (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installing-and-building.html">Installing and Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vcnc-rest.html">vCNC REST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vcnc-web.html">vCNC Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../vclc.html">vCLC (Command Line Client)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../python-api.html">Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../design-notes.html">Design Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation-publish.html">Publishing this Document</a></li>
 </ul>
 
             
@@ -138,7 +145,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/developer/install-and-build/vcnc-server-internal-build.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/developer/building/prepare-internal.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -158,8 +165,7 @@ deployment running on the developer&#8217;s laptop or workstation.</p>
 <p>Python and Node.js are obtained from TOOLROOT. The database,
 redis and RethinkDB, can be obtained from any PeerCache unified
 release file.</p>
-<div class="section" id="python">
-<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p><strong>Python</strong></p>
 <p>Python is needed for the documentation generator <em>Sphinx</em> and for vCNC software
 written in Python.  Ensure you are using the Python 3.5 bundled in <em>TOOLROOT</em>.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> sudo pip install --upgrade pip
@@ -169,9 +175,7 @@ written in Python.  Ensure you are using the Python 3.5 bundled in <em>TOOLROOT<
 <span class="gp">%</span> <span class="o">(</span>venv<span class="o">)</span> pip install sphinx sphinx-autobuild sphinx_rtd_theme
 </pre></div>
 </div>
-</div>
-<div class="section" id="node-js">
-<h3>node.js<a class="headerlink" href="#node-js" title="Permalink to this headline">¶</a></h3>
+<p><strong>node.js</strong></p>
 <p>The build system uses the nvm bundled with <em>TOOLROOT</em>. Place the following in
 your <em>.bashrc</em> file:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">NVM_DIR</span><span class="o">=</span><span class="s2">&quot;/opt/frqu/TOOLROOT/nvm&quot;</span>
@@ -179,9 +183,7 @@ your <em>.bashrc</em> file:</p>
 <span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
 </pre></div>
 </div>
-</div>
-<div class="section" id="redis-and-rethinkdb">
-<h3>redis and RethinkDB<a class="headerlink" href="#redis-and-rethinkdb" title="Permalink to this headline">¶</a></h3>
+<p><strong>redis and RethinkDB</strong></p>
 <p>By default, vCNC expects redis and RethinkDB running with their default
 configuration at their default ports.</p>
 <p>The document <a class="reference external" href="https://docs.google.com/document/d/1ZiepQCDps2hb8Qi7k9BGE5yPtBrc6hfG7TXoUVFt5Tw/edit?usp=sharing">Installing the PeerCache Tools Locally</a> describes how to deploy a complete
@@ -202,19 +204,15 @@ systemctl start velstor-vcnc-redis.service
 </pre></div>
 </div>
 </div>
-</div>
 <div class="section" id="building-the-software">
 <h2>Building the Software<a class="headerlink" href="#building-the-software" title="Permalink to this headline">¶</a></h2>
 <p>The vCNC repository houses a suite of independent projects.  There
 is no top-level, &#8220;grand unified&#8221; build.  Each project is built separately.</p>
-<div class="section" id="build-and-install-peercache">
-<h3>Build and Install PeerCache<a class="headerlink" href="#build-and-install-peercache" title="Permalink to this headline">¶</a></h3>
+<p><strong>Build and Install PeerCache</strong></p>
 <p>vCNC is dependent on PeerCache libraries.  Running &#8216;make install&#8217; after
 building PeerCache puts the libraries in TOOLROOT for the vCNC
 build to use.</p>
-</div>
-<div class="section" id="building-vnc-server">
-<h3>Building vnc-server<a class="headerlink" href="#building-vnc-server" title="Permalink to this headline">¶</a></h3>
+<p><strong>Building vnc-server</strong></p>
 <p>vCNC server comprises two programs.</p>
 <p><em>vcnc-rest</em> is a Node.js server using a custom V8 JavaScript extension object.
 An <em>autotools</em> build system ties together the C++ and JavaScript portions of
@@ -235,9 +233,7 @@ because node_gyp is hardwired to find its dependencies there.</p>
 <span class="gp">%</span> make
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-vcnc-server">
-<h3>Running <em>vcnc-server</em><a class="headerlink" href="#running-vcnc-server" title="Permalink to this headline">¶</a></h3>
+<p><strong>Running vcnc-server</strong></p>
 <p>Run <em>vcnc-rest</em> as follows:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">cd</span> vcnc-server/vcnc-rest
 <span class="gp">%</span> npm start
@@ -256,7 +252,6 @@ sent to the web dashboard, start <em>vcnc-sampler</em>:</p>
 </div>
 </div>
 </div>
-</div>
 
 
            </div>
@@ -268,7 +263,7 @@ sent to the web dashboard, start <em>vcnc-sampler</em>:</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, IC Manage.
+        &copy; Copyright 2017, IC Manage Inc..
 
     </p>
   </div>
@@ -290,7 +285,7 @@ sent to the web dashboard, start <em>vcnc-sampler</em>:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'12345',
+            VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
