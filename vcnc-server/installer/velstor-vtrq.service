@@ -1,0 +1,36 @@
+;  Copyright (c) 2017 IC Manage, Inc.  All rights reserved.
+;
+;
+[Unit]
+Description=VelStor vTRQ server
+After=network.target
+;
+[Service]
+Type=simple
+User=root
+;Group=root
+;
+; set key environment variables used at startup
+;
+; Environment="LD_LIBRARY_PATH=/opt/velstor/current/lib64"
+;
+; start the vTRQ
+;
+ExecStart=/opt/velstor/current/bin/vtrq         \
+	--config=/opt/velstor/configs/velstor-vtrq.conf             \
+	--node=localhost,6100,tcp4 \
+	--backing=/var/lib/velstor/backing           \
+	--backing_db=/var/lib/velstor/backing      \
+	--verbose=3             \
+	--debug=1                         \
+	--logfile=/tmp/vtrq.log
+;
+SendSIGKILL=no
+Restart=always
+StandardOutput=syslog+console
+StandardError=syslog+console
+SyslogIdentifier=velstor_vTRQ
+;
+
+[Install]
+WantedBy=remote-fs.target

@@ -1,5 +1,5 @@
-Coding Policies
-===============
+Policies
+========
 
 General Policies
 ----------------
