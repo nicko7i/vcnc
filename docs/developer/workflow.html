@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Workflow &mdash; vcnc 12345 documentation</title>
+  <title>Workflow &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="vcnc 12345 documentation" href="../index.html"/>
-        <link rel="next" title="Installing and Building" href="installing-and-building.html"/>
-        <link rel="prev" title="Coding Policies" href="coding-policies.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/>
+        <link rel="next" title="Preparing to Build" href="building/build-prepare.html"/>
+        <link rel="prev" title="Policies" href="coding-policies.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,24 +88,31 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
-<p class="caption"><span class="caption-text">User Information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/vcnc-clients.html">vCNC Clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/users-and-security.html">Users and Security</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Coding Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ide.html">IDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Policies</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installing-and-building.html">Installing and Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vcnc-rest.html">vCNC REST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vcnc-web.html">vCNC Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vclc.html">vCLC (Command Line Client)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design-notes.html">Design Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation-publish.html">Publishing this Document</a></li>
 </ul>
 
             
@@ -152,7 +159,7 @@
             
   <div class="section" id="workflow">
 <h1>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h1>
-<p>Caesari cum id nuntiatum esset, eos per provinciam nostram iter facere conari, maturat ab urbe proficisci et quam maximis potest itineribus in Galliam ulteriorem contendit et ad Genavam pervenit. 2 Provinciae toti quam maximum potest militum numerum imperat (erat omnino in Gallia ulteriore legio una), pontem, qui erat ad Genavam, iubet rescindi.</p>
+<p>The <em>vcnc</em> project uses <a class="reference external" href="https://guides.github.com/introduction/flow/">github flow</a>.</p>
 </div>
 
 
@@ -162,10 +169,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="installing-and-building.html" class="btn btn-neutral float-right" title="Installing and Building" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="building/build-prepare.html" class="btn btn-neutral float-right" title="Preparing to Build" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="coding-policies.html" class="btn btn-neutral" title="Coding Policies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="coding-policies.html" class="btn btn-neutral" title="Policies" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -174,7 +181,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, IC Manage.
+        &copy; Copyright 2017, IC Manage Inc..
 
     </p>
   </div>
@@ -196,7 +203,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'12345',
+            VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

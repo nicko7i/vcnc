@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting Started &mdash; vcnc 12345 documentation</title>
+  <title>IDEs &mdash; vcnc 1.0-beta documentation</title>
   
 
   
@@ -33,9 +33,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="vcnc 12345 documentation" href="../index.html"/>
-        <link rel="next" title="Coding Policies" href="coding-policies.html"/>
-        <link rel="prev" title="Users and Security" href="../user/users-and-security.html"/> 
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../index.html"/>
+        <link rel="next" title="Policies" href="coding-policies.html"/>
+        <link rel="prev" title="vCNC Architecture" href="../about-vcnc/vcnc-architecture.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -88,30 +88,34 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
-<p class="caption"><span class="caption-text">User Information</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/getting-started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/vcnc-clients.html">vCNC Clients</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/users-and-security.html">Users and Security</a></li>
-</ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#optional-set-up-an-ide">(optional) Set up an IDE</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#webstorm">WebStorm</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IDEs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#webstorm">WebStorm</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Coding Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding-policies.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installing-and-building.html">Installing and Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vcnc-rest.html">vCNC REST</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vcnc-web.html">vCNC Web</a></li>
-<li class="toctree-l1"><a class="reference internal" href="vclc.html">vCLC (Command Line Client)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python-api.html">Python API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design-notes.html">Design Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation-publish.html">Publishing this Document</a></li>
 </ul>
 
             
@@ -142,11 +146,11 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>Getting Started</li>
+    <li>IDEs</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/developer/getting-started.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/developer/ide.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -156,40 +160,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Begin by working through <a class="reference internal" href="installing-and-building.html#installing-and-building"><span class="std std-ref">Installing and Building</span></a>.  When finished, you will be
-able to demo working software on your workstation.</p>
-<div class="section" id="optional-set-up-an-ide">
-<h2>(optional) Set up an IDE<a class="headerlink" href="#optional-set-up-an-ide" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="ides">
+<h1>IDEs<a class="headerlink" href="#ides" title="Permalink to this headline">¶</a></h1>
 <p>Developers are not required to use a particular IDE, or any IDE at all.
 Tips for setting up some IDEs are provided in the following sections.</p>
 <div class="section" id="webstorm">
-<h3>WebStorm<a class="headerlink" href="#webstorm" title="Permalink to this headline">¶</a></h3>
+<h2>WebStorm<a class="headerlink" href="#webstorm" title="Permalink to this headline">¶</a></h2>
 <p>This description sets up a single WebStorm project for all of the subsystems
 under the GitHub repository root.  We will use the <em>vcnc-web</em> ESLint configuration
 for <em>vcnc-rest</em> as well.</p>
 <p>First run &#8216;npm install&#8217; in directory vcnc-web.  This provides the ESLint package
 that WebStorm needs to perform linting.</p>
 <p>We will do the following:</p>
-<p># Turn off all the JavaScript inspections except for ESLint
-# Configure JavaScript for &#8220;React JSX&#8221; (which implies ES6) and &#8220;strict mode&#8221;.
-# Configure ESLint to point explicitly to vcnc-web/.eslintrc.js.
-# Configure indenting in the editor.</p>
+<ol class="arabic simple">
+<li>Turn off all the JavaScript inspections except for ESLint</li>
+<li>Configure JavaScript for &#8220;React JSX&#8221; (which implies ES6) and &#8220;strict mode&#8221;.</li>
+<li>Configure ESLint to point explicitly to vcnc-web/.eslintrc.js.</li>
+<li>Configure indenting in the editor.</li>
+</ol>
 <p>Navigate to File :: Settings... :: Editor :: Inspections :: JavaScript.
 Clear all inspections, then under &#8220;Code Quality&#8221; enable only &#8220;ESLint&#8221;.</p>
 <p>Navigate to File :: Settings... :: Languages &amp; Frameworks :: JavaScript.
 Set &#8220;JavaScript Language Version&#8221; to &#8220;React JSX&#8221; and enable &#8220;Prefer strict
 mode&#8221;.</p>
 <p>From there, navigate to Code Quality Tools :: ESLint.</p>
-<p># Check the Enable box.
-# Set the Node interpreter to the project interpreter in TOOLROOT.
-# The ESLint package is <em>/&lt;project-dir&gt;/vcnc-web/node_modules/eslint</em>.
-# Set the configuration file explicitly to <em>/&lt;project-dir&gt;vcnc-web/.eslintrc.js</em>.</p>
+<ol class="arabic simple">
+<li>Check the Enable box.</li>
+<li>Set the Node interpreter to the project interpreter in TOOLROOT.</li>
+<li>The ESLint package is <em>/&lt;project-dir&gt;/vcnc-web/node_modules/eslint</em>.</li>
+<li>Set the configuration file explicitly to <em>/&lt;project-dir&gt;vcnc-web/.eslintrc.js</em>.</li>
+</ol>
 <p>Navigate to File :: Settings... :: Editor :: Code Style :: JavaScript.
 Ensue that &#8220;Use tab character&#8221; is <em>not</em> checked and &#8220;Indent&#8221; is &#8220;2&#8221;.
 Ensure that &#8220;Indent chained methods&#8221; is <em>not</em> checked.</p>
-</div>
 </div>
 </div>
 
@@ -200,10 +203,10 @@ Ensure that &#8220;Indent chained methods&#8221; is <em>not</em> checked.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="coding-policies.html" class="btn btn-neutral float-right" title="Coding Policies" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="coding-policies.html" class="btn btn-neutral float-right" title="Policies" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../user/users-and-security.html" class="btn btn-neutral" title="Users and Security" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../about-vcnc/vcnc-architecture.html" class="btn btn-neutral" title="vCNC Architecture" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -212,7 +215,7 @@ Ensure that &#8220;Indent chained methods&#8221; is <em>not</em> checked.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, IC Manage.
+        &copy; Copyright 2017, IC Manage Inc..
 
     </p>
   </div>
@@ -234,7 +237,7 @@ Ensure that &#8220;Indent chained methods&#8221; is <em>not</em> checked.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'12345',
+            VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

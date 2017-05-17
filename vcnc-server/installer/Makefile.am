@@ -13,5 +13,9 @@
 dist_bin_SCRIPTS = install-me.sh vcnc
 
 etcdir=$(datadir)/etc
-etc_DATA = vcnc-redis.service vcnc.service
+etc_DATA =                      \
+  vcnc-redis.service            \
+  vcnc.service                  \
+  vcnc-rethinkdb.service        \
+  velstor-vtrq.service
 
