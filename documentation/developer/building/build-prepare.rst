@@ -1,3 +1,5 @@
+.. _build_prepare:
+
 Preparing to Build
 ==================
 
@@ -26,6 +28,8 @@ Internal TOOLROOT
 *vcnc* uses the same TOOLROOT as PeerCache.  Build PeerCache first. When the
 build is finished, run ``make install`` to put the latest PeerCache libraries
 into your TOOLROOT.  You are now ready to install GNU Tools.
+
+.. _external_toolroot:
 
 External TOOLROOT
 '''''''''''''''''

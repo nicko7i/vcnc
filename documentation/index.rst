@@ -46,7 +46,6 @@ The code is open source, and `available on github`_.
    developer/building/vcnc-server-build.rst
    developer/building/vcnc-web-build.rst
    developer/building/vclc-pyapi-build.rst
-   developer/building/documentation-build.rst
 
 .. toctree::
    :maxdepth: 1
@@ -69,6 +68,7 @@ The code is open source, and `available on github`_.
    :caption: About this Document
 
    developer/about-this-document
+   developer/documentation-build.rst
    developer/documentation-publish.rst
 
 
