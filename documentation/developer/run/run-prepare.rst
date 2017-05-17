@@ -14,7 +14,7 @@ All the servers are run locally using their default ports.  By doing so we elimi
 deal of tricky configuration alignments.
 
 *vtrq* from *triptych*
-______________________
+----------------------
 
 PeerCache developers may use *triptych* to launch the *vtrq*.  *vcnc* expects *vtrq* to
 be listening on port ``6100`` of *localhost* (or 127.0.0.x).
