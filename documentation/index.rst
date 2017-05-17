@@ -42,11 +42,11 @@ The code is open source, and `available on github`_.
    :maxdepth: 1
    :caption: Building
 
-   developer/build/build-prepare.rst
-   developer/build/vcnc-server-build.rst
-   developer/build/vcnc-web-build.rst
-   developer/build/vclc-pyapi-build.rst
-   developer/build/documentation-build.rst
+   developer/building/build-prepare.rst
+   developer/building/vcnc-server-build.rst
+   developer/building/vcnc-web-build.rst
+   developer/building/vclc-pyapi-build.rst
+   developer/building/documentation-build.rst
 
 .. toctree::
    :maxdepth: 1
