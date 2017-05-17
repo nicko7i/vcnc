@@ -31,12 +31,12 @@ const samples =
 
 
 function Logfile() { return logFile; }
-function DefSamplePeriod() { return period; }
-function DefLatency() { return latency; }
+function DefSamplePeriod() { return parseInt(period, 10); }
+function DefLatency() { return parseInt(latency, 10); }
 function vcncSamplerKeys() { return daVcncKeywords; }
-function MaxEntries() { return maxEntries; }
-function Samples() { return samples; }
-function MaxBins() { return maxBins; }
+function MaxEntries() { return parseInt(maxEntries, 10); }
+function Samples() { return parseInt(samples, 10); }
+function MaxBins() { return parseInt(maxBins, 10); }
 function Table() { return table; }
 
 module.exports = {

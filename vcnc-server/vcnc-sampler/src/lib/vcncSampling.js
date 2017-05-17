@@ -22,10 +22,11 @@ const rs = require('./rethinkSampler');
   */
 class VcncSampling {
   constructor(dt, ltc) {
-    this.sampleTime = ((dt !== undefined) ? dt : conf.DefSampleTime());
-    this.latency = (ltc !== undefined) ? ltc : conf.DefLatency(); // ms
+    this.sampleTime = ((dt !== undefined) ? parseInt(dt, 10) : conf.DefSampleTime());
+    this.latency = (ltc !== undefined) ? parseInt(ltc, 10) : conf.DefLatency(); // ms
     this.msgSampler = vsm.CreateVcncSampler(this.sampleTime);
     this.rdb = rs.CreaterethinkdbSampler(this.sampleTime, this.latency);
+    this.msgCount = 0;
   }
    /**
     *  Initializes the vcncSampler module, creating a connection object
@@ -39,6 +40,9 @@ class VcncSampling {
     const p = rs.Init();
     p.then(() => {
       self.msgSampler.Init();
+      p.then(() => {
+        self.Trim();
+      });
     }, (e) => {
       console.error(`ERROR: rethinkdb is not running\n ${e}`);
       process.exit(1);
@@ -57,34 +61,73 @@ class VcncSampling {
 //    console.log(`trimTimeout = ${period}`);
     return period;
   }
+/*
+  Run(data) {
+    console.log(`VcncSampling::Run: ${data}`);
+    return new Promise((resolve, reject) => {
+      const jsonData = json.parse(data);
+      (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          console.log('Process data');
+          async.each(jsonData.messages, (msg) => {
+            self.msgSampler.Add(msg);
+          });
+          const msgCount = self.msgSampler.MessageCount();
+          const ignoreMsgCount = self.msgSampler.IgnoreMessageCount();
+          console.log(`IgnoreMessageCount = ${ignoreMsgCount}`);
+          console.log(`MessageCount = ${msgCount}`);
+          resolve(msgCount);
+        }
+      };
+    });
+  }
+*/
+  Process(jsnData) {
+    const self = this;
+    async.each(jsnData.messages, (msg) => {
+      self.msgSampler.Add(msg);
+    });
+  }
 
   Run(data) {
     const self = this;
     let jsonData;
-    // console.log(`VcncSampling::Run: ${data}`);
+//    console.log(`VcncSampling::Run: ${data}`);
     try {
       jsonData = json.parse(data);
+      self.msgCount += jsonData.messages.length;
     } catch (err) {
-      console.log('Warning: VDa data corrupted');
+      console.warn('Warning: VDa data corrupted');
+      return;
     }
-    async.each(jsonData.messages, (msg) => {
-      self.msgSampler.Add(msg);
-    });
+    if (!jsonData.messages.empty) {
+      self.Process(jsonData);
+    }
   }
 
   Send() {
     const self = this;
 //    console.log('>>> Start Send');
     const bin = self.msgSampler.ReleaseBin();
-    if (bin !== undefined) {
-//      console.log(`Bin: ${json.stringify(bin)}`);
-      self.rdb.Push(bin);
-    }
-//    console.log('<<< Finished Send');
+//    console.log(`Send to rethinkdb: Bin: ${json.stringify(bin)}`);
+
+    self.rdb.Push(bin);
   }
+//    console.log('<<< Finished Send');
 
   Trim() {
     this.rdb.Trim();
+  }
+
+  ProcessCheck() {
+    const self = this;
+    console.info(`Total Vda messages: ${self.msgCount}`);
+    console.info(`Total sampled vpm messages: ${self.msgSampler.VpmMessageCount()}`);
+    console.info(`Total sampled vtrq messages: ${self.msgSampler.VtrqMessageCount()}`);
+    console.info(`Total sampled messages: ${self.msgSampler.MessageCount()}`);
+    console.info(`Total ignored messages = ${self.msgSampler.IgNoreMessaageCount()}`);
   }
 }
 

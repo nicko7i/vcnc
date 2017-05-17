@@ -84,12 +84,6 @@ const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
 
-if (!Date.now) {
-  Date.now = function () {
-    return new Date().getTime();
-  };
-}
-
 const tsStart = Date.now();
 console.log(`Time (ms):${tsStart}`);
 console.log(`Sample period:  ${samplePeriod}`);
@@ -104,7 +98,16 @@ function requestHandler(request, response) {
   request.setEncoding('utf8');
   request.on('data', (data) => {
 //    console.log(data);
-    vcncSample.Run(data);
+    setInterval(() => {
+      if(data !== null) {
+        vcncSample.Run(data);
+        data = null;
+      }
+    }, 0);
+//    .catch (err => {
+//      console.log('Warning: VDa data corrupted: ${err}');
+//    });
+
   });
   response.on('error', (err) => {
     console.error(err);
@@ -134,22 +137,26 @@ setInterval(() => {
   vcncSample.Trim();
 }, trimTimeout);
 
-
 // Process Linux signals
 //
 // Processing of Linux signals
 //
 process.on('SIGINT', () => {
   console.log('Caught SIGINT interrupt signal');
+  vcncSample.ProcessCheck();
+  delete cnctrqClient;
   process.exit(0);
 });
 
 process.on('SIGTERM', () => {
   console.log('Caught SIGTERM interrupt signal');
+  vcncSample.ProcessCheck();
+  delete cnctrqClient;
   process.exit(0);
 });
 
 process.on('SIGUSR1', () => {
   console.log('Caught SIGUSR1 interrupt signal');
+  vcncSample.ProcessCheck();
 });
 
