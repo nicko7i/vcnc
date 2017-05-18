@@ -104,10 +104,6 @@ function requestHandler(request, response) {
         data = null;
       }
     }, 0);
-//    .catch (err => {
-//      console.log('Warning: VDa data corrupted: ${err}');
-//    });
-
   });
   response.on('error', (err) => {
     console.error(err);
