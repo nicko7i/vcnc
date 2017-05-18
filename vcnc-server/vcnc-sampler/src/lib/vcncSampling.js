@@ -61,29 +61,7 @@ class VcncSampling {
 //    console.log(`trimTimeout = ${period}`);
     return period;
   }
-/*
-  Run(data) {
-    console.log(`VcncSampling::Run: ${data}`);
-    return new Promise((resolve, reject) => {
-      const jsonData = json.parse(data);
-      (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          console.log('Process data');
-          async.each(jsonData.messages, (msg) => {
-            self.msgSampler.Add(msg);
-          });
-          const msgCount = self.msgSampler.MessageCount();
-          const ignoreMsgCount = self.msgSampler.IgnoreMessageCount();
-          console.log(`IgnoreMessageCount = ${ignoreMsgCount}`);
-          console.log(`MessageCount = ${msgCount}`);
-          resolve(msgCount);
-        }
-      };
-    });
-  }
-*/
+
   Process(jsnData) {
     const self = this;
     async.each(jsnData.messages, (msg) => {

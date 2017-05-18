@@ -67,7 +67,6 @@ class VcncSampler {
       if (index > self.minIndex) {
         self.empty = false;
         self.minIndex = index;
-//        console.log(`ts = ${ts} index = ${index} minIndex = ${self.minIndex}`);
       } else {
         self.ignoredMsgCount += 1;
         return;
@@ -134,7 +133,6 @@ class VcncSampler {
       rVpm: pmRead,
       sampleTimestamp: samplerTs,
     };
-//    console.info(`Processed messages: ${self.MessageCount()} Ignored messages: ${self.IgNoreMessaageCount()}`);
     // Delete processed bin
     //
 //    let keys1 = Object.keys(self.pmReadBins);
