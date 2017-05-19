@@ -6,15 +6,17 @@ const Set = require('collections/set');
 const config = require('../../vcnc-core/src/lib/configuration.js');
 
 // Default values of configuration parameters
-const { maxEntries, maxBins, table, period, latency } = config.vdaSampler;
+const { maxEntries, maxBins, table, period, latency, hostname, port } = config.vcncSampler;
 
 // Patthto Vcnc-sampler log-file
 const logFile = '';
+const host = hostname;
+const smplPort = port;
 
 // List of all tags of VDA configutation parameters
 const daVcncKeywords = new Set([
   '--logDir',
-  '--vda',
+  '--sampleServer',
   '--samplePeriod',
   '--latency',
 ]);
@@ -29,6 +31,12 @@ const samples =
     read_vtrq: 1,
   };
 
+const options =
+  {
+    host: host,
+    port: smplPort,
+  };
+
 
 function Logfile() { return logFile; }
 function DefSamplePeriod() { return parseInt(period, 10); }
@@ -38,6 +46,7 @@ function MaxEntries() { return parseInt(maxEntries, 10); }
 function Samples() { return parseInt(samples, 10); }
 function MaxBins() { return parseInt(maxBins, 10); }
 function Table() { return table; }
+function HostPort() { return options; }
 
 module.exports = {
   Logfile,
@@ -48,4 +57,5 @@ module.exports = {
   Samples,
   MaxBins,
   Table,
+  HostPort,
 };

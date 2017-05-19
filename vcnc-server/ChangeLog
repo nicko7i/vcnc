@@ -1,3 +1,7 @@
+Release 3.7.4
+
+    vcnc-sampler is live with real data.
+
 Release 3.7.3
 
     Fix ENOENT error for vtrq storage stats.

@@ -7,6 +7,7 @@
 const dict = require('collections/dict');
 const fs = require('fs');
 const path = require('path');
+// const json = require('JSON');
 
 //
 // Global variables
@@ -83,7 +84,7 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
  */
 ProcessCommandLine.prototype.JSNode = function (key, defNode) {
   const self = this;
-  const options =
+  let options =
     {
       host: '',
       port: 0,
@@ -98,7 +99,8 @@ ProcessCommandLine.prototype.JSNode = function (key, defNode) {
   } else if (defNode === undefined) {
     return options;
   } else {
-    value = defNode;
+    options = defNode;
+    return options;
   }
   const args = value.split(',');
   if (args.length === 0) {

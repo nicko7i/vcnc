@@ -45,7 +45,7 @@ const args = cmdl.Input(validKeys);
 
 console.log('\nStart Vcnc Sampler');
 // console.log(`Input arguments: ' + json.stringify(args));
-const options = cmdl.JSNode('vda');
+const options = cmdl.JSNode('sampleServer', conf.HostPort());
 const logDir = cmdl.JSparam('logDir');
 const samplePeriod = cmdl.JSparam('samplePeriod', conf.DefSamplePeriod());
 const latency = cmdl.JSparam('latency', conf.DefLatency());
@@ -55,11 +55,6 @@ console.log(`logDir = ${logDir}`);
 
 // Validate input parameters
 //
-
-if (logDir === undefined) { // || options.method === 'INVALID') {
-  console.log('Invalid input parameters');
-  process.exit(1);
-}
 
 if (!options.host || !options.port) {
   console.log(`Invalid host/port: ${json.stringify(options)}`);

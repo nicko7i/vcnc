@@ -15,7 +15,7 @@ all:
 	  [ ! -d $(NVM_DIR) ] && (NVM_DIR=$(TOOLROOT)/share/vcnc/nvm); \
 	  [ ! -d $(NVM_DIR) ] && (echo "Can't find NVM_DIR"; exit 1); \
 	  . $(NVM_DIR)/nvm.sh;  \
-	  echo npm install;                          \
+	  npm install;                          \
 	)
 
 clean-local:

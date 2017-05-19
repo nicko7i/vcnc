@@ -29,10 +29,10 @@ fi
 #  Set up the sampler.
 #
 SAMPLER_SERVER_DIR="$VELSTOR_VCNC_DIR/share/vcnc/vcnc-sampler"
-#if [ ! -d $SAMPLER_SERVER_DIR/node_modules ]; then
-#  echo "VCNC: $SAMPLER_SERVER_DIR/node_modules doesn't exist. Exiting."; exit 6
-#fi
-SAMPLER_NODE_APP="$SAMPLER_SERVER_DIR/app-mock.js"
+if [ ! -d $SAMPLER_SERVER_DIR/node_modules ]; then
+  echo "VCNC: $SAMPLER_SERVER_DIR/node_modules doesn't exist. Exiting."; exit 6
+fi
+SAMPLER_NODE_APP="$SAMPLER_SERVER_DIR/app.js"
 if [ ! -s $SAMPLER_NODE_APP ]; then
   echo "VCNC: $SAMPLER_NODE_APP empty or doesn't exist. Exiting."; exit 7
 fi
