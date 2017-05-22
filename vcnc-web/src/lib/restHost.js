@@ -7,11 +7,12 @@
 function restHost() {
   //
   //  Give the URL priority
+  //  ... the substring(1) idiom drops the initial '?' See
+  //      https://stackoverflow.com/a/14395123/7702839
   //
   const params = new URLSearchParams(window.location.search.substring(1));
-  const rest = params.get('rest');
-  if (rest) {
-    return rest;
+  if (params.has('rest')) {
+    return params.get('rest');
   }
   //
   //  Otherwise, if the URL is the Slingshot BrowserSync default, use the
