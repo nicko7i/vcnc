@@ -7,6 +7,7 @@ const config = require('./configuration.js');
 const CnctrqClient = require('../../../js-extension/build/Release/cnctrq_client.node').CnctrqClient;
 
 const cnctrqClient = new CnctrqClient();
+const { vtrq_id } = config.peercache;
 let latestValue;
 
 /**
@@ -21,6 +22,8 @@ function init() {
   //
   latestValue = {
     value: 0,
+    st_size: 0,
+    extents: 0,
     timestamp: Date.now(),
   };
   //
@@ -28,7 +31,7 @@ function init() {
   //
   setInterval(() => {
     cnctrqClient.trq_statistic(
-      0,   // Yes, there's only one vtrq, so let's always give it id 0.
+      vtrq_id,
       '/', // We're looking for stats over the entire vtrq..
       (result) => {
         //
@@ -46,10 +49,12 @@ function init() {
         // ... vTRQ bug gives the same value for sum_extents and sum_st_size
         // ... By taking the log, we can see the value change while keeping it the
         // ... same magnitude as the real storage efficiency.
-        // const value = result.sum_extents ? result.sum_st_size / result.sum_extents : 1;
-        const value = Math.log10(1 + result.sum_st_size);
+        const value = result.sum_extents ? result.sum_st_size / result.sum_extents : 1;
+//        const value = Math.log10(1 + result.sum_st_size);
         latestValue = {
           value,
+          st_size: result.sum_st_size,
+          extents: result.sum_extents,
           timestamp: Date.now(),
         };
       }
