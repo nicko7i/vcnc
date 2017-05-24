@@ -78,10 +78,14 @@ function mockDashboardData() {
   const fVtrq = trend(0, 80, 70, 2);
   const fVpm = trend(10, 70, 50, 2);
   const fStorageEfficiency = trend(0.1, 10, 1, 0.1);
+  const fSumExtents = trend(0, 10000, 1000, 50);
+  const fSumStSize = trend(0, 100000, 10000, 300);
   return () => ({
-    storageEfficiency: fStorageEfficiency(),
     rVtrq: fVtrq(),
     rVpm: fVpm(),
+    storageEfficiency: fStorageEfficiency(),
+    sumExtents: fSumExtents(),
+    sumStSize: fSumStSize(),
   });
 }
 

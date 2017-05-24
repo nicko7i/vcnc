@@ -24,6 +24,8 @@ const reducers = {
       storageEfficiencyTrend: updateTrend(
         state.storageEfficiencyTrend,
         action.payload.storageEfficiency),
+      sumExtentsTrend: updateTrend(state.sumExtentsTrend, action.payload.sumExtents),
+      sumStSizeTrend: updateTrend(state.sumStSizeTrend, action.payload.sumStSize),
       ...action.payload,
     }),
   [types.UPDATE_ZERO_TIME_SYNC_PERFORMANCE]:

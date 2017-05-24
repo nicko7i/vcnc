@@ -16,9 +16,9 @@ import * as actions from '../actions/realtimeActions';
 
 function ExternalEvents(props) {
   const handleData = (data) => {
-    const { rVpm, rVtrq, storageEfficiency } = JSON.parse(data);
+    const { rVpm, rVtrq, storageEfficiency, sumExtents, sumStSize } = JSON.parse(data);
     props.dispatch(
-      actions.updateVtrqPerformance({ storageEfficiency }));
+      actions.updateVtrqPerformance({ storageEfficiency, sumExtents, sumStSize }));
     props.dispatch(actions.updatePeercachePerformance({
       rVpm,
       rVtrq,
