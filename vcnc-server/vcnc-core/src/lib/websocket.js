@@ -3,12 +3,14 @@
 const config = require('./configuration.js');
 const url = require('url');
 const mockDashboardData = require('./mockDashboardData')();
-const mockSampler = require('./mockSampler');
 const storagePolling = require('./pollStorageStats');
 const r = require('rethinkdb');
 
+const samplerTableName = config.vcncSampler.table;
+
 let connection = null;
 
+//  Useful for unit testing??
 function makeMockHandler() {
   let interval = null;
   return (ws) => {
@@ -39,9 +41,14 @@ function init() {
   .then((conn) => {
     connection = conn;
   });
+  //
+  //  We don't try to create a table.  If one isn't there, it's
+  //  an error.  This might be an issue: in systemd, we might
+  //  need to start vcnc-sampler first, wait a few seconds,
+  //  and then start vcnc-rest (ugh)  Or something better.
 }
 
-function makeMockRethinkHandler() {
+function makeHandler() {
   let changeCursor = null;
   return (ws) => {
     const location = url.parse(ws.upgradeReq.url, true);
@@ -49,7 +56,7 @@ function makeMockRethinkHandler() {
     //
     //  Start things off by blasting the 100 most recent timepoints.
     //
-    mockSampler.getTable()
+    r.table(samplerTableName)
     .orderBy({ index: r.desc('timestamp') })
     .limit(100)
     .orderBy('timestamp')
@@ -63,7 +70,7 @@ function makeMockRethinkHandler() {
     //
     //  Subscribe to changes in the RethinkDB dashboard table.
     //
-    mockSampler.getTable()
+    r.table(samplerTableName)
     .changes()
     .run(connection, (err, cursor) => {
       changeCursor = cursor;
@@ -100,7 +107,6 @@ function makeMockRethinkHandler() {
 
 module.exports = {
   init,
-  makeMockRethinkHandler,
   makeMockHandler,
-  makeHandler: makeMockRethinkHandler,
+  makeHandler,
 };
