@@ -123,16 +123,18 @@ class VcncSampler {
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.vtrqReadBins[self.minIndex] / self.samplePeriod, 10);
-    const se = storPoll.currentValue().value;
-
+    const se = storPoll.currentValue();
     // Set output bin
     //
     const bin = {
-      storageEfficiency: se,
+      storageEfficiency: se.value,
+      sum_st_size: parseInt(se.st_size, 10),
+      sum_extents: parseInt(se.extents, 10),
       rVtrq: vtrqRead,
       rVpm: pmRead,
       sampleTimestamp: samplerTs,
     };
+//    console.log(`Bin: ${json.stringify(bin)}`);
     // Delete processed bin
     //
 //    let keys1 = Object.keys(self.pmReadBins);

@@ -69,8 +69,8 @@ vcncSampler:
   #  hostname
   hostname: cnc
   #
-  #  port Corresponds mastiff port
-  port: 7059
+  #  port 
+  port: 6159 
 
 
 peercache:
