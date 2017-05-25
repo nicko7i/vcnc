@@ -7,10 +7,14 @@ export default {
   },
   realtime: {
     //
-    //  PeerCache performance
+    //  PeerCache vTRQ performance
     //
     storageEfficiency: 1,
     storageEfficiencyTrend: [],
+    sumExtents: 1,
+    sumExtentsTrend: [],
+    sumStSize: 1,
+    sumStSizeTrend: [],
     //
     //  PeerCache "caching" performance
     //  ... Aggregate numbers over all vps and vpms

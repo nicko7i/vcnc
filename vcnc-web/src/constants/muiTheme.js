@@ -45,10 +45,12 @@ const { primary1Color, textColor } = materialUi.palette;
 
 export const vcnc = {
   palette: {
+    storageEfficiencyColor: grey800,
+    sumExtentsColor: red500,
+    sumStSizeColor: blue500,
     vtrqColor: blue500,
     vpmColor: red500,
     vpColor: lightBlue500,
-    storageEfficiencyColor: grey800,
   },
   widgetFrame: {
     backgroundColor: fade(primary1Color, 0.3),

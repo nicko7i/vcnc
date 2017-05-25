@@ -19,8 +19,6 @@ const Middleware = require('swagger-express-middleware');
 //  Websockets
 const WebSocket = require('ws');
 const WebSocketHandler = require('../vcnc-core/src/lib/websocket');
-const mockSampler = require('../vcnc-core/src/lib/mockSampler');
-const websocket = require('../vcnc-core/src/lib/websocket');
 //
 //  Storage Polling
 //  (Eventually polling will be performed by vcnc-core)
@@ -297,8 +295,7 @@ module.exports = (() => {
   //
   rethink.init()
   .then(() => grid.init())
-  .then(() => mockSampler.init())
-  .then(() => websocket.init())
+  .then(() => WebSocketHandler.init())
   .then(() => storagePolling.init())
   .then(() => configureSwaggerMiddleware(app, 'src/api/v1api.json'))
   .then(() => configureSwaggerMiddleware(app, 'src/api/v2api.json'))
