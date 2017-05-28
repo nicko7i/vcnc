@@ -119,7 +119,7 @@ class VcncSampler {
 
     // Set time to a center af sample interval
     samplerTs -= Math.round(self.samplePeriod / 2);
-    const pmRead = (self.pmReadBins[self.minIndex] === undefined) ?
+    const vpmRead = (self.pmReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.vtrqReadBins[self.minIndex] / self.samplePeriod, 10);
@@ -131,7 +131,8 @@ class VcncSampler {
       sum_st_size: parseInt(se.st_size, 10),
       sum_extents: parseInt(se.extents, 10),
       rVtrq: vtrqRead,
-      rVpm: pmRead,
+      //  Any reads resolved on the vtrq were not resolved on the vpm. <B8569>
+      rVpm: Math.abs(vpmRead - vtrqRead),
       sampleTimestamp: samplerTs,
     };
 //    console.log(`Bin: ${json.stringify(bin)}`);
