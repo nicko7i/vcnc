@@ -9,8 +9,8 @@ import json
 import os
 
 config = {
-    'vcnc': 'cnc:5500'
-    , 'vtrqid': 0
+    'vcnc': 'cnc:7130',
+    'vtrqid': 0
 }
 
 print(os.environ.keys)
@@ -169,19 +169,20 @@ def test_ws_list():
 
 def test_ws_set_get_delete():
     root_name = '/GmqYbvjQkoAEPQIGwzRa'+seed
-    ws_spec = '[{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol", "local": false}]'
+    ws_spec = '{"writeback": "always", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path": "/u/carol"}]}'
     try:
         #  Clear out any existing spec
         call('ws', 'rm', root_name)
     except:
+        print('Name clearing failed')
         pass
 
     for ws in ('ws', 'workspace'):
         for whack in ('rm', 'delete'):
             #
-            #  Create a workspace specificaiton
+            #  Create a workspace specification
             result = call(ws, 'set', root_name, ws_spec)
-            print(ws, 'set', result)
+            print('looky looky', ws, 'set', result)
             j = json.loads(result)
             assert(j['http_status'] == 200)
             #

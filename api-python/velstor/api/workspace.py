@@ -4,8 +4,6 @@
 import requests
 import json
 from velstor.api.util import fake_requests_response as fake_response
-
-from velstor.api.util import print_error
 from velstor.api.util import urlencode
 from velstor.api.fulfill202 import fulfill202
 
@@ -26,17 +24,17 @@ def delete(session, vtrqid, path):
     #  validate vtrqid is an int
     #  validate path is a string and is absolute
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq'
-                    , 'workspaces'
-                    , str(vtrqid)
-                    , urlencode(path)])
+    url = '/'.join([session.base_url(),
+                    'vtrq',
+                    'workspaces',
+                    str(vtrqid),
+                    urlencode(path)])
     r = requests.delete(url)
     return fulfill202(session, r)
 
 
 def get(session, vtrqid, path):
-    """Retreives a workspace specification.
+    """Retrieves a workspace specification.
 
     Args:
         session (:class:`~velstor.api.session.Session`): Provides security information.
@@ -49,11 +47,11 @@ def get(session, vtrqid, path):
     #  validate vtrqid is an int
     #  validate path is a string and is absolute
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq'
-                    , 'workspaces'
-                    , str(vtrqid)
-                    , urlencode(path)])
+    url = '/'.join([session.base_url(),
+                    'vtrq',
+                    'workspaces',
+                    str(vtrqid),
+                    urlencode(path)])
     r = requests.get(url)
     return fulfill202(session, r)
 
@@ -74,12 +72,12 @@ def list(session, vtrqid, path):
     #  validate vtrqid is an int
     #  validate path is a string and is absolute
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq'
-                    , 'workspaces'
-                    , str(vtrqid)
-                    , urlencode(path)
-                    , 'children'])
+    url = '/'.join([session.base_url(),
+                    'vtrq',
+                    'workspaces',
+                    str(vtrqid),
+                    urlencode(path),
+                    'children'])
     r = requests.get(url)
     return fulfill202(session, r)
 
@@ -91,6 +89,7 @@ def set(session, vtrqid, path, spec):
         session (:class:`~velstor.api.session.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified workspace name.
+        spec (Iterable[str]): Workspace definition
 
     Returns:
         The return value of :func:`~velstor.api.fulfill202.fulfill202`
@@ -98,13 +97,13 @@ def set(session, vtrqid, path, spec):
     #  validate vtrqid is an int
     #  validate path is a string and is absolute
     #
-    spc = " ".join(spec)
-    url = '/'.join([session.base_url()
-                    , 'vtrq'
-                    , 'workspaces'
-                    , str(vtrqid)])
+    url = '/'.join([session.base_url(),
+                    'vtrq',
+                    'workspaces',
+                    str(vtrqid)])
     try:
-        r = requests.post(url, json={'name': path, 'spec': json.loads(spc)})
+        print('workspace.set', spec)
+        r = requests.post(url, json={'name': path, 'spec': spec})
         return fulfill202(session, r)
     except ValueError as e:
         message = 'Invalid workspace specification: ' + str(e)
