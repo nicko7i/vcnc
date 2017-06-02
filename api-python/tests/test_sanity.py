@@ -116,16 +116,19 @@ def test_ns_copy():
 
 def test_ns_consistency():
     dirname = '/Ime3Wp2uMyaHFLVoNKSf'+seed
-    call('ns', 'mkdir', dirname)
     for ns in ('ns', 'namespace'):
         for con in ('consistency', 'con'):
             for val in ('immediate', 'eventual'):
+                call(ns, 'mkdir', dirname)
                 result = call(ns, con, 'set', val, dirname)
                 j = json.loads(result)
                 assert(j['http_status'] == 200)
                 #
                 result = call(ns, con, 'get', dirname)
                 print(ns, con, 'get', val, ':', result)
+                j = json.loads(result)
+                assert(j['http_status'] == 200)
+                result = call(ns, 'rm', dirname)
                 j = json.loads(result)
                 assert(j['http_status'] == 200)
 
