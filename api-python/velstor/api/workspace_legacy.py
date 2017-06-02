@@ -27,7 +27,8 @@ def to_delegation_from_legacy(legacy):
 
 
 def _to_delegation_from_response_body(body):
-    """"Converts a (string) response body in legacy form to the delegation form"""
+    """"Converts a (string) response body in legacy form to
+        a string in the delegation form"""
 
     if type(body) != str:
         raise TypeError('Expected {} not {}'.format(type(""), type(body)))

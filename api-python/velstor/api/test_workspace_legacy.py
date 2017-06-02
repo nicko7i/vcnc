@@ -47,20 +47,20 @@ def test_convert_to_delegation():
 
 
 def test_convert_legacy_response_body():
+    #  The method under test returns a json.loads() string, which is not
+    #  guaranteed to always yield the same string for a given dictionary.
+    #  Therefore, the comparison is done over objects, not JSON strings.
     assert(
-        uut._to_delegation_from_response_body(
-            json.dumps({
-                'spec': make_legacy_spec(True)
-            })
-        ) == json.dumps({'spec': make_delegation_spec('never')})
+        json.loads(uut._to_delegation_from_response_body(
+            json.dumps({'spec': make_legacy_spec(True)})
+        )) == {'spec': make_delegation_spec('never')}
     )
     assert(
-        uut._to_delegation_from_response_body(
-            json.dumps({
-                'spec': make_legacy_spec(False)
-            })
-        ) == json.dumps({'spec': make_delegation_spec('always')})
+        json.loads(uut._to_delegation_from_response_body(
+            json.dumps({'spec': make_legacy_spec(False)})
+        )) == {'spec': make_delegation_spec('always')}
     )
+
 
 def test_convert_to_legacy():
     assert(
@@ -79,4 +79,3 @@ def test_convert_to_legacy():
         assert(
             uut._to_legacy_from_delegation(make_delegation_spec('xyzzy')) == make_legacy_spec(False)
         )
-
