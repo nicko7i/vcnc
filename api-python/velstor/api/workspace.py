@@ -102,7 +102,6 @@ def set(session, vtrqid, path, spec):
                     'workspaces',
                     str(vtrqid)])
     try:
-        print('workspace.set', spec)
         r = requests.post(url, json={'name': path, 'spec': spec})
         return fulfill202(session, r)
     except ValueError as e:

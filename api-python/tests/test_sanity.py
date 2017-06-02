@@ -21,7 +21,7 @@ except:
     pass
 
 def call(*args):
-    """Invokes a clc command and returns the results as a dictionary"""
+    """Invokes a vclc command and returns the results as a dictionary"""
     #
     # Form the command
     #
@@ -54,12 +54,12 @@ def test_ns_mk_rm_dir():
     except:
         pass
     for ns in ('ns', 'namespace'):
-        result = call('ns', 'mkdir', dirname)
+        result = call(ns, 'mkdir', dirname)
         print('mkdir result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)
         #
-        result=call('ns', 'rm', dirname)
+        result=call(ns, 'rm', dirname)
         print('rm result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)

@@ -88,7 +88,6 @@ def set(session, vtrqid, path, delegation):
         #  The spec is received as an array of strings from argparse. We
         #  convert it into a string for the downstream API.
         #
-        print(" ".join(delegation))
         return ws.set(
             session,
             vtrqid,
