@@ -1,20 +1,21 @@
 #
 #  test_sanity: make some quick checks against a live vCNC/vTRQ
 #
-
+#
+#  If you can't import the following, put '.' on your PYTHONPATH
+#  % PYTHONPATH=. pytest
+import velstor.testlib as testlib
 import errno
 import subprocess
 import re
 import json
 import os
-import time
 
 config = {
     'vcnc': 'cnc:7130',
     'vtrqid': 0
 }
 
-print(os.environ.keys)
 seed = '+seed'
 try:
     seed = '+' + os.environ['HOSTNAME']
@@ -190,3 +191,47 @@ def test_ws_set_get_delete():
             print(ws, whack, result)
             j = json.loads(result)
             assert(j['http_status'] == 200)
+
+
+def test_grid_list():
+    result = call('grid', 'list')
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+
+
+def test_grid_lifecycle():
+    #
+    #  Define a workspace
+    workspace_name = testlib.random_path(5,1)
+    workspace_spec = testlib.create_workspace('never')
+    result = call('ws', 'set', workspace_name, json.dumps(workspace_spec))
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Post a grid entry
+    grid_id = testlib.random_identifier(6)
+    result = call('grid', 'post', grid_id, workspace_name)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Look at the grid entry
+    result = call('grid', 'get', grid_id)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Delete the grid entry
+    result = call('grid', 'delete', grid_id)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Ensure it's gone
+    try:
+        call('grid', 'get', grid_id)
+        assert False
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
+    #
+    #  Delete the workspace
+    result = call('ws', 'rm', workspace_name)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
