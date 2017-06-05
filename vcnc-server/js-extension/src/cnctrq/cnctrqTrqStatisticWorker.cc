@@ -38,6 +38,9 @@ namespace cnc {
       , _path(path)
       , _errcode(0)
       , _client(0)
+      , _sum_st_size(0)
+      , _sum_extents(0)
+
     {
       //
       //  Obtain the TRQ's hostname from its TRQ ID.
@@ -63,7 +66,12 @@ namespace cnc {
     void cnctrqTrqStatisticWorker::Execute() {
       if (_errcode) 
         return;  // An error has occurred before we were called.
+
       _errcode = _client->TrqStatistic(_path, _sum_st_size, _sum_extents);
+//      std::cout << "_sum_st_size=" << _sum_st_size << " _sum_extents=" << _sum_extents
+//                << "\nstatic_cast<double>(_sum_st_size)=" << static_cast<double>(_sum_st_size)
+//                << " static_cast<double>(_sum_extents)=" << static_cast<double>(_sum_extents) <<"\n";
+
     }
     //
     //  HandleOKCallback

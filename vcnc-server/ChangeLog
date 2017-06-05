@@ -1,3 +1,11 @@
+Release 3.7.8
+
+Fixed bug: <B0123> vcnc-sampler posts invalid sampleTimestamp
+
+Release 3.7.7
+
+    Fixed realtime vpm read rates on the dashboard. <B8569> 
+
 Release 3.7.6
 
     Connect the vcnc-rest websocket push to the rethinkdb

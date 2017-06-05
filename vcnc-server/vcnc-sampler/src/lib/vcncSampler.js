@@ -26,6 +26,7 @@ class VcncSampler {
     this.vpmMsgCount = 0;
     this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
+    this.binCount = 0;
   }
 
   Init() {
@@ -53,14 +54,15 @@ class VcncSampler {
     //
     if (self.startTime === 0) {
       self.startTime = parseInt(ts, 10);
+      const utcTime = Date.now() / 1000;
       self.empty = false;
       self.minIndex = 0;
       self.maxIndex = 0;
+      self.binCount = 0;
       index = 0;
     } else {
       index = self.BinIndex(ts);
     }
-
     // All bins were emptied before and new messages have come
     //
     if (self.empty) {
@@ -115,11 +117,11 @@ class VcncSampler {
 //    console.log('>>> Start ReleaseBin ');
 //    console.log(`startTime = ${self.startTime} minIndex = ${self.minIndex}`);
     let samplerTs = (self.startTime === 0) ? parseInt(Date.now() / 1000, 10) : self.startTime +
-      (self.samplePeriod * self.minIndex);
-
+      (self.samplePeriod * self.binCount);
+    self.binCount =+ 1;
     // Set time to a center af sample interval
     samplerTs -= Math.round(self.samplePeriod / 2);
-    const pmRead = (self.pmReadBins[self.minIndex] === undefined) ?
+    const vpmRead = (self.pmReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.vtrqReadBins[self.minIndex] / self.samplePeriod, 10);
@@ -131,7 +133,8 @@ class VcncSampler {
       sum_st_size: parseInt(se.st_size, 10),
       sum_extents: parseInt(se.extents, 10),
       rVtrq: vtrqRead,
-      rVpm: pmRead,
+      //  Any reads resolved on the vtrq were not resolved on the vpm. <B8569>
+      rVpm: Math.max(vpmRead - vtrqRead, 0),
       sampleTimestamp: samplerTs,
     };
 //    console.log(`Bin: ${json.stringify(bin)}`);
@@ -162,7 +165,7 @@ class VcncSampler {
   MessageCount() { return (this.vpmMsgCount + this.vtrqMsgCount); }
   VpmMessageCount() { return this.vpmMsgCount; }
   VtrqMessageCount() { return this.vtrqMsgCount; }
-  IgNoreMessaageCount() { return this.ignoredMsgCount; }
+  IgnoreMessageCount() { return this.ignoredMsgCount; }
 }
 
 function CreateVcncSampler(dt) {

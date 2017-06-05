@@ -105,7 +105,7 @@ class VcncSampling {
     console.info(`Total sampled vpm messages: ${self.msgSampler.VpmMessageCount()}`);
     console.info(`Total sampled vtrq messages: ${self.msgSampler.VtrqMessageCount()}`);
     console.info(`Total sampled messages: ${self.msgSampler.MessageCount()}`);
-    console.info(`Total ignored messages = ${self.msgSampler.IgNoreMessaageCount()}`);
+    console.info(`Total ignored messages = ${self.msgSampler.IgnoreMessageCount()}`);
   }
 }
 
