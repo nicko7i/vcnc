@@ -7,7 +7,7 @@ import velstor.api.grid as grid
 import velstor.api.namespace as ns
 import velstor.api.vp as vp
 import velstor.api.workspace as ws
-import velstor.api.workspace_preview as ws_preview
+import velstor.api.workspace_legacy as ws_legacy
 
 import logging
 
@@ -304,8 +304,25 @@ def _configure_vp(vp_subparsers, handler):
 
 def _configure_workspace_common(workspace_subparsers
                                 , handler
-                                , api
-                                , wset_epilog):
+                                , api):
+    wset_epilog = """
+'writeback' can take the value 'always', 'trickle', 'explicit' or 'never'.
+
+To specify a workspace on an interactive command line, put the JSON format
+string between single quotes:
+
+% vclc ws set /carol '{ "writeback": "never", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol"}] }'
+
+The same syntax works within a bash script:
+
+File demo.sh:
+#!/bin/bash
+vclc ws set /carol '{ "writeback": "always", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol"}] }'
+
+% sh demo.sh
+{"http_status": 200, "response": {"message": "Request processed.", "error_sym": "OK"}}
+
+"""  # NOQA
     #
     #
     #  Workspace Operations  ########################################
@@ -367,57 +384,20 @@ def _configure_workspace_common(workspace_subparsers
         , api_func=api.delete
         , api_args=['vtrqid', 'path'])
 
-def _configure_workspace_v1(workspace_subparsers, handler):
-    epilog = """
-To specify a workspace on an interactive command line, put the JSON format
-string between single quotes:
+def _configure_workspace_legacy(workspace_subparsers, handler):
+    _configure_workspace_common(workspace_subparsers, handler, ws_legacy)
 
-% vclc ws set /carol '[{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol", "local": false}]'
-
-The same syntax works within a bash script:
-
-File demo.sh:
-#!/bin/bash
-vclc ws set /carol '[{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol", "local": false}]'
-
-% sh demo.sh
-{"http_status": 200, "response": {"message": "Request processed.", "error_sym": "OK"}}
-
-"""  # NOQA
-    _configure_workspace_common(workspace_subparsers, handler, ws, epilog)
-
-def _configure_workspace_v2(workspace_subparsers, handler):
-    epilog = """
-'writeback' can take the value 'always' or 'never'.
-
-To specify a workspace on an interactive command line, put the JSON format
-string between single quotes:
-
-% vclc ws set /carol '{ "writeback": "never", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol"}] }'
-
-The same syntax works within a bash script:
-
-File demo.sh:
-#!/bin/bash
-vclc ws set /carol '{ "writeback": "always", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol"}] }'
-
-% sh demo.sh
-{"http_status": 200, "response": {"message": "Request processed.", "error_sym": "OK"}}
-
-"""  # NOQA
-    _configure_workspace_common(workspace_subparsers
-                                , handler
-                                , ws_preview
-                                , epilog)
+def _configure_workspace_delegation(workspace_subparsers, handler):
+    _configure_workspace_common(workspace_subparsers, handler, ws)
 
 def _configure_workspace(workspace_subparsers, handler):
     try:
-        if os.environ['VELSTOR_VCLC_COMPAT'] == '1':
-            _configure_workspace_v1(workspace_subparsers, handler)
+        if os.environ['VELSTOR_VCLC_DELEGATION'] == '1':
+            _configure_workspace_delegation(workspace_subparsers, handler)
             return
     except KeyError:
         pass
-    _configure_workspace_v2(workspace_subparsers, handler)
+    _configure_workspace_legacy(workspace_subparsers, handler)
 
 def vclc_parser(handler):
     #
@@ -445,7 +425,7 @@ def vclc_parser(handler):
     parser.add_argument(
         '--vtrqid'
         , type=int
-        , help='ID of the vtracker to contact. (default: 0)'
+        , help='ID of the vtrq to contact. (default: 0)'
         , default=_value_configured('vtrqid', 0))
     parser.add_argument(
         '--version'
@@ -453,7 +433,7 @@ def vclc_parser(handler):
         , action='version'
         , version=_version())
     #
-    #  Define the subcommands
+    #  Define the sub-commands
     #
     subparsers = parser.add_subparsers(help='available commands')
     # .. grid

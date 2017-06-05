@@ -1,7 +1,10 @@
 #
-#  test_sanity: make some quick checks against a live CNC/TRQ
+#  test_sanity: make some quick checks against a live vCNC/vTRQ
 #
-
+#
+#  If you can't import the following, put '.' on your PYTHONPATH
+#  % PYTHONPATH=. pytest
+import velstor.testlib as testlib
 import errno
 import subprocess
 import re
@@ -9,35 +12,37 @@ import json
 import os
 
 config = {
-    'vcnc': 'cnc:5500'
-    , 'vtrqid': 0
+    'vcnc': 'cnc:7130',
+    'vtrqid': 0
 }
 
-print(os.environ.keys)
 seed = '+seed'
 try:
-    seed = '+' + os.environ['PLATFORM']
-except:
+    seed = '+' + os.environ['HOSTNAME']
+except KeyError:
     pass
 
+
 def call(*args):
-    """Invokes a clc command and returns the results as a dictionary"""
+    """Invokes a vclc command and returns the results as a dictionary"""
     #
     # Form the command
     #
-    cmd = ['./bin/vclc'
-           , '--vcnc=' + config['vcnc']
-           , '--vtrqid=' + str(config['vtrqid'])] + list(args)
+    cmd = ['./bin/vclc',
+           '--vcnc=' + config['vcnc'],
+           '--vtrqid=' + str(config['vtrqid'])] + list(args)
     print('call: invoking:', ' '.join(cmd))
-    rtn =  subprocess.check_output(cmd).decode('utf-8')
+    rtn = subprocess.check_output(cmd).decode('utf-8')
     print(rtn)
     return rtn
-    
+
+
 def test_version():
-    vre =  '\s*vclc\s+Version\s+\d+\.\d+\.\d+\s+Build\s+\d+'
+    vre = '\s*vclc\s+Version\s+\d+\.\d+\.\d+\s+Build\s+\d+'
     version = call('--version')
     print(version)
     assert(re.match(vre, version))
+
 
 def test_ns_ls():
     for ns in ('ns', 'namespace'):
@@ -51,36 +56,39 @@ def test_ns_mk_rm_dir():
     dirname = '/Ime3Wp2uMyaHFLVoNKSf'+seed
     try:
         call('ns', 'rm', '-r', dirname)
-    except:
-        pass
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
     for ns in ('ns', 'namespace'):
-        result = call('ns', 'mkdir', dirname)
+        result = call(ns, 'mkdir', dirname)
         print('mkdir result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)
         #
-        result=call('ns', 'rm', dirname)
+        result = call(ns, 'rm', dirname)
         print('rm result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)
+
 
 def test_ns_mk_rm_dir_deep():
     rootname = '/Ime3Wp2uMyaHFLVoNKSf'+seed
     dirname = rootname + '/91DWiFjayE0F98BH8tgu/C9VcnHmQ8ZBI4rLXHNge'
     try:
         call('ns', 'rm', '-r', rootname)
-    except:
-        pass
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
+
     for ns in ('ns', 'namespace'):
         result = call(ns, 'mkdir', '-p', dirname)
         print('mkdir result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)
         #
-        result=call(ns, 'rm', '-r', rootname)
+        result = call(ns, 'rm', '-r', rootname)
         print('rm result:', result)
         j = json.loads(result)
         assert(j['http_status'] == 200)
+
 
 def test_ns_copy():
     src_rootname = '/gq4OtHmyQbZhHmbc9dp5'+seed
@@ -89,13 +97,12 @@ def test_ns_copy():
     dest_rootname = '/GmqYbvjQkoAEPQIGwzRa'+seed
     try:
         call('ns', 'rm', '-r', src_rootname)
-    except:
-        pass
-    
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
     try:
         call('ns', 'rm', '-r', dest_rootname)
-    except:
-        pass
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
     for ns in ('ns', 'namespace'):
         for cmd in ('cp', 'copy'):
             call('ns', 'mkdir', '-p', srcdir)
@@ -107,19 +114,14 @@ def test_ns_copy():
             call('ns', 'rm', '-r', src_rootname)
             call('ns', 'rm', '-r', dest_rootname)
     
-    
 
 def test_ns_consistency():
     dirname = '/Ime3Wp2uMyaHFLVoNKSf'+seed
-    try:
-        call('ns', 'mkdir', dirname)
-    except:
-        pass
     for ns in ('ns', 'namespace'):
         for con in ('consistency', 'con'):
             for val in ('immediate', 'eventual'):
+                call(ns, 'mkdir', dirname)
                 result = call(ns, con, 'set', val, dirname)
-                print(ns, con, 'set', val, ':', result)
                 j = json.loads(result)
                 assert(j['http_status'] == 200)
                 #
@@ -127,11 +129,10 @@ def test_ns_consistency():
                 print(ns, con, 'get', val, ':', result)
                 j = json.loads(result)
                 assert(j['http_status'] == 200)
-                #
-    result=call(ns, 'rm', dirname)
-    j = json.loads(result)
-    assert(j['http_status'] == 200)
-    
+                result = call(ns, 'rm', dirname)
+                j = json.loads(result)
+                assert(j['http_status'] == 200)
+
 
 def test_vp_find():
     #
@@ -147,18 +148,21 @@ def test_vp_find():
         j = json.loads(e.output.decode('utf-8'))
         assert(j['http_status'] == 404)
         assert(e.returncode == errno.ENOENT)
-    
+
+
 def test_vp_get():
     try:
-        result = call('vp', 'get', '0x0123456789ABCDEF')
+        call('vp', 'get', '0x0123456789ABCDEF')
     except subprocess.CalledProcessError as e:
         assert(e.returncode == errno.ENOENT)
 
+
 def test_vp_delete():
     try:
-        result = call('vp', 'delete', '0x0123456789ABCDEF')
+        call('vp', 'delete', '0x0123456789ABCDEF')
     except subprocess.CalledProcessError as e:
         assert(e.returncode == errno.ENOENT)
+
 
 def test_ws_list():
     result = call('ws', 'list', '/')
@@ -169,17 +173,14 @@ def test_ws_list():
 
 def test_ws_set_get_delete():
     root_name = '/GmqYbvjQkoAEPQIGwzRa'+seed
-    ws_spec = '[{"vp_path": "/", "vtrq_id": 10, "vtrq_path":  "/u/carol", "local": false}]'
-    try:
-        #  Clear out any existing spec
-        call('ws', 'rm', root_name)
-    except:
-        pass
+    ws_spec = '{"writeback": "always", "maps": [{"vp_path": "/", "vtrq_id": 10, "vtrq_path": "/u/carol"}]}'
+    #  Clear out any existing spec
+    call('ws', 'rm', root_name)
 
     for ws in ('ws', 'workspace'):
         for whack in ('rm', 'delete'):
             #
-            #  Create a workspace specificaiton
+            #  Create a workspace specification
             result = call(ws, 'set', root_name, ws_spec)
             print(ws, 'set', result)
             j = json.loads(result)
@@ -190,4 +191,47 @@ def test_ws_set_get_delete():
             print(ws, whack, result)
             j = json.loads(result)
             assert(j['http_status'] == 200)
-        
+
+
+def test_grid_list():
+    result = call('grid', 'list')
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+
+
+def test_grid_lifecycle():
+    #
+    #  Define a workspace
+    workspace_name = testlib.random_path(5,1)
+    workspace_spec = testlib.create_workspace('never')
+    result = call('ws', 'set', workspace_name, json.dumps(workspace_spec))
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Post a grid entry
+    grid_id = testlib.random_identifier(6)
+    result = call('grid', 'post', grid_id, workspace_name)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Look at the grid entry
+    result = call('grid', 'get', grid_id)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Delete the grid entry
+    result = call('grid', 'delete', grid_id)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
+    #
+    #  Ensure it's gone
+    try:
+        call('grid', 'get', grid_id)
+        assert False
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
+    #
+    #  Delete the workspace
+    result = call('ws', 'rm', workspace_name)
+    j = json.loads(result)
+    assert(j['http_status'] == 200)
