@@ -66,7 +66,7 @@ class VcncSampler {
     // All bins were emptied before and new messages have come
     //
     if (self.empty) {
-      if (index > self.minIndex) {
+      if (index >= self.minIndex) {
         self.empty = false;
         self.minIndex = index;
       } else {
