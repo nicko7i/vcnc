@@ -55,6 +55,23 @@ function installStaticContent(app) {
     express.static(path.join(__dirname, 'src/api/v1api.json'))
   );
   //
+  //  ... and for v1a
+  //
+/*
+  app.use(
+    '/v1a/doc/api',
+    express.static(path.join(__dirname, 'static/swagger-ui/dist'))
+  );
+  app.use(
+    '/v1a/doc',
+    express.static(path.join(__dirname, 'static/doc-html'))
+  );
+  app.use(
+    '/v1a/doc/api/spec',
+    express.static(path.join(__dirname, 'src/api/v1aapi.json'))
+  );
+*/
+  //
   //  ... and for v2
   //
   app.use(
@@ -181,6 +198,10 @@ function installRouters(app) {
   require(path.join(__dirname, 'src/routes/v1'))(v1Router); // eslint-disable-line global-require
   app.use('/v1', v1Router);
   //
+//  const v1aRouter = express.Router(); // eslint-disable-line new-cap
+//  require(path.join(__dirname, 'src/routes/v1a'))(v1aRouter); // eslint-disable-line global-require
+//  app.use('/v1a', v1aRouter);
+  //
   const v2Router = express.Router(); // eslint-disable-line new-cap
   require(path.join(__dirname, 'src/routes/v2'))(v2Router); // eslint-disable-line global-require
   app.use('/v2', v2Router);
@@ -194,17 +215,20 @@ function installRouters(app) {
   // Catch undefined URLs (404) and forward to error handler
   //
   app.use((req, res, next) => {
+    //
+    //  Swagger-ui needs the .../api/spec URLs to 404 and
+    //  also return the default response.
+    //
     if (req.originalUrl === '/v1/doc/api/spec') {
-      //
-      //  Swagger-ui needs this url to 404 and
-      //  also return the default response.
-      //
       next();
+//    } else if (req.originalUrl === '/') {
+//      next();
+//      res.redirect('/v1a/doc');
     } else if (req.originalUrl === '/') {
       res.redirect('/v2/doc');
     } else {
       //
-      //  Otherwise, if we go here, we got here, we missed
+      //  Otherwise, if we go here, we missed
       //  a URL that was outside the swagger-express-middleware
       //  domain, so perform our uniform JSON response handling.
       //
@@ -298,6 +322,7 @@ module.exports = (() => {
   .then(() => WebSocketHandler.init())
   .then(() => storagePolling.init())
   .then(() => configureSwaggerMiddleware(app, 'src/api/v1api.json'))
+//  .then(() => configureSwaggerMiddleware(app, 'src/api/v1aapi.json'))
   .then(() => configureSwaggerMiddleware(app, 'src/api/v2api.json'))
   .then(() => {
     installRouters(app);

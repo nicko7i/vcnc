@@ -5,13 +5,6 @@
 
 #include <iostream>
 
-#ifdef VELSTOR_VCLC_DELEGATION
-bool NEW_API = true;
-#else
-bool NEW_API = false;
-#endif
-
-
 namespace cnc {
   namespace cnctrq {
     using v8::Array;
@@ -113,7 +106,8 @@ namespace cnc {
         _errcode = _client->WorkspaceGet(_path, _workspace);
         break;
       case op_set:
-        if (_workspace.ImportJson(_input_spec, NEW_API)) {
+//    	std::cout << "op_set: " << _input_spec.c_str() << std::endl;
+        if (_workspace.ImportJson(_input_spec)) {
           _errcode = -EINVAL;
           std::cerr << "cnctrqWorkspaceWorker: Invalid JSON: " << _input_spec << std::endl;
           return;
@@ -179,6 +173,7 @@ namespace cnc {
         break;
       case op_get:
       {
+//    	std::cout << "ExportJson(): " << _workspace.ExportJson();
         Nan::Set(rtn
                  , Nan::New("ws").ToLocalChecked()
                  , Nan::New(_workspace.ExportJson().c_str()).ToLocalChecked());

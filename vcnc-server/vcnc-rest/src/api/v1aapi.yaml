@@ -32,7 +32,7 @@ schemes:
   - http
 
 # will be prefixed to all paths
-basePath: /v1
+basePath: /v1a
 
 # API request and response bodies are always JSON
 consumes:
@@ -1160,60 +1160,40 @@ paths:
       summary: Creates or updates a workspace
       operationId: vtrqWorkspaceCreate
       tags:
-        - "vTRQ Workspaces"
+         - "vTRQ Workspaces"
       parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-        - in: query
-          name: overwrite
-          description: "'true' if an existing workspace should be overwritten."
-          required: false
-          type: boolean
-          default: false
-        - in: query
-          name: push
-          description: "'true' if active VPs should switch to the new spec."
-          required: false
-          type: boolean
-          default: false
-        - in: body
-          name: body
-          description: "Workspace Specification"
-          required: true
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-                example: /workspace_a
-              spec:
-                $ref: '#/definitions/Workspace'
-            required:
-              - name
-              - spec
-            additionalProperties: false
+         - in: path
+           name: vtrq_id
+           description: ID of the vTRQ performing this operation.
+           required: true
+           type: integer
+         - in: query
+           name: overwrite
+           description: "'true' if an existing workspace should be overwritten."
+           required: false
+           type: boolean
+           default: false
+         - in: query
+           name: push
+           description: "'true' if active VPs should switch to the new spec."
+           required: false
+           type: boolean
+           default: false
+         - in: body
+           name: body
+           description: "Workspace Specification"
+           required: true
+           schema:
+             $ref: '#/definitions/Workspace'
       responses:
-        '200':
-          description: Request processed. See response body.
-          schema:
-            required:
-              - error_sym
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
+         '200':
+           description: Request processed. See response body.
+           schema:
+             $ref: '#/definitions/Error'
+         default:
+           description: HTTP error
+           schema:
+             $ref: '#/definitions/Error'
 
   /_test/latency:
     post:
@@ -1532,4 +1512,3 @@ definitions:
       - maps
       - writeback
     additionalProperties: false
-

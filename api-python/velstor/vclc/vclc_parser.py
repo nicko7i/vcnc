@@ -302,9 +302,9 @@ def _configure_vp(vp_subparsers, handler):
         , api_func=vp.delete
         , api_args=['vtrqid', 'vpid'])
 
-def _configure_workspace_common(workspace_subparsers
-                                , handler
-                                , api):
+def _configure_workspace(workspace_subparsers
+                         , handler):
+    api = ws
     wset_epilog = """
 'writeback' can take the value 'always', 'trickle', 'explicit' or 'never'.
 
@@ -383,21 +383,6 @@ vclc ws set /carol '{ "writeback": "always", "maps": [{"vp_path": "/", "vtrq_id"
         action=handler.action
         , api_func=api.delete
         , api_args=['vtrqid', 'path'])
-
-def _configure_workspace_legacy(workspace_subparsers, handler):
-    _configure_workspace_common(workspace_subparsers, handler, ws_legacy)
-
-def _configure_workspace_delegation(workspace_subparsers, handler):
-    _configure_workspace_common(workspace_subparsers, handler, ws)
-
-def _configure_workspace(workspace_subparsers, handler):
-    try:
-        if os.environ['VELSTOR_VCLC_DELEGATION'] == '1':
-            _configure_workspace_delegation(workspace_subparsers, handler)
-            return
-    except KeyError:
-        pass
-    _configure_workspace_legacy(workspace_subparsers, handler)
 
 def vclc_parser(handler):
     #

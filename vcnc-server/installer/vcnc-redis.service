@@ -8,7 +8,7 @@ Description=Redis for VelStor vCNC
 
 [Service]
 Type=simple
-ExecStart=/opt/velstor/current/bin/redis-server /opt/velstor/current/share/vcnc/vnc-server/config/vcnc-redis.conf --daemonize no
+ExecStart=/opt/velstor/current/bin/redis-server /opt/velstor/current/share/vcnc/config/vcnc-redis.conf --daemonize no
 Restart=always
 StandardOutput=syslog+console
 StandardError=syslog+console
