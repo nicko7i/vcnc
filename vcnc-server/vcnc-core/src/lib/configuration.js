@@ -38,6 +38,12 @@ if (conf.fulfill202.baseUrl === undefined) {
   const port = conf.server.port;
   conf.fulfill202.baseUrl = `http://${os.hostname()}:${port}`;
 }
+//
+//  Get the vtrq storage efficiency polling period
+//
+if ('VELSTOR_VCNC_VTRQ_POLL_PERIOD_SEC' in process.env) {
+  conf.vcncSampler.vtrqPollPeriod = parseInt(process.env.VELSTOR_VCNC_VTRQ_POLL_PERIOD_SEC) * 1000
+}
 // console.log('resolved configuration: ', conf);
 
 module.exports = conf;

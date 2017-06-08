@@ -13,10 +13,12 @@ server:
   interface: all
   #
   #  The period (1/rate) at which to poll the vtrq for storage statistics, in ms.
+  #  This value may be overridden by the VELSTOR_VCNC_VTRQ_POLL_PERIOD_SEC
+  #  environment variable.
   #
-  #  A rate of a few seconds is intendend for customer demo, not production.
+  #  A rate of a few seconds is intended for customer demo, not production.
   #
-  vtrqPollPeriod: 5000
+  vtrqPollPeriod: 20000
 
 fulfill202:
   #
@@ -66,12 +68,12 @@ vcncSampler:
   #  The period extension in ms to prevent data loss
   latency: 500
   #
-  #  hostname
-  hostname: cnc
+  #  The IP address (or hostname) on which to listen for vda posts.
+  #  0.0.0.0 listens on all interfaces.
+  hostname: 0.0.0.0
   #
-  #  port 
+  #  The port at which to listen for vda posts.
   port: 6159 
-
 
 peercache:
   #
@@ -107,7 +109,7 @@ redis:
     #  An alternative way to isolate vcnc instances is by specifying a database
     #  number.  Valid values are between 0 and 15, inclusive.  Default is 0
     db: 0
-    #
+
 rethinkdb:
   #
   #  Connection information for the RethinkDB client.  See
@@ -116,17 +118,26 @@ rethinkdb:
   #  The RethinkDB server itself is configured separately.  The two configurations
   #  must match where they intersect.
   connection:
+    #
     # The host to connect to.
+    # May be overridden by VELSTOR_VCNC_RETHINKDB_HOST
     host: localhost
+    #
     # The port to connect on.
     port: 28015
+    #
     # The default database
+    # May be overridden by VELSTOR_VCNC_RETHINKDB_DB
     db: vcnc_rest
+    #
     # The user account to connect as
     user: admin
+    #
     # The password for the user account to connect as
     password: ''
+    #
     # Timeout period in seconds for the connection to be opened.
+    #
     timeout: 20
     # A hash of options to support SSL connections.
 
@@ -142,6 +153,7 @@ test:
 web:
   #
   #  If true, statically serve the web-based admin console
+  #  May be overridden by VELSTOR_VCNC_WEB_ENABLE
   enabled: true
   #
   #  Serve the console at this offset from server.port
