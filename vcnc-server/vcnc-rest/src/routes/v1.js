@@ -57,7 +57,7 @@ function workspaceJsonPidlToRest(jsonIn) {
   let jsonWs = JSON.parse(jsonIn.ws);
   delete jsonWs.name;  // the 'name' key is for possible future use.
   const jsonResult = {
-    workspace: Object.assign({}, jsonWs, { maps: convertMapVtrqID(jsonWs.maps) }),
+    spec: Object.assign({}, jsonWs, { maps: convertMapVtrqID(jsonWs.maps) }),
   };
   // console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
   return jsonResult;
