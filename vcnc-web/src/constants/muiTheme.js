@@ -45,6 +45,7 @@ const { primary1Color, textColor } = materialUi.palette;
 
 export const vcnc = {
   palette: {
+    emptyDoughnutColor: grey400,
     storageEfficiencyColor: grey800,
     sumExtentsColor: red500,
     sumStSizeColor: blue500,

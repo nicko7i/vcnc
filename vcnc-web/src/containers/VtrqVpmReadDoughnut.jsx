@@ -4,11 +4,25 @@ import { connect } from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DoughnutWidget from '../components/widgets/DoughnutWidget';
 
+const readRatesAreZero = data => {
+  return data.reduce((accumulator, item) => accumulator + item, 0 ) === 0;
+};
+
 const VtrqVpmDoughnut = (props) => {
-  const { vtrqColor, vpmColor } = props.muiTheme.palette;
-  const backgroundColor = [vtrqColor, vpmColor];
+  //
+  //  When all the values to a Doughnut are zero, jsChart doesn't display
+  //  anything at all.  We prefer to display a grey doughnut (grey to
+  //  indicate that it is "grey-ed out").  Since the values are equally
+  //  zero, we make the areas equal size.
+
+  const { emptyDoughnutColor, vpmColor, vtrqColor } = props.muiTheme.palette;
+  const doughnutIsEmpty = readRatesAreZero(props.data.datasets[0].data)
+  const backgroundColor =
+    doughnutIsEmpty
+      ? [emptyDoughnutColor, emptyDoughnutColor]
+      : [vtrqColor, vpmColor];
   const datasets = [{ data: props.data.datasets[0].data, backgroundColor }];
-  const data = { ...props.data, datasets };
+  const data = { ...props.data, datasets: doughnutIsEmpty ? [{ data: [1, 1] }] : datasets };
 
   return (
     <DoughnutWidget data={data} title={props.title} />
