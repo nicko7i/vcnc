@@ -128,13 +128,14 @@ class VcncSampler {
     const se = storPoll.currentValue();
     // Set output bin
     //
+	const vpmLocalRead = Math.max(vpmRead - vtrqRead, 0);
     const bin = {
       storageEfficiency: se.value,
       sum_st_size: parseInt(se.st_size, 10),
       sum_extents: parseInt(se.extents, 10),
-      rVtrq: vtrqRead,
+      rVtrq: Math.log10(vtrqRead + 1),
       //  Any reads resolved on the vtrq were not resolved on the vpm. <B8569>
-      rVpm: Math.max(vpmRead - vtrqRead, 0),
+      rVpm: Math.log10(vpmLocalRead + 1),
       sampleTimestamp: samplerTs,
     };
 //    console.log(`Bin: ${json.stringify(bin)}`);
@@ -153,8 +154,9 @@ class VcncSampler {
       self.maxIndex = 0;
       self.minIndex = 0;
     } else if (self.maxIndex > 0) {
-      const keys = Object.keys(self.pmReadBins);
-      self.minIndex = keys[0];
+//      const keys = Object.keys(self.pmReadBins);
+//      self.minIndex = keys[0];
+      self.minIndex += 1;  
     }
 //    console.log(`Bin: ${json.stringify(bin)}`);
 //    console.log(`minIndex = ${self.minIndex} maxIndex = ${self.maxIndex}`);
