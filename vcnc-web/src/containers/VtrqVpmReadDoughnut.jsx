@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import DoughnutWidget from '../components/widgets/DoughnutWidget';
 
-const readRatesAreZero = data => {
-  return data.reduce((accumulator, item) => accumulator + item, 0 ) === 0;
-};
+const readRatesAreZero = data =>
+  data.reduce((accumulator, item) => accumulator + item, 0) < 1e-6;
 
 const VtrqVpmDoughnut = (props) => {
   //
@@ -16,7 +15,7 @@ const VtrqVpmDoughnut = (props) => {
   //  zero, we make the areas equal size.
 
   const { emptyDoughnutColor, vpmColor, vtrqColor } = props.muiTheme.palette;
-  const doughnutIsEmpty = readRatesAreZero(props.data.datasets[0].data)
+  const doughnutIsEmpty = readRatesAreZero(props.data.datasets[0].data);
   const backgroundColor =
     doughnutIsEmpty
       ? [emptyDoughnutColor, emptyDoughnutColor]
