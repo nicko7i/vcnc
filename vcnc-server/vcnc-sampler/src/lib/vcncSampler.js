@@ -45,8 +45,8 @@ class VcncSampler {
   Add(jsnMsg) {
 //    console.log('>>> Add started');
     const self = this;
-    const ts = new Date(jsnMsg.ts).getTime() / 1000;
-    let index = self.BinIndex(ts);
+    const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000);
+    let index = 0;
 
     // First call
     //
@@ -54,12 +54,10 @@ class VcncSampler {
     //
     if (self.startTime === 0) {
       self.startTime = parseInt(ts, 10);
-      const utcTime = Date.now() / 1000;
       self.empty = false;
       self.minIndex = 0;
-      self.maxIndex = 0;
+      self.maxIndex = conf.MaxBins();
       self.binCount = 0;
-      index = 0;
     } else {
       index = self.BinIndex(ts);
     }
@@ -138,7 +136,7 @@ class VcncSampler {
       rVpm: Math.log10(vpmLocalRead + 1),
       sampleTimestamp: samplerTs,
     };
-//    console.log(`Bin: ${json.stringify(bin)}`);
+ //   console.log('minIndex: ${self.minIndex} +  Bin: ${json.stringify(bin)}`);
     // Delete processed bin
     //
 //    let keys1 = Object.keys(self.pmReadBins);
@@ -148,7 +146,6 @@ class VcncSampler {
 
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
-//    console.log(`ReleaseBin 1: minIndex= ${self.minIndex} maxIndex = ${self.maxIndex}`);
     if(self.empty === true) return bin;
     if (parseInt(self.minIndex, 10) === parseInt(self.maxIndex, 10)) {
       self.empty = true;
