@@ -68,7 +68,7 @@ class VcncSampler {
     if (self.empty) {
       if (index >= self.minIndex) {
         self.empty = false;
-        self.minIndex = index;
+        self.maxIndex = index;
       } else {
         self.ignoredMsgCount += 1;
         return;
@@ -128,7 +128,7 @@ class VcncSampler {
     const se = storPoll.currentValue();
     // Set output bin
     //
-	const vpmLocalRead = Math.max(vpmRead - vtrqRead, 0);
+    const vpmLocalRead = Math.max(vpmRead - vtrqRead, 0);
     const bin = {
       storageEfficiency: se.value,
       sum_st_size: parseInt(se.st_size, 10),
@@ -149,11 +149,12 @@ class VcncSampler {
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
 //    console.log(`ReleaseBin 1: minIndex= ${self.minIndex} maxIndex = ${self.maxIndex}`);
+    if(self.empty === true) return bin;
     if (parseInt(self.minIndex, 10) === parseInt(self.maxIndex, 10)) {
       self.empty = true;
       self.maxIndex = 0;
       self.minIndex = 0;
-    } else if (self.maxIndex > 0) {
+    } else {
 //      const keys = Object.keys(self.pmReadBins);
 //      self.minIndex = keys[0];
       self.minIndex += 1;  
