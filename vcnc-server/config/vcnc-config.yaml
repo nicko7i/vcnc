@@ -55,7 +55,7 @@ vcncSampler:
   maxEntries: 100
   #
   #  The maximum number of beans to collect messages
-  maxBins: 100
+  maxBins: 300
   #
   #  The RethinkDB table where the real-time dashboard data is stored.
   table: vdasampler
