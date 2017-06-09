@@ -1,3 +1,17 @@
+Release 3.8.0
+
+    Display a grey doughnut (instead of vanishing) when data is zero.
+
+    StorageEfficiency number stays in-bounds.
+
+    Deliver all writeback options to vtrq, adding 'trickle' and 'explicit'
+
+    Use a log scale for read rates.
+
+    Environment variable sets the vtrq polling period.
+
+    Default vcnc-sampler host is now 0.0.0.0
+
 Release 3.7.8
 
     Fixed bug: <B0123> vcnc-sampler posts invalid sampleTimestamp
