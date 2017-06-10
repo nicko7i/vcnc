@@ -1,3 +1,7 @@
+Release 3.8.1
+
+    Fix excessive CPU consumption in vda-sampler
+
 Release 3.8.0
 
     Display a grey doughnut (instead of vanishing) when data is zero.
