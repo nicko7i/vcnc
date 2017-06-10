@@ -72,7 +72,6 @@ class VcncSampling {
   Run(data) {
     const self = this;
     let jsonData;
-//    console.log(`VcncSampling::Run: ${data}`);
     try {
       jsonData = json.parse(data);
       self.msgCount += jsonData.messages.length;

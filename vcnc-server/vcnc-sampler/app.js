@@ -95,13 +95,7 @@ vcncSample.Init();
 function requestHandler(request, response) {
   request.setEncoding('utf8');
   request.on('data', (data) => {
-//    console.log(data);
-    setInterval(() => {
-      if(data !== null) {
-        vcncSample.Run(data);
-        data = null;
-      }
-    }, 0);
+    vcncSample.Run(data);
   });
   response.on('error', (err) => {
     console.error(err);
