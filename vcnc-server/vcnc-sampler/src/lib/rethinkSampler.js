@@ -13,10 +13,9 @@ const table = conf.Table();
 let cnxtn = null;
 
 class RethinkdbSampler {
-  constructor(dt, ltc) {
+  constructor(dt) {
     this.period = parseInt(dt, 10);
-    this.latency = parseInt(ltc, 10);
-    this.timespanSec = conf.MaxEntries() * ((dt + ltc) / 1000.0);
+    this.timespanSec = conf.MaxEntries() * (dt / 1000.0);
   }
 
   /**

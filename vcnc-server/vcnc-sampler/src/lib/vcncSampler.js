@@ -15,10 +15,11 @@ const conf = require('../vcncSampler.conf');
  * to date names directories
  */
 class VcncSampler {
-  constructor(dt) {
+  constructor(dt, dl) {
     this.pmReadBins = {};
     this.vtrqReadBins = {};
-    this.samplePeriod = (parseInt(dt, 10) / 1000.0);
+    this.samplePeriod = parseInt((Math.round(dt)/ 1000.0), 10);
+    this.latency = parseInt((Math.round(dt)/ 1000.0), 10);
     this.startDataTime = 0;
     this.empty = true;
     this.minIndex = 0;
@@ -46,7 +47,8 @@ class VcncSampler {
   Add(jsnMsg) {
 //    console.log('>>> Add started');
     const self = this;
-    const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000, 10);
+    const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000 , 10);
+    const op = jsnMsg.opID;
     if (ts < self.startSamplerTime) {
       return;
     }
@@ -57,14 +59,15 @@ class VcncSampler {
     // Set start time of data sampling
     //
     if (self.startDataTime === 0) {
-      self.startDataTime = parseInt(ts, 10);
+      self.startDataTime = parseInt(ts, 10) - self.latency;
       self.empty = false;
       self.minIndex = 0;
       self.maxIndex = conf.MaxBins();
       self.binCount = 0;
-    } else {
-      index = self.BinIndex(ts);
     }
+    index = self.BinIndex(ts);
+
+//    console.log(`minIndex=${self.minIndex} index=${index} ts=${ts} op=${op}  startDataTime = ${self.startDataTime}`);
     // All bins were emptied before and new messages have come
     //
     if (self.empty) {
@@ -90,7 +93,7 @@ class VcncSampler {
     }
     // Add number of bytes of read operation to corresponding bin
     //
-    const op = jsnMsg.opID;
+
     const readBytes = parseInt(jsnMsg.errCode, 10);
     //
     switch (op) {

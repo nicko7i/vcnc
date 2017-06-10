@@ -24,8 +24,8 @@ class VcncSampling {
   constructor(dt, ltc) {
     this.sampleTime = ((dt !== undefined) ? parseInt(dt, 10) : conf.DefSampleTime());
     this.latency = (ltc !== undefined) ? parseInt(ltc, 10) : conf.DefLatency(); // ms
-    this.msgSampler = vsm.CreateVcncSampler(this.sampleTime);
-    this.rdb = rs.CreaterethinkdbSampler(this.sampleTime, this.latency);
+    this.msgSampler = vsm.CreateVcncSampler(this.sampleTime, this.latency);
+    this.rdb = rs.CreaterethinkdbSampler(this.sampleTime);
     this.msgCount = 0;
   }
    /**
@@ -51,14 +51,11 @@ class VcncSampling {
   }
 
   PushTimeout() {
-    const period = this.sampleTime + this.latency;
- //   console.log(`pushTimeout = ${period}`);
-    return period;
+    return this.sampleTime;
   }
 
   TrimTimeout() {
-    const period = (this.sampleTime + this.latency) * conf.MaxEntries();
-//    console.log(`trimTimeout = ${period}`);
+    const period = this.sampleTime * conf.MaxEntries();
     return period;
   }
 
@@ -86,10 +83,7 @@ class VcncSampling {
 
   Send() {
     const self = this;
-//    console.log('>>> Start Send');
     const bin = self.msgSampler.ReleaseBin();
-//    console.log(`Send to rethinkdb: Bin: ${json.stringify(bin)}`);
-
     self.rdb.Push(bin);
   }
 //    console.log('<<< Finished Send');
