@@ -2,7 +2,6 @@ import requests
 import json
 from velstor.api.util import urlencode
 from velstor.api.fulfill202 import fulfill202
-from velstor.api.workspace_legacy import to_delegation_from_legacy
 
 #  grid.py:  Operations about grid jobs
 
@@ -31,10 +30,10 @@ def get_as_preview(session, jobid):
         #
         #  The workspace spec is job_spec.workspace_spec within the response
         #
-        b = json.loads(response['body'])
-        b['job_spec']['workspace_spec'] = json.dumps(to_delegation_from_legacy(b['job_spec']['workspace_spec']))
+        body = json.loads(response['body'])
+        body['job_spec']['workspace_spec'] = json.dumps(body['job_spec']['workspace_spec'])
         return {"status_code": 200,
-                "body": json.dumps(b)}
+                "body": json.dumps(body)}
     return response
 
 

@@ -1,7 +1,8 @@
 Building this document
 ======================
 
-The build must be done under the Python virtual environment.
+The build must be done under the Python virtual environment, as described
+in :ref:`_set_up_virtualenv`.
 
 .. code-block:: console
 
