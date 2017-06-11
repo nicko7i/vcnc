@@ -61,23 +61,6 @@ if (!options.host || !options.port) {
   process.exit(1);
 }
 
-/*
-mkdirp(logDir, (err) => {
-  if (err) {
-    console.log(`Directory ${logDir} could not be created: ${err}`);
-    process.exit(1);
-  }
-});
-//
-fs.access(logDir, fs.W_OK, (err) => {
-  if (err !== null) {
-    console.log(`No directory or no permission to create ${logDir}`);
-    console.log('Invalid input parameters');
-    process.exit(1);
-  }
-});
-*/
-
 const host = options.host;
 const port = options.port;
 console.log(`host=${host} port=${port}`);
@@ -112,18 +95,14 @@ server.listen(port, host, () => {
 });
 
 // Pass data to rethinkdb
-const pushTimeout = vcncSample.PushTimeout();
-const trimTimeout = vcncSample.TrimTimeout();
-// console.log('pushTimeout = ' + pushTimeout +  ' trimTimeout = ' + trimTimeout);
-
 setInterval(() => {
   vcncSample.Send();
-}, pushTimeout);
+}, vcncSample.PushTimeout());
 
 // Remove old data from rethinkdb table
 setInterval(() => {
   vcncSample.Trim();
-}, trimTimeout);
+}, vcncSample.TrimTimeout());
 
 // Process Linux signals
 //
