@@ -1,3 +1,7 @@
+Release 3.8.2
+
+    vcnc-sampler now ignores data older than vcnc-sampler startup time.
+
 Release 3.8.1
 
     Fix excessive CPU consumption in vda-sampler
