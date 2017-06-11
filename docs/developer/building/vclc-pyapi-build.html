@@ -90,7 +90,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Information</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../ide.html">IDEs (optional)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ide.html">IDEs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../coding-policies.html">Policies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workflow.html">Workflow</a></li>
 </ul>
@@ -99,7 +99,12 @@
 <li class="toctree-l1"><a class="reference internal" href="build-prepare.html">Preparing to Build</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Building <em>vclc</em></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building <em>vclc</em></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-virtualenv">Set up virtualenv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-development-packages">Install development packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-vclc">Testing vclc</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Running</span></p>
 <ul>
@@ -159,9 +164,53 @@
             
   <div class="section" id="building-vclc">
 <h1>Building <em>vclc</em><a class="headerlink" href="#building-vclc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="set-up-virtualenv">
+<span id="id1"></span><h2>Set up virtualenv<a class="headerlink" href="#set-up-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>Use <em>pip</em> to <a class="reference external" href="https://virtualenv.pypa.io/en/stable/installation/">install virtualenv</a> into your system Python. Then create a Python3 virtual
+environment that points to your system Python3.  This document uses <em>venv</em> for the
+directory name.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> pip install virtualenv
+<span class="gp">%</span> virtualenv --python<span class="o">=</span>python3 venv
+</pre></div>
+</div>
+<p><em>virtualenv</em> must be activated whenever a new shell is created.  That is done by
+sourcing the <em>activate</em> script.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">source</span> ./venv/bin/activate
+</pre></div>
+</div>
+<p>One can verify that <em>python</em> is <em>python3</em>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">[nick@einbecker api-python]$</span> . ./venv/bin/activate
+<span class="go">(venv) [nick@einbecker api-python]$ python --version</span>
+<span class="go">Python 3.5.3</span>
+<span class="go">(venv) [nick@einbecker api-python]$</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-development-packages">
+<h2>Install development packages<a class="headerlink" href="#install-development-packages" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> pip install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-vclc">
+<h2>Testing vclc<a class="headerlink" href="#testing-vclc" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">TBD</p>
+<p class="last">This will eventually move elsewhere in the document.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Assumes one is inside the IC Manage firewall.</p>
+</div>
+<p><a class="reference external" href="https://docs.pytest.org/en/latest/">pytest</a> is the project&#8217;s test framework.
+The tests in <em>api-python/test/test_sanity.py</em> are configured to use the internal
+<a class="reference external" href="https://docs.google.com/a/icmanage.com/document/d/1UcJ2yql5YKih365z24zP3Zm_iz0lO5rYHYkNyixBWIg/edit?usp=sharing">Mastiff</a>
+deployment. Change the configuration at the top of the file to use a different deployment.</p>
+<p>To run the tests:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">cd</span> *project-root*
+<span class="gp">%</span> <span class="nv">PYTHONPATH</span><span class="o">=</span>. pytest
+</pre></div>
+</div>
 </div>
 </div>
 
