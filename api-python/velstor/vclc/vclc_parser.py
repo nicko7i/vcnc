@@ -101,15 +101,9 @@ def _configure_grid(grid_subparsers, handler):
         , help="ID of grid job")
     #
     #  ... support legacy and new-style workspace specs
-    newstyle = True
-    try:
-        if os.environ['VELSTOR_VCLC_COMPAT'] == '1':
-            newstyle = False
-    except:
-        pass
     parser_grid_get.set_defaults(
         action=handler.action
-        , api_func=grid.get_as_preview if newstyle else grid.get
+        , api_func=grid.get
         , api_args=['jobid'])
     #
     #  .. grid list job
