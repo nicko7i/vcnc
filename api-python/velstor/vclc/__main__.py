@@ -19,6 +19,10 @@ from velstor.vclc.handler import error_response
 from velstor.vclc.vClcException import vClcException
 
 print_error = partial(print, file=sys.stderr)
+#
+#  Yeah, yeah, globals are bad form...
+#
+quiet = False
 
 
 def main(args=None):
@@ -31,7 +35,10 @@ def main(args=None):
         parser = vclc_parser(handler)
         #
         try:
-            return parser.parse_args(args, handler).action()
+            global quiet
+            results = parser.parse_args(args, handler)
+            quiet = results.quiet
+            return results.action()
         except requests.exceptions.RequestException as e:
             #
             #  Requests raised an exception.  Probably couldn't reach the vCNC
@@ -90,7 +97,7 @@ def main(args=None):
 
 
 if __name__ == "__main__":
-    # (exit_code, response, json) = main()
     (exit_code, response) = main()
-    print(json.dumps(response, sort_keys=True, indent=2))
+    if not quiet:
+        print(json.dumps(response, sort_keys=True, indent=2))
     sys.exit(127 if (exit_code > 127) else exit_code)

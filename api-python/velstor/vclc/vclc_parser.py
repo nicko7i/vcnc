@@ -403,6 +403,13 @@ def vclc_parser(handler):
         , nargs=0
         , default=None)
     parser.add_argument(
+        '--quiet'
+        , aliases=['-q']
+        , help='quashes all output, including errors'
+        , action='store_true'
+        , default=False
+        , dest='quiet')
+    parser.add_argument(
         '--json'
         , help='formats output as JSON'
         , action='store_true'
