@@ -1,6 +1,7 @@
 Release 3.8.3
 
 Fixed bug in flushing data from pmda to vda
+
 Increased latency time to pmda flushing time interval
 
 Release 3.8.2
