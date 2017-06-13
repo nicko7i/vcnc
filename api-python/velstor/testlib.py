@@ -8,6 +8,7 @@ import os
 config = {
     'vcnc': 'cnc:7130',
     'vp_mount_root': '/tmp/vcnc/stress/',
+    'vpm': 'cnc,7110,tcp4',
     'vtrq': 'trq,7100,tcp4',
     'vtrqid': 0
 }
@@ -50,7 +51,7 @@ def vvclc(*args):
 
 def create_workspace(**kwargs):
     """Creates a workspace specification as a Python data structure"""
-    vtrq_id = kwargs['vtrq_id'] if 'vtrq_id' in kwargs else '0'
+    vtrq_id = int(kwargs['vtrq_id'] if 'vtrq_id' in kwargs else '0')
     vtrq_path = kwargs['vtrq_path'] if 'vtrq_path' in kwargs else '/'
     writeback = kwargs['writeback'] if 'writeback' in kwargs else 'always'
     return {'writeback': writeback,
@@ -83,10 +84,12 @@ def delete_workspace_vtrq(path):
     return result['http_status']
 
 
-def mount_vp(path, workspace):
-    """Mounts a VP using 'workspace' on 'path'
+def mount_vp(path, workspace_pathname, **kwargs):
+    """Mounts a VP using 'workspace_pathname' on 'path'
     
     Assumes the appropriate vp is on the system path."""
+    #
+    is_private = kwargs['is_private'] if 'is_private' in kwargs else False
     #
     #  Create a directory on 'path'
     #
@@ -95,8 +98,10 @@ def mount_vp(path, workspace):
     #  Invoke the VP
     cmd = ['vp',
            '--mount=' + path,
-           '--mentor=' + config['vtrq'],
-           '--workspace=' + workspace]
+           '--mentor=' + config['vpm'],
+           '--workspace=' + workspace_pathname]
+    if is_private:
+        cmd = cmd + ['--fuse-cache=auto', '--timeout=1']
     print('mount_vp: invoking:', ' '.join(cmd))
     rtn = subprocess.check_output(cmd).decode('utf-8')
     print(rtn)
