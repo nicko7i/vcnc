@@ -1,5 +1,5 @@
 /*
- *    Copyright (C) 2015-2016    IC Manage Inc.
+ *    Copyright (C) 2015-2017    IC Manage Inc.
  *
  *    See the file 'COPYING' for license information.
  */
