@@ -1,10 +1,10 @@
 /*
- *    Copyright (C) 2015-2016    IC Manage Inc.
+ *    Copyright (C) 2015-2017    IC Manage Inc.
  *
  *    See the file 'COPYING' for license information.
  */
 /**
- *  Defines routes for every API v1 operation.
+ *  Defines routes for every API v2 operation.
  *  @module
  */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -38,25 +38,11 @@ function convertVtrqID(map) {
 }
 
 function convertMapVtrqID(maps) {
-  if (!Array.isArray(maps)) {
-    return [];
-  }
-  return maps.map(e => convertVtrqID(e));
-}
-
+//  for (let i = 0; i < maps.length; i++) {
+//  	convertVtrqID(maps[i]);
+//  }
 //
-//  Convert v2-format of workspace to v1 format for back compatibility
-//
-//  This function receives PIDL JSON format (integers are strings and empty
-//  arrays may be empty strings).
-//
-function v2WorkspaceAsV1(jstr) {
-  const jsonWs = JSON.parse(jstr.ws);
-  const local = jsonWs.writeback === 'never';
-  return (
-    convertMapVtrqID(jsonWs.maps)
-    .map(e => Object.assign({}, e, { local }))
-  );
+  return maps(e => convertVtrqID(e));
 }
 
 //
@@ -68,42 +54,36 @@ function workspace(jsonIn, name) {
   const jsonResult = {
     workspace: Object.assign({}, jsonWs, { name, maps: convertMapVtrqID(jsonWs.maps) }),
   };
-  console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
+  //  console.log(`workspace: jsonResult: ${JSON.stringify(jsonResult)}`);
   return jsonResult;
 }
-
-
-
 //
-// Extract workspace children names from  v2-format for back compatibility
-//
-//  This function receives PIDL JSON format (integers are strings and empty
-//  arrays may be empty strings).
+//  Converts the PIDL format for workspace children into the REST format.
 //
 function workspaceChildren(jsonIn) {
   const children = jsonIn.ws_children;
+  //
+  //  If there are no children at all return an empty array.
   if (children === '') {
     return { children: [] };
   }
-  const jso = JSON.parse(children);
-  const jsonChildren = jso.children;
-  const arr = [];
-  for (let i = 0; i < jsonChildren.length; i += 1) {
-    arr.push(jsonChildren[i].name);
-  }
-  const jsonResult = {
-    children: arr,
+  const jsonChildren = JSON.parse(children);
+  return {
+    children:
+      jsonChildren.children.map(e => Object.assign(
+        {},
+        e,
+        {
+          maps: convertMapVtrqID(e.maps),
+        })),
   };
-  return jsonResult;
 }
-
 //
-// Convert v2-format of namespace to v1 format for back compatibility
-//
-function namespace(jstr) {
-  const ns = jstr.ns;
+function namespace(jsonIn, p) {
+  const ns = jsonIn.ns;
   const jsonNs = JSON.parse(ns);
   const jsonResult = {
+    name: p,
     stat: jsonNs.stat,
   };
   return jsonResult;
@@ -122,10 +102,12 @@ function adapter(fromRpc, onSuccess, onFailure) {
     body: {},
   };
   rtn.body.error_sym = fromRpc.error_sym;
-  rtn.body.message = fromRpc.error_description_brief;
   //
   const successful = (200 <= status && status < 300); // eslint-disable-line yoda
   const moreProperties = successful ? onSuccess : onFailure;
+  if (successful === false) {
+    rtn.body.message = fromRpc.error_description_brief;
+  }
   Object.assign(rtn.body, moreProperties);
   return rtn;
 }
@@ -196,10 +178,7 @@ module.exports = (app) => {
               if (result.http_status === 200) {
                 grid.createJob(
                   req.pathParams.job_id,
-                  {
-                    workspace_name: req.body.workspace_name,
-                    workspace_spec: v2WorkspaceAsV1(result),
-                  })
+                  { workspace_name: req.body.workspace_name, workspace_spec: workspace(result) })
                 .then(() => {
                   cb(adapter({
                     http_status: 200,
@@ -232,6 +211,7 @@ module.exports = (app) => {
   //
   app.get('/grid/job/:job_id', (req, res) => {
     const jobId = req.pathParams.job_id;
+
     fulfill202(
       req,
       res,
@@ -245,7 +225,7 @@ module.exports = (app) => {
               error_sym: 'OK',
               error_description_brief: 'Request processed',
             }, {
-              job_spec: result.job_spec,
+              job: result.job_spec,
             }));
           } else {
             // job ID was not found
@@ -304,7 +284,7 @@ module.exports = (app) => {
   //
   //  Vector delete node
   //
-  app.post('/vtrq/delete_nodes/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/delete_nodes', (req, res) => {
     fulfill202(
       req,
       res,
@@ -325,7 +305,7 @@ module.exports = (app) => {
   //
   //  Vector metadata Copy
   //
-  app.post('/vtrq/meta_copy/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/meta_copy/', (req, res) => {
     fulfill202(
       req,
       res,
@@ -343,7 +323,7 @@ module.exports = (app) => {
       });
   });
 
-  app.delete('/vtrq/namespace/:vtrq_id/:url_path', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/namespace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -365,7 +345,7 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:url_path/children', (req, res) => {
+  app.get('/vtrq/:vtrq_id/namespace/:url_path/children', (req, res) => {
     fulfill202(
       req,
       res,
@@ -382,7 +362,7 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/namespace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -392,56 +372,22 @@ module.exports = (app) => {
           cnctrqClient.getattr(
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
+
             (result) => {
-              if (result.http_status === 200) {
-                cb(adapter(result, namespace(result)));
-              } else {
+              if (result.http_status !== 200) {
                 cb(adapter(result));
+              } else {
+                cb(adapter(result, namespace(result, req.pathParams.url_path)));
               }
             });
         });
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_get(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            (result) => {
-              cb(adapter(result, { consistency: result.consistency }));
-            });
-        });
-      });
-  });
-
-  app.post('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_set(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            req.body.consistency,
-            (result) => {
-              cb(adapter(result));
-            });
-        });
-      });
-  });
-
   //
   //
   //
-  app.post('/vtrq/namespace/:vtrq_id/:path/mkdir', (req, res) => {
+  app.post('/vtrq/:vtrq_id/namespace/:path/mkdir', (req, res) => {
     fulfill202(
       req,
       res,
@@ -463,7 +409,7 @@ module.exports = (app) => {
   //
   //  Shutdown TRQ
   //
-  app.delete('/vtrq/service/:vtrq_id', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/service', (req, res) => {
     fulfill202(
       req,
       res,
@@ -480,9 +426,9 @@ module.exports = (app) => {
   });
 
   //
-  //  Start invariants chains reduction process.
+  //  Start an invariant chain reduction process.
   //
-  app.post('/vtrq/service/icr_run/:vtrq_id/:url_path', (req, res) => {
+  app.post('/vtrq/:vtrq_id/icr/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -498,10 +444,11 @@ module.exports = (app) => {
         });
       });
   });
-  //  Wait/stop invariants chains reduction process.
-  //  Request storage info from  TRQ.
+
   //
-  app.post('/vtrq/service/icr_wait/:vtrq_id/:mod', (req, res) => {
+  //  Get the status of an invariant chain reduction.
+  //
+  app.get('/vtrq/:vtrq_id/icr', (req, res) => {
     fulfill202(
       req,
       res,
@@ -510,17 +457,38 @@ module.exports = (app) => {
         .then(() => {
           cnctrqClient.icr_wait(
             req.pathParams.vtrq_id,
-            req.pathParams.mod,
+            0,  // wait for finish mode.
             (result) => {
               cb(adapter(result));
             });
         });
       });
   });
+
+  //
+  //  Cancel invariant chain reduction process.
+  //
+  app.delete('/vtrq/:vtrq_id/icr', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.icr_wait(
+            req.pathParams.vtrq_id,
+            1,  // "cancel" mode
+            (result) => {
+              cb(adapter(result));
+            });
+        });
+      });
+  });
+
   //
   //  Request storage info from  TRQ.
   //
-  app.get('/vtrq/service/trq_statistic/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/storage/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -543,7 +511,7 @@ module.exports = (app) => {
   //
   //  Discover VP IDs having certain qualities
   //
-  app.get('/vtrq/vp/:vtrq_id', (req, res) => {
+  app.get('/vtrq/:vtrq_id/vps', (req, res) => {
     fulfill202(
       req,
       res,
@@ -555,7 +523,8 @@ module.exports = (app) => {
             req.query.vp_host,
             req.query.mount_point,
             (result) => {
-              cb(adapter(result, { vp_ids: result.vp_ids }));
+              // TODO: this is probably something else now.
+              cb(adapter(result, { items: result.vp_ids }));
             });
         });
       });
@@ -564,7 +533,7 @@ module.exports = (app) => {
   //
   //  Retrieve information about a specific VP
   //
-  app.get('/vtrq/vp/:vtrq_id/:vp_id', (req, res) => {
+  app.get('/vtrq/:vtrq_id/vp/:vp_id', (req, res) => {
     fulfill202(
       req,
       res,
@@ -578,6 +547,7 @@ module.exports = (app) => {
               cb(adapter(
                 result,
                 {
+                  // TODO update to match v2api.yaml
                   gid: result.gid,
                   hostname: result.hostname,
                   mount_point: result.mount_point,
@@ -589,11 +559,10 @@ module.exports = (app) => {
         });
       });
   });
-
   //
   //  Retrieve the workspaces names at this workspace path.
   //
-  app.get('/vtrq/workspaces/:vtrq_id/:url_path/children', (req, res) => {
+  app.get('/vtrq/:vtrq_id/workspace/:url_path/children', (req, res) => {
     fulfill202(
       req,
       res,
@@ -604,7 +573,11 @@ module.exports = (app) => {
             req.pathParams.vtrq_id,
             req.pathParams.url_path,
             (result) => {
-              cb(adapter(result, workspaceChildren(result)));
+              if (result.http_status === 200) {
+                cb(adapter(result, workspaceChildren(result)));
+              } else {
+                cb(adapter(result));
+              }
             });
         });
       });
@@ -613,7 +586,7 @@ module.exports = (app) => {
   //
   //  Retrieves the workspace specification at this path.
   //
-  app.get('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.get('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -629,7 +602,6 @@ module.exports = (app) => {
               //  from the RPC as a JSON string rather than an object. Code at
               //  this level manipulates objects.
               //
-              console.log('Retrieves the workspace specification at this path');
               if (result.http_status === 200) {
                 cb(adapter(result, workspace(result, req.pathParams.url_path)));
               } else {
@@ -645,7 +617,7 @@ module.exports = (app) => {
   //  'put' is implicitly "overwrite: true".  It is an error 'put'
   //  to a workspace that doesn't exist.
   //
-  app.put('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.put('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,
@@ -667,7 +639,7 @@ module.exports = (app) => {
   //
   //  Sets a workspace specification at this path.
   //
-  app.post('/vtrq/workspaces/:vtrq_id', (req, res) => {
+  app.post('/vtrq/:vtrq_id/workspaces', (req, res) => {
     fulfill202(
       req,
       res,
@@ -690,7 +662,7 @@ module.exports = (app) => {
   //
   //  Deletes a workspace specification at this path.
   //
-  app.delete('/vtrq/workspaces/:vtrq_id/:url_path', (req, res) => {
+  app.delete('/vtrq/:vtrq_id/workspace/:url_path', (req, res) => {
     fulfill202(
       req,
       res,

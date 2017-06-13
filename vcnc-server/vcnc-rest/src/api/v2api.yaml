@@ -1,13 +1,21 @@
 #
-#  Copyright (C) 2015 IC Manage Inc.
+#  Copyright (C) 2015-2017 IC Manage Inc.
 #
 #  See the file 'COPYING' for license information.
 #
+#  This file may be validated and viewed in a more readable form at
+#  http://editor.swagger.io/#!/
+#
 swagger: '2.0'
+
+#
+#  JSON structure:
+#    In response bodies, the returned data is packaged into a single key that is a sibling of 'error_sym'.
+#    Everywhere else, we prefer to avoid creating hierarchy.  Hierarchy complicates object manipulation in the browser.
 
 # Document metadata
 info:
-  version: "1.1.0"
+  version: "2.0.0"
   title: Velstor vCNC API
   description: |
     ### Admin API
@@ -21,11 +29,6 @@ info:
     Errors are reported at two levels: HTTP and operational.  With one exception, HTTP error codes represent the success or failure of the HTTP protocol, considered solely as a transport. Operational error codes, reported in the response body, reflect the success or failure of the operation itself.
 
     The exception is the operational error code __ENOENT__ (Does not exist).  REST operations which refer to exactly one resource in the URL convert __ENOENT__ to HTTP 404.  Doing so improves our compliance with [*HTTP/1.1*](http://tools.ietf.org/html/rfc7231).  Refer to the [vCNC API Overview](../api-overview.html) for a more detailed discussion.
-
-# Generic host; our customers deploy this service.
-# In production, comment out this line.  The correct host will be displayed
-# when the deployed vCNC server hosts this document set.
-#host: api.acme.com
 
 # Array of all schemes the API supports.
 schemes:
@@ -50,6 +53,7 @@ paths:
   /auth/token:
     post:
       summary: Returns a session authorization token
+      description: Not yet finalized or implemented.
       operationId: login
       tags:
         - "Admin API"
@@ -75,6 +79,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       summary: Ends a user session
+      description: Not yet finalized or implemented.
       operationId: logout
       tags:
         - "Admin API"
@@ -102,10 +107,27 @@ paths:
       summary: Retrieves information about all jobs
       operationId: gridJobList
       tags:
-        - "Grid API"
+        - 'Grid API'
       responses:
         '200':
           description: Request processed.  See response body.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+              jobs:
+                type: array
+                items:
+                  $ref: '#/definitions/GridJobInfo'
         default:
           description: unexpected error
           schema:
@@ -166,6 +188,22 @@ paths:
       responses:
         '200':
           description: Request processed.  See response body.
+          schema:
+            required:
+              - error_sym
+              - job
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+              job:
+                $ref: '#/definitions/GridJobInfo'
         default:
           description: unexpected error
           schema:
@@ -195,6 +233,7 @@ paths:
   /vcnc/users:
     post:
       summary: Creates a new vCNC user and assigns the initial password
+      description: Not yet finalized or implemented.
       operationId: vcncUserCreate
       tags:
         - "Admin API"
@@ -220,9 +259,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vcnc/users/{username}:
+  /vcnc/user/{username}:
     put:
       summary: Updates information about a vCNC user.
+      description: Not yet finalized or implemented.
       operationId: vcncUserUpdate
       tags:
         - "Admin API"
@@ -259,6 +299,7 @@ paths:
 
     delete:
       summary: Deletes a vCNC user
+      description: Not yet finalized or implemented.
       operationId: vcncUserDelete
       tags:
         - "Admin API"
@@ -284,7 +325,7 @@ paths:
   ##
   ##  vTRQ
   ##
-  /vtrq/delete_nodes/{vtrq_id}:
+  /vtrq/{vtrq_id}/delete_nodes:
     post:
       summary: Performs a vector of deletions in a vTRQ namespace
       tags:
@@ -324,7 +365,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/meta_copy/{vtrq_id}:
+  /vtrq/{vtrq_id}/meta_copy:
     post:
       summary: Performs a vector of meta-data copies
       description: |
@@ -376,7 +417,7 @@ paths:
             $ref: '#/definitions/Error'
 
 
-  /vtrq/namespace/{vtrq_id}/{url_path}:
+  /vtrq/{vtrq_id}/namespace/{url_path}:
     delete:
       summary: Deletes the node at the specified paath.
       operationId: vtrqNamespaceDelete
@@ -450,13 +491,13 @@ paths:
                   - EACCESS
                   - EREMOTEIO
               stat:
-                $ref: '#/definitions/StructStat'
+                $ref: '#/definitions/NodeInfo'
         default:
           description: HTTP error
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/namespace/{vtrq_id}/{url_path}/children:
+  /vtrq/{vtrq_id}/namespace/{url_path}/children:
     get:
       summary: Returns the child nodes of a namespace path
       operationId: vtrqNamespaceChildren
@@ -476,6 +517,12 @@ paths:
           description: URL-encoded path in the vTRQ namespace.
           required: true
           type: string
+        - in: query
+          name: details
+          description: If false the 'stat' field will not be returned.
+          required: false
+          type: boolean
+          default: false
       responses:
         '200':
           description: Request processed.  See response body.
@@ -491,120 +538,14 @@ paths:
               result:
                 type: array
                 items:
-                  type: string
+                  $ref: '#/definitions/NodeInfo'
             additionalProperties: false
         default:
           description: HTTP error
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/namespace/{vtrq_id}/{url_path}/consistency:
-    get:
-      summary: Retreives the consistency attribute of a vTRQ node.
-      operationId: vtrqNamespaceConsistencyGet
-      tags:
-        - "vTRQ Namespace"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-          format: int64
-          minimum: 0
-          maximum: 1073741823
-        - in: path
-          name: url_path
-          description: URL-encoded path in the vTRQ namespace.
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed. See response body.
-          schema:
-            required:
-              - error_sym
-              - consistency
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - ENOENT
-                  - ENOTDIR
-                  - ENAMETOOLONG
-                  - EEXIST
-                  - ENOSPC
-                  - EREMOTEIO
-              consistency:
-                $ref: '#/definitions/Consistency'
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-    post:
-      summary: Sets the consistency attribute of a vTRQ node.
-      operationId: vtrqNamespaceConsistencySet
-      tags:
-        - "vTRQ Namespace"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-          format: int64
-          minimum: 0
-          maximum: 1073741823
-        - in: path
-          name: url_path
-          description: URL-encoded path in the vTRQ namespace.
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: "Additional parameters"
-          required: true
-          schema:
-            type: object
-            properties:
-              consistency:
-                $ref: '#/definitions/Consistency'
-            required:
-              - consistency
-            additionalProperties: false
-      responses:
-        '200':
-          description: Request processed. See response body.
-          schema:
-            required:
-              - error_sym
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - ENOENT
-                  - ENOTDIR
-                  - ENAMETOOLONG
-                  - EEXIST
-                  - ENOSPC
-                  - EREMOTEIO
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /vtrq/namespace/{vtrq_id}/{url_path}/mkdir:
+  /vtrq/{vtrq_id}/namespace/{url_path}/mkdir:
     post:
       summary: Creates a directory at a namespace path.
       description: Clients must ensure the parent exists and is a directory.
@@ -663,7 +604,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/service/{vtrq_id}:
+  /vtrq/{vtrq_id}/service:
     delete:
       summary: Gracefully brings down a vTRQ
       operationId: vtrqShutdown
@@ -697,128 +638,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/service/icr_run/{vtrq_id}/{url_path}:
-    post:
-      summary: Run invariants chains reduction on a vTRQ
-      operationId: vtrqIcrRun
-      tags:
-        - "vTRQ Services"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-        - in: path
-          name: url_path
-          description: URL-encoded initial path in the vTRQ namespace.
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request accepted.
-          schema:
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-            required:
-              - error_sym
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /vtrq/service/icr_wait/{vtrq_id}/{mod}:
-    post:
-      summary: Wait or stop invariants chains reduction process on a vTRQ
-      operationId: vtrqIcrWait
-      tags:
-        - "vTRQ Services"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-        - in: path
-          name: mod
-          description: 0 - wait till its done. 1 - stop the pprocess as soon as possible.
-          required: true
-          type: integer
-          default: 0
-      responses:
-        '200':
-          description: Request accepted.
-          schema:
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-            required:
-              - error_sym
-            additionalProperties: false
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /vtrq/service/trq_statistic/{vtrq_id}/{url_path}:
-    get:
-      summary: Returns basic statistic info
-      operationId: vtrqIcrWait
-      tags:
-        - "vTRQ Services"
-      parameters:
-        - in: path
-          name: vtrq_id
-          description: ID of the vTRQ performing this operation.
-          required: true
-          type: integer
-        - in: path
-          name: url_path
-          description: URL-encoded hierarchial name of the workspace.
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Request processed, see response body.
-          schema:
-            type: object
-            required:
-              - error_sym
-              - sum_st_size
-              - sum_extents
-            properties:
-              error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-              sum_st_size:
-                type: integer
-                description: Summarize stat sizes (aka ls-l) for sub-tree.
-                example: 101
-              sum_extents:
-                type: integer
-                description: Summarize extents sizes for for sub-tree including invariants.
-                example: 101
-        default:
-          description: HTTP error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /vtrq/vp/{vtrq_id}/{vp_id}:
+  /vtrq/{vtrq_id}/vp/{vp_id}:
     get:
       summary: Returns information about a VP instance
       operationId: vpGet
@@ -844,11 +664,7 @@ paths:
           schema:
             required:
               - error_sym
-              - gid
-              - mount_point
-              - uid
-              - user
-              - workspace
+              - vp
             properties:
               error_sym:
                 type: string
@@ -858,26 +674,8 @@ paths:
                   - OK
                   - EACCESS
                   - EREMOTEIO
-              gid:
-                type: integer
-                description: Group ID of VP process.
-                example: 101
-              mount_point:
-                type: string
-                description: "Fully qualified path to the VP's mount point."
-                example: "/path/to/mount/point"
-              uid:
-                type: integer
-                description: User ID of VP process.
-                example: 101
-              user:
-                type: string
-                description: PeerCache hierarchical user name.
-                example: /marketing/sally
-              workspace:
-                type: string
-                description: Name of the PeerCache workspace.
-                example: /some/workspace/name
+              vp:
+                $ref: '#/definitions/VpInstance'
         default:
           description: HTTP error
           schema:
@@ -921,7 +719,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/vp/{vtrq_id}:
+  /vtrq/{vtrq_id}/vps:
     get:
       summary: Finds VP instances matching certain criteria
       description: |
@@ -951,30 +749,27 @@ paths:
       responses:
         '200':
           description: Request processed, see response body.
+          headers:
+            Location:
+              description: URL of a cursor resource.
+              type: string
           schema:
             required:
               - error_sym
             properties:
               error_sym:
-                type: string
-                description: Symbolic error code value
-                default: OK
-                enum:
-                  - OK
-                  - EACCESS
-                  - EREMOTEIO
-              vp_ids:
+                $ref: '#/definitions/ErrorSymbol'
+              vps:
                 type: array
                 description: ""
                 items:
-                  type: string
-                  example: "0x123456789ABCDEF0"
+                  $ref: '#/definitions/VpInstance'
         default:
           description: HTTP error
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}/{url_path}:
+  /vtrq/{vtrq_id}/workspace/{url_path}:
     put:
       summary: Updates a workspace
       operationId: vtrqWorkspaceUpdate
@@ -1002,13 +797,7 @@ paths:
           description: "Workspace Specification"
           required: true
           schema:
-            type: object
-            required:
-              - spec
-            properties:
-              spec:
-                $ref: '#/definitions/WorkspaceSpec'
-            additionalProperties: false
+            $ref: '#/definitions/Workspace'
       responses:
         '200':
           description: Request processed. See response body.
@@ -1067,7 +856,7 @@ paths:
             $ref: '#/definitions/Error'
 
     get:
-      summary: Returns a workspace specification
+      summary: Returns the workspace specification at this path
       operationId: vtrqWorkspaceGet
       tags:
         - "vTRQ Workspaces"
@@ -1089,7 +878,7 @@ paths:
             type: object
             required:
               - error_sym
-              - spec
+              - workspace
             properties:
               error_sym:
                 type: string
@@ -1100,7 +889,7 @@ paths:
                   - EACCES
                   - ENOENT
                   - EREMOTEIO
-              spec:
+              workspace:
                 $ref: '#/definitions/Workspace'
             additionalProperties: false
         default:
@@ -1108,13 +897,14 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}/{url_path}/children:
+  /vtrq/{vtrq_id}/workspace/{url_path}/children:
     get:
       summary: Returns child nodes of a workspace path
       description: |
-        Workspaces are organized into a hierarchical namespace.  This method returns a
-        JSON array containing every workspace name which is a child of the specified
-        path.
+        Workspaces are organized into a hierarchical namespace. A child
+        workspace having only a 'name' key represents an additional level of
+        hierarchy. A child workspace having a 'name' key and also other keys
+        is a workspace.
 
       operationId: vtrqWorkspaceChildren
       tags:
@@ -1130,6 +920,11 @@ paths:
           description: URL-encoded hierarchial name of the workspace.
           required: true
           type: string
+        - in: query
+          name: details
+          required: false
+          type: boolean
+          default: false
       responses:
         '200':
           description: Request processed, see response body.
@@ -1149,51 +944,398 @@ paths:
               children:
                 type: array
                 items:
-                  type: string
+                  $ref: '#/definitions/Workspace'
         default:
           description: HTTP error
           schema:
             $ref: '#/definitions/Error'
 
-  /vtrq/workspaces/{vtrq_id}:
+  /vtrq/{vtrq_id}/workspaces:
     post:
       summary: Creates or updates a workspace
       operationId: vtrqWorkspaceCreate
       tags:
-         - "vTRQ Workspaces"
+        - "vTRQ Workspaces"
       parameters:
-         - in: path
-           name: vtrq_id
-           description: ID of the vTRQ performing this operation.
-           required: true
-           type: integer
-         - in: query
-           name: overwrite
-           description: "'true' if an existing workspace should be overwritten."
-           required: false
-           type: boolean
-           default: false
-         - in: query
-           name: push
-           description: "'true' if active VPs should switch to the new spec."
-           required: false
-           type: boolean
-           default: false
-         - in: body
-           name: body
-           description: "Workspace Specification"
-           required: true
-           schema:
-             $ref: '#/definitions/Workspace'
+        - in: path
+          name: vtrq_id
+          description: ID of the vTRQ performing this operation.
+          required: true
+          type: integer
+        - in: query
+          name: overwrite
+          description: "'true' if an existing workspace should be overwritten."
+          required: false
+          type: boolean
+          default: false
+        - in: query
+          name: push
+          description: "'true' if active VPs should switch to the new spec."
+          required: false
+          type: boolean
+          default: false
+        - in: body
+          name: body
+          description: "Workspace Specification"
+          required: true
+          schema:
+            $ref: '#/definitions/Workspace'
       responses:
-         '200':
-           description: Request processed. See response body.
-           schema:
-             $ref: '#/definitions/Error'
-         default:
-           description: HTTP error
-           schema:
-             $ref: '#/definitions/Error'
+        '200':
+          description: Request processed. See response body.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /_cursor/{id}:
+    put:
+      summary: Sets sorting and filtering directives.
+      operationId: _cursorPost
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Cursor object identifier
+          required: true
+          type: string
+        - in: query
+          name: filter
+          description: Boolean expression over object fields.
+          required: false
+          type: string
+        - in: query
+          name: order
+          description: Ascending or descending sort
+          required: false
+          type: string
+          default: ascend
+          enum:
+            - ascend
+            - descend
+        - in: query
+          name: on
+          description: Field on which to sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+          schema:
+            properties:
+              error_sym:
+                $ref: '#/definitions/ErrorSymbol'
+            required:
+              - error_sym
+            additionalProperties: false
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+    get:
+      summary: Iterates over the result set.
+      operationId: _cursorGet
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique cursor identifier
+          required: true
+          type: string
+        - in: query
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
+          required: false
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Request processed.  See response body.
+
+    delete:
+      summary: Releases the result set.
+      operationId: _cursorDelete
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique cursor identifier
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed, see response body.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /vtrq/{vtrq_id}/icr/{url_path}:
+    post:
+      summary: Starts an invariants chains reduction process on a vTRQ
+      operationId: vtrqIcrStart
+      tags:
+        - "vTRQ Services"
+      parameters:
+        - in: path
+          name: vtrq_id
+          description: ID of the vTRQ performing this operation.
+          required: true
+          type: integer
+        - in: path
+          name: url_path
+          description: vTRQ namespace path on which to do the reduction.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request accepted.
+          schema:
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+            required:
+              - error_sym
+            additionalProperties: false
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /vtrq/{vtrq_id}/icr:
+    get:
+      summary: Returns status of invariant chain reduction on the vTRQ
+      operationId: vtrqIcrWait
+      tags:
+        - "vTRQ Services"
+      parameters:
+        - in: path
+          name: vtrq_id
+          description: ID of the vTRQ performing this operation.
+          required: true
+          type: integer
+        - in: query
+          name: wait
+          description: Don't send response until process has finished on the vTRQ.
+          required: false
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Request accepted.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                $ref: '#/definitions/ErrorSymbol'
+              active:
+                type: boolean
+                description: True if an ICR is running, false otherwise.
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      summary: Cancels an invariant chain reduction process on a vTRQ
+      operationId: vtrqIcrCancel
+      tags:
+        - "vTRQ Services"
+      parameters:
+        - in: path
+          name: vtrq_id
+          description: ID of the vTRQ performing this operation.
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Request accepted.
+          schema:
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+            required:
+              - error_sym
+            additionalProperties: false
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /vtrq/{vtrq_id}/storage/{url_path}:
+    get:
+      summary: Returns summary storage info
+      operationId: vtrqStorage
+      tags:
+        - "vTRQ Services"
+      parameters:
+        - in: path
+          name: vtrq_id
+          description: ID of the vTRQ performing this operation.
+          required: true
+          type: integer
+        - in: path
+          name: url_path
+          description: URL-encoded namespace path.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed, see response body.
+          schema:
+            type: object
+            required:
+              - error_sym
+              - sum_st_size
+              - sum_extents
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCESS
+                  - EREMOTEIO
+              sum_st_size:
+                type: integer
+                description: Summarize stat sizes (aka ls-l) for sub-tree.
+                example: 101
+              sum_extents:
+                type: integer
+                description: Summarize extents sizes for for sub-tree including invariants.
+                example: 101
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /_cursor/{id}:
+    put:
+      summary: Sets sorting and filtering directives.
+      operationId: _cursorPost
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Cursor object identifier
+          required: true
+          type: string
+        - in: query
+          name: filter
+          description: Boolean expression over object fields.
+          required: false
+          type: string
+        - in: query
+          name: order
+          description: Ascending or descending sort
+          required: false
+          type: string
+          default: ascend
+          enum:
+            - ascend
+            - descend
+        - in: query
+          name: on
+          description: Field on which to sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Request processed.  See response body.
+          schema:
+            properties:
+              error_sym:
+                $ref: '#/definitions/ErrorSymbol'
+            required:
+              - error_sym
+            additionalProperties: false
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
+
+    get:
+      summary: Iterates over the result set.
+      operationId: _cursorGet
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique cursor identifier
+          required: true
+          type: string
+        - in: query
+          name: cursor
+          description: Opaque value for start of next set of items. Zero means start at beginning.
+          required: false
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Request processed.  See response body.
+
+    delete:
+      summary: Releases the result set.
+      operationId: _cursorDelete
+      tags:
+        - "Internal API"
+      parameters:
+        - in: path
+          name: id
+          description: Unique cursor identifier
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request processed, see response body.
+          schema:
+            required:
+              - error_sym
+            properties:
+              error_sym:
+                type: string
+                description: Symbolic error code value
+                default: OK
+                enum:
+                  - OK
+                  - EACCES
+                  - ENOENT
+                  - EREMOTEIO
+        default:
+          description: HTTP error
+          schema:
+            $ref: '#/definitions/Error'
 
   /_test/latency:
     post:
@@ -1217,41 +1359,10 @@ paths:
         '200':
           description: Completed
 
-  /_test/moxiate:
-    # /_test/moxiate is deprecated. Use /_test/latency instead
-    post:
-      summary: Tests 202 fulfillment mechanism
-      operationId: _testFulfill
-      tags:
-        - "Internal API"
-        - "Tests"
-      parameters:
-        - in: query
-          name: latency
-          description: Number of seconds needed to fulfill
-          required: true
-          type: integer
-        - in: query
-          name: input
-          description: Integer input value
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Completed
-
-#summary
+#
 #  Re-usable object definitions.
 #
 definitions:
-
-  Consistency:
-    type: string
-    description: Consistency semantics
-    default: eventual
-    enum:
-      - eventual
-      - immediate
 
   DeleteNodesRequest:
     type: object
@@ -1297,8 +1408,25 @@ definitions:
     properties:
       error_sym:
         type: string
+        example: OK
       message:
         type: string
+        example: Request processed
+
+  ErrorSymbol:
+    type: string
+    description: Symbolic error code value
+    default: OK
+    enum:
+      - OK
+      - EACCES
+      - EEXIST
+      - ENAMETOOLONG
+      - ENOENT
+      - ENOSPC
+      - ENOTDIR
+      - ENOTRECOVERABLE
+      - EREMOTEIO
 
   ErrorVtrq:
     description: |
@@ -1337,37 +1465,34 @@ definitions:
       message:
         type: string
 
-  SourceDestinationPath:
+  GridJobInfo:
+    type: object
     properties:
-      src:
+      id:
+        description: Grid job identifier.
         type: string
-        example: "/path/to/source"
-      dest:
+        example: XYZ:1234
+      vtrq_id:
+        description: ID of the vTRQ performing this operation.
+        type: integer
+        format: int64
+        minimum: 0
+        maximum: 1073741823
+        default: 0
+      workspace_name:
+        description: Name of the workspace used by the job
         type: string
-        example: "/path/to/destination"
+        example: /path/to/workspace
+      workspace_spec:
+        description: Workspace specification used by the job
+        type: string
+        example:
+          "{ \"maps\": [{\"vp_path\":\"/\", \"vtrq_id\":8, \"vtrq_path\":\"/\"}], \"writeback\": \"never\""
     required:
-      - src
-      - dest
+      - vtrq_id
+      - workspace_name
+      - workspace_spec
     additionalProperties: false
-
-  SourceDestinationVector:
-    type: array
-    items:
-      $ref: '#/definitions/SourceDestinationPath'
-
-  SourceDestinationErrorVector:
-    type: array
-    items:
-      properties:
-        error_sym:
-          type: string
-          example: OK
-        copy:
-          $ref: '#/definitions/SourceDestinationPath'
-      required:
-        - error_sym
-        - copy
-      additionalProperties: false
 
   MetaCopyRequest:
     type: object
@@ -1384,13 +1509,13 @@ definitions:
       result:
         $ref: '#/definitions/SourceDestinationErrorVector'
 
-  SessionToken:
+  NodeInfo:
+    description: Intentionally using 'name' rather than 'path', because this is used in a hierarchical context.
+    type: object
     properties:
-      token:
+      name:
         type: string
-
-  StructStat:
-    properties:
+        example: foo
       st_dev:
         type: string
         format: uint64
@@ -1459,6 +1584,43 @@ definitions:
       - st_ctime
     additionalProperties: false
 
+  SourceDestinationPath:
+    properties:
+      src:
+        type: string
+        example: "/path/to/source"
+      dest:
+        type: string
+        example: "/path/to/destination"
+    required:
+      - src
+      - dest
+    additionalProperties: false
+
+  SourceDestinationVector:
+    type: array
+    items:
+      $ref: '#/definitions/SourceDestinationPath'
+
+  SourceDestinationErrorVector:
+    type: array
+    items:
+      properties:
+        error_sym:
+          type: string
+          example: OK
+        copy:
+          $ref: '#/definitions/SourceDestinationPath'
+      required:
+        - error_sym
+        - copy
+      additionalProperties: false
+
+  SessionToken:
+    properties:
+      token:
+        type: string
+
   UsernamePassword:
     type: object
     properties:
@@ -1470,6 +1632,46 @@ definitions:
       - username
       - password
     additionalProperties: false
+
+  VpInstance:
+    type: object
+    properties:
+      host:
+        type: string
+        description: The hostanme of the machine running the vp process.
+        example: jupiter
+      id:
+        type: string
+        description: Opaquely identifies a mounted PeerCache filesystem.
+        example: '123456789ABCDEF0'
+      ip:
+        type: string
+        description: The IP address of the host running the vp process.
+        example: 172.17.0.1
+      job:
+        type: string
+        description: An arbitrary user-provided string, perhaps a grid job ID.
+        example: DRC-0-0-0-0
+      mount:
+        type: string
+        description: The absolute path at which the PeerCache filesystem is mounted.
+        example: /tmp/mnt/0xABCDE
+      os_user:
+        type: string
+        description: The effective user id on the host operating system.
+        example: sally
+      pc_user:
+        type: string
+        description: The PeerCache user id of the vp process.
+        example: /engr/sally
+    required:
+      - host
+      - id
+      - ip
+      - job
+      - mount
+      - os_user
+      - pc_user
 
   WorkspaceEntry:
     type: object
@@ -1497,7 +1699,7 @@ definitions:
     properties:
       name:
         type: string
-        example: /myWorkspace
+        example: myWorkspace
       maps:
         type: array
         items:
@@ -1505,18 +1707,14 @@ definitions:
       writeback:
         type: string
         description: Desired writeback semantics
-        default: "trickle"
+        default: never
         enum:
-          - trickle
-          - always
           - never
           - explicit
+          - trickle
+          - always
     required:
       - maps
       - writeback
     additionalProperties: false
 
-  WorkspaceSpec:
-    type: array
-    items:
-      $ref: '#/definitions/WorkspaceEntry'
