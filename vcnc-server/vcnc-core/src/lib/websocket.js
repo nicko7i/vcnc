@@ -3,12 +3,29 @@
 const config = require('./configuration.js');
 const url = require('url');
 const mockDashboardData = require('./mockDashboardData')();
-const storagePolling = require('./pollStorageStats');
 const r = require('rethinkdb');
 
 const samplerTableName = config.vcncSampler.table;
 
 let connection = null;
+
+//
+//  A watchdog barks (to console) if there have been no messages for one
+//  minute.  The metaphor is: the watchdog barks if he hasn't been
+//  fed for more than one minute.
+//
+let watchdogFed = true;
+function feedWatchdog() {
+  watchdogFed = true;
+}
+setInterval(
+  () => {
+    if (!watchdogFed) {
+      console.log('ERROR: No RethinkDB post for at least 1 minute')
+    }
+    watchdogFed = false;
+  },
+  60*1000);
 
 //  Useful for unit testing??
 function makeMockHandler() {
@@ -22,16 +39,17 @@ function makeMockHandler() {
     });
 
     ws.on('message', (message) => {
-      console.log('INFO-ws: received: %s', message);
+      console.log('INFO-WS: received: %s', message);
     });
 
     ws.on('close', () => {
-      console.log('INFO-ws: disconnected');
+      console.log('INFO-WS: disconnected');
       clearInterval(interval);
     });
 
     interval = setInterval(() => {
       ws.send(JSON.stringify(mockDashboardData()));
+      feedWatchdog();
     }, 10000);
   };
 }
@@ -77,29 +95,23 @@ function makeHandler() {
       cursor.each((error, change) => {
         if (change !== undefined && change.new_val) {
           const { rVpm, rVtrq, storageEfficiency } = change.new_val;
-          if (storagePolling.connected()) {
-            ws.send(JSON.stringify({
-              rVpm,
-              rVtrq,
-              storageEfficiency: storagePolling.currentValue().value }));
-          } else {
-            ws.send(JSON.stringify({ rVpm, rVtrq, storageEfficiency }));
-          }
+          ws.send(JSON.stringify({ rVpm, rVtrq, storageEfficiency }));
+          feedWatchdog();
         }
       });
     })
-    .catch(() => console.log('caught cursor error'));
+    .catch(() => console.log('ERROR: caught RethinkDB cursor error'));
 
     ws.on('open', () => {
       console.log('INFO-WS: opened');
     });
 
     ws.on('message', (message) => {
-      console.log('INFO-ws: received: %s', message);
+      console.log('INFO-WS: received: %s', message);
     });
 
     ws.on('close', () => {
-      console.log('INFO-ws: disconnected');
+      console.log('INFO-WS: disconnected');
       changeCursor.close();
     });
   };

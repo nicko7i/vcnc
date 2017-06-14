@@ -12,6 +12,25 @@ const table = conf.Table();
 //
 let cnxtn = null;
 
+//
+//  A watchdog barks (to console) if there have been no messages for one
+//  minute.  The metaphor is: the watchdog barks if he hasn't been
+//  fed for more than one minute.
+//
+let watchdogFed = true;
+function feedWatchdog() {
+  watchdogFed = true;
+}
+setInterval(
+  () => {
+    if (!watchdogFed) {
+      console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
+    }
+    watchdogFed = false;
+  },
+  60*1000);
+//  End of watchdog code
+
 class RethinkdbSampler {
   constructor(dt) {
     this.period = parseInt(dt, 10);
@@ -31,6 +50,7 @@ class RethinkdbSampler {
     return r.table(table).insert(
       Object.assign({}, sample, { timestamp: r.now() })
     ).run(cnxtn);
+    feedWatchdog();
   }
 
   Trim() {

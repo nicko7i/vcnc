@@ -27,7 +27,7 @@ function ExternalEvents(props) {
   };
 
   return (
-    <Websocket url={`ws://${restHost()}/`} onMessage={handleData} />
+    <Websocket url={`ws://${restHost()}/`} onMessage={handleData} debug={true}/>
   );
 }
 
