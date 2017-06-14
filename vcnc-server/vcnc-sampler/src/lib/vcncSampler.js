@@ -28,7 +28,6 @@ class VcncSampler {
     this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
     this.binCount = 0;
-    this.startSamplerTime = parseInt(Date.now() / 1000, 10);
   }
 
   Init() {
@@ -49,9 +48,6 @@ class VcncSampler {
     const self = this;
     const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000 , 10);
     const op = jsnMsg.opID;
-    if (ts < self.startSamplerTime) {
-      return;
-    }
     let index = 0;
 
     // First call
