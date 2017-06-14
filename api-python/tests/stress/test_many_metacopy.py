@@ -71,7 +71,7 @@ def test_private_space_reads():
     #  It's visible to the private space, so copy it to /dev/null in the
     #  private space.  This shows up as vtrq reads on the dashboard.
     #
-    testlib.command('cp', large_file_path_public, '/dev/null')
+    testlib.command('cp', large_file_path_private, '/dev/null')
     #
     #  Now do the copy to /dev/null twice more.  These should show up as
     #  vpm reads on the dashboard.
