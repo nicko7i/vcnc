@@ -17,14 +17,14 @@ let cnxtn = null;
 //  minute.  The metaphor is: the watchdog barks if he hasn't been
 //  fed for more than one minute.
 //
-let watchdogFed = true;
+let watchdogFed = undefined;
 function feedWatchdog() {
+  console.log('INFO: feeding sampler watchdog')
   watchdogFed = true;
 }
 setInterval(
   () => {
-    if (!watchdogFed) {
-      console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
+    if (watchdogFed !== undefined || !watchdogFed) {
     }
     watchdogFed = false;
   },
@@ -47,10 +47,10 @@ class RethinkdbSampler {
     const sample = Object.assign({}, entry);
     sample.sampleTimestamp = r.epochTime(entry.sampleTimestamp);
     //
+    feedWatchdog();
     return r.table(table).insert(
       Object.assign({}, sample, { timestamp: r.now() })
     ).run(cnxtn);
-    feedWatchdog();
   }
 
   Trim() {

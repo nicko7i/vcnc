@@ -14,13 +14,13 @@ let connection = null;
 //  minute.  The metaphor is: the watchdog barks if he hasn't been
 //  fed for more than one minute.
 //
-let watchdogFed = true;
+let watchdogFed = undefined;
 function feedWatchdog() {
   watchdogFed = true;
 }
 setInterval(
   () => {
-    if (!watchdogFed) {
+    if (watchdogFed !== undefined && !watchdogFed) {
       console.log('ERROR: No RethinkDB post for at least 1 minute')
     }
     watchdogFed = false;
