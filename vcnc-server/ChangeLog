@@ -1,8 +1,12 @@
+Release 3.8.4
+
+    Fix to have gray doughnut when there is no activity.
+
 Release 3.8.3
 
-Fixed bug in flushing data from pmda to vda
+    Fixed bug in flushing data from pmda to vda
 
-Increased latency time to pmda flushing time interval
+    Increased latency time to pmda flushing time interval
 
 Release 3.8.2
 
