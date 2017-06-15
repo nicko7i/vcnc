@@ -147,7 +147,7 @@ class VcncSampler {
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
     if (self.empty === true) return bin;
-    if (self.minIndex === maxIndex ) {
+    if (self.minIndex === self.maxIndex ) {
       self.empty = true;
     }
     self.minIndex += 1;

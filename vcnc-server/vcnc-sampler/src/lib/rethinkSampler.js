@@ -24,6 +24,7 @@ function feedWatchdog() {
 setInterval(
   () => {
     if (watchdogFed !== undefined || !watchdogFed) {
+      console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
     }
     watchdogFed = false;
   },
