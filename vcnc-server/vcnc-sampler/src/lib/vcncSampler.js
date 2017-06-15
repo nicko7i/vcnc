@@ -147,16 +147,10 @@ class VcncSampler {
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
     if (self.empty === true) return bin;
-    if (parseInt(self.minIndex, 10) === parseInt(self.maxIndex, 10)) {
+    if (minIndex === maxIndex ) {
       self.empty = true;
-      self.maxIndex = 0;
-      self.minIndex = 0;
-      self.startDataTime = 0;
-    } else {
-//      const keys = Object.keys(self.pmReadBins);
-//      self.minIndex = keys[0];
-      self.minIndex += 1;
     }
+    self.minIndex += 1;
 //    console.log(`Bin: ${json.stringify(bin)}`);
 //    console.log(`minIndex = ${self.minIndex} maxIndex = ${self.maxIndex}`);
 //    console.log('<<< Finished ReleaseBin');
