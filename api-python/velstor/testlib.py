@@ -101,7 +101,7 @@ def mount_vp(path, workspace_pathname, **kwargs):
            '--mentor=' + config['vpm'],
            '--workspace=' + workspace_pathname]
     if is_private:
-        cmd = cmd + ['--fuse-cache=auto', '--timeout=1']
+        cmd = cmd + ['--fuse-cache=none', '--timeout=0']
     print('mount_vp: invoking:', ' '.join(cmd))
     rtn = subprocess.check_output(cmd).decode('utf-8')
     print(rtn)

@@ -59,26 +59,26 @@ def test_private_space_reads():
 #    testlib.mount_vp(private_vp_mountpt, private_workspace_name, is_private=True)
 #    testlib.command('md5sum', large_file_path_private)
     #
-    #  Now do the copy to /dev/null twice more.  These should show up as
+    #  Now do the md5sum twice more.  These should show up as
     #  vpm reads on the dashboard.
-#    testlib.command('md5sum', large_file_path_private)
-#    testlib.command('md5sum', large_file_path_private)
+    testlib.command('md5sum', large_file_path_private)
+    testlib.command('md5sum', large_file_path_private)
     #
     #  Delete the large file
     #
-#    testlib.command('rm', large_file_path_public)
+    testlib.command('rm', large_file_path_public)
     #
     #  Un-mount the VPs
     #
-#    testlib.unmount_vp(public_vp_mountpt)
-#    testlib.unmount_vp(private_vp_mountpt)
+    testlib.unmount_vp(public_vp_mountpt)
+    testlib.unmount_vp(private_vp_mountpt)
     #
     #  Remove the mount directories
     #
-#    testlib.command('rmdir', public_vp_mountpt)
-#    testlib.command('rmdir', private_vp_mountpt)
+    testlib.command('rmdir', public_vp_mountpt)
+    testlib.command('rmdir', private_vp_mountpt)
     #
     #  Delete the workspaces from the vtrq
     #
-#    testlib.delete_workspace_vtrq(public_workspace_name)
-#    testlib.delete_workspace_vtrq(private_workspace_name)
+    testlib.delete_workspace_vtrq(public_workspace_name)
+    testlib.delete_workspace_vtrq(private_workspace_name)
