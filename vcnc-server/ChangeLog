@@ -1,3 +1,7 @@
+Release 3.8.5
+
+    Fix to trend graph dropout.
+
 Release 3.8.4
 
     Fix to have gray doughnut when there is no activity.
