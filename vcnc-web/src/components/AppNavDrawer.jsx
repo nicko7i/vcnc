@@ -64,6 +64,7 @@ const AppNavDrawer = (props, context) => {
       >
         <ListItem primaryText="Files" value="/files" />,
         <ListItem primaryText="Mounts" value="/mounts" />,
+        <ListItem primaryText="Specialty" value="/se" />,
         <ListItem primaryText="Workspaces" value="/workspaces" />,
         <Divider />
         <Subheader>Settings</Subheader>
