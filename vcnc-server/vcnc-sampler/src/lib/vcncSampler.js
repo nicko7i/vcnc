@@ -32,7 +32,6 @@ class VcncSampler {
 
   Init() {
     storPoll.init();
-//    console.log('StorageEfficiency: ' + storPoll.currentValue().value);
     return Promise.resolve();
   }
 
@@ -152,6 +151,7 @@ class VcncSampler {
       self.empty = true;
       self.maxIndex = 0;
       self.minIndex = 0;
+      self.startDataTime = 0;
     } else {
 //      const keys = Object.keys(self.pmReadBins);
 //      self.minIndex = keys[0];
