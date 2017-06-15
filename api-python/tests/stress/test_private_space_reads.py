@@ -56,8 +56,8 @@ def test_private_space_reads():
     #  Now mount the private vp and make the (first) md5sum
     #  This shows up as vtrq reads on the dashboard.
     #
-#    testlib.mount_vp(private_vp_mountpt, private_workspace_name, is_private=True)
-#    testlib.command('md5sum', large_file_path_private)
+    testlib.mount_vp(private_vp_mountpt, private_workspace_name, is_private=True)
+    testlib.command('md5sum', large_file_path_private)
     #
     #  Now do the md5sum twice more.  These should show up as
     #  vpm reads on the dashboard.
