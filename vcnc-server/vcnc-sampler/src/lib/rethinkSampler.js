@@ -23,7 +23,7 @@ function feedWatchdog() {
 }
 setInterval(
   () => {
-    if (watchdogFed !== undefined || !watchdogFed) {
+    if (watchdogFed !== undefined && !watchdogFed) {
       console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
     }
     watchdogFed = false;
@@ -33,7 +33,7 @@ setInterval(
 
 class RethinkdbSampler {
   constructor(dt) {
-    this.period = parseInt(dt, 10);
+    this.tcperiod = parseInt(dt, 10);
     this.timespanSec = conf.MaxEntries() * (dt / 1000.0);
   }
 
