@@ -19,7 +19,6 @@ let cnxtn = null;
 //
 let watchdogFed = undefined;
 function feedWatchdog() {
-  console.log('INFO: feeding sampler watchdog')
   watchdogFed = true;
 }
 setInterval(
