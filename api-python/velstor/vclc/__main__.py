@@ -62,15 +62,15 @@ def main(args=None):
                 port = match_port.group(1)
                 if host == 'vcnc' and port == "6130":
                     suffix = ''.join([
-                        ' Did you mean to set a command line switch'
-                        , ' or environment variable?'])
+                        ' Did you mean to set a command line switch',
+                        ' or environment variable?'])
                 return error_response('Could not reach vCNC server at '
                                       + match_host.group(1)
                                       + ':'
                                       + match_port.group(1)
-                                      + suffix
-                                      , http_status=504
-                                      , error_sym='EHOSTDOWN')
+                                      + suffix,
+                                      http_status=504,
+                                      error_sym='EHOSTDOWN')
             else:
                 #
                 #  We don't really know what happened.  Just dump the raw data
@@ -93,7 +93,6 @@ def main(args=None):
             sys.exit(errno.EINVAL)
         except BaseException as e:
             raise
-            # return error_response('Unexpected exception in client: '+str(e))
 
 
 if __name__ == "__main__":

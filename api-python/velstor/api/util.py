@@ -39,6 +39,6 @@ def fake_requests_response(status_code, error_sym, message):
         pass
     rtn = expando()
     rtn.status_code = status_code
-    rtn.text = json.dumps({'error_sym': error_sym
-                           , 'message': message})
+    rtn.text = json.dumps({'error_sym': error_sym,
+                           'message': message})
     return rtn

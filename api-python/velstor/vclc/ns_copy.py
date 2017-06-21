@@ -10,10 +10,10 @@ from velstor.vclc.handler import reverse_dict_lookup
 
 def ns_copy(session, vtrqid, src, dest, overwrite):
     """Modified velstor.api call for meta-data copies"""
-    result = ns.copy_vector(session
-                            , vtrqid
-                            , [{'src': src, 'dest': dest}]
-                            , overwrite)
+    result = ns.copy_vector(session,
+                            vtrqid,
+                            [{'src': src, 'dest': dest}],
+                            overwrite)
     # print('ns_copy:', result)
     #
     #  This command always does a single operation, but it is conveyed through
@@ -50,6 +50,4 @@ def ns_copy(session, vtrqid, src, dest, overwrite):
         message = 'Internal client error on meta-data copy: '
         # message += str(sys.exc_info()[0])
         message += str(sys.exc_info())
-        return fake_response(500
-                             , 'EREMOTEIO'
-                             , message)
+        return fake_response(500, 'EREMOTEIO', message)
