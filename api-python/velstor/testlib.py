@@ -49,6 +49,10 @@ def vvclc(*args):
     return json.loads(rtn)
 
 
+def vvclcc(*args):
+    """Invokes a vclc command."""
+
+
 def create_workspace(**kwargs):
     """Creates a workspace specification as a Python data structure"""
     vtrq_id = int(kwargs['vtrq_id'] if 'vtrq_id' in kwargs else '0')

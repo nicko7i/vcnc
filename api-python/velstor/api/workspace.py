@@ -3,7 +3,7 @@
 """
 import requests
 import json
-from velstor.api.util import fake_requests_response as fake_response
+from velstor.api.util import synthetic_response
 from velstor.api.util import urlencode
 from velstor.api.fulfill202 import fulfill202
 
@@ -106,4 +106,4 @@ def set(session, vtrqid, path, spec):
         return fulfill202(session, r)
     except ValueError as e:
         message = 'Invalid workspace specification: ' + str(e)
-        return fake_response(400, 'EINVAL', message)
+        return synthetic_response(400, 'EINVAL', message)

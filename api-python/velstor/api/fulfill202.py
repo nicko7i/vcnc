@@ -117,7 +117,7 @@ def fulfill202(session, response, interval=10, callback=None):
                 'failed')
         #
         #  ... if the status is 'completed', return the deferred status and
-        #      body as the actual status and bodyp.x
+        #      body as the actual status and body.
         #
         if poll_delivery == 'completed':
             try:
@@ -147,7 +147,7 @@ def fulfill202(session, response, interval=10, callback=None):
                 pass
             continue
         #
-        #  ... Otherwise, the status itself is invalid, which is itxs own
+        #  ... Otherwise, the status itself is invalid, which is its own
         #      sort of EREMOTEIO.
         #
         return _return(

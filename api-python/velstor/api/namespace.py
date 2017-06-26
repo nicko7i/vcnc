@@ -43,7 +43,7 @@ def consistency_set(session, vtrqid, value, path):
         vtrqid (int): ID of the vTRQ.
         value (str): Either 'eventual' or 'immediate'
         path (str): Fully-qualified namespace path.
-
+'
     Returns:
         The return value of :func:`~velstor.api.fulfill202.fulfill202`
     """

@@ -77,6 +77,9 @@ def test_ns_copy():
     src_tailname = 'Tjso7JcL0zdz0hI3dBcP'
     srcdir = src_rootname + '/' + src_tailname
     dest_rootname = '/GmqYbvjQkoAEPQIGwzRa'+seed
+    #
+    #  Ensure neither the source nor destination directory exists.
+    #
     try:
         vclc('ns', 'rm', '-r', src_rootname)
     except subprocess.CalledProcessError as e:
@@ -85,6 +88,16 @@ def test_ns_copy():
         vclc('ns', 'rm', '-r', dest_rootname)
     except subprocess.CalledProcessError as e:
         assert(e.returncode == errno.ENOENT)
+    #
+    #  Try to copy non-existent directories.
+    #
+    try:
+        vclc('ns', 'cp', src_rootname, dest_rootname)
+    except subprocess.CalledProcessError as e:
+        assert(e.returncode == errno.ENOENT)
+    #
+    #  Copy directories that exist.  Test all aliases. Expect success.
+    #
     for ns in ('ns', 'namespace'):
         for cmd in ('cp', 'copy'):
             vclc('ns', 'mkdir', '-p', srcdir)
