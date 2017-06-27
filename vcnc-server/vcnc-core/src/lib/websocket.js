@@ -9,24 +9,6 @@ const samplerTableName = config.vcncSampler.table;
 
 let connection = null;
 
-//
-//  A watchdog barks (to console) if there have been no messages for one
-//  minute.  The metaphor is: the watchdog barks if he hasn't been
-//  fed for more than one minute.
-//
-let watchdogFed = undefined;
-function feedWatchdog() {
-  watchdogFed = true;
-}
-setInterval(
-  () => {
-    if (watchdogFed !== undefined && !watchdogFed) {
-      console.log('ERROR: No RethinkDB post for at least 1 minute')
-    }
-    watchdogFed = false;
-  },
-  60*1000);
-
 //  Useful for unit testing??
 function makeMockHandler() {
   let interval = null;
@@ -72,6 +54,23 @@ function makeHandler() {
     const location = url.parse(ws.upgradeReq.url, true);
     console.log('INFO-WS: Connected from ', location);
     //
+    //  A watchdog barks (to console) if there have been no messages for one
+    //  minute.  The metaphor is: the watchdog barks if he hasn't been
+    //  fed for more than one minute.
+    //
+    let watchdogFed = undefined;
+    function feedWatchdog() {
+      watchdogFed = true;
+    }
+    const interval = setInterval(
+      () => {
+        if (watchdogFed !== undefined && !watchdogFed) {
+          console.log('ERROR: No RethinkDB post for at least 1 minute')
+        }
+        watchdogFed = false;
+      },
+      60*1000);
+    //
     //  Start things off by blasting the 100 most recent timepoints.
     //
     r.table(samplerTableName)
@@ -113,6 +112,7 @@ function makeHandler() {
     ws.on('close', () => {
       console.log('INFO-WS: disconnected');
       changeCursor.close();
+      clearInterval(interval)
     });
   };
 }
