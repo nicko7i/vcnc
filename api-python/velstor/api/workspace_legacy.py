@@ -3,7 +3,7 @@
 """
 import json
 import copy
-from velstor.api.util import fake_requests_response as fake_response
+from velstor.api.util import synthetic_response
 from velstor.api import workspace as ws
 
 
@@ -96,4 +96,4 @@ def set(session, vtrqid, path, delegation):
             _to_legacy_from_delegation(" ".join(delegation)))
     except ValueError as e:
         message = 'Invalid workspace specification: ' + str(e)
-        return fake_response(400, 'EINVAL', message)
+        return synthetic_response(400, 'EINVAL', message)
