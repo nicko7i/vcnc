@@ -58,6 +58,7 @@ def synthetic_response(status_code, error_sym, message):
                            'message': message})
     return rtn
 
+
 def rpc_status_to_http_status(error_sym):
     """
     Returns the HTTP status code corresponding to the PIDL RPC status code.

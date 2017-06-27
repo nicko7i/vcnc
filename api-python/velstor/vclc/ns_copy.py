@@ -47,7 +47,7 @@ def ns_copy(session, vtrqid, src, dest, overwrite):
             errsym = payload['result'][0]['error_sym']
         message = os.strerror(reverse_dict_lookup(errno.errorcode, errsym))
         return synthetic_response(
-            rpc_status_to_http_status,
+            rpc_status_to_http_status(errsym),
             errsym,
             message)
     except:
