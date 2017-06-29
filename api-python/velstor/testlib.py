@@ -67,12 +67,13 @@ def vclc(*args):
     print('vclc: invoking:', ' '.join(cmd))
     try:
         doc = subprocess.check_output(cmd).decode('utf-8')
+    except subprocess.CalledProcessError as e:
+        raise VclcError(e.returncode, e.cmd, e.output.decode('utf8'))
+    try:
         rtn = json.loads(doc)
         rtn['returncode'] = 0
         print(rtn)
         return rtn
-    except subprocess.CalledProcessError as e:
-        raise VclcError(e.returncode, e.cmd, e.output.decode('utf8'))
     except ValueError:
         raise VclcError(0, cmd, doc)
 

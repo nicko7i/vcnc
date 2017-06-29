@@ -91,7 +91,7 @@ def main(args=None):
             raise
         except KeyboardInterrupt:
             sys.exit(errno.EINVAL)
-        except BaseException as e:
+        except BaseException:
             raise
 
 
