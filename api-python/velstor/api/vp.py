@@ -5,23 +5,6 @@ from velstor.api.fulfill202 import fulfill202
 #  vp.py:  Operations about VPs
 
 
-def to_vtrqspace(session, vtrqid, vpid, paths):
-    """Deprecated.
-    """
-    #  validate vtrqid is an int
-    #  validate vpid
-    #  validate paths is an array of string
-    #
-    url = '/'.join([session.base_url(),
-                    'vtrq/vp',
-                    str(vtrqid),
-                    vpid,
-                    'to_vtrqspace'])
-    r = requests.post(url,
-                      json={'paths': paths})
-    return fulfill202(session, r)
-
-
 def get(session, vtrqid, vpid):
     """Retrieves details about a mounted client file system.
 
