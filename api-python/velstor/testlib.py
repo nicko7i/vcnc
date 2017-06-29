@@ -3,6 +3,7 @@ import random
 import subprocess
 import json
 import os
+import errno
 
 
 class VclcError(Exception):
@@ -120,9 +121,20 @@ def mount_vp(path, workspace_pathname, **kwargs):
     #
     is_private = kwargs['is_private'] if 'is_private' in kwargs else False
     #
-    #  Create a directory on 'path'
+    #  Create the mount directory on 'path'
     #
     os.makedirs(path, exist_ok=True)
+    #
+    #  Ensure the vtrq_path exists.
+    #
+    workspace = vclc('ws', 'get', workspace_pathname)
+    print(workspace)
+    try:
+        vclc('ns', 'mkdir', '-p', workspace['response']['spec']['maps'][0]['vtrq_path'])
+    except VclcError as e:
+        print('Return code is: {}'.format(e.returncode))
+        if e.returncode != errno.EEXIST:
+            raise
     #
     #  Invoke the VP
     cmd = ['vp',

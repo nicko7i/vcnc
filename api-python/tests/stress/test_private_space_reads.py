@@ -27,8 +27,8 @@ def test_private_space_reads():
     #  Create the directory in the vtrq
     #
     try:
-      testlib.vvclc('ns', 'mkdir', '-p', vtrq_path)
-    except subprocess.CalledProcessError:
+      testlib.vclc('ns', 'mkdir', '-p', vtrq_path)
+    except testlib.VclcError:
         pass
     #
     #  Put the workspaces into the vtrq
