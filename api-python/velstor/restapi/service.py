@@ -8,7 +8,7 @@ def shutdown(session, vtrqid):
     """Gracefully shuts down a vTRQ.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
 
     Returns:

@@ -13,11 +13,11 @@ import errno
 import os
 
 
-from velstor.restapi.session import Session
+from velstor.restapi import Session
 from functools import partial
 from velstor.vsh.vsh_parser import vsh_parser
 from velstor.vclc.handler import error_response
-from velstor.api import grid
+from velstor.restapi import grid
 
 print_error = partial(print, file=sys.stderr)
 

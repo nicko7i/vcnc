@@ -50,7 +50,7 @@ def fulfill202(session, response, interval=10, callback=None):
     *completed* means this polling result contains the delivered response.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security\
+        session (:class:`~velstor.restapi.Session`): Provides security\
         information.
         response (object): A Requests.response object.
         interval (int): The interval, in seconds, at which the REST server\

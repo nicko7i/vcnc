@@ -10,7 +10,7 @@ def get(session, jobid):
     """Retrieves details about a grid job.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         jobid (str): The job's identifying string.
 
     Returns:
@@ -41,7 +41,7 @@ def delete(session, jobid):
     """Deletes information about a grid job.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         jobid (str): The job's identifying string.
 
     Returns:
@@ -57,7 +57,7 @@ def post(session, jobid, vtrq_id, workspace_name):
     """Posts information about a grid job.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         jobid (str): The job's identifying string.
         vtrq_id (int): The vTRQ of the worksapce name.
         workspace_name (str): The PeerCache workspace employed by the job.
@@ -77,7 +77,7 @@ def list(session):
     """Retrieves a list of existing jobs.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
 
     Returns:
         The return value of :func:`~velstor.restapi.fulfill202.fulfill202`

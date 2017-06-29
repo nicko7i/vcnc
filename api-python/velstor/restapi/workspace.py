@@ -14,7 +14,7 @@ def delete(session, vtrqid, path):
     """Deletes a workspace.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified workspace name.
 
@@ -37,7 +37,7 @@ def get(session, vtrqid, path):
     """Retrieves a workspace specification.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified workspace name.
 
@@ -62,7 +62,7 @@ def list(session, vtrqid, path):
     The names may represent workspaces or nodes of the hierarchy.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified workspace path.
 
@@ -86,7 +86,7 @@ def set(session, vtrqid, path, spec):
     """Creates or overwrites a workspace.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified workspace name.
         spec (Iterable[str]): Workspace definition

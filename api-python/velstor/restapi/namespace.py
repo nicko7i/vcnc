@@ -15,7 +15,7 @@ def consistency_get(session, vtrqid, path):
     """Retrieves the consistency semantics attribute of a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified namespace path.
 
@@ -39,7 +39,7 @@ def consistency_set(session, vtrqid, value, path):
     """Sets the consistency semantics attribute of a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         value (str): Either 'eventual' or 'immediate'
         path (str): Fully-qualified namespace path.
@@ -65,7 +65,7 @@ def copy_vector(session, vtrqid, pairs, overwrite):
     """Retrieves the consistency semantics attribute of a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         pairs (list): A list of (source, destination) pairs.
         overwrite (bool): When true, an existing destination is overwritten with 'cp -r' semantics; otherwise, the pair is skipped.
@@ -90,7 +90,7 @@ def delete(session, vtrqid, path, recursive):
     """Removes a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified namespace path.
         recursive (bool): When True, a subtree will removed.  Otherwise, only leafs will be removed.
@@ -113,7 +113,7 @@ def mkdir(session, vtrqid, mode, parents, path):
     """Retrieves the consistency semantics attribute of a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified namespace path.
 
@@ -137,7 +137,7 @@ def list(session, vtrqid, path):
     """Retrieves the consistency semantics attribute of a namespace node.
 
     Args:
-        session (:class:`~velstor.restapi.session.Session`): Provides security information.
+        session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         path (str): Fully-qualified namespace path.
 
