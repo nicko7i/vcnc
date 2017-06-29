@@ -2,7 +2,7 @@
 
 """
 
-from velstor.api.util import print_error  # NOQA
+from velstor.restapi.util import print_error  # NOQA
 
 
 # See http://stackoverflow.com/questions/865115/how-do-i-correctly-clean-up-a-python-object  # NOQA

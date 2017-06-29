@@ -2,8 +2,8 @@
 #  
 import argparse
 import os
-import velstor.api.workspace as ws
-import velstor.api.grid as grid
+import velstor.restapi.workspace as ws
+import velstor.restapi.grid as grid
 import json
 
 import logging

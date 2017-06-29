@@ -11,7 +11,7 @@ import requests
 import errno
 
 
-from velstor.api.session import Session
+from velstor.restapi.session import Session
 from functools import partial
 from velstor.vclc.vclc_parser import vclc_parser
 from velstor.vclc.handler import Handler

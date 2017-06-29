@@ -1,12 +1,12 @@
 import argparse
 import json
 import os
-from velstor.api.service import shutdown
+from velstor.restapi.service import shutdown
 from velstor.vclc.ns_copy import ns_copy
-import velstor.api.grid as grid
-import velstor.api.namespace as ns
-import velstor.api.vp as vp
-import velstor.api.workspace as ws
+import velstor.restapi.grid as grid
+import velstor.restapi.namespace as ns
+import velstor.restapi.vp as vp
+import velstor.restapi.workspace as ws
 import logging
 
 

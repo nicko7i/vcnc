@@ -13,7 +13,7 @@ import errno
 import os
 
 
-from velstor.api.session import Session
+from velstor.restapi.session import Session
 from functools import partial
 from velstor.vsh.vsh_parser import vsh_parser
 from velstor.vclc.handler import error_response
