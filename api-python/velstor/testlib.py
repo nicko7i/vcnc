@@ -73,8 +73,6 @@ def vclc(*args):
         return rtn
     except subprocess.CalledProcessError as e:
         raise VclcError(e.returncode, e.cmd, e.output.decode('utf8'))
-    except json.JSONDecodeError as e:  # Python 3.5+
-        raise VclcError(0, cmd, e.doc)
     except ValueError:
         raise VclcError(0, cmd, doc)
 
