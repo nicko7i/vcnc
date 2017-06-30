@@ -30,10 +30,15 @@ def urlencode(path):
         Returns:
             str: The URL encoded string.
     """
-    #  Adapt to Python 2 vs Python 3
-    if hasattr(urllib, 'quote'):
+    try:
+        # Python 2 syntax
+        # return urllib.urlencode({'v': path})[2:]
         return urllib.quote(path, '')
-    return urllib.parse.quote(path, '')
+    except AttributeError:
+        # Python 3 syntax
+        # return urllib.parse.urlencode({'v': path})[2:]
+        print(type(path))
+        return urllib.parse.quote(path, '')
 
 
 def synthetic_response(status_code, error_sym, message):

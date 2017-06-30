@@ -1,18 +1,22 @@
 import json
 import velstor.restapi.workspace as workspace
 from velstor.pcapi.exceptions import raise_if_not_2xx
+from velstor.libutil import CommonEqualityMixin
 
 
-class Workspace:
+class Workspace(CommonEqualityMixin):
     def __init__(self, session, **kwargs):
-        self._pathname = kwargs['pathname'] if 'pathname' in kwargs else '/xyzzy'
+        self._pathname = kwargs['pathname'] if 'pathname' in kwargs else None
         self.session = session
         self._vtrq_id = int(kwargs['vtrq_id'] if 'vtrq_id' in kwargs else 0)
         self._vtrq_path = kwargs['vtrq_path'] if 'vtrq_path' in kwargs else '/'
         self._writeback = kwargs['writeback'] if 'writeback' in kwargs else 'always'
 
-    def get(self, pathname):
+    def get(self, pathname=None):
         """The HTTP get method"""
+        pathname = self._pathname if pathname is None else pathname
+        if not pathname:
+            raise ValueError('Workspace.get: Workspace instance has no pathname')
         response = workspace.get(self.session, 0, pathname)
         raise_if_not_2xx(response)
         spec = json.loads(response['body'])['spec']
@@ -26,11 +30,15 @@ class Workspace:
 
     def set(self):
         """The HTTP set method"""
+        if not self._pathname:
+            raise ValueError('Workspace.set: Workspace instance has no pathname')
         doc = workspace.set(self.session, 0, self._pathname, self.json)
         raise_if_not_2xx(doc)
 
     def delete(self):
         """The HTTP delete method"""
+        if not self._pathname:
+            raise ValueError('Workspace.delete: Workspace instance has no pathname')
         doc = workspace.delete(self.session, 0, self._pathname)
         raise_if_not_2xx(doc)
 

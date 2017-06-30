@@ -102,7 +102,8 @@ def set(session, vtrqid, path, spec):
                     'workspaces',
                     str(vtrqid)])
     try:
-        r = requests.post(url, json={'name': path, 'spec': json.loads(' '.join(spec))})
+        spec = spec if isinstance(spec, str) else ' '.join(spec)
+        r = requests.post(url, json={'name': path, 'spec': json.loads(spec)})
         return fulfill202(session, r)
     except ValueError as e:
         message = 'Invalid workspace specification: ' + str(e)

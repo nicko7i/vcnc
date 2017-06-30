@@ -9,7 +9,7 @@ class RESTException(Exception):
         )
         response = unpack_response(response)
         self.http_code = response['status_code']
-        self.error_sym = response['error_sym']
+        self.error_sym = response['body']['error_sym']
 
 
 def raise_if_not_2xx(response):
