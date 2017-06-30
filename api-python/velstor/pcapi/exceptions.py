@@ -1,18 +1,20 @@
 import json
+from velstor.libutil import unpack_response
 
 
 class RESTException(Exception):
-    def __init__(self, doc):
+    def __init__(self, response):
         super(RESTException, self).__init__(
-            "Non 2xx HTTP response: '{}'".format(doc)
+            "Non 2xx HTTP response: '{}'".format(response)
         )
-        response = json.loads(doc)
-        self.http_code = response['http_status']
+        response = unpack_response(response)
+        self.http_code = response['status_code']
         self.error_sym = response['error_sym']
 
 
-def raise_if_not_2xx(doc):
+def raise_if_not_2xx(response):
     """Convenience function"""
-    http_code = json.loads(doc)['http_status']
+    response = unpack_response(response)
+    http_code = response['status_code']
     if not (200 <= http_code and http_code < 300):
-        raise RESTException(doc)
+        raise RESTException(response)

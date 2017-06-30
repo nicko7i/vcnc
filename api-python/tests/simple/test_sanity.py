@@ -4,9 +4,9 @@
 #
 #  If you can't import the following, put '.' on your PYTHONPATH
 #  % PYTHONPATH=. pytest
-import velstor.testlib as testlib
-from velstor.testlib import vclc
-from velstor.testlib import VclcError
+import velstor.libtest as libtest
+from velstor.libtest import vclc
+from velstor.libtest import VclcError
 import errno
 import re
 import json
@@ -22,7 +22,7 @@ except KeyError:
 def test_version():
     vre = '\s*vclc\s+Version\s+\d+\.\d+\.\d+\s+Build\s+\d+'
     try:
-        # testlib.vclc assumes that stdout is valid JSON
+        # libtest.vclc assumes that stdout is valid JSON
         # This is intentionally not the case for --version.
         vclc('--version')
         assert False
@@ -195,13 +195,13 @@ def test_grid_list():
 def test_grid_lifecycle():
     #
     #  Define a workspace
-    workspace_name = testlib.random_path(5,1)
-    workspace_spec = testlib.create_workspace(writeback='never')
+    workspace_name = libtest.random_path(5,1)
+    workspace_spec = libtest.create_workspace(writeback='never')
     result = vclc('ws', 'set', workspace_name, json.dumps(workspace_spec))
     assert(result['http_status'] == 200)
     #
     #  Post a grid entry
-    grid_id = testlib.random_identifier(6)
+    grid_id = libtest.random_identifier(6)
     result = vclc('grid', 'post', grid_id, workspace_name)
     assert(result['http_status'] == 200)
     #

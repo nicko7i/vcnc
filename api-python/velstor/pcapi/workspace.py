@@ -14,9 +14,8 @@ class Workspace:
     def get(self, pathname):
         """The HTTP get method"""
         response = workspace.get(self.session, 0, pathname)
-        print(response)
+        raise_if_not_2xx(response)
         spec = json.loads(response['body'])['spec']
-        raise_if_not_2xx(response['status_code'])
         return Workspace(
             self.session,
             vtrq_id=spec['maps'][0]['vtrq_id'],
