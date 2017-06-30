@@ -2,25 +2,17 @@
 # For command aliases prior to 3.2 - https://bugs.python.org/issue25299
 #
 # https://pythonconquerstheuniverse.wordpress.com/2011/08/29/lambda_tutorial/
-from __future__ import print_function
 import sys
 import re
 import json
 import subprocess
-
 import requests
 import errno
 import os
-
-
 from velstor.restapi import Session
-from functools import partial
 from velstor.vsh.vsh_parser import vsh_parser
 from velstor.vclc.handler import error_response
 from velstor.restapi import grid
-
-print_error = partial(print, file=sys.stderr)
-
 
 
 def main(args=None):
@@ -109,7 +101,7 @@ def worker(session, args):
     else:
         mount_point = '/tmp/velstor/'+args.jobid
     try:
-      os.makedirs(mount_point)
+        os.makedirs(mount_point)
     except FileExistsError as e:
         pass
       
@@ -151,11 +143,11 @@ def worker(session, args):
     #  originally successfully mounted the vp).
     #
     if result.returncode == 0:
-    	subprocess.run(['fusermount', '-uz', '{}'.format(mount_point)])
+        subprocess.run(['fusermount', '-uz', '{}'.format(mount_point)])
     #
     #  Always report success
     #
-    return (0, '')
+    return 0, ''
     
 
 if __name__ == "__main__":

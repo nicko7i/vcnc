@@ -37,7 +37,6 @@ def urlencode(path):
     except AttributeError:
         # Python 3 syntax
         # return urllib.parse.urlencode({'v': path})[2:]
-        print(type(path))
         return urllib.parse.quote(path, '')
 
 

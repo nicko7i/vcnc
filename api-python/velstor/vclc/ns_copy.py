@@ -3,8 +3,8 @@ import sys
 import os
 import errno
 import json
-from velstor.restapi.util import synthetic_response
-from velstor.restapi.util import rpc_status_to_http_status
+from velstor.libutil import synthetic_response
+from velstor.libutil import rpc_status_to_http_status
 
 from velstor.vclc.handler import reverse_dict_lookup
 
