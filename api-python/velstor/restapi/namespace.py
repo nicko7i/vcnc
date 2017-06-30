@@ -5,7 +5,7 @@
 #
 import requests
 
-from velstor.restapi.util import urlencode
+from velstor.libutil import urlencode
 from velstor.restapi.fulfill202 import fulfill202
 
 #  namespace.py:  Operations on a TRQ namespace

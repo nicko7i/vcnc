@@ -3,8 +3,8 @@
 """
 import requests
 import json
-from velstor.restapi.util import synthetic_response
-from velstor.restapi.util import urlencode
+from velstor.libutil import synthetic_response
+from velstor.libutil import urlencode
 from velstor.restapi.fulfill202 import fulfill202
 
 # workspace.py:  Operations on a TRQ's set of workspace specifications

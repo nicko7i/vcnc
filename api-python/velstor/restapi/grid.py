@@ -1,6 +1,6 @@
 import requests
 import json
-from velstor.restapi.util import urlencode
+from velstor.libutil import urlencode
 from velstor.restapi.fulfill202 import fulfill202
 
 #  grid.py:  Operations about grid jobs
