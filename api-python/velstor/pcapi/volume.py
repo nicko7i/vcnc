@@ -45,6 +45,8 @@ class Volume:
             '--workspace={}'.format(self.workspace.pathname)
         ]
         if self.workspace.is_private:
+            cmd = cmd + ['--fuse-cache=auto', '--timeout=1']
+        else:
             cmd = cmd + ['--fuse-cache=none', '--timeout=0']
         subprocess.check_output(cmd)
 
