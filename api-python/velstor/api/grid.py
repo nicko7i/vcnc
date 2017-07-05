@@ -21,20 +21,7 @@ def get(session, jobid):
                     'grid/job',
                     urlencode(jobid)])
     r = requests.get(url)
-    response = fulfill202(session, r)
-    #
-    #  I don't believe this is needed anymore. The workspace spec is stored in
-    #  rethinkdb as a JSON string.
-    #
-    if response['status_code'] == 200:
-        #
-        #  The workspace spec is job_spec.workspace_spec within the response
-        #
-        body = json.loads(response['body'])
-        body['job_spec']['workspace_spec'] = json.dumps(body['job_spec']['workspace_spec'])
-        return {"status_code": 200,
-                "body": json.dumps(body)}
-    return response
+    return fulfill202(session, r)
 
 
 def delete(session, jobid):
