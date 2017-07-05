@@ -6,7 +6,7 @@ import VtrqVpmReadTrend from '../containers/VtrqVpmReadTrend';
 import StorageEfficiencyTrend from '../containers/StorageEfficiencyTrend';
 import StorageEfficiencyNumber from '../containers/StorageEfficiencyNumber';
 
-const Dashboard = () => (
+const DashboardBoth = () => (
   <div className="container-fluid">
     <div className="row no-gutters" >
       <div className="col-xs-8">
@@ -26,5 +26,26 @@ const Dashboard = () => (
     </div>
   </div>
 );
+
+const DashboardSE = () => (
+  <div className="container-fluid">
+    <div className="row no-gutters" >
+      <div className="col-xs-8">
+        <StorageEfficiencyTrend title="Efficiency Trend" />
+      </div>
+      <div className="col-xs-4">
+        <StorageEfficiencyNumber title="Efficiency" />
+      </div>
+    </div>
+  </div>
+);
+
+const Dashboard = () => {
+  if (window.location.pathname === '/se') {
+    return DashboardSE();
+  }
+  return DashboardBoth();
+};
+
 
 export default Dashboard;

@@ -12,7 +12,7 @@ def reverse_dict_lookup(d, d_val):
     #  http://stackoverflow.com/questions/9542738/python-find-in-list
     #  http://stackoverflow.com/questions/2568673/inverse-dictionary-lookup-python
     #
-    if (d_val == "OK"):
+    if d_val == "OK":
         return 0
     return list(d)[next(i for i, x in enumerate(d.values()) if x == d_val)]
 
@@ -21,21 +21,21 @@ def _mk_msg(*args):
     return ' '.join([str(x) for x in args])
 
 
-def error_response(message
-                   , error_sym="EREMOTEIO"
-                   , http_status=500
-                   , detail=None):
+def error_response(message,
+                   error_sym="EREMOTEIO",
+                   http_status=500,
+                   detail=None):
     """Returns an (exit_code, dict) pair"""
-    if (detail):
-        res = {'http_status': http_status
-               , 'response': {'error_sym': error_sym
-                              , 'message': message
-                              , 'detail': detail}}
+    if detail:
+        res = {'http_status': http_status,
+               'response': {'error_sym': error_sym,
+                            'message': message,
+                            'detail': detail}}
     else:
-        res = {'http_status': http_status
-               , 'response': {'error_sym': error_sym
-                              , 'message': message}}
-    return (errno.EREMOTEIO, res)
+        res = {'http_status': http_status,
+               'response': {'error_sym': error_sym,
+                            'message': message}}
+    return errno.EREMOTEIO, res
 
 
 def finish(status_code, json_response):
@@ -49,7 +49,6 @@ def finish(status_code, json_response):
     #  errno.h name, so we need to look it up.
     #
     ec = errno.errorcode  # the system dictionary of errno errcodes
-    errsym = 'EINVAL'
     try:
         errsym = json.loads(json_response)['error_sym']
     except:
@@ -59,19 +58,20 @@ def finish(status_code, json_response):
         if errsym != 'OK':
             exit_code = reverse_dict_lookup(ec, errsym)
     except:
-        msg = _mk_msg(['vclc internal error: reverse-lookup'
-                       , errsym])
+        msg = _mk_msg(['vclc internal error: reverse-lookup',
+                       errsym])
         return error_response(msg)
     #
     #  Return the results, good, bad, or ugly.
     #
-    return (exit_code
-            , {'http_status': status_code
-               , 'response': json.loads(json_response)})
+    return (exit_code,
+            {'http_status': status_code,
+             'response': json.loads(json_response)})
 
 
 class Handler(argparse.Namespace):
     def __init__(self, session):
+        super(Handler, self).__init__()
         self.session = session
 
     def action(self):

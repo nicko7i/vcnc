@@ -6,13 +6,14 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as actions from '../actions/realtimeActions';
 import TrendWidget from '../components/widgets/TrendWidget';
 
+// TODO: put the trend labels in a central shared place.
 const labels = [
-  '-2 min', '', '', '', '', '', '', '', '', '',
-  '', '', '', '', '', '', '', '', '', '',
-  '', '', '', '', '', '', '', '', '', '',
-  '-1 min', '', '', '', '', '', '', '', '', '',
-  '', '', '', '', '', '', '', '', '', '',
-  '', '', '', '', '', '', '', '', '', 'now',
+  '', '-5m',
+  '', '', '', '', '', '', '', '', '', '', '', '-4m',
+  '', '', '', '', '', '', '', '', '', '', '', '-3m',
+  '', '', '', '', '', '', '', '', '', '', '', '-2m',
+  '', '', '', '', '', '', '', '', '', '', '', '-1m',
+  '', '', '', '', '', '', '', '', '', '', '', 'now',
 ];
 
 const VtrqVpmReadTrend = (props) => {

@@ -65,10 +65,10 @@ def fulfill202(session, response, interval=10, callback=None):
     #
     if response.status_code != 202:
         return _return(
-            response.status_code
-            , response.text
-            , callback
-            , 'completed')
+            response.status_code,
+            response.text,
+            callback,
+            'completed')
     #
     #  Otherwise, poll for the result.
     #
@@ -76,10 +76,10 @@ def fulfill202(session, response, interval=10, callback=None):
         url = response.headers['location']
     except:
         return _return(
-            502
-            , 'Bad Gateway, no location header.'
-            , callback
-            , 'failed')
+            502 ,
+            'Bad Gateway, no location header.',
+            callback,
+            'failed')
     while True:
         time.sleep(interval)
         #
@@ -91,19 +91,19 @@ def fulfill202(session, response, interval=10, callback=None):
         #
         if poll.status_code != 200:
             return _return(
-                poll.status_code
-                , poll.text
-                , callback
-                , 'failed')
+                poll.status_code,
+                poll.text,
+                callback,
+                'failed')
         try:
             poll_content = poll.json()
             poll_delivery = poll_content['delivery']
         except:
             return _return(
-                502
-                , 'Bad Gateway, invalid JSON body (' + poll.text + ').'
-                , callback
-                , 'failed')
+                502,
+                'Bad Gateway, invalid JSON body (' + poll.text + ').',
+                callback,
+                'failed')
         #
         #  Otherwise, check the delivery status.
         #  ... if the status is 'failed', return a 410 'Gone' to indicate that
@@ -111,13 +111,13 @@ def fulfill202(session, response, interval=10, callback=None):
         #
         if poll_delivery == 'failed':
             return _return(
-                410
-                , 'Gone'
-                , callback
-                , 'failed')
+                410,
+                'Gone',
+                callback,
+                'failed')
         #
         #  ... if the status is 'completed', return the deferred status and
-        #      body as the actual status and bodyp.x
+        #      body as the actual status and body.
         #
         if poll_delivery == 'completed':
             try:
@@ -125,15 +125,15 @@ def fulfill202(session, response, interval=10, callback=None):
                 poll_body = poll_content['body']
             except:
                 return _return(
-                    502
-                    , 'Bad Gateway, invalid JSON body (' + poll_content + ').'
-                    , callback
-                    , 'failed')
+                    502,
+                    'Bad Gateway, invalid JSON body (' + poll_content + ').',
+                    callback,
+                    'failed')
             return _return(
-                poll_status
-                , poll_body
-                , callback
-                , 'completed')
+                poll_status,
+                poll_body,
+                callback,
+                'completed')
         #
         #  ... if the status is 'pending', go to the top of the loop to wait
         #      for the next poll.
@@ -147,11 +147,11 @@ def fulfill202(session, response, interval=10, callback=None):
                 pass
             continue
         #
-        #  ... Otherwise, the status itself is invalid, which is itxs own
+        #  ... Otherwise, the status itself is invalid, which is its own
         #      sort of EREMOTEIO.
         #
         return _return(
-            502
-            , 'Bad Gateway, invalid delivery status: ' + poll_delivery
-            , callback
-            , 'failed')
+            502,
+            'Bad Gateway, invalid delivery status: ' + poll_delivery,
+            callback,
+            'failed')

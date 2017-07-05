@@ -1,3 +1,16 @@
+Release 3.5.1
+
+    FRQU-238: ENOENT should produce HTTP code 404
+
+Release 3.5.0
+
+	vclc gets a -q / --quiet switch
+
+	pytest-based regression suite
+
+	pytest-based script for activating the multiple-read not generating
+	vda events bug.
+
 Release 3.4.4
 
 	Fix a bug in 'vclc grid' that referred to the legacy workspace format.

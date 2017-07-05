@@ -28,12 +28,10 @@ class VcncSampler {
     this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
     this.binCount = 0;
-    this.startSamplerTime = parseInt(Date.now() / 1000, 10);
   }
 
   Init() {
     storPoll.init();
-//    console.log('StorageEfficiency: ' + storPoll.currentValue().value);
     return Promise.resolve();
   }
 
@@ -49,9 +47,6 @@ class VcncSampler {
     const self = this;
     const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000 , 10);
     const op = jsnMsg.opID;
-    if (ts < self.startSamplerTime) {
-      return;
-    }
     let index = 0;
 
     // First call
@@ -152,15 +147,10 @@ class VcncSampler {
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
     if (self.empty === true) return bin;
-    if (parseInt(self.minIndex, 10) === parseInt(self.maxIndex, 10)) {
+    if (self.minIndex === self.maxIndex ) {
       self.empty = true;
-      self.maxIndex = 0;
-      self.minIndex = 0;
-    } else {
-//      const keys = Object.keys(self.pmReadBins);
-//      self.minIndex = keys[0];
-      self.minIndex += 1;
     }
+    self.minIndex += 1;
 //    console.log(`Bin: ${json.stringify(bin)}`);
 //    console.log(`minIndex = ${self.minIndex} maxIndex = ${self.maxIndex}`);
 //    console.log('<<< Finished ReleaseBin');

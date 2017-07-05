@@ -16,12 +16,12 @@ const VtrqVpmDoughnut = (props) => {
 
   const { emptyDoughnutColor, vpmColor, vtrqColor } = props.muiTheme.palette;
   const doughnutIsEmpty = readRatesAreZero(props.data.datasets[0].data);
-  const backgroundColor =
-    doughnutIsEmpty
-      ? [emptyDoughnutColor, emptyDoughnutColor]
-      : [vtrqColor, vpmColor];
-  const datasets = [{ data: props.data.datasets[0].data, backgroundColor }];
-  const data = { ...props.data, datasets: doughnutIsEmpty ? [{ data: [1, 1] }] : datasets };
+  const data = {
+    ...props.data,
+    datasets: doughnutIsEmpty
+      ? [{ data: [1, 1], backgroundColor: [emptyDoughnutColor, emptyDoughnutColor] }]
+      : [{ data: props.data.datasets[0].data, backgroundColor: [vtrqColor, vpmColor] }],
+  };
 
   return (
     <DoughnutWidget data={data} title={props.title} />

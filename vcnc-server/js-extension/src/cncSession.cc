@@ -78,6 +78,7 @@ namespace cnc {
     // intentionally empty
   }
 
+  // Must be kept in sync with api-python/velstor/api/util.py
   void cncSession::RpcToHttpStatus(const int& rpc_error
                                   , int& http_status_code
                                   , string_type& error_sym

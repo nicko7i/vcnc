@@ -19,6 +19,10 @@ from velstor.vclc.handler import error_response
 from velstor.vclc.vClcException import vClcException
 
 print_error = partial(print, file=sys.stderr)
+#
+#  Yeah, yeah, globals are bad form...
+#
+quiet = False
 
 
 def main(args=None):
@@ -31,7 +35,10 @@ def main(args=None):
         parser = vclc_parser(handler)
         #
         try:
-            return parser.parse_args(args, handler).action()
+            global quiet
+            results = parser.parse_args(args, handler)
+            quiet = results.quiet
+            return results.action()
         except requests.exceptions.RequestException as e:
             #
             #  Requests raised an exception.  Probably couldn't reach the vCNC
@@ -55,15 +62,15 @@ def main(args=None):
                 port = match_port.group(1)
                 if host == 'vcnc' and port == "6130":
                     suffix = ''.join([
-                        ' Did you mean to set a command line switch'
-                        , ' or environment variable?'])
+                        ' Did you mean to set a command line switch',
+                        ' or environment variable?'])
                 return error_response('Could not reach vCNC server at '
                                       + match_host.group(1)
                                       + ':'
                                       + match_port.group(1)
-                                      + suffix
-                                      , http_status=504
-                                      , error_sym='EHOSTDOWN')
+                                      + suffix,
+                                      http_status=504,
+                                      error_sym='EHOSTDOWN')
             else:
                 #
                 #  We don't really know what happened.  Just dump the raw data
@@ -86,11 +93,10 @@ def main(args=None):
             sys.exit(errno.EINVAL)
         except BaseException as e:
             raise
-            # return error_response('Unexpected exception in client: '+str(e))
 
 
 if __name__ == "__main__":
-    # (exit_code, response, json) = main()
     (exit_code, response) = main()
-    print(json.dumps(response, sort_keys=True, indent=2))
+    if not quiet:
+        print(json.dumps(response, sort_keys=True, indent=2))
     sys.exit(127 if (exit_code > 127) else exit_code)

@@ -57,10 +57,10 @@ The tests in *api-python/test/test_sanity.py* are configured to use the internal
 `Mastiff <https://docs.google.com/a/icmanage.com/document/d/1UcJ2yql5YKih365z24zP3Zm_iz0lO5rYHYkNyixBWIg/edit?usp=sharing>`_
 deployment. Change the configuration at the top of the file to use a different deployment.
 
-To run the tests:
+To run the basic tests:
 
 .. code-block:: console
 
   % cd *project-root*
-  % PYTHONPATH=. pytest
+  % python3 -m pytest tests/simple
 

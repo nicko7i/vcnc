@@ -6,6 +6,21 @@ import json
 from functools import partial
 print_error = partial(print, file=sys.stderr)
 
+#
+#  Must be kept in sync with vcnc_server/js-extension/src/cncSession.cc
+_http_status = {
+    'OK': 200,
+    'EPERM': 401,
+    'EEXIST': 409,
+    'ENOTDIR': 409,
+    'ENOENT': 404,
+    'EHOSTDOWN': 504,
+    'EINVAL': 400,
+    'ENOTEMPTY': 409,
+    'EPROTO': 500,
+    'EUNATCH': 500,
+}
+
 
 def urlencode(path):
     """URL encodes a string
@@ -21,7 +36,7 @@ def urlencode(path):
     return urllib.parse.quote(path, '')
 
 
-def fake_requests_response(status_code, error_sym, message):
+def synthetic_response(status_code, error_sym, message):
     """
     Returns an object that looks like a 'requests' Response object
 
@@ -39,6 +54,18 @@ def fake_requests_response(status_code, error_sym, message):
         pass
     rtn = expando()
     rtn.status_code = status_code
-    rtn.text = json.dumps({'error_sym': error_sym
-                           , 'message': message})
+    rtn.text = json.dumps({'error_sym': error_sym,
+                           'message': message})
     return rtn
+
+
+def rpc_status_to_http_status(error_sym):
+    """
+    Returns the HTTP status code corresponding to the PIDL RPC status code.
+    
+    :param error_sym: The error code from the vtrq.
+    :return: The corresponding HTTP status code.
+    
+    throws: KeyError
+    """
+    return _http_status[error_sym]

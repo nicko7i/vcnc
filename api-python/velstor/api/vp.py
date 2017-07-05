@@ -1,7 +1,5 @@
 import requests
 
-from velstor.api.util import print_error
-from velstor.api.util import urlencode
 from velstor.api.fulfill202 import fulfill202
 
 #  vp.py:  Operations about VPs
@@ -14,13 +12,13 @@ def to_vtrqspace(session, vtrqid, vpid, paths):
     #  validate vpid
     #  validate paths is an array of string
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq/vp'
-                    , str(vtrqid)
-                    , vpid
-                    , 'to_vtrqspace'])
-    r = requests.post(url
-                      , json={'paths': paths})
+    url = '/'.join([session.base_url(),
+                    'vtrq/vp',
+                    str(vtrqid),
+                    vpid,
+                    'to_vtrqspace'])
+    r = requests.post(url,
+                      json={'paths': paths})
     return fulfill202(session, r)
 
 
@@ -38,10 +36,10 @@ def get(session, vtrqid, vpid):
     #  validate vtrqid is an int
     #  validate vpid
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq/vp'
-                    , str(vtrqid)
-                    , vpid])
+    url = '/'.join([session.base_url(),
+                    'vtrq/vp',
+                    str(vtrqid),
+                    vpid])
     r = requests.get(url)
     return fulfill202(session, r)
 
@@ -60,10 +58,10 @@ def delete(session, vtrqid, vpid):
     #  validate vtrqid is an int
     #  validate vpid
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq/vp'
-                    , str(vtrqid)
-                    , vpid])
+    url = '/'.join([session.base_url(),
+                    'vtrq/vp',
+                    str(vtrqid),
+                    vpid])
     r = requests.delete(url)
     return fulfill202(session, r)
 
@@ -83,10 +81,10 @@ def find(session, vtrqid, vp_host, mount_point):
     #  validate vtrqid is an int
     #  validate vpid
     #
-    url = '/'.join([session.base_url()
-                    , 'vtrq/vp'
-                    , str(vtrqid)])
-    r = requests.get(url
-                     , params={'vp_host': vp_host
-                               , 'mount_point': mount_point})
+    url = '/'.join([session.base_url(),
+                    'vtrq/vp',
+                    str(vtrqid)])
+    r = requests.get(url,
+                     params={'vp_host': vp_host,
+                             'mount_point': mount_point})
     return fulfill202(session, r)
