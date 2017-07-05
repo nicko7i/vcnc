@@ -3,6 +3,8 @@ import urllib
 import sys
 import json
 
+#
+#  Convenience function for printing to stderr
 from functools import partial
 print_error = partial(print, file=sys.stderr)
 
@@ -22,6 +24,21 @@ _http_status = {
 }
 
 
+def rpc_status_to_http_status(error_sym):
+    """
+    Returns the HTTP status code corresponding to the PIDL RPC status code.
+
+    :param error_sym: The error code from the vtrq.
+    :return: The corresponding HTTP status code.
+
+    throws: ValueError
+    """
+    try:
+        return _http_status[error_sym]
+    except KeyError:
+        raise ValueError('Unknown RPC status code {}'.format(error_sym))
+
+
 def urlencode(path):
     """URL encodes a string
         Args:
@@ -30,10 +47,12 @@ def urlencode(path):
         Returns:
             str: The URL encoded string.
     """
-    #  Adapt to Python 2 vs Python 3
-    if hasattr(urllib, 'quote'):
+    try:
+        # Python 2 syntax
         return urllib.quote(path, '')
-    return urllib.parse.quote(path, '')
+    except AttributeError:
+        # Python 3 syntax
+        return urllib.parse.quote(path, '')
 
 
 def synthetic_response(status_code, error_sym, message):
@@ -50,22 +69,31 @@ def synthetic_response(status_code, error_sym, message):
         string 'body'.
     """
 
-    class expando(object):
+    class Expando(object):
         pass
-    rtn = expando()
+    rtn = Expando()
     rtn.status_code = status_code
     rtn.text = json.dumps({'error_sym': error_sym,
                            'message': message})
     return rtn
 
 
-def rpc_status_to_http_status(error_sym):
-    """
-    Returns the HTTP status code corresponding to the PIDL RPC status code.
-    
-    :param error_sym: The error code from the vtrq.
-    :return: The corresponding HTTP status code.
-    
-    throws: KeyError
-    """
-    return _http_status[error_sym]
+def unpack_response(response):
+    if isinstance(response['body'], str):
+        return {
+            'status_code': response['status_code'],
+            'body': json.loads(response['body'])
+        }
+    return response
+
+
+class CommonEqualityMixin(object):
+    """Simple (in)equality functionality.
+
+    See StackOverflow https://stackoverflow.com/a/390511/7702839"""
+    def __eq__(self, other):
+        return (isinstance(other, self.__class__)
+                and self.__dict__ == other.__dict__)
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
