@@ -1,6 +1,6 @@
 import json
 import velstor.restapi.workspace as workspace
-from velstor.pcapi.exceptions import raise_if_not_2xx
+from velstor.pcapi.exceptions import raise_if_not_2xx, RESTException
 from velstor.libutil import CommonEqualityMixin
 
 
@@ -28,19 +28,29 @@ class Workspace(CommonEqualityMixin):
             writeback=spec['writeback'],
         )
 
-    def set(self):
+    def set(self, **kwargs):
         """The HTTP set method"""
         if not self._pathname:
             raise ValueError('Workspace.set: Workspace instance has no pathname')
+        hard = kwargs['hard'] if 'hard' in kwargs else False
+        if hard:
+            self.delete(hard=True)
         doc = workspace.set(self.session, 0, self._pathname, self.json)
         raise_if_not_2xx(doc)
 
-    def delete(self):
+    def delete(self, **kwargs):
         """The HTTP delete method"""
         if not self._pathname:
             raise ValueError('Workspace.delete: Workspace instance has no pathname')
-        doc = workspace.delete(self.session, 0, self._pathname)
-        raise_if_not_2xx(doc)
+        hard = kwargs['hard'] if 'hard' in kwargs else False
+        try:
+            doc = workspace.delete(self.session, 0, self._pathname)
+            raise_if_not_2xx(doc)
+        except RESTException as e:
+            if hard and e.error_sym == 'ENOENT':
+                pass  # We don't care if it doesn't exist
+            else:
+                raise
 
     @property
     def vtrq_id(self):
@@ -57,6 +67,10 @@ class Workspace(CommonEqualityMixin):
     @property
     def pathname(self):
         return self._pathname
+
+    @property
+    def is_private(self):
+        return self.writeback != 'always'
 
     @property
     def json(self):
