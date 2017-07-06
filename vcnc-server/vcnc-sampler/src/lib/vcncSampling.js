@@ -22,8 +22,8 @@ const rs = require('./rethinkSampler');
   */
 class VcncSampling {
   constructor(dt, ltc) {
-    this.sampleTime = ((dt !== undefined) ? parseInt(dt, 10) : conf.DefSampleTime());
-    this.latency = (ltc !== undefined) ? parseInt(ltc, 10) : conf.DefLatency(); // ms
+    this.sampleTime = parseInt(dt, 10); // ms
+    this.latency = parseInt(ltc, 10); // ms
     this.msgSampler = vsm.CreateVcncSampler(this.sampleTime, this.latency);
     this.rdb = rs.CreaterethinkdbSampler(this.sampleTime);
     this.msgCount = 0;
@@ -83,6 +83,7 @@ class VcncSampling {
 
   Send() {
     const self = this;
+    if ( self.msgSampler.IsSampling() === false ) return;
     const bin = self.msgSampler.ReleaseBin();
     self.rdb.Push(bin);
   }

@@ -23,10 +23,12 @@ function feedWatchdog() {
 }
 setInterval(
   () => {
-    if (watchdogFed !== undefined && !watchdogFed) {
+    if (watchdogFed === undefined) return;
+    if (!watchdogFed) {
       console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
+    } else {
+        watchdogFed = false;
     }
-    watchdogFed = false;
   },
   60*1000);
 //  End of watchdog code
@@ -61,8 +63,8 @@ class RethinkdbSampler {
   }
 }
 
-function CreaterethinkdbSampler(p, ltc) {
-  return new RethinkdbSampler(p, ltc);
+function CreaterethinkdbSampler(p) {
+  return new RethinkdbSampler(p);
 }
 
 /**
