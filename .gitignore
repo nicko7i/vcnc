@@ -27,6 +27,7 @@ venv*/
 /vcnc-server/vcnc-rest/static/doc-html/
 /vcnc-server/vcnc-rest/static/swagger-ui/
 /vcnc-server/vcnc-rest/swagger-editor/
+/documentation/api-reference/
 
 # Haskell
 *.hi

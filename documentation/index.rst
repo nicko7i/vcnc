@@ -56,6 +56,8 @@ The code is open source, and `available on github`_.
    developer/run/vclc-run.rst
    developer/run/vcnc-web-run.rst
 
+   api-reference/modules.rst
+
 ..
    developer/vcnc-rest
    developer/vcnc-web

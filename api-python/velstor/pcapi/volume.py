@@ -5,12 +5,36 @@ from velstor.pcapi.exceptions import RESTException
 
 
 class Volume:
+    """
+    Represents a VP mounted on the local filesystem.
+    """
     def __init__(self, session, mount_point, workspace):
+        """
+        Uploads the workspace to the vtrq and mounts a VP.
+
+        Args:
+            session: The REST API session state.
+            mount_point: The local directory on which the VP is mounted.
+            workspace: The workspace used by the VP.
+        """
         self._session = session
         self._mount_point = os.path.abspath(mount_point)
         self._workspace = workspace
 
     def mount(self, **kwargs):
+        """
+        Mounts a VP on the local filesystem.
+
+        Args:
+            **kwargs: Keyword arguments.
+
+        Returns: None
+
+        Raises:
+            ValueError:
+            RESTException:
+
+        """
         if self._workspace.pathname is None:
             raise ValueError('Workspace has no pathname')
         hard = kwargs['hard'] if 'hard' in kwargs else False
@@ -51,12 +75,24 @@ class Volume:
         subprocess.check_output(cmd)
 
     def unmount(self):
+        """
+        Un-mounts the VP.
+
+        Returns: None
+        """
         subprocess.check_output(['fusermount', '-uz', self.mount_point])
 
     @property
     def mount_point(self):
+        """
+        Returns: Directory on which VP will be mounted.
+        """
         return self._mount_point
 
     @property
     def workspace(self):
+        """
+        Returns: The Workspace instance used by this VP.
+
+        """
         return self._workspace

@@ -50,6 +50,14 @@ config = {
 
 
 def command(*args):
+    """
+    Runs a command in a subprocess.
+
+
+    :param args: Tokens passed to exec.
+    :return: None
+    :raises CalledProcessError
+    """
     """Runs a command in a subprocess"""
     print('command: Invoking ', ' '.join(args))
     rtn = subprocess.check_output(args).decode('utf-8')

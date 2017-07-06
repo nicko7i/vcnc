@@ -1,4 +1,5 @@
 node_modules
+documentation/api-reference
 docs
 .git
 venv*
