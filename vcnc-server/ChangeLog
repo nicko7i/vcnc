@@ -1,3 +1,10 @@
+Release 3.8.6
+
+    Vcnc-sampler:
+    Fixed bug <B1991> VCNC: Load Transfer Trend graph update gets 'behind' the actual data usage
+    Fixed bug with incorrect latency setup
+    rethinkdb begins to get samples after vcnc-sampler has got the first message from vda
+
 Release 3.8.5
 
     Fix to trend graph dropout.

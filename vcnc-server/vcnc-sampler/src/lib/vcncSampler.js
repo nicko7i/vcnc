@@ -19,15 +19,15 @@ class VcncSampler {
     this.pmReadBins = {};
     this.vtrqReadBins = {};
     this.samplePeriod = parseInt((Math.round(dt)/ 1000.0), 10);
-    this.latency = parseInt((Math.round(dt)/ 1000.0), 10);
+    this.latency = parseInt((Math.round(dl)/ 1000.0), 10);
     this.startDataTime = 0;
+    this.samplingTime = 0;
     this.empty = true;
     this.minIndex = 0;
     this.maxIndex = 0;
     this.vpmMsgCount = 0;
     this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
-    this.binCount = 0;
   }
 
   Init() {
@@ -45,7 +45,7 @@ class VcncSampler {
   Add(jsnMsg) {
 //    console.log('>>> Add started');
     const self = this;
-    const ts = parseInt(new Date(jsnMsg.ts).getTime() / 1000 , 10);
+    const ts = parseInt(Math.round(new Date(jsnMsg.ts).getTime() / 1000) , 10);
     const op = jsnMsg.opID;
     let index = 0;
 
@@ -55,10 +55,10 @@ class VcncSampler {
     //
     if (self.startDataTime === 0) {
       self.startDataTime = parseInt(ts, 10) - self.latency;
+      self.samplingTime = self.startDataTime - Math.round(self.samplePeriod / 2); ;
       self.empty = false;
       self.minIndex = 0;
       self.maxIndex = conf.MaxBins();
-      self.binCount = 0;
     }
     index = self.BinIndex(ts);
 
@@ -66,7 +66,7 @@ class VcncSampler {
     // All bins were emptied before and new messages have come
     //
     if (self.empty) {
-      if (index >= self.minIndex) {
+      if (index >= self.minIndex && index - self.minIndex < conf.MaxBins()) {
         self.empty = false;
         self.maxIndex = index;
       } else {
@@ -76,7 +76,7 @@ class VcncSampler {
     }
     // Input messaage is out of time range
     //
-    if (index < self.minIndex || index - self.minIndex > conf.MaxBins()) {
+    if (index < self.minIndex || index - self.minIndex >= conf.MaxBins()) {
       self.ignoredMsgCount += 1;
       return;
     }
@@ -115,13 +115,9 @@ class VcncSampler {
 
   ReleaseBin() {
     const self = this;
-//    console.log('>>> Start ReleaseBin ');
-//    console.log(`startDataTime = ${self.startDataTime} minIndex = ${self.minIndex}`);
-    let samplerTs = (self.startDataTime === 0) ? parseInt(Date.now() / 1000, 10) : self.startDataTime +
-      (self.samplePeriod * self.binCount);
-    self.binCount += 1;
+    if (self.startDataTime === 0) return;
+    self.samplingTime += self.samplePeriod;
     // Set time to a center af sample interval
-    samplerTs -= Math.round(self.samplePeriod / 2);
     const vpmRead = (self.pmReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
     const vtrqRead = (self.vtrqReadBins[self.minIndex] === undefined) ?
@@ -137,7 +133,7 @@ class VcncSampler {
       rVtrq: Math.log10(vtrqRead + 1),
       //  Any reads resolved on the vtrq were not resolved on the vpm. <B8569>
       rVpm: Math.log10(vpmLocalRead + 1),
-      sampleTimestamp: samplerTs,
+      sampleTimestamp: self.samplingTime,
     };
 
 //    console.log(`minIndex: ${self.minIndex} Bin: ${json.stringify(bin)}`);
@@ -146,7 +142,6 @@ class VcncSampler {
     //
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
     if (self.vtrqReadBins[self.minIndex] !== undefined) delete self.vtrqReadBins[self.minIndex];
-    if (self.empty === true) return bin;
     if (self.minIndex === self.maxIndex ) {
       self.empty = true;
     }
@@ -156,6 +151,8 @@ class VcncSampler {
 //    console.log('<<< Finished ReleaseBin');
     return bin;
   }
+  
+  IsSampling() { return !(this.startDataTime === 0); }
 
   MessageCount() { return (this.vpmMsgCount + this.vtrqMsgCount); }
   VpmMessageCount() { return this.vpmMsgCount; }
@@ -163,8 +160,8 @@ class VcncSampler {
   IgnoreMessageCount() { return this.ignoredMsgCount; }
 }
 
-function CreateVcncSampler(dt) {
-  return new VcncSampler(dt);
+function CreateVcncSampler(dt, ltc) {
+  return new VcncSampler(dt, ltc);
 }
 
 module.exports = {
