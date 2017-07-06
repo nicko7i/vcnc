@@ -4,6 +4,8 @@ import subprocess
 import json
 import os
 import errno
+from velstor.pcapi.volume import Volume
+from velstor.pcapi.workspace import Workspace
 
 
 class VclcError(Exception):
@@ -177,3 +179,44 @@ def create_workspace_legacy(local):
         'vtrq_id': 0,
         'vtrq_path': '/u/bubba',
     }]
+
+
+class Mount:
+    """A 'Mount' is the unholy conjunction of a Volume and a Workspace"""
+    def __init__(self, session, mount_point, **kwargs):
+        self._workspace = Workspace(session, **kwargs)
+        self.volume = Volume(session, mount_point, self.workspace)
+        self.workspace.set(hard=True)
+        self.volume.mount(hard=True)
+
+    def dispose(self):
+        self.volume.unmount()
+        self.workspace.delete(hard=True)
+
+    @property
+    def mount_point(self):
+        return self.volume.mount_point
+
+    @property
+    def workspace(self):
+        return self._workspace
+
+    @property
+    def vtrq_id(self):
+        return self.workspace.vtrq_id
+
+    @property
+    def vtrq_path(self):
+        return self.workspace.vtrq_path
+
+    @property
+    def writeback(self):
+        return self.workspace.writeback
+
+    @property
+    def pathname(self):
+        return self.workspace.pathname
+
+    @property
+    def is_private(self):
+        return self.workspace.writeback != 'always'

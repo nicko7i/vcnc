@@ -45,7 +45,7 @@ def test_private_space_reads():
     #
     libtest.mount_vp(public_vp_mountpt, public_workspace_name, is_private=False)
     #
-    #  Put a large (1GB) file into the vtrq
+    #  Put a large (1MB) file into the vtrq
     #
     libtest.command('dd',
                     'if=/dev/urandom',
