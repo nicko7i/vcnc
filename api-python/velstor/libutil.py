@@ -88,6 +88,15 @@ def synthetic_response(status_code, error_sym, message):
 
 
 def unpack_response(response):
+    """
+    Unpacks a JSON response body into a dict.
+    
+    Args:
+        response: a response body from the 'requests' library.
+
+    Returns:
+        dict: The equivalent as a dictionary.
+    """
     if isinstance(response['body'], str):
         return {
             'status_code': response['status_code'],

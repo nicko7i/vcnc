@@ -12,9 +12,18 @@ class VclcError(Exception):
     """
     Error information for an invocation of 'vclc'
     
-    Contains everything a CalledProcessError has, plus the HTTP
-    error code, the vtrq 'error_sym', and the vtrq 'message'
-    (as 'msg')
+    Args:
+        returncode: The Linux process exit code.
+        cmd (:obj:`list` of :obj:`str`): The command invoked.
+        output (str): Contents of stdout.
+        
+    Attributes:
+        returncode (int): The Linux process exit code.
+        cmd (:obj:`list` of :obj:`str`): The command invoked.
+        output (str): Contents of stdout.
+        error_sym (str): Status of REST operation.
+        msg (str): Message from REST operation.
+        http_status (int): HTTP status code from REST operation.
     """
     def __init__(self, returncode, cmd, output):
         message = "Command '{}' returned non-zero exit status '{}'"
@@ -51,24 +60,33 @@ config = {
 
 def command(*args):
     """
-    Runs a command in a subprocess.
+    Runs a Linux command in a subprocess.
+    
+    Args:
+        *args: Tokens passed to 'exec'.
 
-
-    :param args: Tokens passed to exec.
-    :return: None
-    :raises CalledProcessError
+    Raises:
+        subprocess.CalledProcessError: Throw on non-zero Linux exit code.
     """
-    """Runs a command in a subprocess"""
     print('command: Invoking ', ' '.join(args))
     rtn = subprocess.check_output(args).decode('utf-8')
     print(rtn)
 
 
 def vclc(*args):
-    """Invokes a vclc command and returns the results as a dictionary.
-    
-    Raises VclcError when the process exit code is non-zero.
     """
+    Runs the 'vclc' as if on the command line.
+    
+    Args:
+        *args: Command-line arguments to 'vclc'.
+
+    Returns:
+        dict: The JSON response from the REST server, with the additional key 'returncode', whose value is the vclc process exit code.
+            
+    Raises:
+        VclcError: Process exit code is non-zero or REST response not valid JSON.
+    """
+    # dict: The JSON response from the REST server, with the additional
     #
     # Form the command
     #
@@ -90,7 +108,24 @@ def vclc(*args):
 
 
 def create_workspace(**kwargs):
-    """Creates a workspace specification as a Python data structure"""
+    """
+    Creates a workspace specification as a Python data structure.
+    
+    Args:
+        **kwargs:  Optional keyword arguments.
+        
+    Keyword Args:
+        vtrq_id (int): vtrq ID.  Default is 0.
+        vtrq_path (str): Absolute vtrq path mapped to mount point. Default is '/'.
+        writeback (str): Writeback semantics.  One of 'always', 'explicit',
+            'trickle' or 'never'.  Default is 'always'.
+
+    Returns:
+        (dict): A workspace specification.
+        
+    Note:
+        Can only create specifications having a single map entry.
+    """
     vtrq_id = int(kwargs['vtrq_id'] if 'vtrq_id' in kwargs else '0')
     vtrq_path = kwargs['vtrq_path'] if 'vtrq_path' in kwargs else '/'
     writeback = kwargs['writeback'] if 'writeback' in kwargs else 'always'
@@ -99,9 +134,18 @@ def create_workspace(**kwargs):
 
 
 def create_workspace_vtrq(path, spec):
-    """Creates a workspace specification on the vtrq
+    """
+    Creates a workspace specification on the vtrq.
     
-    Accepts a JSON string or a python data structure as the spec.
+    Args:
+        path (str): The hierarchical name of the workspace.
+        spec (str or dict): The workspace specification.
+
+    Returns:
+        int: The HTTP status code.
+        
+    Raises:
+        VclcError:
     """
     json_spec = spec if type(spec) is str else json.dumps(spec)
     #
@@ -116,18 +160,43 @@ def create_workspace_vtrq(path, spec):
 
 
 def delete_workspace_vtrq(path):
-    """Deletes a workspace specification on the vtrq.
+    """
+    Deletes a workspace specification on the vtrq.
     
-    Returns the HTTP status coce.
+    Args:
+        path: The hierarchical name of the workspace.
+
+    Returns:
+        int: The HTTP status code.
+        
+    Raises:
+        VclcError: Problem creating directory on vtrq.
+        subprocess.CalledProcessError: Problem with vclc invocation.
     """
     result = vclc('ws', 'rm', path)
     return result['http_status']
 
 
 def mount_vp(path, workspace_pathname, **kwargs):
-    """Mounts a VP using 'workspace_pathname' on 'path'
+    """
+    Mounts a VP using 'workspace_pathname' on 'path'
     
-    Assumes the appropriate vp is on the system path."""
+    Args:
+        path: The local filesystem directory on which the VP mounts.
+        workspace_pathname: The hierarchical name of the workspace.
+        **kwargs: Optional keyword arguments.
+
+    Keyword Args:
+        is_private (bool): False if 'writeback' is 'always', True otherwise.
+        
+    Returns:
+        (str): The stdout of the call to 'vp'.
+        
+    Notes:
+        Assumes the appropriate vp is on the system PATH.
+        
+        TODO: Compute 'is_private' automatically.
+    """
     #
     is_private = kwargs['is_private'] if 'is_private' in kwargs else False
     #
@@ -152,6 +221,8 @@ def mount_vp(path, workspace_pathname, **kwargs):
            '--mentor=' + config['vpm'],
            '--workspace=' + workspace_pathname]
     if is_private:
+        cmd = cmd + ['--fuse-cache=auto', '--timeout=1']
+    else:
         cmd = cmd + ['--fuse-cache=none', '--timeout=0']
     print('mount_vp: invoking:', ' '.join(cmd))
     rtn = subprocess.check_output(cmd).decode('utf-8')
@@ -160,7 +231,9 @@ def mount_vp(path, workspace_pathname, **kwargs):
 
 
 def unmount_vp(path):
-    """Unmounts the VP on 'path'"""
+    """
+    Unmounts the VP on 'path'
+    """
     cmd = ['fusermount', '-uz', path]
     print('unmount_vp: invoking:', ' '.join(cmd))
     rtn = subprocess.check_output(cmd).decode('utf-8')
@@ -169,28 +242,53 @@ def unmount_vp(path):
 
 
 def random_identifier(length):
+    """
+    Returns a random identifier.
+    
+    Args:
+        length (int): number of characters to generate.
+
+    Returns:
+        str: A randomly generated identifier.
+    """
     return ''.join(random.choice(
         string.ascii_letters + '_' + string.digits
     ) for i in range(length))
 
 
-def random_path(length, depth, prefix='/'):
+def random_path(length, depth, prefix="/"):
+    """
+    Returns a random absolute path.
+    
+    Args:
+        length (int): number of characters in each name.
+        depth (int): number of names in the path.
+        prefix (str): Prefix to path. Default is "/".
+
+    Returns:
+        str: A randomly generated path.
+
+    """
     return prefix + '/'.join(random_identifier(length) for i in range(depth))
 
 
-def create_workspace_legacy(local):
-    """Returns a single legacy workspace specification.
-    """
-    return [{
-        'local': local,
-        'vp_path': '/',
-        'vtrq_id': 0,
-        'vtrq_path': '/u/bubba',
-    }]
-
-
 class Mount:
-    """A 'Mount' is the unholy conjunction of a Volume and a Workspace"""
+    """
+    The unholy conjunction of a Volume and a Workspace.
+    
+    Reduces boilerplate when mounting VPs on short-lived workspaces.
+    
+    Args:
+        session: Security information.
+        mount_point: The local directory where the VP will mount.
+        **kwargs: Optional arguments passed to :class:`Workspace`.
+        
+    The constructor creates the specified workspace, puts it on the vtrq,
+    and mounts the VP.
+    
+    Calling dispose un-mounts the vp and removes the workspace
+    from the vtrq.
+    """
     def __init__(self, session, mount_point, **kwargs):
         self._workspace = Workspace(session, **kwargs)
         self.volume = Volume(session, mount_point, self.workspace)
@@ -198,33 +296,44 @@ class Mount:
         self.volume.mount(hard=True)
 
     def dispose(self):
+        """
+        Unmounts the :class:`Volume` and deletes the :class:`Workspace`
+        on the vtrq.
+        """
         self.volume.unmount()
         self.workspace.delete(hard=True)
 
     @property
     def mount_point(self):
+        """str: Directory on which VP will be mounted."""
         return self.volume.mount_point
 
     @property
     def workspace(self):
+        """Workspace: the Workspace component of this instance."""
         return self._workspace
 
     @property
     def vtrq_id(self):
+        """int: Identifer of vtrq."""
         return self.workspace.vtrq_id
 
     @property
     def vtrq_path(self):
+        """str: Absolute vtrq path mapped by this workspace."""
         return self.workspace.vtrq_path
 
     @property
     def writeback(self):
+        """str:  Writeback value."""
         return self.workspace.writeback
 
     @property
     def pathname(self):
+        """str:  Hierarchical workspace name."""
         return self.workspace.pathname
 
     @property
     def is_private(self):
+        """bool: True if this workspace is 'private', False otherwise."""
         return self.workspace.writeback != 'always'
