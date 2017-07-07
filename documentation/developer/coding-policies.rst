@@ -68,7 +68,7 @@ Node
 Use npm for scripting. Do not use Grunt, Gulp or similar.
 
 Version Control
-_______________
+---------------
 
 The project is hosted at `GitHub`_.
 
@@ -83,7 +83,7 @@ into version control.
 .. _GitHub Flow: https://help.github.com/articles/github-flow/
 
 IDEs
-____
+----
 
 The project must always be buildable from the command line.
 
