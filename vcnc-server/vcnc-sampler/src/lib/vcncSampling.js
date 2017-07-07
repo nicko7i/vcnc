@@ -83,7 +83,7 @@ class VcncSampling {
 
   Send() {
     const self = this;
-    if ( self.msgSampler.IsSampling() === false ) return;
+    if (self.msgSampler.IsSampling() === false) return;
     const bin = self.msgSampler.ReleaseBin();
     self.rdb.Push(bin);
   }
