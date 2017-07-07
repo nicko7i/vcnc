@@ -1,3 +1,4 @@
+import velstor.pcapi.mount
 from velstor.restapi import Session
 from velstor import libtest
 import os
@@ -7,7 +8,7 @@ import subprocess
 def test_private_space_cat():
     with Session() as session:
         session.login('cnc:7130')
-        m = libtest.Mount(
+        m = velstor.pcapi.mount.Mount(
             session,
             '/tmp/pytest/joebob',
             pathname='/joebob',
