@@ -28,12 +28,10 @@ class Volume:
         Args:
             **kwargs: Keyword arguments.
 
-        Returns: None
-
         Raises:
             ValueError:
             RESTException:
-
+            CheckedOutputException:
         """
         if self._workspace.pathname is None:
             raise ValueError('Workspace has no pathname')
@@ -75,24 +73,15 @@ class Volume:
         subprocess.check_output(cmd)
 
     def unmount(self):
-        """
-        Un-mounts the VP.
-
-        Returns: None
-        """
+        """Un-mounts the VP."""
         subprocess.check_output(['fusermount', '-uz', self.mount_point])
 
     @property
     def mount_point(self):
-        """
-        Returns: Directory on which VP will be mounted.
-        """
+        """str: Directory on which VP will be mounted."""
         return self._mount_point
 
     @property
     def workspace(self):
-        """
-        Returns: The Workspace instance used by this VP.
-
-        """
+        """Workspace: Workspace instance used by this VP."""
         return self._workspace

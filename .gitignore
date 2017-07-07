@@ -5,6 +5,7 @@
 build/
 Build/
 _build/
+api-python/
 
 # IDEs
 # .. Webstorm

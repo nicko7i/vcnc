@@ -27,11 +27,16 @@ _http_status = {
 def rpc_status_to_http_status(error_sym):
     """
     Returns the HTTP status code corresponding to the PIDL RPC status code.
+    
+    Args:
+        error_sym (str): The error code from the vtrq.
 
-    :param error_sym: The error code from the vtrq.
-    :return: The corresponding HTTP status code.
+    Returns:
+        int: The HTTP status code corresponding to 'error_sym'.
+        
+    Raises:
+        ValueError: Unexpected value of 'error_sym'.
 
-    throws: ValueError
     """
     try:
         return _http_status[error_sym]
@@ -40,12 +45,14 @@ def rpc_status_to_http_status(error_sym):
 
 
 def urlencode(path):
-    """URL encodes a string
-        Args:
-            path (str): The string to be encoded.
+    """
+    URL encodes a string
+    
+    Args:
+        path (str): The string to be encoded.
 
-        Returns:
-            str: The URL encoded string.
+    Returns:
+        str: The URL encoded string.
     """
     try:
         # Python 2 syntax
@@ -65,9 +72,11 @@ def synthetic_response(status_code, error_sym, message):
         message (str): A brief description of the error.
 
     Returns:
-        dict: A dictionary with two keys: an integer 'status_code' and a
+        obj: A object with two attributes: an integer 'status_code' and a
         string 'body'.
     """
+
+    #  TODO: Replace the 'Expando' with a dedicated Python class.
 
     class Expando(object):
         pass
