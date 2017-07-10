@@ -1,3 +1,7 @@
+Release 3.6.0
+
+    New, object-oriented simplified Python API.
+
 Release 3.5.1
 
     FRQU-238: ENOENT should produce HTTP code 404
