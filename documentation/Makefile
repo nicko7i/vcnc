@@ -21,6 +21,9 @@ help:
 #  are done manually.  See the documentation.
 #
 publish:
+	rm -rf api-reference
+	sphinx-apidoc -o api-reference ../api-python \
+		../api-python/setup.py ../api-python/velstor/vclc ../api-python/velstor/vsh
 	make html
 	mkdir -p ../docs
 	rsync -a --delete _build/html/ ../docs

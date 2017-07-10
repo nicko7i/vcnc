@@ -1,12 +1,12 @@
 import argparse
 import json
 import os
-from velstor.api.service import shutdown
+from velstor.restapi.service import shutdown
 from velstor.vclc.ns_copy import ns_copy
-import velstor.api.grid as grid
-import velstor.api.namespace as ns
-import velstor.api.vp as vp
-import velstor.api.workspace as ws
+import velstor.restapi.grid as grid
+import velstor.restapi.namespace as ns
+import velstor.restapi.vp as vp
+import velstor.restapi.workspace as ws
 import logging
 
 
@@ -100,16 +100,10 @@ def _configure_grid(grid_subparsers, handler):
         help="ID of grid job")
     #
     #  ... support legacy and new-style workspace specs
-    newstyle = True
-    try:
-        if os.environ['VELSTOR_VCLC_COMPAT'] == '1':
-            newstyle = False
-    except:
-        pass
     parser_grid_get.set_defaults(
-        action=handler.action,
-        api_func=grid.get_as_preview if newstyle else grid.get,
-        api_args=['jobid'])
+        action=handler.action
+        , api_func=grid.get
+        , api_args=['jobid'])
     #
     #  .. grid list job
     parser_grid_list = grid_subparsers.add_parser(

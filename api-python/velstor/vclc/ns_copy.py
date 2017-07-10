@@ -1,10 +1,10 @@
-import velstor.api.namespace as ns
+import velstor.restapi.namespace as ns
 import sys
 import os
 import errno
 import json
-from velstor.api.util import synthetic_response
-from velstor.api.util import rpc_status_to_http_status
+from velstor.libutil import synthetic_response
+from velstor.libutil import rpc_status_to_http_status
 
 from velstor.vclc.handler import reverse_dict_lookup
 

@@ -10,6 +10,45 @@ Python indents four, per PEP 8.  All other languages indent by two.
 
 Maintain 80 character margins.
 
+Python
+------
+
+Follow PEP 8.  Where PEP 8 is silent, use the `Google Python Style Guide`_.
+
+Docstrings are processed by `Napoleon`_ and formatted in `Google style`_.
+
+Annotate types in your docstrings. Parameter types (Args and Keyword Args) are
+parenthesized.
+
+.. code-block:: python
+
+    class Workspace(CommonEqualityMixin):
+        """
+        Represents a vtrq workspace and its hierarchical name.
+
+        Args:
+            session (Session): Security and configuration information.
+            **kwargs: Optional keywords described below.
+
+        Keyword Args:
+            pathname (str): hierarchical workspace name. Default is None.
+            vtrq_id (int): vtrq ID.  Default is 0.
+            vtrq_path (str): Absolute vtrq path mapped
+
+Types for properties are not parenthesized:
+
+.. code-block:: python
+
+    @property
+    def vtrq_path(self):
+        """str: Absolute vtrq path mapped by this workspace."""
+        return self._vtrq_path
+
+
+.. _Google Python Style Guide: https://google.github.io/styleguide/pyguide.html
+.. _Google style: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
+.. _Napoleon: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/
+
 JavaScript
 ----------
 
@@ -29,7 +68,7 @@ Node
 Use npm for scripting. Do not use Grunt, Gulp or similar.
 
 Version Control
-_______________
+---------------
 
 The project is hosted at `GitHub`_.
 
@@ -44,9 +83,9 @@ into version control.
 .. _GitHub Flow: https://help.github.com/articles/github-flow/
 
 IDEs
-____
+----
 
 The project must always be buildable from the command line.
 
 Developers may use any IDE they wish.  An IDE capable of performing continual
-ESLInt validation is recommended.
+ESLInt and PEP 8 validation is recommended.

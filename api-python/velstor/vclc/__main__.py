@@ -11,7 +11,7 @@ import requests
 import errno
 
 
-from velstor.api.session import Session
+from velstor.restapi import Session
 from functools import partial
 from velstor.vclc.vclc_parser import vclc_parser
 from velstor.vclc.handler import Handler
@@ -91,7 +91,7 @@ def main(args=None):
             raise
         except KeyboardInterrupt:
             sys.exit(errno.EINVAL)
-        except BaseException as e:
+        except BaseException:
             raise
 
 
