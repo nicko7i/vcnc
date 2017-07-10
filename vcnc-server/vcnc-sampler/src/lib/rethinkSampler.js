@@ -17,7 +17,7 @@ let cnxtn = null;
 //  minute.  The metaphor is: the watchdog barks if he hasn't been
 //  fed for more than one minute.
 //
-let watchdogFed = undefined;
+let watchdogFed;
 function feedWatchdog() {
   watchdogFed = true;
 }
@@ -25,12 +25,12 @@ setInterval(
   () => {
     if (watchdogFed === undefined) return;
     if (!watchdogFed) {
-      console.log('ERROR: No Push() to RethinkDB for at least 1 minute')
+      console.log('ERROR: No Push() to RethinkDB for at least 1 minute');
     } else {
-        watchdogFed = false;
+      watchdogFed = false;
     }
   },
-  60*1000);
+  60 * 1000);
 //  End of watchdog code
 
 class RethinkdbSampler {
@@ -93,13 +93,17 @@ function Init() {
     return Promise.resolve();
   });
 }
-
+//
 function GetConnection() {
   return cnxtn;
 }
-
+//
 function GetTable() {
   return cnxtn;
+}
+//
+function CloseConnection() {
+  cnxtn.close({ noreplyWait: false });
 }
 
 module.exports = {
@@ -107,4 +111,5 @@ module.exports = {
   GetConnection,
   GetTable,
   Init,
+  CloseConnection,
 };

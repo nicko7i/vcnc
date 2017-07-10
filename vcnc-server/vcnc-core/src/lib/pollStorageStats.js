@@ -9,7 +9,7 @@ const CnctrqClient = require('../../../js-extension/build/Release/cnctrq_client.
 const cnctrqClient = new CnctrqClient();
 const { vtrq_id } = config.peercache;
 let latestValue;
-
+let stats;
 /**
  *  Initializes the vtrq storage statistics poller.
  *
@@ -29,7 +29,7 @@ function init() {
   //
   //  Poll the vtrq at the configured rate.
   //
-  setInterval(() => {
+  stats = setInterval(() => {
     cnctrqClient.trq_statistic(
       vtrq_id,
       '/', // We're looking for stats over the entire vtrq..
@@ -82,8 +82,13 @@ function currentValue() {
   return Object.assign({}, latestValue);
 }
 
+function shutdownStats() {
+  clearTimeout(stats);
+}
+
 module.exports = {
   init,
   connected,
   currentValue,
+  shutdownStats,
 };

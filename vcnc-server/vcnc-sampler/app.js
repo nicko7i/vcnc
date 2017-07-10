@@ -28,7 +28,8 @@ const path = require('path');
 const jsu = require('./src/lib/vcncSamplerUtils');
 const conf = require('./src/vcncSampler.conf');
 const vs = require('./src/lib/vcncSampling');
-
+const rs = require('./src/lib/rethinkSampler');
+const storPoll = require('../vcnc-core/src/lib/pollStorageStats');
 //
 //  Initialize the C++ extension
 //
@@ -95,35 +96,35 @@ server.listen(port, host, () => {
 });
 
 // Pass data to rethinkdb
-setInterval(() => {
+const send = setInterval(() => {
   vcncSample.Send();
 }, vcncSample.PushTimeout());
 
 // Remove old data from rethinkdb table
-setInterval(() => {
+const trim = setInterval(() => {
   vcncSample.Trim();
 }, vcncSample.TrimTimeout());
 
-// Process Linux signals
-//
 // Processing of Linux signals
 //
-process.on('SIGINT', () => {
-  console.log('Caught SIGINT interrupt signal');
+function ProcessExit() {
   vcncSample.ProcessCheck();
-  delete cnctrqClient;
-  process.exit(0);
-});
-
+  clearTimeout(send);
+  clearTimeout(trim);
+  rs.CloseConnection();
+  storPoll.shutdownStats();
+  process.kill(process.pid, 'SIGKILL');
+}
+//
 process.on('SIGTERM', () => {
-  console.log('Caught SIGTERM interrupt signal');
-  vcncSample.ProcessCheck();
-  delete cnctrqClient;
-  process.exit(0);
+  ProcessExit();
 });
-
+//
+process.on('SIGINT', () => {
+  ProcessExit();
+});
+//
 process.on('SIGUSR1', () => {
   console.log('Caught SIGUSR1 interrupt signal');
   vcncSample.ProcessCheck();
 });
-
