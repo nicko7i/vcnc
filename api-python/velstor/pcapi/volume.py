@@ -61,7 +61,7 @@ class Volume:
         #  it down with just the mount point.
         #
         cmd = [
-            '/opt/mastiff/current/bin/vp',
+            'vp',  # 'vp' must on on the system PATH
             '--mount={}'.format(self.mount_point),
             '--mentor={}'.format('cnc,7110,tcp4'),  # Mastiff vpm, hardwired for now.
             '--workspace={}'.format(self.workspace.pathname)
