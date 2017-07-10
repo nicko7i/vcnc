@@ -1,0 +1,22 @@
+velstor.vsh package
+===================
+
+Submodules
+----------
+
+velstor.vsh.vsh_parser module
+-----------------------------
+
+.. automodule:: velstor.vsh.vsh_parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: velstor.vsh
+    :members:
+    :undoc-members:
+    :show-inheritance:

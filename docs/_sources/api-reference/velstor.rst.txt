@@ -1,0 +1,38 @@
+velstor package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+
+    velstor.pcapi
+    velstor.restapi
+
+Submodules
+----------
+
+velstor.libtest module
+----------------------
+
+.. automodule:: velstor.libtest
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+velstor.libutil module
+----------------------
+
+.. automodule:: velstor.libutil
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: velstor
+    :members:
+    :undoc-members:
+    :show-inheritance:

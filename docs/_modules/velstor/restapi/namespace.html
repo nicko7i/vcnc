@@ -1,0 +1,377 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>velstor.restapi.namespace &mdash; vcnc 1.0-beta documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> vcnc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/ide.html">IDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/coding-policies.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/workflow.html">Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/modules.html">api-python</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/documentation-publish.html">Publishing this Document</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">vcnc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>velstor.restapi.namespace</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for velstor.restapi.namespace</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1">#  Copyright (C) 2016 IC Manage Inc.</span>
+<span class="c1">#</span>
+<span class="c1">#  See the file COPYING for license details.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">velstor.libutil</span> <span class="k">import</span> <span class="n">urlencode</span>
+<span class="kn">from</span> <span class="nn">velstor.restapi.fulfill202</span> <span class="k">import</span> <span class="n">fulfill202</span>
+
+<span class="c1">#  namespace.py:  Operations on a TRQ namespace</span>
+
+
+<div class="viewcode-block" id="consistency_get"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.consistency_get">[docs]</a><span class="k">def</span> <span class="nf">consistency_get</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieves the consistency semantics attribute of a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        path (str): Fully-qualified namespace path.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate path is a string and is absolute</span>
+    <span class="c1">#</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;namespace&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">),</span>
+                    <span class="n">urlencode</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+                    <span class="s1">&#39;consistency&#39;</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="consistency_set"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.consistency_set">[docs]</a><span class="k">def</span> <span class="nf">consistency_set</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sets the consistency semantics attribute of a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        value (str): Either &#39;eventual&#39; or &#39;immediate&#39;</span>
+<span class="sd">        path (str): Fully-qualified namespace path.</span>
+<span class="sd">&#39;</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate value is either immediate or eventual</span>
+    <span class="c1">#  validate path is a string and is absolute</span>
+    <span class="c1">#</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;namespace&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">),</span>
+                    <span class="n">urlencode</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+                    <span class="s1">&#39;consistency&#39;</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;consistency&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="copy_vector"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.copy_vector">[docs]</a><span class="k">def</span> <span class="nf">copy_vector</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieves the consistency semantics attribute of a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        pairs (list): A list of (source, destination) pairs.</span>
+<span class="sd">        overwrite (bool): When true, an existing destination is overwritten with &#39;cp -r&#39; semantics; otherwise, the pair is skipped.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate pairs is an array</span>
+    <span class="c1">#  validate overwrite is boolean</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;meta_copy&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">)])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+                      <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;overwrite&#39;</span><span class="p">:</span> <span class="n">overwrite</span><span class="p">},</span>
+                      <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;copy_paths&#39;</span><span class="p">:</span> <span class="n">pairs</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="delete"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.delete">[docs]</a><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">recursive</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Removes a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        path (str): Fully-qualified namespace path.</span>
+<span class="sd">        recursive (bool): When True, a subtree will removed.  Otherwise, only leafs will be removed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate path is a string and is absolute</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;namespace&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">),</span>
+                    <span class="n">urlencode</span><span class="p">(</span><span class="n">path</span><span class="p">)])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;recursive&#39;</span><span class="p">:</span> <span class="n">recursive</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="mkdir"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.mkdir">[docs]</a><span class="k">def</span> <span class="nf">mkdir</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieves the consistency semantics attribute of a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        path (str): Fully-qualified namespace path.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate path is a string and is absolute</span>
+    <span class="c1">#  validate recursive is boolean</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;namespace&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">),</span>
+                    <span class="n">urlencode</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+                    <span class="s1">&#39;mkdir&#39;</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="n">mode</span><span class="p">,</span> <span class="s1">&#39;parents&#39;</span><span class="p">:</span> <span class="n">parents</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="list"><a class="viewcode-back" href="../../../api-reference/velstor.restapi.html#velstor.restapi.namespace.list">[docs]</a><span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">vtrqid</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Retrieves the consistency semantics attribute of a namespace node.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        session (:class:`~velstor.restapi.Session`): Provides security information.</span>
+<span class="sd">        vtrqid (int): ID of the vTRQ.</span>
+<span class="sd">        path (str): Fully-qualified namespace path.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#  validate vtrqid is an int</span>
+    <span class="c1">#  validate path is a string and is absolute</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">session</span><span class="o">.</span><span class="n">base_url</span><span class="p">(),</span>
+                    <span class="s1">&#39;vtrq&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;namespace&#39;</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">vtrqid</span><span class="p">),</span>
+                    <span class="n">urlencode</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
+                    <span class="s1">&#39;children&#39;</span><span class="p">])</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fulfill202</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, IC Manage Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0-beta',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

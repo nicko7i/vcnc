@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>velstor.libtest &mdash; vcnc 1.0-beta documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> vcnc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/ide.html">IDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/coding-policies.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/workflow.html">Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/modules.html">api-python</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer/documentation-publish.html">Publishing this Document</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">vcnc</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>velstor.libtest</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for velstor.libtest</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">errno</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<div class="viewcode-block" id="VclcError"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.VclcError">[docs]</a><span class="k">class</span> <span class="nc">VclcError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Error information for an invocation of &#39;vclc&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        returncode: The Linux process exit code.</span>
+<span class="sd">        cmd (:obj:`list` of :obj:`str`): The command invoked.</span>
+<span class="sd">        output (str): Contents of stdout.</span>
+<span class="sd">        </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        returncode (int): The Linux process exit code.</span>
+<span class="sd">        cmd (:obj:`list` of :obj:`str`): The command invoked.</span>
+<span class="sd">        output (str): Contents of stdout.</span>
+<span class="sd">        error_sym (str): Status of REST operation.</span>
+<span class="sd">        msg (str): Message from REST operation.</span>
+<span class="sd">        http_status (int): HTTP status code from REST operation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">returncode</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Command &#39;</span><span class="si">{}</span><span class="s2">&#39; returned non-zero exit status &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">VclcError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="n">returncode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span> <span class="o">=</span> <span class="n">cmd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_sym</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_sym</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;error_sym&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">msg</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">http_status</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># JSON decode failed.</span>
+            <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="c1"># One or more of the expected keys was not found.</span>
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Command &#39;</span><span class="si">{}</span><span class="s2">&#39; returned non-zero exit status </span><span class="si">{}</span><span class="s2"> with output &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmd</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span></div>
+
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;vcnc&#39;</span><span class="p">:</span> <span class="s1">&#39;cnc:7130&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;vp_mount_root&#39;</span><span class="p">:</span> <span class="s1">&#39;/tmp/vcnc/stress/&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;vpm&#39;</span><span class="p">:</span> <span class="s1">&#39;cnc,7110,tcp4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;vtrq&#39;</span><span class="p">:</span> <span class="s1">&#39;trq,7100,tcp4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;vtrqid&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="command"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.command">[docs]</a><span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs a Linux command in a subprocess.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        *args: Tokens passed to &#39;exec&#39;.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        subprocess.CalledProcessError: Throw on non-zero Linux exit code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;command: Invoking &#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+    <span class="n">rtn</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rtn</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vclc"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.vclc">[docs]</a><span class="k">def</span> <span class="nf">vclc</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the &#39;vclc&#39; as if on the command line.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        *args: Command-line arguments to &#39;vclc&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: The JSON response from the REST server, with the additional key &#39;returncode&#39;, whose value is the vclc process exit code.</span>
+<span class="sd">            </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        VclcError: Process exit code is non-zero or REST response not valid JSON.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># dict: The JSON response from the REST server, with the additional</span>
+    <span class="c1">#</span>
+    <span class="c1"># Form the command</span>
+    <span class="c1">#</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;./bin/vclc&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;--vcnc=&#39;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;vcnc&#39;</span><span class="p">],</span>
+           <span class="s1">&#39;--vtrqid=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vtrqid&#39;</span><span class="p">])]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;vclc: invoking:&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VclcError</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">cmd</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rtn</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        <span class="n">rtn</span><span class="p">[</span><span class="s1">&#39;returncode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">rtn</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rtn</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">VclcError</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_workspace"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.create_workspace">[docs]</a><span class="k">def</span> <span class="nf">create_workspace</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a workspace specification as a Python data structure.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        **kwargs:  Optional keyword arguments.</span>
+<span class="sd">        </span>
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        vtrq_id (int): vtrq ID.  Default is 0.</span>
+<span class="sd">        vtrq_path (str): Absolute vtrq path mapped to mount point. Default is &#39;/&#39;.</span>
+<span class="sd">        writeback (str): Writeback semantics.  One of &#39;always&#39;, &#39;explicit&#39;,</span>
+<span class="sd">            &#39;trickle&#39; or &#39;never&#39;.  Default is &#39;always&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (dict): A workspace specification.</span>
+<span class="sd">        </span>
+<span class="sd">    Note:</span>
+<span class="sd">        Can only create specifications having a single map entry.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vtrq_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;vtrq_id&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;vtrq_id&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span>
+    <span class="n">vtrq_path</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;vtrq_path&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;vtrq_path&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="s1">&#39;/&#39;</span>
+    <span class="n">writeback</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;writeback&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;writeback&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="s1">&#39;always&#39;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;writeback&#39;</span><span class="p">:</span> <span class="n">writeback</span><span class="p">,</span>
+            <span class="s1">&#39;maps&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;vp_path&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;vtrq_id&#39;</span><span class="p">:</span> <span class="n">vtrq_id</span><span class="p">,</span> <span class="s1">&#39;vtrq_path&#39;</span><span class="p">:</span> <span class="n">vtrq_path</span><span class="p">}]}</span></div>
+
+
+<div class="viewcode-block" id="create_workspace_vtrq"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.create_workspace_vtrq">[docs]</a><span class="k">def</span> <span class="nf">create_workspace_vtrq</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">spec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a workspace specification on the vtrq.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        path (str): The hierarchical name of the workspace.</span>
+<span class="sd">        spec (str or dict): The workspace specification.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The HTTP status code.</span>
+<span class="sd">        </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        VclcError:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">json_spec</span> <span class="o">=</span> <span class="n">spec</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span> <span class="k">else</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1">#  Clear out any existing spec</span>
+    <span class="c1">#</span>
+    <span class="n">vclc</span><span class="p">(</span><span class="s1">&#39;ws&#39;</span><span class="p">,</span> <span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1">#  Post the new spec</span>
+    <span class="c1">#</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">vclc</span><span class="p">(</span><span class="s1">&#39;ws&#39;</span><span class="p">,</span> <span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">json_spec</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="delete_workspace_vtrq"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.delete_workspace_vtrq">[docs]</a><span class="k">def</span> <span class="nf">delete_workspace_vtrq</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a workspace specification on the vtrq.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        path: The hierarchical name of the workspace.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The HTTP status code.</span>
+<span class="sd">        </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        VclcError: Problem creating directory on vtrq.</span>
+<span class="sd">        subprocess.CalledProcessError: Problem with vclc invocation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">vclc</span><span class="p">(</span><span class="s1">&#39;ws&#39;</span><span class="p">,</span> <span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="mount_vp"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.mount_vp">[docs]</a><span class="k">def</span> <span class="nf">mount_vp</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">workspace_pathname</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Mounts a VP using &#39;workspace_pathname&#39; on &#39;path&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        path: The local filesystem directory on which the VP mounts.</span>
+<span class="sd">        workspace_pathname: The hierarchical name of the workspace.</span>
+<span class="sd">        **kwargs: Optional keyword arguments.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        is_private (bool): False if &#39;writeback&#39; is &#39;always&#39;, True otherwise.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        (str): The stdout of the call to &#39;vp&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">    Notes:</span>
+<span class="sd">        Assumes the appropriate vp is on the system PATH.</span>
+<span class="sd">        </span>
+<span class="sd">        TODO: Compute &#39;is_private&#39; automatically.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#</span>
+    <span class="n">is_private</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;is_private&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;is_private&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">False</span>
+    <span class="c1">#</span>
+    <span class="c1">#  Create the mount directory on &#39;path&#39;</span>
+    <span class="c1">#</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#</span>
+    <span class="c1">#  Ensure the vtrq_path exists.</span>
+    <span class="c1">#</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">vclc</span><span class="p">(</span><span class="s1">&#39;ws&#39;</span><span class="p">,</span> <span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="n">workspace_pathname</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">workspace</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">vclc</span><span class="p">(</span><span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="s1">&#39;mkdir&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="n">workspace</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">][</span><span class="s1">&#39;spec&#39;</span><span class="p">][</span><span class="s1">&#39;maps&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;vtrq_path&#39;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="n">VclcError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Return code is: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">returncode</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="n">errno</span><span class="o">.</span><span class="n">EEXIST</span><span class="p">:</span>
+            <span class="k">raise</span>
+    <span class="c1">#</span>
+    <span class="c1">#  Invoke the VP</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;vp&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;--mount=&#39;</span> <span class="o">+</span> <span class="n">path</span><span class="p">,</span>
+           <span class="s1">&#39;--mentor=&#39;</span> <span class="o">+</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;vpm&#39;</span><span class="p">],</span>
+           <span class="s1">&#39;--workspace=&#39;</span> <span class="o">+</span> <span class="n">workspace_pathname</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">is_private</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;--fuse-cache=auto&#39;</span><span class="p">,</span> <span class="s1">&#39;--timeout=1&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;--fuse-cache=none&#39;</span><span class="p">,</span> <span class="s1">&#39;--timeout=0&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mount_vp: invoking:&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+    <span class="n">rtn</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rtn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rtn</span></div>
+
+
+<div class="viewcode-block" id="unmount_vp"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.unmount_vp">[docs]</a><span class="k">def</span> <span class="nf">unmount_vp</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unmounts the VP on &#39;path&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fusermount&#39;</span><span class="p">,</span> <span class="s1">&#39;-uz&#39;</span><span class="p">,</span> <span class="n">path</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unmount_vp: invoking:&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+    <span class="n">rtn</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rtn</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rtn</span></div>
+
+
+<div class="viewcode-block" id="random_identifier"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.random_identifier">[docs]</a><span class="k">def</span> <span class="nf">random_identifier</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a random identifier.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        length (int): number of characters to generate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A randomly generated identifier.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+        <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span>
+    <span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="random_path"><a class="viewcode-back" href="../../api-reference/velstor.html#velstor.libtest.random_path">[docs]</a><span class="k">def</span> <span class="nf">random_path</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a random absolute path.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        length (int): number of characters in each name.</span>
+<span class="sd">        depth (int): number of names in the path.</span>
+<span class="sd">        prefix (str): Prefix to path. Default is &quot;/&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A randomly generated path.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random_identifier</span><span class="p">(</span><span class="n">length</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">))</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, IC Manage Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0-beta',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

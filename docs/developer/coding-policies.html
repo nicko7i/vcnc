@@ -93,12 +93,11 @@
 <li class="toctree-l1"><a class="reference internal" href="ide.html">IDEs</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Policies</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#general-policies">General Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python">Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#javascript">JavaScript</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#node">Node</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#version-control">Version Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ides">IDEs</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#node">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-control">Version Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ides">IDEs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a></li>
@@ -116,6 +115,7 @@
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="run/vclc-run.html">Running <em>vclc</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/modules.html">api-python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">About this Document</span></p>
 <ul>
@@ -174,6 +174,34 @@
 <p>Python indents four, per PEP 8.  All other languages indent by two.</p>
 <p>Maintain 80 character margins.</p>
 </div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Follow PEP 8.  Where PEP 8 is silent, use the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a>.</p>
+<p>Docstrings are processed by <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/">Napoleon</a> and formatted in <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google">Google style</a>.</p>
+<p>Annotate types in your docstrings. Parameter types (Args and Keyword Args) are
+parenthesized.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Workspace</span><span class="p">(</span><span class="n">CommonEqualityMixin</span><span class="p">):</span>
+    <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    Represents a vtrq workspace and its hierarchical name.</span>
+
+<span class="s2">    Args:</span>
+<span class="s2">        session (Session): Security and configuration information.</span>
+<span class="s2">        **kwargs: Optional keywords described below.</span>
+
+<span class="s2">    Keyword Args:</span>
+<span class="s2">        pathname (str): hierarchical workspace name. Default is None.</span>
+<span class="s2">        vtrq_id (int): vtrq ID.  Default is 0.</span>
+<span class="s2">        vtrq_path (str): Absolute vtrq path mapped</span>
+</pre></div>
+</div>
+<p>Types for properties are not parenthesized:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">vtrq_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;str: Absolute vtrq path mapped by this workspace.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vtrq_path</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="javascript">
 <h2>JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h2>
 <p>JavaScript follows the AirBnb <a class="reference external" href="https://github.com/airbnb/javascript">JavaScript</a> and <a class="reference external" href="https://github.com/airbnb/javascript/tree/master/react">React</a> standards.</p>
@@ -183,8 +211,9 @@
 <div class="section" id="node">
 <h2>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h2>
 <p>Use npm for scripting. Do not use Grunt, Gulp or similar.</p>
+</div>
 <div class="section" id="version-control">
-<h3>Version Control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h3>
+<h2>Version Control<a class="headerlink" href="#version-control" title="Permalink to this headline">¶</a></h2>
 <p>The project is hosted at <a class="reference external" href="https://github.com/nicko7i/vcnc.git">GitHub</a>.</p>
 <p>Use <a class="reference external" href="https://help.github.com/articles/github-flow/">GitHub Flow</a>.</p>
 <p>The <em>node_modules</em> directory is not checked into version control.</p>
@@ -192,11 +221,10 @@
 into version control.</p>
 </div>
 <div class="section" id="ides">
-<h3>IDEs<a class="headerlink" href="#ides" title="Permalink to this headline">¶</a></h3>
+<h2>IDEs<a class="headerlink" href="#ides" title="Permalink to this headline">¶</a></h2>
 <p>The project must always be buildable from the command line.</p>
 <p>Developers may use any IDE they wish.  An IDE capable of performing continual
-ESLInt validation is recommended.</p>
-</div>
+ESLInt and PEP 8 validation is recommended.</p>
 </div>
 </div>
 

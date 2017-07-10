@@ -206,9 +206,9 @@ sourcing the <em>activate</em> script.</p>
 The tests in <em>api-python/test/test_sanity.py</em> are configured to use the internal
 <a class="reference external" href="https://docs.google.com/a/icmanage.com/document/d/1UcJ2yql5YKih365z24zP3Zm_iz0lO5rYHYkNyixBWIg/edit?usp=sharing">Mastiff</a>
 deployment. Change the configuration at the top of the file to use a different deployment.</p>
-<p>To run the tests:</p>
+<p>To run the basic tests:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">%</span> <span class="nb">cd</span> *project-root*
-<span class="gp">%</span> <span class="nv">PYTHONPATH</span><span class="o">=</span>. pytest
+<span class="gp">%</span> python3 -m pytest tests/simple
 </pre></div>
 </div>
 </div>
