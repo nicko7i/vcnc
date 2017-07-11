@@ -10,7 +10,6 @@ const { maxEntries, maxBins, table, period, latency, hostname, port } = config.v
 
 // Patthto Vcnc-sampler log-file
 const logFile = '';
-const host = hostname;
 const smplPort = port;
 
 // List of all tags of VDA configutation parameters
@@ -33,7 +32,7 @@ const samples =
 
 const options =
   {
-    host: host,
+    host: hostname,
     port: smplPort,
   };
 

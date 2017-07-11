@@ -12,8 +12,8 @@ const json = require('JSON');
 const async = require('async');
 //
 const conf = require('../vcncSampler.conf');
-const vsm = require('./vcncSampler');
-const rs = require('./rethinkSampler');
+const sampler = require('./vcncSampler');
+const rethink = require('./rethinkSampler');
 // const vdaRec = require('./src/lib/vdaReceiver');
 
  /**
@@ -24,8 +24,7 @@ class VcncSampling {
   constructor(dt, ltc) {
     this.sampleTime = parseInt(dt, 10); // ms
     this.latency = parseInt(ltc, 10); // ms
-    this.msgSampler = vsm.CreateVcncSampler(this.sampleTime, this.latency);
-    this.rdb = rs.CreaterethinkdbSampler(this.sampleTime);
+    this.msgSampler = sampler.CreateVcncSampler(this.sampleTime, this.latency);
     this.msgCount = 0;
   }
    /**
@@ -37,17 +36,13 @@ class VcncSampling {
   Init() {
     const self = this;
 //    console.log('>>> Start Init');
-    const p = rs.Init();
-    p.then(() => {
-      self.msgSampler.Init();
-      p.then(() => {
-        self.Trim();
-      });
-    }, (e) => {
-      console.error(`ERROR: rethinkdb is not running\n ${e}`);
-      process.exit(1);
-    });
-//    console.log('>>> Finished Init');
+    return rethink.Init()
+     .then(() => sampler.Init())
+     .then(() => {
+       rethink.Trim(self.TrimTimeout());
+     }, (e) => {
+       throw (e);
+     });
   }
 
   PushTimeout() {
@@ -85,13 +80,9 @@ class VcncSampling {
     const self = this;
     if (self.msgSampler.IsSampling() === false) return;
     const bin = self.msgSampler.ReleaseBin();
-    self.rdb.Push(bin);
+    rethink.Push(bin);
   }
 //    console.log('<<< Finished Send');
-
-  Trim() {
-    this.rdb.Trim();
-  }
 
   ProcessCheck() {
     const self = this;
