@@ -117,8 +117,9 @@ const send = setInterval(() => {
 
 // Remove old data from rethinkdb table
 const trimTimeout = vcncSample.TrimTimeout();
+const trimPeriod = vcncSample.TrimPeriod();
 const trim = setInterval(() => {
-  rethink.Trim(trimTimeout);
+  rethink.Trim(trimPeriod);
 }, trimTimeout);
 
 // Processing of Linux signals

@@ -39,7 +39,7 @@ class VcncSampling {
     return rethink.Init()
      .then(() => sampler.Init())
      .then(() => {
-       rethink.Trim(self.TrimTimeout());
+       rethink.Trim(self.TrimPeriod());
      }, (e) => {
        throw (e);
      });
@@ -52,6 +52,10 @@ class VcncSampling {
   TrimTimeout() {
     const period = this.sampleTime * conf.MaxEntries();
     return period;
+  }
+
+  TrimPeriod() {
+    return parseInt(this.TrimTimeout() / 1000, 10);
   }
 
   Process(jsnData) {
