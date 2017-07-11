@@ -49,7 +49,6 @@ const options = cmdl.JSNode('sampleServer', conf.HostPort());
 const samplePeriod = cmdl.JSparam('samplePeriod', conf.DefSamplePeriod());
 const latency = cmdl.JSparam('latency', conf.DefLatency());
 
-console.log(json.stringify(options));
 // console.log(`logDir = ${logDir}`);
 
 // Validate input parameters
@@ -92,7 +91,7 @@ function startServer(h, p) {
   server.setTimeout(5000, () => {
   });
   server.listen(p, h, () => {
-    console.log(`Listening on ${host}:${port}`);
+    console.log(`Listening on ${h}:${p}`);
   });
 }
 
