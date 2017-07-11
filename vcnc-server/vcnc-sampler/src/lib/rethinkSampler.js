@@ -4,9 +4,9 @@
  *    See the file 'COPYING' for license information.
  */
 const r = require('rethinkdb');
-const conf = require('../vcncSampler.conf');
+const conf = require('./vcncSampler.conf');
 //
-const config = require('../../../vcnc-core/src/lib/configuration.js');
+const config = require('../../../vcnc-core/src/lib/configuration');
 //
 const table = conf.Table();
 //
@@ -33,38 +33,26 @@ setInterval(
   60 * 1000);
 //  End of watchdog code
 
-class RethinkdbSampler {
-  constructor(dt) {
-    this.tcperiod = parseInt(dt, 10);
-    this.timespanSec = conf.MaxEntries() * (dt / 1000.0);
-  }
-
-  /**
-   * Adds real time data for timepoint "now".
-   *
-   * @param entry
-   * @returns {Promise.<TResult>|*|Request}
-   */
-  Push(entry) {
-    const sample = Object.assign({}, entry);
-    sample.sampleTimestamp = r.epochTime(entry.sampleTimestamp);
-    //
-    feedWatchdog();
-    return r.table(table).insert(
-      Object.assign({}, sample, { timestamp: r.now() })
-    ).run(cnxtn);
-  }
-
-  Trim() {
-    return r.table(table)
-    .filter(r.row('timestamp')
-    .le(r.now().sub(this.timespanSec)))
-    .delete({ durability: 'soft' }).run(cnxtn);
-  }
+/**
+ * Adds real time data for timepoint "now".
+ *
+ * @param entry - data bin
+*/
+function Push(entry) {
+  const sample = Object.assign({}, entry);
+  sample.sampleTimestamp = r.epochTime(entry.sampleTimestamp);
+  //
+  feedWatchdog();
+  return r.table(table).insert(
+    Object.assign({}, sample, { timestamp: r.now() })
+  ).run(cnxtn);
 }
 
-function CreaterethinkdbSampler(p) {
-  return new RethinkdbSampler(p);
+function Trim(timespanSec) {
+  return r.table(table)
+  .filter(r.row('timestamp')
+  .le(r.now().sub(timespanSec)))
+  .delete({ durability: 'soft' }).run(cnxtn);
 }
 
 /**
@@ -107,9 +95,10 @@ function CloseConnection() {
 }
 
 module.exports = {
-  CreaterethinkdbSampler,
   GetConnection,
   GetTable,
   Init,
+  Push,
+  Trim,
   CloseConnection,
 };

@@ -1,3 +1,8 @@
+Release 3.8.7
+        Vcnc-sampler:
+    Fixed promise resolving
+    Fixed style errors and cleaned code
+
 Release 3.8.6
 
     Vcnc-sampler:
