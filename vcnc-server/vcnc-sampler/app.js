@@ -85,11 +85,10 @@ function requestHandler(request, response) {
 
 // Create server
 //
-let server;
+// let server;
 function startServer(h, p) {
-  server = http.createServer(requestHandler);
-  server.setTimeout(5000, () => {
-  });
+  const server = http.createServer(requestHandler);
+  server.setTimeout(5000);
   server.listen(p, h, () => {
     console.log(`Listening on ${h}:${p}`);
   });
