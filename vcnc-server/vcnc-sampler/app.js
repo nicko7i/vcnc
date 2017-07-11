@@ -24,7 +24,7 @@ const json = require('JSON');
 const path = require('path');
 //
 const jsUtils = require('./src/lib/vcncSamplerUtils');
-const conf = require('./src/vcncSampler.conf');
+const conf = require('./src/lib/vcncSampler.conf');
 const sampling = require('./src/lib/vcncSampling');
 const rethink = require('./src/lib/rethinkSampler');
 const storPoll = require('../vcnc-core/src/lib/pollStorageStats');

@@ -11,7 +11,7 @@
 const json = require('JSON');
 const async = require('async');
 //
-const conf = require('../vcncSampler.conf');
+const conf = require('./vcncSampler.conf');
 const sampler = require('./vcncSampler');
 const rethink = require('./rethinkSampler');
 // const vdaRec = require('./src/lib/vdaReceiver');

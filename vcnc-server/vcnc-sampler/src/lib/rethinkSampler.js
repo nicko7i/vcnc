@@ -4,9 +4,9 @@
  *    See the file 'COPYING' for license information.
  */
 const r = require('rethinkdb');
-const conf = require('../vcncSampler.conf');
+const conf = require('./vcncSampler.conf');
 //
-const config = require('../../../vcnc-core/src/lib/configuration.js');
+const config = require('../../../vcnc-core/src/lib/configuration');
 //
 const table = conf.Table();
 //

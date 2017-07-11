@@ -8,7 +8,7 @@
 //
 const storPoll = require('../../../vcnc-core/src/lib/pollStorageStats');
 //
-const conf = require('../vcncSampler.conf');
+const conf = require('./vcncSampler.conf');
 
 /**
  * This class is a custom write stream to output VDA messages to multiple files
