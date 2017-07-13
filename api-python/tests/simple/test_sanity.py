@@ -113,22 +113,6 @@ def test_ns_copy():
             vclc('ns', 'rm', '-r', dest_rootname)
     
 
-def test_ns_consistency():
-    dirname = '/Ime3Wp2uMyaHFLVoNKSf'+seed
-    for ns in ('ns', 'namespace'):
-        for con in ('consistency', 'con'):
-            for val in ('immediate', 'eventual'):
-                vclc(ns, 'mkdir', dirname)
-                result = vclc(ns, con, 'set', val, dirname)
-                assert(result['http_status'] == 200)
-                #
-                result = vclc(ns, con, 'get', dirname)
-                print(ns, con, 'get', val, ':', result)
-                assert(result['http_status'] == 200)
-                result = vclc(ns, 'rm', dirname)
-                assert(result['http_status'] == 200)
-
-
 def test_vp_find():
     #
     # We're expecting ENOENT
