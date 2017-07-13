@@ -18,6 +18,7 @@ _build/
 __pycache__/
 .cache/
 views.egg-info/
+*.pyc
 
 # Python virtual environments
 venv*/

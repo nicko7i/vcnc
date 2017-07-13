@@ -55,7 +55,7 @@ ProcessCommandLine.prototype.Input = function (validKeys) {
       //
       if (validKeys.has(argkey)) {
         self.argsDict.add(argvalue, argkey);
-        console.log(ARG_COUNT++ + ". " + argkey + " " + argvalue);
+        console.log(`${ARG_COUNT++}. ${argkey} ${argvalue}`);
       } else {
         console.log(`Invalid key: ${argkey}`);
         invalidKeyCount += 1;

@@ -3,14 +3,13 @@
 
 const Set = require('collections/set');
 //
-const config = require('../../vcnc-core/src/lib/configuration.js');
+const config = require('../../../vcnc-core/src/lib/configuration');
 
 // Default values of configuration parameters
 const { maxEntries, maxBins, table, period, latency, hostname, port } = config.vcncSampler;
 
 // Patthto Vcnc-sampler log-file
 const logFile = '';
-const host = hostname;
 const smplPort = port;
 
 // List of all tags of VDA configutation parameters
@@ -33,7 +32,7 @@ const samples =
 
 const options =
   {
-    host: host,
+    host: hostname,
     port: smplPort,
   };
 
