@@ -6,7 +6,6 @@
 
 #include <cncSession.h>
 #include <cnctrq/cnctrqClient.h>
-#include <cnctrq/cnctrqConsistencyWorker.h>
 #include <cnctrq/cnctrqDeleteWorker.h>
 #include <cnctrq/cnctrqGetattrWorker.h>
 #include <cnctrq/cnctrqListWorker.h>
@@ -73,8 +72,6 @@ namespace cnc {
       //  Configure the methods.
       //
       NODE_SET_PROTOTYPE_METHOD(tpl, "call_me_first", CallMeFirst);
-      NODE_SET_PROTOTYPE_METHOD(tpl, "consistency_get", ConsistencyGet);
-      NODE_SET_PROTOTYPE_METHOD(tpl, "consistency_set", ConsistencySet);
       NODE_SET_PROTOTYPE_METHOD(tpl, "remove", Delete);
       NODE_SET_PROTOTYPE_METHOD(tpl, "getattr", Getattr);
       NODE_SET_PROTOTYPE_METHOD(tpl, "list", List);
@@ -193,104 +190,6 @@ namespace cnc {
       }
     }
 
-    void cnctrqClient::ConsistencyGet(const FunctionCallbackInfo<Value>& args) {
-      Isolate* isolate = args.GetIsolate();
-      //
-      //  Get the argument values
-      //
-      if (args.Length() < 3) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected three arguments: trq_id, path, and callback")));
-        return;
-      }
-      //
-      if (!args[0]->IsNumber()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected integer first argument (trq_id)")));
-        return;
-      }
-      int trq_id = args[0]->ToNumber()->NumberValue();
-      //
-      if (!args[1]->IsString()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected string second argument (path)")));
-        return;
-      }
-      path_type path(*String::Utf8Value(args[1]->ToString()));
-      //
-      //
-      if (!args[2]->IsFunction()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected callback function as the third argument.")));
-        return;
-      }
-      Local<Function> callback = args[2].As<Function>();
-      //
-      //  Prepare the async worker
-      //
-      Nan::AsyncQueueWorker(new cnctrqConsistencyWorker(trq_id
-                                                        , path
-                                                        , new Nan::Callback(callback)));
-
-    }
-
-    void cnctrqClient::ConsistencySet(const FunctionCallbackInfo<Value>& args) {
-      Isolate* isolate = args.GetIsolate();
-      //
-      //  Get the argument values
-      //
-      if (args.Length() < 4) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected four arguments: trq_id, path, consistency value, and callback")));
-        return;
-      }
-      //
-      if (!args[0]->IsNumber()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected integer first argument (trq_id)")));
-        return;
-      }
-      int trq_id = args[0]->ToNumber()->NumberValue();
-      //
-      if (!args[1]->IsString()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected string second argument (path)")));
-        return;
-      }
-      path_type path(*String::Utf8Value(args[1]->ToString()));
-      //
-      if (!args[2]->IsString()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected string second argument (path)")));
-        return;
-      }
-      string_type value(*String::Utf8Value(args[2]->ToString()));
-      //
-      if (!args[3]->IsFunction()) {
-        isolate->ThrowException(
-          Exception::TypeError(
-            String::NewFromUtf8(isolate, "Expected callback function as the fourth argument.")));
-        return;
-      }
-      Local<Function> callback = args[3].As<Function>();
-      //
-      //  Prepare the async worker
-      //
-      Nan::AsyncQueueWorker(new cnctrqConsistencyWorker(trq_id
-                                                        , path
-                                                        , value
-                                                        , new Nan::Callback(callback)));
-
-    }
-    
     void cnctrqClient::Delete(const FunctionCallbackInfo<Value>& args) {
       Isolate* isolate = args.GetIsolate();
       //

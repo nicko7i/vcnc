@@ -392,41 +392,6 @@ module.exports = (app) => {
       });
   });
 
-  app.get('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_get(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            (result) => {
-              cb(adapter(result, { consistency: result.consistency }));
-            });
-        });
-      });
-  });
-
-  app.post('/vtrq/namespace/:vtrq_id/:path/consistency', (req, res) => {
-    fulfill202(
-      req,
-      res,
-      (cb) => {
-        latency()
-        .then(() => {
-          cnctrqClient.consistency_set(
-            req.pathParams.vtrq_id,
-            req.pathParams.url_path,
-            req.body.consistency,
-            (result) => {
-              cb(adapter(result));
-            });
-        });
-      });
-  });
-
   //
   //
   //

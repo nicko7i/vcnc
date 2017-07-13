@@ -7,7 +7,6 @@
       "target_name": "cnctrq_client",
       "sources": [ "./src/cnctrq/cnctrq_client.cc" 
 	           , "./src/cnctrq/cnctrqClient.cc"
-      		   , "./src/cnctrq/cnctrqConsistencyWorker.cc"
       		   , "./src/cnctrq/cnctrqDeleteWorker.cc"
       		   , "./src/cnctrq/cnctrqGetattrWorker.cc"
       		   , "./src/cnctrq/cnctrqListWorker.cc"

@@ -1,3 +1,7 @@
+Release 3.8.7
+
+    <T1797> Removed unused 'namespace consistency' features.
+
 Release 3.8.6
 
     Vcnc-sampler:

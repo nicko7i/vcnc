@@ -1,6 +1,12 @@
 Instructions for how to build and run vcnc-server may be found at
-https://nicko7i.github.io/vcnc/developer/installing-and-building.html
+https://nicko7i.github.io/vcnc/developer/building/vcnc-server-build.html
 
-You can also read the source code at *project-dir*/documentation/developer/installing-and-building.rst
+You can also read the source code at *project-dir*/documentation/developer/building/vcnc-server-build.rst
+
+**spoiler alert**:
+
+```
+../configure --with-pic --with-toolroot=/opt/frqu/TOOLROOT
+```
 
 Do not delete this file, it is required to keep autotools happy.
