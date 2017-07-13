@@ -1,7 +1,10 @@
 Release 3.8.7
-        Vcnc-sampler:
-    Fixed promise resolving
-    Fixed style errors and cleaned code
+
+    <T1797> Removed unused 'namespace consistency' features.
+
+    Vcnc-sampler:
+      Fixed promise resolving
+      Fixed style errors and cleaned code
 
 Release 3.8.6
 

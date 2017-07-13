@@ -11,58 +11,8 @@ from velstor.restapi.fulfill202 import fulfill202
 #  namespace.py:  Operations on a TRQ namespace
 
 
-def consistency_get(session, vtrqid, path):
-    """Retrieves the consistency semantics attribute of a namespace node.
-
-    Args:
-        session (:class:`~velstor.restapi.Session`): Provides security information.
-        vtrqid (int): ID of the vTRQ.
-        path (str): Fully-qualified namespace path.
-
-    Returns:
-        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`
-    """
-    #  validate vtrqid is an int
-    #  validate path is a string and is absolute
-    #
-    url = '/'.join([session.base_url(),
-                    'vtrq',
-                    'namespace',
-                    str(vtrqid),
-                    urlencode(path),
-                    'consistency'])
-    r = requests.get(url)
-    return fulfill202(session, r)
-
-
-def consistency_set(session, vtrqid, value, path):
-    """Sets the consistency semantics attribute of a namespace node.
-
-    Args:
-        session (:class:`~velstor.restapi.Session`): Provides security information.
-        vtrqid (int): ID of the vTRQ.
-        value (str): Either 'eventual' or 'immediate'
-        path (str): Fully-qualified namespace path.
-'
-    Returns:
-        The return value of :func:`~velstor.restapi.fulfill202.fulfill202`
-    """
-    #  validate vtrqid is an int
-    #  validate value is either immediate or eventual
-    #  validate path is a string and is absolute
-    #
-    url = '/'.join([session.base_url(),
-                    'vtrq',
-                    'namespace',
-                    str(vtrqid),
-                    urlencode(path),
-                    'consistency'])
-    r = requests.post(url, json={'consistency': value})
-    return fulfill202(session, r)
-
-
 def copy_vector(session, vtrqid, pairs, overwrite):
-    """Retrieves the consistency semantics attribute of a namespace node.
+    """Performs one or more meta-data copies on the vtrq.
 
     Args:
         session (:class:`~velstor.restapi.Session`): Provides security information.
@@ -110,7 +60,7 @@ def delete(session, vtrqid, path, recursive):
 
 
 def mkdir(session, vtrqid, mode, parents, path):
-    """Retrieves the consistency semantics attribute of a namespace node.
+    """Creates a directory on the vtrq.
 
     Args:
         session (:class:`~velstor.restapi.Session`): Provides security information.
@@ -134,7 +84,7 @@ def mkdir(session, vtrqid, mode, parents, path):
 
 
 def list(session, vtrqid, path):
-    """Retrieves the consistency semantics attribute of a namespace node.
+    """Returns names of the child nodes of a vtrq path.
 
     Args:
         session (:class:`~velstor.restapi.Session`): Provides security information.

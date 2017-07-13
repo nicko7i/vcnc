@@ -437,14 +437,6 @@ def vclc_parser(handler):
     namespace_subparsers = parser_namespace.add_subparsers(
         help='namespace commands')
     #
-    # .. namespace consistency
-    parser_consistency = namespace_subparsers.add_parser(
-        'consistency',
-        aliases=['con'],
-        help='manage filesystem semantics')
-    consistency_subparsers = parser_consistency.add_subparsers(
-        help='filesystem semantics')
-    #
     # .. vp management
     parser_vp = subparsers.add_parser(
         'vp',
