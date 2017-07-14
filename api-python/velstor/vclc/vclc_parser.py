@@ -142,36 +142,6 @@ def _configure_shutdown(parser_shutdown, handler):
 #
 #  Namespace Operations  ########################################
 #
-def _configure_consistency(consistency_subparsers, handler):
-    #  .. namespace consistency set
-    parser_consistency_set = consistency_subparsers.add_parser(
-        'set',
-        help='set filesystem semantics')
-    parser_consistency_set.add_argument(
-        'type',
-        choices=['immediate', 'eventual'],
-        help="desired semantics for the sub-tree")
-    parser_consistency_set.add_argument(
-        'path',
-        help="absolute path to the sub-tree")
-    parser_consistency_set.set_defaults(
-        action=handler.action,
-        api_func=ns.consistency_set,
-        api_args=['vtrqid', 'type', 'path'])
-    #
-    #  .. namespace consistency get
-    parser_consistency_get = consistency_subparsers.add_parser(
-        'get',
-        help='get filesystem semantics')
-    parser_consistency_get.add_argument(
-        'path',
-        help="absolute path to the sub-tree")
-    parser_consistency_get.set_defaults(
-        action=handler.action,
-        api_func=ns.consistency_get,
-        api_args=['vtrqid', 'path'])
-
-
 def _configure_namespace(namespace_subparsers, handler):
     #
     #  .. namespace copy
@@ -460,7 +430,6 @@ def vclc_parser(handler):
     #
     _configure_grid(grid_subparsers, handler)
     _configure_namespace(namespace_subparsers, handler)
-    _configure_consistency(consistency_subparsers, handler)
     _configure_vp(vp_subparsers, handler)
     _configure_workspace(workspace_subparsers, handler)
     _configure_shutdown(parser_shutdown, handler)
