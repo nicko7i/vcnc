@@ -20,6 +20,7 @@ We will do the following:
 #. Configure JavaScript for "React JSX" (which implies ES6) and "strict mode".
 #. Configure ESLint to point explicitly to vcnc-web/.eslintrc.js.
 #. Configure indenting in the editor.
+#. Configure Python doc-comments.
 
 Navigate to File :: Settings... :: Editor :: Inspections :: JavaScript.
 Clear all inspections, then under "Code Quality" enable only "ESLint".
@@ -39,3 +40,5 @@ Navigate to File :: Settings... :: Editor :: Code Style :: JavaScript.
 Ensue that "Use tab character" is *not* checked and "Indent" is "2".
 Ensure that "Indent chained methods" is *not* checked.
 
+Navigate to File :: Settings... :: Tools :: Python Integrated Tools.  Set 'Docstring
+format' to 'Google' and check 'Analyze Python code in Docstrings'.

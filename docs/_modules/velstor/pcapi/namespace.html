@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>velstor.pcapi.namespace &mdash; vcnc 1.0-beta documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="vcnc 1.0-beta documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> vcnc
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">About the vCNC</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/ide.html">IDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/coding-policies.html">Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/workflow.html">Workflow</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Building</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/build-prepare.html">Preparing to Build</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vcnc-server-build.html">Building <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vcnc-web-build.html">Building <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/building/vclc-pyapi-build.html">Building <em>vclc</em></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Running</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/run-prepare.html">Preparing to Run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vclc-run.html">Running <em>vclc</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/modules.html">api-python</a></li>
+</ul>
+<p class="caption"><span class="caption-text">About this Document</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/about-this-document.html">About this Document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/documentation-build.html">Building this document</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/documentation-publish.html">Publishing this Document</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">vcnc</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>velstor.pcapi.namespace</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for velstor.pcapi.namespace</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">velstor.restapi.workspace</span> <span class="k">as</span> <span class="nn">workspace</span>
+<span class="kn">from</span> <span class="nn">velstor.pcapi.exceptions</span> <span class="k">import</span> <span class="n">raise_if_not_2xx</span><span class="p">,</span> <span class="n">RESTException</span>
+
+
+<div class="viewcode-block" id="Namespace"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace">[docs]</a><span class="k">class</span> <span class="nc">Namespace</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides convenient, contextual access to a vtrq namespace.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        session (Session): A session object.</span>
+<span class="sd">        **kwargs: Optional keywords described below.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        cwd (str): Initial working directory. Default is &#39;/&#39;.</span>
+<span class="sd">        vtrq_id (int): vtrq ID.  Default is 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cwd</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cwd&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;cwd&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="s1">&#39;/&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vtrq_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;vtrq_id&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;vtrq_id&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cwd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;str: Gets or sets the current working directory.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cwd</span>
+
+<div class="viewcode-block" id="Namespace.cwd"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.cwd">[docs]</a>    <span class="k">def</span> <span class="nf">cwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cwd</span> <span class="o">=</span> <span class="n">path</span></div>
+
+<div class="viewcode-block" id="Namespace.clone"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Makes a meta-data copy of a file or directory.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            src: The directory to clone.</span>
+<span class="sd">            dest: The root of the cloned directory.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">            overwrite (bool): When true, an existing destination is overwritten</span>
+<span class="sd">              with &#39;cp -r&#39; semantics; otherwise, TBD.  Default is False</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            RESTException:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">overwrite</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;overwrite&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Namespace.delete"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the namespace node at &#39;path&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): Node to delete.</span>
+<span class="sd">            **kwargs: Optional arguments.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">            recursive (bool): When True, delete subdirectories, otherwise,</span>
+<span class="sd">              raises an exception if subdirectories exist.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            CheckedOutputException:</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="Namespace.mkdir"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.mkdir">[docs]</a>    <span class="k">def</span> <span class="nf">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a directory at &#39;path&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): The directory to create.</span>
+<span class="sd">            **kwargs: Optional arguments.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">            parents (bool): If true, create missing intermediate directories.</span>
+<span class="sd">                Default is to raise an error.</span>
+<span class="sd">            mode (int): The filesystem read/write/execute mode. Default is 0o755.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            CheckedOutputException:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Namespace.list"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.list">[docs]</a>    <span class="k">def</span> <span class="nf">list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists the contents of a directory.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): The directory to list.</span>
+<span class="sd">            **kwargs: Optional arguments.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">            details: if True, returns the &#39;stat&#39; information for each child.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[str]: if &#39;details&#39; is False</span>
+<span class="sd">            List[Dict]: if &#39;details&#39; is True</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            CheckedOutputException:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Namespace.ls"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.ls">[docs]</a>    <span class="k">def</span> <span class="nf">ls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        An alias for &#39;list&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Namespace.mkfile"><a class="viewcode-back" href="../../../api-reference/velstor.pcapi.html#velstor.pcapi.namespace.Namespace.mkfile">[docs]</a>    <span class="k">def</span> <span class="nf">mkfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a file of a specified size on the vtrq.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path (str): The directory to list.</span>
+
+<span class="sd">        Keyword Args:</span>
+<span class="sd">            parents (bool): If true, create missing intermediate directories.</span>
+<span class="sd">                Default is to raise an error.</span>
+<span class="sd">            mode (int): The filesystem read/write/execute mode. Default is 0o755.</span>
+<span class="sd">            size (int): The size in bytes of the file to be created. Default is 0.</span>
+<span class="sd">            force (bool): If True, an existing file is overwritten. Otherwise,</span>
+<span class="sd">                raises an exception.  Default is False.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            CheckedOutputException:</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, IC Manage Inc..
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0-beta',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

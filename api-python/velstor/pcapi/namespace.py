@@ -20,8 +20,17 @@ class Namespace:
         self.session = session
         self._vtrq_id = int(kwargs['vtrq_id'] if 'vtrq_id' in kwargs else 0)
 
+    @property
+    def cwd(self):
+        """str: Gets or sets the current working directory."""
+        return self._cwd
+
+    def cwd(self, path):
+        self._cwd = path
+
     def clone(self, src, dest, **kwargs):
         """
+        Makes a meta-data copy of a file or directory.
 
         Args:
             src: The directory to clone.
@@ -31,23 +40,26 @@ class Namespace:
             overwrite (bool): When true, an existing destination is overwritten
               with 'cp -r' semantics; otherwise, TBD.  Default is False
 
-        Returns:
-            TBD
+        Raises:
+            RESTException:
         """
         overwrite = kwargs['overwrite'] if 'overwrite' in kwargs else False
         pass
 
-    def delete(self, path, recursive=False):
+    def delete(self, path):
         """
         Deletes the namespace node at 'path'.
 
         Args:
             path (str): Node to delete.
-            recursive (bool): When true, delete subdirectories, otherwise,
+            **kwargs: Optional arguments.
+
+        Keyword Args:
+            recursive (bool): When True, delete subdirectories, otherwise,
               raises an exception if subdirectories exist.
 
-        Returns:
-            TBD
+        Raises:
+            CheckedOutputException:
         """
 
     def mkdir(self, path, **kwargs):
@@ -63,21 +75,28 @@ class Namespace:
                 Default is to raise an error.
             mode (int): The filesystem read/write/execute mode. Default is 0o755.
 
-        Returns:
-            TBD
+        Raises:
+            CheckedOutputException:
         """
         pass
 
-    def list(self, path, details=False):
+    def list(self, path, **kwargs):
         """
         Lists the contents of a directory.
 
         Args:
             path (str): The directory to list.
+            **kwargs: Optional arguments.
+
+        Keyword Args:
             details: if True, returns the 'stat' information for each child.
 
         Returns:
-            TBD
+            List[str]: if 'details' is False
+            List[Dict]: if 'details' is True
+
+        Raises:
+            CheckedOutputException:
         """
         pass
 
@@ -87,3 +106,21 @@ class Namespace:
         """
         return self.list(path)
 
+    def mkfile(self, path):
+        """
+        Creates a file of a specified size on the vtrq.
+
+        Args:
+            path (str): The directory to list.
+
+        Keyword Args:
+            parents (bool): If true, create missing intermediate directories.
+                Default is to raise an error.
+            mode (int): The filesystem read/write/execute mode. Default is 0o755.
+            size (int): The size in bytes of the file to be created. Default is 0.
+            force (bool): If True, an existing file is overwritten. Otherwise,
+                raises an exception.  Default is False.
+
+        Raises:
+            CheckedOutputException:
+        """

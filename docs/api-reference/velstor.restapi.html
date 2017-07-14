@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +88,10 @@
           
             
             
-                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+              
+            
+            
+              <p class="caption"><span class="caption-text">About the vCNC</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
@@ -141,8 +147,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">vcnc</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">vcnc</a>
+        
       </nav>
 
 
@@ -151,27 +159,44 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="modules.html">api-python</a> &raquo;</li>
-      
+        
           <li><a href="velstor.html">velstor package</a> &raquo;</li>
-      
-    <li>velstor.restapi package</li>
+        
+      <li>velstor.restapi package</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/api-reference/velstor.restapi.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -312,54 +337,9 @@ deliver the result; <em>failed</em> means the API call has permanently failed; a
 <div class="section" id="module-velstor.restapi.namespace">
 <span id="velstor-restapi-namespace-module"></span><h2>velstor.restapi.namespace module<a class="headerlink" href="#module-velstor.restapi.namespace" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="velstor.restapi.namespace.consistency_get">
-<code class="descclassname">velstor.restapi.namespace.</code><code class="descname">consistency_get</code><span class="sig-paren">(</span><em>session</em>, <em>vtrqid</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/velstor/restapi/namespace.html#consistency_get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#velstor.restapi.namespace.consistency_get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the consistency semantics attribute of a namespace node.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>session</strong> (<code class="xref py py-class docutils literal"><span class="pre">Session</span></code>) &#8211; Provides security information.</li>
-<li><strong>vtrqid</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; ID of the vTRQ.</li>
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Fully-qualified namespace path.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The return value of <a class="reference internal" href="#velstor.restapi.fulfill202.fulfill202" title="velstor.restapi.fulfill202.fulfill202"><code class="xref py py-func docutils literal"><span class="pre">fulfill202()</span></code></a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="velstor.restapi.namespace.consistency_set">
-<code class="descclassname">velstor.restapi.namespace.</code><code class="descname">consistency_set</code><span class="sig-paren">(</span><em>session</em>, <em>vtrqid</em>, <em>value</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/velstor/restapi/namespace.html#consistency_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#velstor.restapi.namespace.consistency_set" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the consistency semantics attribute of a namespace node.</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>Args:</dt>
-<dd>session (<code class="xref py py-class docutils literal"><span class="pre">Session</span></code>): Provides security information.
-vtrqid (int): ID of the vTRQ.
-value (str): Either &#8216;eventual&#8217; or &#8216;immediate&#8217;
-path (str): Fully-qualified namespace path.</dd>
-</dl>
-</div></blockquote>
-<dl class="docutils">
-<dt>&#8216;</dt>
-<dd><dl class="first last docutils">
-<dt>Returns:</dt>
-<dd>The return value of <a class="reference internal" href="#velstor.restapi.fulfill202.fulfill202" title="velstor.restapi.fulfill202.fulfill202"><code class="xref py py-func docutils literal"><span class="pre">fulfill202()</span></code></a></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="function">
 <dt id="velstor.restapi.namespace.copy_vector">
 <code class="descclassname">velstor.restapi.namespace.</code><code class="descname">copy_vector</code><span class="sig-paren">(</span><em>session</em>, <em>vtrqid</em>, <em>pairs</em>, <em>overwrite</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/velstor/restapi/namespace.html#copy_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#velstor.restapi.namespace.copy_vector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the consistency semantics attribute of a namespace node.</p>
+<dd><p>Performs one or more meta-data copies on the vtrq.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -367,8 +347,9 @@ path (str): Fully-qualified namespace path.</dd>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>session</strong> (<code class="xref py py-class docutils literal"><span class="pre">Session</span></code>) &#8211; Provides security information.</li>
 <li><strong>vtrqid</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; ID of the vTRQ.</li>
-<li><strong>pairs</strong> (<a class="reference internal" href="#velstor.restapi.grid.list" title="velstor.restapi.grid.list"><em>list</em></a>) &#8211; A list of (source, destination) pairs.</li>
-<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; When true, an existing destination is overwritten with &#8216;cp -r&#8217; semantics; otherwise, the pair is skipped.</li>
+<li><strong>pairs</strong> (<a class="reference internal" href="#velstor.restapi.workspace.list" title="velstor.restapi.workspace.list"><em>list</em></a>) &#8211; A list of (source, destination) pairs.</li>
+<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; When true, an existing destination is overwritten with
+&#8216;cp -r&#8217; semantics; otherwise, the pair is skipped.</li>
 </ul>
 </td>
 </tr>
@@ -405,7 +386,7 @@ path (str): Fully-qualified namespace path.</dd>
 <dl class="function">
 <dt id="velstor.restapi.namespace.list">
 <code class="descclassname">velstor.restapi.namespace.</code><code class="descname">list</code><span class="sig-paren">(</span><em>session</em>, <em>vtrqid</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/velstor/restapi/namespace.html#list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#velstor.restapi.namespace.list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the consistency semantics attribute of a namespace node.</p>
+<dd><p>Returns names of the child nodes of a vtrq path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -427,7 +408,7 @@ path (str): Fully-qualified namespace path.</dd>
 <dl class="function">
 <dt id="velstor.restapi.namespace.mkdir">
 <code class="descclassname">velstor.restapi.namespace.</code><code class="descname">mkdir</code><span class="sig-paren">(</span><em>session</em>, <em>vtrqid</em>, <em>mode</em>, <em>parents</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/velstor/restapi/namespace.html#mkdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#velstor.restapi.namespace.mkdir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves the consistency semantics attribute of a namespace node.</p>
+<dd><p>Creates a directory on the vtrq.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -632,7 +613,7 @@ path (str): Fully-qualified namespace path.</dd>
 <li><strong>session</strong> (<code class="xref py py-class docutils literal"><span class="pre">Session</span></code>) &#8211; Provides security information.</li>
 <li><strong>vtrqid</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; ID of the vTRQ.</li>
 <li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Fully-qualified workspace name.</li>
-<li><strong>spec</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em><em></em>) &#8211; Workspace definition</li>
+<li><strong>spec</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em>]</em>) &#8211; Workspace definition</li>
 </ul>
 </td>
 </tr>
@@ -651,15 +632,18 @@ path (str): Fully-qualified namespace path.</dd>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../developer/about-this-document.html" class="btn btn-neutral float-right" title="About this Document" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../developer/about-this-document.html" class="btn btn-neutral float-right" title="About this Document" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="velstor.pcapi.html" class="btn btn-neutral" title="velstor.pcapi package" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="velstor.pcapi.html" class="btn btn-neutral" title="velstor.pcapi package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -693,7 +677,8 @@ path (str): Fully-qualified namespace path.</dd>
             VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

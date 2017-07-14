@@ -1,27 +1,43 @@
-velstor.pcapi package
-=====================
+velstor\.pcapi package
+======================
 
 Submodules
 ----------
 
-velstor.pcapi.exceptions module
--------------------------------
+velstor\.pcapi\.exceptions module
+---------------------------------
 
 .. automodule:: velstor.pcapi.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.pcapi.volume module
----------------------------
+velstor\.pcapi\.mount module
+----------------------------
+
+.. automodule:: velstor.pcapi.mount
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+velstor\.pcapi\.namespace module
+--------------------------------
+
+.. automodule:: velstor.pcapi.namespace
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+velstor\.pcapi\.volume module
+-----------------------------
 
 .. automodule:: velstor.pcapi.volume
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.pcapi.workspace module
-------------------------------
+velstor\.pcapi\.workspace module
+--------------------------------
 
 .. automodule:: velstor.pcapi.workspace
     :members:

@@ -18,7 +18,8 @@ Follow PEP 8.  Where PEP 8 is silent, use the `Google Python Style Guide`_.
 Docstrings are processed by `Napoleon`_ and formatted in `Google style`_.
 
 Annotate types in your docstrings. Parameter types (Args and Keyword Args) are
-parenthesized.
+parenthesized.  JetBrains has published a `useful overview of Python type
+hinting`_.
 
 .. code-block:: python
 
@@ -44,10 +45,25 @@ Types for properties are not parenthesized:
         """str: Absolute vtrq path mapped by this workspace."""
         return self._vtrq_path
 
+Getter/setter pairs are documented in the getter only:
+
+.. code-block:: python
+
+    @property
+    def cwd(self):
+        """str: Gets or sets the current working directory."""
+        return self._cwd
+
+    def cwd(self, path):
+        self._cwd = path
+
+Refer to this `Stack Overflow answer`_ for background.
 
 .. _Google Python Style Guide: https://google.github.io/styleguide/pyguide.html
 .. _Google style: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google
 .. _Napoleon: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/
+.. _useful overview of Python type hinting: https://blog.jetbrains.com/pycharm/2015/11/python-3-5-type-hinting-in-pycharm-5/).
+.. _Stack Overflow answer: https://stackoverflow.com/a/16025754
 
 JavaScript
 ----------
