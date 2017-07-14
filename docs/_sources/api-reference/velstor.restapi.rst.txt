@@ -1,59 +1,59 @@
-velstor.restapi package
-=======================
+velstor\.restapi package
+========================
 
 Submodules
 ----------
 
-velstor.restapi.fulfill202 module
----------------------------------
+velstor\.restapi\.fulfill202 module
+-----------------------------------
 
 .. automodule:: velstor.restapi.fulfill202
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.grid module
----------------------------
+velstor\.restapi\.grid module
+-----------------------------
 
 .. automodule:: velstor.restapi.grid
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.namespace module
---------------------------------
+velstor\.restapi\.namespace module
+----------------------------------
 
 .. automodule:: velstor.restapi.namespace
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.service module
-------------------------------
+velstor\.restapi\.service module
+--------------------------------
 
 .. automodule:: velstor.restapi.service
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.session module
-------------------------------
+velstor\.restapi\.session module
+--------------------------------
 
 .. automodule:: velstor.restapi.session
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.vp module
--------------------------
+velstor\.restapi\.vp module
+---------------------------
 
 .. automodule:: velstor.restapi.vp
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.restapi.workspace module
---------------------------------
+velstor\.restapi\.workspace module
+----------------------------------
 
 .. automodule:: velstor.restapi.workspace
     :members:

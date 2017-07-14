@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -44,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -84,7 +87,10 @@
           
             
             
-                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+              
+            
+            
+              <p class="caption"><span class="caption-text">About the vCNC</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
@@ -115,7 +121,6 @@
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-server-run.html">Running <em>vcnc-server</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="run/vclc-run.html">Running <em>vclc</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="run/vcnc-web-run.html">Running <em>vcnc-web</em></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../api-reference/modules.html">api-python</a></li>
 </ul>
 <p class="caption"><span class="caption-text">About this Document</span></p>
 <ul>
@@ -134,8 +139,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">vcnc</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">vcnc</a>
+        
       </nav>
 
 
@@ -144,23 +151,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-    <li>Policies</li>
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Policies</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/developer/coding-policies.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -179,7 +203,8 @@
 <p>Follow PEP 8.  Where PEP 8 is silent, use the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a>.</p>
 <p>Docstrings are processed by <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/">Napoleon</a> and formatted in <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html#example-google">Google style</a>.</p>
 <p>Annotate types in your docstrings. Parameter types (Args and Keyword Args) are
-parenthesized.</p>
+parenthesized.  JetBrains has published a <a class="reference external" href="https://blog.jetbrains.com/pycharm/2015/11/python-3-5-type-hinting-in-pycharm-5/).">useful overview of Python type
+hinting</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Workspace</span><span class="p">(</span><span class="n">CommonEqualityMixin</span><span class="p">):</span>
     <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    Represents a vtrq workspace and its hierarchical name.</span>
@@ -201,6 +226,17 @@ parenthesized.</p>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vtrq_path</span>
 </pre></div>
 </div>
+<p>Getter/setter pairs are documented in the getter only:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">cwd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;str: Gets or sets the current working directory.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cwd</span>
+
+<span class="k">def</span> <span class="nf">cwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cwd</span> <span class="o">=</span> <span class="n">path</span>
+</pre></div>
+</div>
+<p>Refer to this <a class="reference external" href="https://stackoverflow.com/a/16025754">Stack Overflow answer</a> for background.</p>
 </div>
 <div class="section" id="javascript">
 <h2>JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h2>
@@ -230,15 +266,18 @@ ESLInt and PEP 8 validation is recommended.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="workflow.html" class="btn btn-neutral float-right" title="Workflow" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="workflow.html" class="btn btn-neutral float-right" title="Workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ide.html" class="btn btn-neutral" title="IDEs" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ide.html" class="btn btn-neutral" title="IDEs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -272,7 +311,8 @@ ESLInt and PEP 8 validation is recommended.</p>
             VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

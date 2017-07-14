@@ -12,16 +12,16 @@ Subpackages
 Submodules
 ----------
 
-velstor.libtest module
-----------------------
+velstor\.libtest module
+-----------------------
 
 .. automodule:: velstor.libtest
     :members:
     :undoc-members:
     :show-inheritance:
 
-velstor.libutil module
-----------------------
+velstor\.libutil module
+-----------------------
 
 .. automodule:: velstor.libutil
     :members:

@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -44,6 +46,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -84,7 +87,10 @@
           
             
             
-                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+              
+            
+            
+              <p class="caption"><span class="caption-text">About the vCNC</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
@@ -131,8 +137,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">vcnc</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">vcnc</a>
+        
       </nav>
 
 
@@ -141,23 +149,40 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
-    <li>Preparing to Build</li>
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Preparing to Build</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../../_sources/developer/building/build-prepare.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -225,15 +250,18 @@ or Leap 42) provides GCC 4.8.  On SuSE, it sufficient to install the
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="vcnc-server-build.html" class="btn btn-neutral float-right" title="Building vcnc-server" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="vcnc-server-build.html" class="btn btn-neutral float-right" title="Building vcnc-server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../workflow.html" class="btn btn-neutral" title="Workflow" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../workflow.html" class="btn btn-neutral" title="Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -267,7 +295,8 @@ or Leap 42) provides GCC 4.8.  On SuSE, it sufficient to install the
             VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

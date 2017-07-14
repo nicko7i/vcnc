@@ -13,6 +13,8 @@
 
   
   
+  
+  
 
   
 
@@ -45,6 +47,7 @@
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
@@ -85,7 +88,10 @@
           
             
             
-                <p class="caption"><span class="caption-text">About the vCNC</span></p>
+              
+            
+            
+              <p class="caption"><span class="caption-text">About the vCNC</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about-vcnc/vcnc-architecture.html">vCNC Architecture</a></li>
 </ul>
@@ -141,8 +147,10 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">vcnc</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">vcnc</a>
+        
       </nav>
 
 
@@ -151,25 +159,42 @@
         <div class="rst-content">
           
 
- 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="modules.html">api-python</a> &raquo;</li>
-      
-    <li>velstor package</li>
+        
+      <li>velstor package</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/api-reference/velstor.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -184,6 +209,8 @@
 <li class="toctree-l1"><a class="reference internal" href="velstor.pcapi.html">velstor.pcapi package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi.exceptions">velstor.pcapi.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi.mount">velstor.pcapi.mount module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi.namespace">velstor.pcapi.namespace module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi.volume">velstor.pcapi.volume module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi.workspace">velstor.pcapi.workspace module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="velstor.pcapi.html#module-velstor.pcapi">Module contents</a></li>
@@ -293,7 +320,7 @@
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><ul class="first simple">
 <li><strong>vtrq_id</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; vtrq ID.  Default is 0.</li>
 <li><strong>vtrq_path</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Absolute vtrq path mapped to mount point. Default is &#8216;/&#8217;.</li>
 <li><strong>writeback</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Writeback semantics.  One of &#8216;always&#8217;, &#8216;explicit&#8217;,
@@ -385,7 +412,7 @@
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first"><strong>is_private</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; False if &#8216;writeback&#8217; is &#8216;always&#8217;, True otherwise.</p>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first"><strong>is_private</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; False if &#8216;writeback&#8217; is &#8216;always&#8217;, True otherwise.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The stdout of the call to &#8216;vp&#8217;.</p>
@@ -571,15 +598,18 @@ string &#8216;body&#8217;.</p>
 
 
            </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="velstor.pcapi.html" class="btn btn-neutral float-right" title="velstor.pcapi package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="velstor.pcapi.html" class="btn btn-neutral float-right" title="velstor.pcapi package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="modules.html" class="btn btn-neutral" title="api-python" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral" title="api-python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -613,7 +643,8 @@ string &#8216;body&#8217;.</p>
             VERSION:'1.0-beta',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>

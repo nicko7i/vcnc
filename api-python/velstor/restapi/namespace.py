@@ -18,7 +18,8 @@ def copy_vector(session, vtrqid, pairs, overwrite):
         session (:class:`~velstor.restapi.Session`): Provides security information.
         vtrqid (int): ID of the vTRQ.
         pairs (list): A list of (source, destination) pairs.
-        overwrite (bool): When true, an existing destination is overwritten with 'cp -r' semantics; otherwise, the pair is skipped.
+        overwrite (bool): When true, an existing destination is overwritten with
+            'cp -r' semantics; otherwise, the pair is skipped.
 
     Returns:
         The return value of :func:`~velstor.restapi.fulfill202.fulfill202`
