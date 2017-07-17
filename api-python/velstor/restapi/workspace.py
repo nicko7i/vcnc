@@ -26,8 +26,8 @@ def delete(session, vtrqid, path):
     #
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'workspaces',
                     str(vtrqid),
+                    'workspaces',
                     urlencode(path)])
     r = requests.delete(url)
     return fulfill202(session, r)
@@ -49,8 +49,8 @@ def get(session, vtrqid, path):
     #
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'workspaces',
                     str(vtrqid),
+                    'workspaces',
                     urlencode(path)])
     r = requests.get(url)
     return fulfill202(session, r)
@@ -74,8 +74,8 @@ def list(session, vtrqid, path):
     #
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'workspaces',
                     str(vtrqid),
+                    'workspaces',
                     urlencode(path),
                     'children'])
     r = requests.get(url)
@@ -99,11 +99,11 @@ def set(session, vtrqid, path, spec):
     #
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'workspaces',
-                    str(vtrqid)])
+                    str(vtrqid),
+                    'workspaces'])
     try:
         spec = spec if isinstance(spec, str) else ' '.join(spec)
-        r = requests.post(url, json={'name': path, 'spec': json.loads(spec)})
+        r = requests.post(url, json={'path': path, 'spec': json.loads(spec)})
         return fulfill202(session, r)
     except ValueError as e:
         message = 'Invalid workspace specification: ' + str(e)

@@ -15,9 +15,9 @@ def shutdown(session, vtrqid):
         The return value of :func:`~velstor.restapi.fulfill202.fulfill202`
     """
     # validate vtrqid is an integer
-    url = '/'.join([session.base_url()
-                    , 'vtrq'
-                    , 'service'
-                    , str(vtrqid)])
+    url = '/'.join([session.base_url(),
+                    'vtrq',
+                    str(vtrqid),
+                    'service'])
     r = requests.delete(url)
     return fulfill202(session, r)

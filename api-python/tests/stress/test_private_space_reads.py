@@ -5,15 +5,13 @@
 #    % python3 -m pytest
 #
 import velstor.libtest as libtest
-import os
-import subprocess
 
 
 def test_private_space_reads():
     #
     #  Constants
     #
-    vp_mount_root = '/tmp/vcnc/stress/'
+    vp_mount_root = libtest.config.vp_mount_root
     vtrq_path = '/test/stress'
     public_vp_mountpt = vp_mount_root + libtest.random_identifier(8)
     private_vp_mountpt = vp_mount_root + libtest.random_identifier(8)
@@ -27,7 +25,7 @@ def test_private_space_reads():
     #  Create the directory in the vtrq
     #
     try:
-      libtest.vclc('ns', 'mkdir', '-p', vtrq_path)
+        libtest.vclc('ns', 'mkdir', '-p', vtrq_path)
     except libtest.VclcError:
         pass
     #

@@ -48,13 +48,36 @@ class VclcError(Exception):
             self.cmd, self.returncode, self.output)
 
 
-config = {
-    'vcnc': 'cnc:7130',
-    'vp_mount_root': '/tmp/vcnc/stress/',
-    'vpm': 'cnc,7110,tcp4',
-    'vtrq': 'trq,7100,tcp4',
-    'vtrqid': 0
-}
+class Config(object):
+
+    def __init__(self):
+        self.port_base = 7100  # Mastiff
+        try:
+            self.port_base = os.environ['TEST_PORT_BASE']
+        except KeyError:
+            pass
+
+    @property
+    def vcnc(self):
+        return 'cnc:{}'.format(self.port_base + 30)
+
+    @property
+    def vp_mount_root(self):
+        return '/tmp/vcnc/stress/'
+
+    @property
+    def vpm(self):
+        return 'cnc,{},tcp4'.format(self.port_base + 10)
+
+    @property
+    def vtrq(self):
+        return 'trq,{},tcp4'.format(self.port_base)
+
+    @property
+    def vtrqid(self):
+        return 0
+
+config = Config()
 
 
 def command(*args):
@@ -90,8 +113,8 @@ def vclc(*args):
     # Form the command
     #
     cmd = ['./bin/vclc',
-           '--vcnc=' + config['vcnc'],
-           '--vtrqid=' + str(config['vtrqid'])] + list(args)
+           '--vcnc=' + config.vcnc,
+           '--vtrqid=' + str(config.vtrqid)] + list(args)
     print('vclc: invoking:', ' '.join(cmd))
     try:
         doc = subprocess.check_output(cmd).decode('utf-8')
@@ -217,7 +240,7 @@ def mount_vp(path, workspace_pathname, **kwargs):
     #  Invoke the VP
     cmd = ['vp',
            '--mount=' + path,
-           '--mentor=' + config['vpm'],
+           '--mentor=' + config.vpm,
            '--workspace=' + workspace_pathname]
     if is_private:
         cmd = cmd + ['--fuse-cache=auto', '--timeout=1']

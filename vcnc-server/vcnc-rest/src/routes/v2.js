@@ -531,6 +531,28 @@ module.exports = (app) => {
   });
 
   //
+  //  Discover VP IDs having certain qualities
+  //  (Deprecated v1-style)
+  //
+  app.get('/vtrq/:vtrq_id/vp', (req, res) => {
+    fulfill202(
+      req,
+      res,
+      (cb) => {
+        latency()
+        .then(() => {
+          cnctrqClient.vp_find(
+            req.pathParams.vtrq_id,
+            req.query.vp_host,
+            req.query.mount_point,
+            (result) => {
+              cb(adapter(result, { vp_ids: result.vp_ids }));
+            });
+        });
+      });
+  });
+
+  //
   //  Retrieve information about a specific VP
   //
   app.get('/vtrq/:vtrq_id/vp/:vp_id', (req, res) => {

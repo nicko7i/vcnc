@@ -20,8 +20,9 @@ def get(session, vtrqid, vpid):
     #  validate vpid
     #
     url = '/'.join([session.base_url(),
-                    'vtrq/vp',
+                    'vtrq',
                     str(vtrqid),
+                    'vp',
                     vpid])
     r = requests.get(url)
     return fulfill202(session, r)
@@ -42,8 +43,9 @@ def delete(session, vtrqid, vpid):
     #  validate vpid
     #
     url = '/'.join([session.base_url(),
-                    'vtrq/vp',
+                    'vtrq',
                     str(vtrqid),
+                    'vp',
                     vpid])
     r = requests.delete(url)
     return fulfill202(session, r)
@@ -65,8 +67,9 @@ def find(session, vtrqid, vp_host, mount_point):
     #  validate vpid
     #
     url = '/'.join([session.base_url(),
-                    'vtrq/vp',
-                    str(vtrqid)])
+                    'vtrq',
+                    str(vtrqid),
+                    'vp'])
     r = requests.get(url,
                      params={'vp_host': vp_host,
                              'mount_point': mount_point})

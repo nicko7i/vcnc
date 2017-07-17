@@ -32,7 +32,7 @@ class Session:
                 return self
 
             def base_url(self):
-                return 'http://' + self.host + '/v1'
+                return 'http://' + self.host + '/v2'
 
         self.instance = SessionWorker()
         return self.instance

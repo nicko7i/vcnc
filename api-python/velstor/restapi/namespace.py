@@ -29,8 +29,8 @@ def copy_vector(session, vtrqid, pairs, overwrite):
     #  validate overwrite is boolean
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'meta_copy',
-                    str(vtrqid)])
+                    str(vtrqid),
+                    'meta_copy'])
     r = requests.post(url,
                       params={'overwrite': overwrite},
                       json={'copy_paths': pairs})
@@ -53,8 +53,8 @@ def delete(session, vtrqid, path, recursive):
     #  validate path is a string and is absolute
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'namespace',
                     str(vtrqid),
+                    'namespace',
                     urlencode(path)])
     r = requests.delete(url, params={'recursive': recursive})
     return fulfill202(session, r)
@@ -76,8 +76,8 @@ def mkdir(session, vtrqid, mode, parents, path):
     #  validate recursive is boolean
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'namespace',
                     str(vtrqid),
+                    'namespace',
                     urlencode(path),
                     'mkdir'])
     r = requests.post(url, params={'mode': mode, 'parents': parents})
@@ -99,8 +99,8 @@ def list(session, vtrqid, path):
     #  validate path is a string and is absolute
     url = '/'.join([session.base_url(),
                     'vtrq',
-                    'namespace',
                     str(vtrqid),
+                    'namespace',
                     urlencode(path),
                     'children'])
     r = requests.get(url, timeout=5.0)

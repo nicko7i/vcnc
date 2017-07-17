@@ -3,6 +3,10 @@ import json
 from velstor.restapi import Session
 from velstor.pcapi import Workspace
 from velstor.pcapi import RESTException
+from velstor.libtest import Config
+
+
+config = Config()
 
 
 def test_as_json():
@@ -13,7 +17,7 @@ def test_as_json():
 
 def test_get_well_known_workspace():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         w = Workspace(session).get('/root/local')
         assert(w.pathname == '/root/local')
         assert(w.vtrq_id == 0)
@@ -23,7 +27,7 @@ def test_get_well_known_workspace():
 
 def test_set_no_pathname():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         w = Workspace(session)
         try:
             w.set()
@@ -49,7 +53,7 @@ def test_equality_operator():
 
 def test_lifecycle_success():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         w = Workspace(session, pathname='/bubba', writeback='never')
         #
         #  Prepare by deleting any existing workspace.
@@ -69,7 +73,7 @@ def test_lifecycle_success():
 
 def test_get_enoent():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         try:
             Workspace(session, pathname='/not/even').get()
             assert False
@@ -81,7 +85,7 @@ def test_get_enoent():
 @pytest.mark.xfail
 def test_delete_enoent():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         try:
             Workspace(session, pathname='/not/even').delete()
             assert False
@@ -92,7 +96,7 @@ def test_delete_enoent():
 
 def test_get_default():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         try:
             Workspace(session).get()
             assert False
@@ -102,7 +106,7 @@ def test_get_default():
 
 def test_set_default():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         try:
             Workspace(session).set()
             assert False
@@ -112,7 +116,7 @@ def test_set_default():
 
 def test_delete_default():
     with Session() as session:
-        session.login('cnc:7130')
+        session.login(config.vcnc)
         try:
             Workspace(session).delete()
             assert False
