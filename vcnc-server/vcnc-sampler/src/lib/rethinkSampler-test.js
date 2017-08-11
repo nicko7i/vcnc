@@ -3,7 +3,7 @@
  *
  *    See the file 'COPYING' for license information.
  */
-// const json = require('JSON');
+const json = require('JSON');
 const r = require('rethinkdb');
 const conf = require('./vcncSampler.conf');
 //
@@ -20,7 +20,6 @@ const dbName = config.rethinkdb.connection.db;
 //  fed for more than one minute.
 //
 let watchdogFed;
-
 function feedWatchdog() {
   watchdogFed = true;
 }
@@ -65,22 +64,23 @@ function Trim(timespanSec) {
  *  @return {promise} A promise fulfilled when the connection is ready.
  */
 function Init() {
+//  return r.connect(config.rethinkdb.connection)
   return r.connect(config.rethinkdb.connection)
   .then((conn) => {
     cnxtn = conn;  // save the connection for later reuse
     return r.dbList().filter(v => v.eq(dbName)).run(conn);
   }, (e) => {
-    console.error('ERROR: rethinkdb is not running');
-    throw (e);
+	 console.error('ERROR: rethinkdb is not running');
+	 throw (e);
   })
-.then((lst) => {
+  .then((lst) => {
     //  Create the database if necessary
     if (lst.length === 0) {
       return r.dbCreate(dbName).run(cnxtn)
       .then(() => r.tableCreate(tbl).run(cnxtn)
         .then(() => {
           r.table(tbl).indexCreate('timestamp').run(cnxtn);
-        }));
+      }));
     }
   })
   .then(() =>
@@ -92,7 +92,7 @@ function Init() {
       // return r.tableCreate(table).indexCreate('timestamp').run(cnxtn);
       return r.tableCreate(tbl).run(cnxtn)
       .then(() => {
-        r.table(tbl).indexCreate('timestamp').run(cnxtn);
+      r.table(tbl).indexCreate('timestamp').run(cnxtn);
       })
       .then(() => r.table(tableName).orderBy(r.desc('timestamp')).run(cnxtn));
     }
@@ -100,7 +100,7 @@ function Init() {
   .then(() => {
     r.db(dbName).wait().run(cnxtn);
   });
-//  return Promise.resolve();
+  return Promise.resolve();
 }
 //
 function GetConnection() {
@@ -115,6 +115,20 @@ function CloseConnection() {
   cnxtn.close({ noreplyWait: false });
 }
 
+function PushEmptyBin(entry) {
+  const sample = Object.assign({}, entry);
+  return r.table(tbl).insert(Object.assign({},sample, { timestamp: r.now() })).run(cnxtn);
+}
+
+function PushTestBin(entry) {
+	const sample = Object.assign({}, entry);
+	//
+	feedWatchdog();
+	return r.table(tbl).insert(
+		Object.assign({}, sample, { timestamp: r.now() })
+	).run(cnxtn);
+}
+
 module.exports = {
   GetConnection,
   GetTable,
@@ -122,4 +136,6 @@ module.exports = {
   Push,
   Trim,
   CloseConnection,
+  PushEmptyBin,
+  PushTestBin,
 };

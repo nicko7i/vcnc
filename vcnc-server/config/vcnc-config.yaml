@@ -17,8 +17,9 @@ server:
   #  environment variable.
   #
   #  A rate of a few seconds is intended for customer demo, not production.
+  #  The default is once per day (86400000)
   #
-  vtrqPollPeriod: 20000
+  vtrqPollPeriod: 86400000
 
 fulfill202:
   #
@@ -57,7 +58,7 @@ vcncSampler:
   maxEntries: 100
   #
   #  The maximum number of beans to collect messages
-  maxBins: 100
+  maxBins: 12
   #
   #  The RethinkDB table where the real-time dashboard data is stored.
   table: vdasampler
@@ -66,7 +67,7 @@ vcncSampler:
   period: 5000
   #
   #  The period extension in ms to prevent data loss, ms
-  latency: 30000
+  latency: 5000
   #
   #  The IP address (or hostname) on which to listen for vda posts.
   #  0.0.0.0 listens on all interfaces.

@@ -1,3 +1,13 @@
+Release 3.8.9
+
+Updated promises to wait for until db/table were completed
+
+Release 3.8.8
+
+Added watchdog to control  that vda messages are coming to vcnc-sampler;
+Fixed bug;
+Added capability to create a new DB in case of it doesn't exist.
+
 Release 3.8.7
 
     <T1797> Removed unused 'namespace consistency' features.
