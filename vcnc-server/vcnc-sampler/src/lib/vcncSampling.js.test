@@ -26,6 +26,7 @@ class VcncSampling {
     this.latency = parseInt(ltc, 10); // ms
     this.msgSampler = sampler.CreateVcncSampler(this.sampleTime, this.latency);
     this.msgCount = 0;
+    this.samplingTime = 0;
   }
    /**
     *  Initializes the vcncSampler module, creating a connection object
@@ -79,14 +80,25 @@ class VcncSampling {
       self.Process(jsonData);
     }
   }
-
+  
   Send() {
     const self = this;
     if (self.msgSampler.IsSampling() === false) return;
-    const bin = self.msgSampler.ReleaseBin();
+//    const bin = self.msgSampler.ReleaseBin();
+    
+    const bin = {
+      storageEfficiency: 0,
+      sum_st_size: 0,
+      sum_extents: 0,
+      rVtrq: 0,
+      //  Any reads resolved on the vtrq were not resolved on the vpm. <B8569>
+      rVpm: 0,
+      sampleTimestamp: self.samplingTime,
+    };
+    self.samplingTime += 5;
+    console.log(json.stringify(bin));
     rethink.Push(bin);
   }
-//
 //    console.log('<<< Finished Send');
 
   ProcessCheck() {
