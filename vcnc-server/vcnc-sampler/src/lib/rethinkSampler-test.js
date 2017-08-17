@@ -3,7 +3,7 @@
  *
  *    See the file 'COPYING' for license information.
  */
-const json = require('JSON');
+// const json = require('JSON');
 const r = require('rethinkdb');
 const conf = require('./vcncSampler.conf');
 //
@@ -35,21 +35,6 @@ setInterval(
   60 * 1000);
 //  End of watchdog code
 
-/**
- * Adds real time data for timepoint "now".
- *
- * @param entry - data bin
-*/
-function Push(entry) {
-  const sample = Object.assign({}, entry);
-  sample.sampleTimestamp = r.epochTime(entry.sampleTimestamp);
-  //
-  feedWatchdog();
-  return r.table(tbl).insert(
-    Object.assign({}, sample, { timestamp: r.now() })
-  ).run(cnxtn);
-}
-
 function Trim(timespanSec) {
   return r.table(tbl)
   .filter(r.row('timestamp')
@@ -70,8 +55,8 @@ function Init() {
     cnxtn = conn;  // save the connection for later reuse
     return r.dbList().filter(v => v.eq(dbName)).run(conn);
   }, (e) => {
-	 console.error('ERROR: rethinkdb is not running');
-	 throw (e);
+    console.error('ERROR: rethinkdb is not running');
+    throw (e);
   })
   .then((lst) => {
     //  Create the database if necessary
@@ -80,8 +65,9 @@ function Init() {
       .then(() => r.tableCreate(tbl).run(cnxtn)
         .then(() => {
           r.table(tbl).indexCreate('timestamp').run(cnxtn);
-      }));
+        }));
     }
+    return Promise.resolve();
   })
   .then(() =>
     //  Look for the table in the database
@@ -92,15 +78,15 @@ function Init() {
       // return r.tableCreate(table).indexCreate('timestamp').run(cnxtn);
       return r.tableCreate(tbl).run(cnxtn)
       .then(() => {
-      r.table(tbl).indexCreate('timestamp').run(cnxtn);
+        r.table(tbl).indexCreate('timestamp').run(cnxtn);
       })
-      .then(() => r.table(tableName).orderBy(r.desc('timestamp')).run(cnxtn));
+      .then(() => r.table(tbl).orderBy(r.desc('timestamp')).run(cnxtn));
     }
+    return Promise.resolve();
   })
   .then(() => {
     r.db(dbName).wait().run(cnxtn);
   });
-  return Promise.resolve();
 }
 //
 function GetConnection() {
@@ -117,23 +103,25 @@ function CloseConnection() {
 
 function PushEmptyBin(entry) {
   const sample = Object.assign({}, entry);
-  return r.table(tbl).insert(Object.assign({},sample, { timestamp: r.now() })).run(cnxtn);
+  return r.table(tbl).insert(Object.assign({}, sample, { timestamp: r.now() })).run(cnxtn);
 }
-
+/**
+ * Adds real time data for timepoint "now".
+ *
+ * @param entry - data bin
+ */
 function PushTestBin(entry) {
-	const sample = Object.assign({}, entry);
-	//
-	feedWatchdog();
-	return r.table(tbl).insert(
-		Object.assign({}, sample, { timestamp: r.now() })
-	).run(cnxtn);
+  const sample = Object.assign({}, entry);
+  //
+  feedWatchdog();
+  return r.table(tbl).insert(
+    Object.assign({}, sample, { timestamp: r.now() })).run(cnxtn);
 }
 
 module.exports = {
   GetConnection,
   GetTable,
   Init,
-  Push,
   Trim,
   CloseConnection,
   PushEmptyBin,

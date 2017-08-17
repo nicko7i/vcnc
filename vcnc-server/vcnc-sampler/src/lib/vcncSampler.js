@@ -28,12 +28,14 @@ class VcncSampler {
     this.vpmMsgCount = 0;
     this.vtrqMsgCount = 0;
     this.ignoredMsgCount = 0;
+    this.binCount = [];
+    this.totalBins = 0;
   }
 
   BinIndex(ts) {
     const self = this;
     // Index is counting from the beginning of binning process
-    // 
+    //
     return parseInt((ts - self.startDataTime) / self.samplePeriod, 10);
   }
 
@@ -78,9 +80,22 @@ class VcncSampler {
       self.maxIndex = index;
 //      console.log(`maxIndex = ${self.maxIndex}`);
     }
-    // Add number of bytes of read operation to corresponding bin
+
+    // Check new bin (debug code)
+    //
+    if (self.binCount[index - self.minIndex] === undefined) {
+      self.binCount[index - self.minIndex] = 1;
+      self.totalBins += 1;
+      const currts = Date.now();
+      console.log(`Current time: ${currts} index=${index} minIndex=${self.minIndex} totalBins=${self.totalBins}`);
+      console.log(`Bin: ${index - self.minIndex}. ${self.binCount[index - self.minIndex]}`);
+    } else {
+      self.binCount[index - self.minIndex] += 1;
+    }
     //
 
+    // Add number of bytes of read operation to corresponding bin
+    //
     const readBytes = parseInt(jsnMsg.errCode, 10);
     //
     switch (op) {
@@ -97,15 +112,23 @@ class VcncSampler {
       default:
         console.error('Invalid operation');
         self.ignoredMsgCount += 1;
-        return;
     }
-    //
-    self.msgCount += 1;
+  }
+
+  GetBins(t) {
+    const self = this;
+    const binElems = [];
+    let bin = self.ReleaseBin();
+    binElems.push(bin);
+    if ((t - self.samplingTime) > self.samplePeriod) {
+      bin = self.ReleaseBin();
+      binElems.push(bin);
+    }
+    return binElems;
   }
 
   ReleaseBin() {
     const self = this;
-    self.samplingTime += self.samplePeriod;
     // Set time to a center af sample interval
     const vpmRead = (self.pmReadBins[self.minIndex] === undefined) ?
       0 : parseInt(self.pmReadBins[self.minIndex] / self.samplePeriod, 10);
@@ -124,9 +147,7 @@ class VcncSampler {
       rVpm: Math.log10(vpmLocalRead + 1),
       sampleTimestamp: self.samplingTime,
     };
-
 //    console.log(`minIndex: ${self.minIndex} Bin: ${json.stringify(bin)}`);
-
     // Delete processed bin
     //
     if (self.pmReadBins[self.minIndex] !== undefined) delete self.pmReadBins[self.minIndex];
@@ -135,6 +156,7 @@ class VcncSampler {
       self.empty = true;
     }
     self.minIndex += 1;
+    self.samplingTime += self.samplePeriod;
 //    console.log(`Bin: ${json.stringify(bin)}`);
 //    console.log(`minIndex = ${self.minIndex} maxIndex = ${self.maxIndex}`);
 //    console.log('<<< Finished ReleaseBin');
@@ -160,6 +182,10 @@ class VcncSampler {
   IgnoreMessageCount() {
     return this.ignoredMsgCount;
   }
+  BinCount() { return this.binCount; }
+  TotalBins() { return this.totalBins; }
+  CurrentBin() { return this.minIndex; }
+
 }
 
 function CreateVcncSampler(dt, ltc) {

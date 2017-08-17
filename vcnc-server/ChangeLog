@@ -1,3 +1,10 @@
+Release 3.8.10
+
+Syndfchronize sampling process to insertion into rethinkdb table
+Fixed bug to create a new table
+Added test scripts
+
+
 Release 3.8.9
 
 Updated promises to wait for until db/table were completed

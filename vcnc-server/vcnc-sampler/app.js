@@ -69,7 +69,6 @@ console.info(`Sample period:  ${samplePeriod}`);
 console.info(`Output latency:  ${latency}`);
 
 const vcncSample = sampling.CreateVcncSampling(samplePeriod, latency);
-
 //
 //  Output messages to console in case of vcnc-sampler did not get any messages
 // from vda
@@ -77,7 +76,7 @@ const vcncSample = sampling.CreateVcncSampling(samplePeriod, latency);
 
 let waitFirstMessage = setInterval(
   () => {
-    console.log('No messages from VDA yet at least 1 minute(s)');
+    console.info('No messages from VDA yet at least 1 minute(s)');
   }, 60 * 1000);
 // Process buffered messages from VDA
 //
@@ -104,8 +103,8 @@ const server = http.createServer(requestHandler);
 
 // Init all components
 //
-vcncSample.Init()
-.then( () => {
+sampling.Init()
+.then(() => {
   server.listen(port, host, () => {
     console.info(`Listening on ${host}:${port}`);
   });
@@ -125,12 +124,11 @@ const send = setInterval(() => {
 }, vcncSample.PushTimeout());
 
 // Remove old data from rethinkdb table
-const trimTimeout = vcncSample.TrimTimeout();
 const trimPeriod = vcncSample.TrimPeriod();
 const trim = setInterval(() => {
   rethink.Trim(trimPeriod);
   vcncSample.ProcessCheck();
-}, trimTimeout);
+}, vcncSample.TrimTimeout());
 
 // Processing of Linux signals
 //

@@ -22,35 +22,18 @@ const rethink = require('./rethinkSampler');
   */
 class VcncSampling {
   constructor(dt, ltc) {
-    this.sampleTime = parseInt(dt, 10); // ms
+    this.samplePeriod = parseInt(dt, 10); // ms
     this.latency = parseInt(ltc, 10); // ms
-    this.msgSampler = sampler.CreateVcncSampler(this.sampleTime, this.latency);
+    this.msgSampler = sampler.CreateVcncSampler(this.samplePeriod, this.latency);
     this.msgCount = 0;
-  }
-   /**
-    *  Initializes the vcncSampler module, creating a connection object
-    *  and creating the table if necessary.
-    *
-    *  @return {promise} A promise fulfilled when the connection is ready.
-    */
-  Init() {
-    const self = this;
-    return rethink.Init()
-     .then(() => sampler.Init())
-     .then(() => {
-       rethink.Trim(0);
-       return Promise.resolve();
-     }, (e) => {
-       throw (e);
-     });
   }
 
   PushTimeout() {
-    return this.sampleTime;
+    return this.samplePeriod;
   }
 
   TrimTimeout() {
-    const period = this.sampleTime * conf.MaxEntries();
+    const period = this.samplePeriod * conf.MaxEntries();
     return period;
   }
 
@@ -83,21 +66,51 @@ class VcncSampling {
   Send() {
     const self = this;
     if (self.msgSampler.IsSampling() === false) return;
-    const bin = self.msgSampler.ReleaseBin();
-    rethink.Push(bin);
+    const sendTime = parseInt((Date.now() / 1000), 10);
+    const bin = self.msgSampler.GetBins(sendTime);
+    bin.forEach((e) => {
+      rethink.Push(e);
+    });
   }
 //
 //    console.log('<<< Finished Send');
 
   ProcessCheck() {
     const self = this;
+    console.info(`Current time: ${Date.now()}`);
     console.info(`Total Vda messages: ${self.msgCount}`);
     console.info(`Total sampled vpm messages: ${self.msgSampler.VpmMessageCount()}`);
     console.info(`Total sampled vtrq messages: ${self.msgSampler.VtrqMessageCount()}`);
     console.info(`Total sampled messages: ${self.msgSampler.MessageCount()}`);
     console.info(`Total ignored messages = ${self.msgSampler.IgnoreMessageCount()}`);
+    const binCount = self.msgSampler.BinCount();
+    const totalBins = self.msgSampler.TotalBins();
+    console.log('Bins:');
+    for (let i = 0; i < totalBins; i += 1) {
+      if (binCount[i] !== undefined) {
+        console.log(`${i}. ${binCount[i]}`);
+      }
+    }
   }
 }
+
+/**
+ *  Creating a connection to rethinkdb
+ *  and creating the database/table if necessary.
+ *
+ *  @return {promise} A promise fulfilled when the connection is ready.
+ */
+function Init() {
+  return rethink.Init()
+    .then(() => sampler.Init())
+    .then(() => {
+      rethink.Trim(0);
+      return Promise.resolve();
+    }, (e) => {
+      throw (e);
+    });
+}
+
 
 function CreateVcncSampling(dt, ltc) {
   return new VcncSampling(dt, ltc);
@@ -105,5 +118,6 @@ function CreateVcncSampling(dt, ltc) {
 
 module.exports = {
   CreateVcncSampling,
+  Init,
 };
 

@@ -47,12 +47,18 @@ function Push(entry) {
   //
   feedWatchdog();
   return r.table(tbl).insert(
-    Object.assign({}, sample, { timestamp: r.now() })
-  ).run(cnxtn);
+    Object.assign({}, sample, { timestamp: r.now() })).run(cnxtn);
+}
+
+function IsEmpty() {
+  return r.table(tbl).isEmpty().run(cnxtn);
 }
 
 function Trim(timespanSec) {
-  return r.table(tbl)
+  if (IsEmpty() === true) {
+    return Promise.resolve();
+  }
+  r.table(tbl)
   .filter(r.row('timestamp')
   .le(r.now().sub(timespanSec)))
   .delete({ durability: 'soft' }).run(cnxtn);
@@ -73,15 +79,16 @@ function Init() {
     console.error('ERROR: rethinkdb is not running');
     throw (e);
   })
-.then((lst) => {
+  .then((lst) => {
     //  Create the database if necessary
     if (lst.length === 0) {
       return r.dbCreate(dbName).run(cnxtn)
-      .then(() => r.tableCreate(tbl).run(cnxtn)
-        .then(() => {
-          r.table(tbl).indexCreate('timestamp').run(cnxtn);
-        }));
+        .then(() => r.tableCreate(tbl).run(cnxtn)
+          .then(() => {
+            r.table(tbl).indexCreate('timestamp').run(cnxtn);
+          }));
     }
+    return Promise.resolve();
   })
   .then(() =>
     //  Look for the table in the database
@@ -94,13 +101,13 @@ function Init() {
       .then(() => {
         r.table(tbl).indexCreate('timestamp').run(cnxtn);
       })
-      .then(() => r.table(tableName).orderBy(r.desc('timestamp')).run(cnxtn));
+      .then(() => r.table(tbl).orderBy(r.desc('timestamp')).run(cnxtn));
     }
+    return Promise.resolve();
   })
   .then(() => {
     r.db(dbName).wait().run(cnxtn);
   });
-//  return Promise.resolve();
 }
 //
 function GetConnection() {

@@ -25,8 +25,8 @@ const path = require('path');
 //
 const jsUtils = require('./src/lib/vcncSamplerUtils');
 const conf = require('./src/lib/vcncSampler.conf');
-const sampling = require('./src/lib/vcncSampling');
-const rethink = require('./src/lib/rethinkSampler');
+const sampling = require('./src/lib/vcncSampling-test');
+const rethink = require('./src/lib/rethinkSampler-test');
 const storPoll = require('../vcnc-core/src/lib/pollStorageStats');
 //
 //  Initialize the C++ extension
@@ -48,8 +48,6 @@ const options = cmdl.JSNode('sampleServer', conf.HostPort());
 // const logDir = cmdl.JSparam('logDir');
 const samplePeriod = cmdl.JSparam('samplePeriod', conf.DefSamplePeriod());
 const latency = cmdl.JSparam('latency', conf.DefLatency());
-
-// console.log(`logDir = ${logDir}`);
 
 // Validate input parameters
 //
@@ -77,8 +75,8 @@ const vcncSample = sampling.CreateVcncSampling(samplePeriod, latency);
 
 let waitFirstMessage = setInterval(
   () => {
-  console.log('No messages from VDA yet at least 1 minute(s)');
- }, 60 * 1000);
+    console.log('No messages from VDA yet at least 1 minute(s)');
+  }, 60 * 1000);
 // Process buffered messages from VDA
 //
 function requestHandler(request, response) {
@@ -104,7 +102,7 @@ const server = http.createServer(requestHandler);
 
 // Init all components
 //
-vcncSample.Init()
+sampling.Init()
 .then(() => {
   server.listen(port, host, () => {
     console.log(`Listening on ${host}:${port}`);
@@ -118,11 +116,11 @@ vcncSample.Init()
 // Process buffered messages from VDA
 //
 
-
-// Pass data to rethinkdb
 const send = setInterval(() => {
 //  vcncSample.Send();
 //  vcncSample.SendEmptyBin();
+//  vcncSample.SendTestBin(rethink.PushTestBin);
+//  console.log('Process the first bin')
   vcncSample.SendTestBin();
 }, vcncSample.PushTimeout());
 

@@ -12,8 +12,8 @@ const json = require('JSON');
 const async = require('async');
 //
 const conf = require('./vcncSampler.conf');
-const sampler = require('./vcncSampler');
-const rethink = require('./rethinkSampler');
+const sampler = require('./vcncSampler-test');
+const rethink = require('./rethinkSampler-test');
 // const vdaRec = require('./src/lib/vdaReceiver');
 
  /**
@@ -30,26 +30,9 @@ class VcncSampling {
     this.beforeSendTime = Date.now();
     this.startTime = Date.now();
   }
-   /**
-    *  Initializes the vcncSampler module, creating a connection object
-    *  and creating the table if necessary.
-    *
-    *  @return {promise} A promise fulfilled when the connection is ready.
-    */
-  Init() {
-    const self = this;
-    return rethink.Init()
-     .then(() => sampler.Init())
-     .then(() => {
-       rethink.Trim(0);
-       return Promise.resolve();
-     }, (e) => {
-       throw (e);
-     });
-  }
 
   PushTimeout() {
-    return this.sampleTime;
+    return this.sampleTime - (this.afterSendTime - this.beforeSendTime);
   }
 
   TrimTimeout() {
@@ -84,12 +67,6 @@ class VcncSampling {
     }
   }
 
-  Send() {
-    const self = this;
-    if (self.msgSampler.IsSampling() === false) return;
-    const bin = self.msgSampler.ReleaseBin();
-    rethink.Push(bin);
-  }
 //
   SendEmptyBin() {
     const self = this;
@@ -114,26 +91,28 @@ class VcncSampling {
     const bin = self.msgSampler.ReleaseBinTest();
     const dt = Date.now();
     const deltaT = self.afterSendTime - self.beforeSendTime;
-
     bin.sampleTimestamp = (dt - self.startTime) / 1000;
     bin.storageEfficiency = (dt - self.beforeSendTime) / 1000;
-    bin.sum_extents = deltaT / 1000;
+//    bin.sum_extents = deltaT / 1000;
 //    console.log('SendTestBin: bin = ' + json.stringify(bin));
-    rethink.PushTestBin(bin);
     self.beforeSendTime = dt;
+    rethink.PushTestBin(bin);
     self.afterSendTime = Date.now();
+//    return callback(bin);
   }
-//    console.log('<<< Finished Send');
 
   ProcessCheck() {
     const self = this;
+    console.info(`Current time: ${Date.now()}`);
+    console.info(`Current bin index: ${self.msgSampler.CurrentBin()}`);
     console.info(`Total Vda messages: ${self.msgCount}`);
     console.info(`Total sampled vpm messages: ${self.msgSampler.VpmMessageCount()}`);
     console.info(`Total sampled vtrq messages: ${self.msgSampler.VtrqMessageCount()}`);
     console.info(`Total sampled messages: ${self.msgSampler.MessageCount()}`);
     console.info(`Total ignored messages = ${self.msgSampler.IgnoreMessageCount()}`);
-    console.info('Max delivery time from Vda to Vcnc = ' + self.msgSampler.MaxDaVcnc());
-    console.info('Average delivery time from Vda to Vcnc = ' + self.msgSampler.AvgDaVcnc());
+    console.info(`Max delivery time from Vda to Vcnc = ${self.msgSampler.MaxDaVcnc()}`);
+    console.info(`Mean value of transportation time from Pmda to Vcnc = ${self.msgSampler.MeanTimePmdaVcnc()}`);
+    console.info(`Std value of transportation time from Pmda to Vcnc = ${self.msgSampler.StdTimePmdaVcnc()}`);
     const binCount = self.msgSampler.BinCount();
     const totalBins = self.msgSampler.TotalBins();
     console.log('Bins:');
@@ -145,11 +124,31 @@ class VcncSampling {
   }
 }
 
+/**
+ *  Creating a connection to rethinkdb
+ *  and creating the database/table if necessary.
+ *
+ *  @return {promise} A promise fulfilled when the connection is ready.
+ */
+function Init()
+{
+  return rethink.Init()
+    .then(() => sampler.Init())
+    .then(() => {
+      rethink.Trim(0);
+      return Promise.resolve();
+}, (e) => {
+  throw (e);
+});
+}
+
+
 function CreateVcncSampling(dt, ltc) {
   return new VcncSampling(dt, ltc);
 }
 
 module.exports = {
   CreateVcncSampling,
+  Init,
 };
 
