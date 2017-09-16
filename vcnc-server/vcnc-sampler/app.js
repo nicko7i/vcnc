@@ -81,13 +81,17 @@ let waitFirstMessage = setInterval(
 // Process buffered messages from VDA
 //
 function requestHandler(request, response) {
+  let buffer = "";	
   request.setEncoding('utf8');
   request.on('data', (data) => {
     if (waitFirstMessage !== undefined) {
       clearInterval(waitFirstMessage);
       waitFirstMessage = undefined;
     }
-    vcncSample.Run(data);
+    buffer += data;
+  });
+  request.on('end', () => {
+	vcncSample.Run(buffer);  
   });
   response.on('error', (err) => {
     console.error(err);
@@ -99,7 +103,6 @@ function requestHandler(request, response) {
 //
 // let server;
 const server = http.createServer(requestHandler);
-// server.setTimeout(5000, () => { });
 
 // Init all components
 //

@@ -16,11 +16,14 @@ User=root
 ;
 ; start the vTRQ
 ;
+;--backing_db=/var/lib/velstor/backing - old parameter
 ExecStart=/opt/velstor/current/bin/vtrq         \
 	--config=/opt/velstor/configs/velstor-vtrq.conf             \
 	--node=localhost,6100,tcp4 \
 	--backing=/var/lib/velstor/backing           \
-	--backing_db=/var/lib/velstor/backing      \
+	--mongo_url=mongodb://127.0.0.1:27017	\
+	--mongo_database_name=backing	\
+	--mongo_app_name=vtrq		\
 	--verbose=3             \
 	--debug=1                         \
 	--logfile=/tmp/vtrq.log

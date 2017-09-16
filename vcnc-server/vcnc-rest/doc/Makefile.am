@@ -14,11 +14,8 @@ MARKDOWN_HTML =			\
 
 $(MARKDOWN_HTML) : markdown-products-proxy
 markdown-products-proxy : $(MARKDOWN_SRCS)
-	[ -x $(GENERATE_MD) ] || { echo 'generate-md not found'; exit 1; }
-	rm -rf $(top_srcdir)/doc-html
-	mkdir -p $(top_srcdir)/doc-html
-	$(GENERATE_MD) --input $(top_srcdir)/vcnc-rest/doc --output $(top_srcdir)/vcnc-rest/static/doc-html --layout mixu-page
-	touch markdown-products-proxy
+	(source $(top_srcdir)/scripts/makelib.sh; \
+	do_markdown_products_proxy $(top_srcdir), $(GENERATE_MD))
 
 BUILT_SOURCES = $(MARKDOWN_HTML)
 CLEANFILES = $(MARKDOWN_HTML) markdown-products-proxy

@@ -54,14 +54,10 @@ namespace cnc {
     //  Execute
     //
     void cnctrqGetattrWorker::Execute() {
-      struct stat st;
-      if (_errcode) {
+      if (_errcode) 
         return;  // An error has occurred before we were called.
-      }
       _errcode = _client->Getattr(_path
-                                  , st);
-      _stat.Stat(st);
-      _stat.Name(_path());
+                                  , _stat);
     }
     //
     //  HandleOKCallback
@@ -114,12 +110,60 @@ namespace cnc {
       //       "st_ctime": "2015-09-10T11:32:50.522"
       //   }
       //
-//      Local<Object> stat = Nan::New<Object>();
-      string_type ns;
-      _stat.ExportJson(ns, true);
+      Local<Object> stat = Nan::New<Object>();
+      pString member;
+      member = pcSessionExport::self().UInt64AsString(_stat.st_dev);
+      Nan::Set(stat
+               , Nan::New("st_dev").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().UInt64AsString(_stat.st_ino);
+      Nan::Set(stat
+               , Nan::New("st_ino").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      Nan::Set(stat
+               , Nan::New("st_mode").ToLocalChecked()
+               , Nan::New(_stat.st_mode));
+      member = pcSessionExport::self().UInt64AsString(_stat.st_mode);
+      Nan::Set(stat
+               , Nan::New("st_mode").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      Nan::Set(stat
+               , Nan::New("st_uid").ToLocalChecked()
+               , Nan::New(_stat.st_uid));
+      Nan::Set(stat
+               , Nan::New("st_gid").ToLocalChecked()
+               , Nan::New(_stat.st_gid));
+      member = pcSessionExport::self().UInt64AsString(_stat.st_rdev);
+      Nan::Set(stat
+               , Nan::New("st_rdev").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().UInt64AsString(_stat.st_size);
+      Nan::Set(stat
+               , Nan::New("st_size").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().UInt64AsString(_stat.st_blksize);
+      Nan::Set(stat
+               , Nan::New("st_blksize").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().UInt64AsString(_stat.st_blocks);
+      Nan::Set(stat
+               , Nan::New("st_blocks").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().TimestampAsISO8601(_stat.st_atime);
+      Nan::Set(stat
+               , Nan::New("st_atime").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().TimestampAsISO8601(_stat.st_ctime);
+      Nan::Set(stat
+               , Nan::New("st_ctime").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
+      member = pcSessionExport::self().TimestampAsISO8601(_stat.st_mtime);
+      Nan::Set(stat
+               , Nan::New("st_mtime").ToLocalChecked()
+               , Nan::New(member.c_str()).ToLocalChecked());
       Nan::Set(rtn
-               , Nan::New("ns").ToLocalChecked()
-               , Nan::New(ns.c_str()).ToLocalChecked());
+               , Nan::New("stat").ToLocalChecked()
+               , stat);
       //
       //  Prepare for callback
       //

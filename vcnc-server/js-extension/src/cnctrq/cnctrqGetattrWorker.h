@@ -4,7 +4,6 @@
 #include <lib/pString.H>
 #include <prtcl/cnctrq/cnctrqClient.H>
 #include <prtcl/core/pcSessionExport.H>
-#include <prtcl/core/pidlStructStat.H>
 #include <frquCore/frquStd.H>
 #include <prtcl/iCncTrq.H>
 #include <sys/stat.h>
@@ -15,7 +14,6 @@ using v8::Object;
 using v8::Value;
 using frqu::prtcl::cnctrq::cnctrqClient;
 using frqu::prtcl::core::pcSessionExport;
-using frqu::prtcl::pidlStructStat;
 using frqu::path_type;
 
 using namespace pepsis::lib;
@@ -54,8 +52,7 @@ namespace cnc {
       //
       //  Results of the RPC
       //
-      pidlStructStat _stat;
-      // struct stat _stat;
+      struct stat _stat;
       //
       //  The iCncTrq RPC error code (from errno.h)
       //

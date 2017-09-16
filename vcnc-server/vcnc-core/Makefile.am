@@ -10,14 +10,8 @@
 #  Builds the core libraries and component
 #
 all:
-	(                               \
-	  cd $(top_srcdir)/vcnc-core    \
-	  NVM_DIR=$(TOOLROOT)/nvm; \
-	  [ ! -d $(NVM_DIR) ] && (NVM_DIR=$(TOOLROOT)/share/vcnc/nvm); \
-	  [ ! -d $(NVM_DIR) ] && (echo "Can't find NVM_DIR"; exit 1); \
-	  . $(NVM_DIR)/nvm.sh;  \
-	  npm install                   \
-	)
+	(source $(top_srcdir)/scripts/makelib.sh;    \
+	 do_all $(top_srcdir)/vcnc-core $(TOOLROOT))
 
 clean-local:
 	echo TBD

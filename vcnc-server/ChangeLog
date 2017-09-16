@@ -1,19 +1,26 @@
+Release 4.0.1
+
+    Fixed corruption of vda-messages
+
+Release 3.8.11
+
+  Restore cnctrqGetattr to its original form.
+
+
 Release 3.8.10
 
-Syndfchronize sampling process to insertion into rethinkdb table
-Fixed bug to create a new table
-Added test scripts
-
-
+  Synchronize sampling process to insertion into rethinkdb table
+  Fixed bug to create a new table
+  Added test scripts
 Release 3.8.9
 
-Updated promises to wait for until db/table were completed
+    Updated promises to wait for until db/table were completed
 
 Release 3.8.8
 
-Added watchdog to control  that vda messages are coming to vcnc-sampler;
-Fixed bug;
-Added capability to create a new DB in case of it doesn't exist.
+    Added watchdog to control  that vda messages are coming to vcnc-sampler;
+    Fixed bug;
+    Added capability to create a new DB in case of it doesn't exist.
 
 Release 3.8.7
 
